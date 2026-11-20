@@ -310,7 +310,7 @@ globalThis.mountDongleFlash = function (document) {
       port = await requestBootRomPort();
       transport = new SerialTransport(port);
       await transport.open();
-      setStatus("connected", `已连接 · ${transport.baudRate.toLocaleString()} baud`);
+      setStatus("connected", `DS5Dongle-BL616-Bootloader · ${transport.baudRate.toLocaleString()} baud`);
       log(`串口已连接，波特率 ${transport.baudRate}`);
     } catch (error) {
       transport = null;
