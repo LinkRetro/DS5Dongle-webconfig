@@ -16,6 +16,7 @@ This repository contains **only the web part**. Firmware sources, PCB design and
 | Audio | Speaker/headset volume, gain, buffer depth, audio-to-haptics, mic passthrough |
 | Touchpad | D-pad / mouse emulation modes, sensitivity, raw-touch blocking, combo window |
 | Remapping | Two profiles, 31 buttons, keyboard/mouse targets, live highlight on the controller image |
+| Sticks | OGX-Mini style radial deadzone warp: inner/outer deadzone, anti-deadzone, response curve, diagonal compensation, axis restriction |
 | Diagnostics | Rumble, adaptive-trigger, lightbar tests, mic level meter, test tone |
 | Firmware | Version list with rollback, SHA-256 allow-list, flashing over Web Serial |
 
