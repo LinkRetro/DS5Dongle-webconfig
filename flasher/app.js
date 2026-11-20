@@ -288,9 +288,10 @@ globalThis.mountDongleFlash = function (document) {
 
   /* BootROM 下载模式的 USB VID/PID 是固定的，先按它过滤，避免把普通串口也列出来。
      若没有匹配项（例如本机枚举的 ID 不在列表里），退回完整列表并把原因写进日志。 */
+  /* 实测：BL616/BL618 BOOT 模式枚举为 VID_349B & PID_6160（Bouffalo Lab），
+     只按这个过滤，列表里不会再出现 CH340、蓝牙串口等无关设备。 */
   const BOOTROM_FILTERS = [
-    { usbVendorId: 0xffff, usbProductId: 0xffff },   /* Bouffalo BootROM（常见） */
-    { usbVendorId: 0x349b, usbProductId: 0x6160 },   /* Bouffalo VID，BL616 CDC/BootROM */
+    { usbVendorId: 0x349b, usbProductId: 0x6160 },
   ];
 
   async function requestBootRomPort() {
