@@ -1,7 +1,7 @@
 /* Local policy for the LCTech BL616 oc8 partition layout. */
 (function(root){
  'use strict';
- const RELEASES={"720c7816a7f66133591d9f4672a169a272437a2a4bc6996e3ee1a08b721599a6": {"model": "LCTech BL616 · oc8", "size": 794988}};
+ const RELEASES={"720c7816a7f66133591d9f4672a169a272437a2a4bc6996e3ee1a08b721599a6": {"model": "LCTech BL616 · oc8", "size": 794988}, "77d4eb8394bb8f7c3024da1dfb53767cb30a84464c8a53777e167a5cf379464f": {"model": "V1 单灯 · 3.18H-oc12", "size": 795832}, "94b7673b03351599bf286b177d36be405a971cc02225bb8a5802a5a501f1b133": {"model": "V1.2 RGB · 3.18H-oc12", "size": 796336}};
  async function validate(data){
   if(!(data instanceof Uint8Array)||!Object.values(RELEASES).some(r=>r.size===data.length))throw Error('文件长度不属于本工程已发布固件，禁止烧录');
   if(!root.crypto?.subtle)throw Error('SHA-256 不可用，请通过 localhost 或 HTTPS 打开');

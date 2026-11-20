@@ -77,24 +77,27 @@ resources={'targets/bl616/flash_para.bin':base64.b64encode((f/'targets/bl616/fla
 import hashlib
 policy_file=f/'policy.js'
 policy_text=policy_file.read_text(encoding='utf-8')
-release_policy={}
+_policy_json=r/'firmware'/'policy.json'
+computed={}
 if _oc8_file.exists():
-    release_policy[hashlib.sha256(_oc8_file.read_bytes()).hexdigest()]={'model':'LCTech BL616 · oc8','size':_oc8_file.stat().st_size}
+    computed[hashlib.sha256(_oc8_file.read_bytes()).hexdigest()]={'model':'LCTech BL616 · oc8','size':_oc8_file.stat().st_size}
 for variant,c in catalog.items():
     label='V1 单灯' if variant=='v1' else 'V1.2 RGB'
     for entry in c.get('versions',[]):
         raw=catalog_bytes.get(entry['file'])
         if raw is None:
             continue
-        release_policy[hashlib.sha256(raw).hexdigest()]={'model':label+' · '+entry['tag'],'size':len(raw)}
+        computed[hashlib.sha256(raw).hexdigest()]={'model':label+' · '+entry['tag'],'size':len(raw)}
 
-# 白名单持久化：仓库不携带固件镜像时，用提交在仓库里的 policy.json 复现同一份允许列表
-_policy_json=r/'firmware'/'policy.json'
-if release_policy:
+# 有固件镜像时以计算结果为准并持久化；没有镜像（开源仓库）时回读 policy.json
+if catalog_bytes:
+    release_policy=computed
     _policy_json.write_text(json.dumps(release_policy,ensure_ascii=False,indent=1),encoding='utf-8')
 elif _policy_json.exists():
     release_policy=json.loads(_policy_json.read_text(encoding='utf-8'))
-    print('policy.json: 使用仓库内白名单（未找到固件镜像）')
+    print('policy.json: 使用仓库内白名单（本目录没有固件镜像）')
+else:
+    release_policy=computed
 
 # 直接重写 policy.js，避免正则匹配失败导致旧版本哈希残留
 policy_text=('/* Local policy for the LCTech BL616 oc8 partition layout. */\n'
