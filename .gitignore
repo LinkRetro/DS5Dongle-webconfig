@@ -1,9 +1,9 @@
 node_modules/
 /index.html
 /auth-preview.html
+deploy.env.json
 .syntax_*.js
 firmware/*/*.bin
-flasher/ds5dongle-*.bin
 firmware/*/boot2_*.bin
 firmware/*/partition.bin
 *.log

@@ -117,7 +117,13 @@ syntax_check(js,'bundle')
 (r/'index.html').write_text(html,encoding='utf-8')
 (r/'auth-preview.html').write_text(html.replace('const PRODUCTION_AUTH=false;','const PRODUCTION_AUTH=true;').replace('<title>BL616 · DualSense 控制台</title>','<title>BL616 · 身份认证实验版（未量产）</title>'),encoding='utf-8')
 licenses=['BL616 configuration UI: locally implemented; controller SVGs reused from MarcelineVPQ/DS5Dongle-OLED-Config-Web, commit babb41488a040c2bb88affccc644e075eaa15211.\n']
-for p in ['LICENSE','src/assets/AL2009MAN-LICENSE.txt','src/assets/DAIDR-LICENSE.txt']:
- licenses.append('\n--- '+p+' ---\n'+(up/p).read_text(encoding='utf-8-sig'))
+# 第三方许可证：优先使用仓库自带副本（开源仓库不含上游项目），缺失则跳过
+_lic_map=[('LICENSE', r/'assets/licenses/DS5Dongle-OLED-Config-Web-LICENSE.txt', up/'LICENSE'),
+          ('src/assets/AL2009MAN-LICENSE.txt', r/'assets/licenses/AL2009MAN-LICENSE.txt', up/'src/assets/AL2009MAN-LICENSE.txt'),
+          ('src/assets/DAIDR-LICENSE.txt', r/'assets/licenses/DAIDR-LICENSE.txt', up/'src/assets/DAIDR-LICENSE.txt')]
+for _label, _local, _upstream in _lic_map:
+    _f = _local if _local.exists() else _upstream
+    if _f.exists():
+        licenses.append('\n--- '+_label+' ---\n'+_f.read_text(encoding='utf-8-sig'))
 (r/'LICENSES.txt').write_text('\n'.join(licenses),encoding='utf-8')
 print('Built standalone index.html',len(html.encode('utf-8')),'bytes')
