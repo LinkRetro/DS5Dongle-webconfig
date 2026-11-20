@@ -231,3 +231,25 @@ input[type=range]{height:22px;cursor:pointer}
 /* 面板高度：原来封顶 780px，底部会留一段空白；改为按可视区拉伸 */
 .panel{height:min(980px,calc(100dvh - 128px));min-height:460px}
 @media(max-height:720px) and (min-width:761px){.panel{height:calc(100dvh - 110px);min-height:380px}}
+
+/* 就绪判决条：一句话回答"现在能不能玩" */
+.verdict{display:flex;align-items:center;gap:10px;margin:0 0 14px;padding:11px 14px;
+  border-radius:12px;border:1px solid var(--line);
+  background:color-mix(in srgb,var(--panel) 94%,var(--bg));font-size:14px}
+.verdict .v-dot{width:9px;height:9px;border-radius:50%;flex:none;background:var(--muted);transition:background .2s,box-shadow .2s}
+.verdict strong{font-weight:650;letter-spacing:.2px}
+.verdict #verdict-detail{color:color-mix(in srgb,var(--ink) 60%,transparent);font-size:13px;font-variant-numeric:tabular-nums}
+.verdict[data-state=ok]{border-color:color-mix(in srgb,var(--success,#2FBF71) 45%,var(--line))}
+.verdict[data-state=ok] .v-dot{background:var(--success,#2FBF71);box-shadow:0 0 0 4px color-mix(in srgb,var(--success,#2FBF71) 20%,transparent)}
+.verdict[data-state=warn]{border-color:color-mix(in srgb,var(--warning,#E8A33D) 45%,var(--line))}
+.verdict[data-state=warn] .v-dot{background:var(--warning,#E8A33D)}
+.verdict[data-state=bad]{border-color:color-mix(in srgb,#E05252 45%,var(--line))}
+.verdict[data-state=bad] .v-dot{background:#E05252}
+
+/* 快捷验证按钮：连上手柄后一按就知道震动/扳机/灯光是否工作 */
+.quick-actions{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin:0 0 14px}
+.quick-actions button{font-size:13px;padding:7px 14px;min-height:34px;border-radius:999px;
+  border:1px solid color-mix(in srgb,var(--line) 90%,transparent);background:var(--panel);color:var(--ink);font-weight:600}
+.quick-actions button:hover:not(:disabled){border-color:color-mix(in srgb,var(--accent) 50%,var(--line));
+  background:color-mix(in srgb,var(--accent) 10%,var(--panel))}
+.quick-actions .hint{font-size:12px;color:color-mix(in srgb,var(--ink) 55%,transparent)}

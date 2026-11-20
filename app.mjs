@@ -204,6 +204,36 @@ function mappingChanges(){if(!table||!tableBaseline)return 0;let count=0;for(let
 function changedCount(){const keys=Object.keys(draft),colors=keys.filter(k=>k.startsWith('led_')).length;return keys.length-colors+(colors?1:0)+mappingChanges()}
 function dirty(){return changedCount()>0}
 function needsRestart(){return Object.keys(draft).some(k=>restartFields.has(k))||!!(mappingChanges()&&table.some((v,i)=>i%4===0&&v!==0))}
+function paintQuickActions(){
+ const state=telemetry?.length>=17&&telemetry[13]===0xD3?telemetry[14]:null;
+ const ready=!!device&&state===7;
+ const labels={rumble:'qa_rumble',trigger:'qa_trigger',lights:'qa_lights'};
+ for(const [id,key] of Object.entries(labels)){
+  const b=$('qa-'+id);if(!b)continue;
+  b.disabled=!ready;b.textContent=t(key);
+ }
+ const hint=$('qa-hint');
+ if(hint){const text=ready?t('qa_hint'):'';if(hint.textContent!==text)hint.textContent=text}
+}
+function paintVerdict(){
+ const box=$('verdict');if(!box)return;
+ const state=telemetry?.length>=17&&telemetry[13]===0xD3?telemetry[14]:null;
+ const pct=telemetry?.[11],known=Number.isInteger(pct)&&pct>=0&&pct<=100;
+ let kind='warn',title=t('verdict_checking'),detail='';
+ if(!navigator.hid){kind='bad';title=t('verdict_unsupported')}
+ else if(!device){kind='warn';title=t('verdict_no_device')}
+ else if(state===7){
+  kind='ok';title=t('verdict_ready');
+  const model=$('device-title').textContent||'';
+  detail=[model,known?`${pct}%`:''].filter(Boolean).join(' · ');
+ }else if(state===null||(state>0&&state<7)){kind='warn';title=t('verdict_no_controller');detail=t('verdict_pair_hint')}
+ else{kind='warn';title=t('verdict_no_controller')}
+ if(box.dataset.state!==kind)box.dataset.state=kind;
+ const tt=$('verdict-title'),dd=$('verdict-detail');
+ if(tt&&tt.textContent!==title)tt.textContent=title;
+ if(dd&&dd.textContent!==detail)dd.textContent=detail;
+ paintQuickActions();
+}
 function paintConnection(){
  $('dot').classList.toggle('on',!!device);
  $('connection').textContent=LT(device?'接收器已连接':'尚未连接接收器');
@@ -216,6 +246,7 @@ function paintConnection(){
  const pct=telemetry?.[11],known=Number.isInteger(pct)&&pct>=0&&pct<=100;
  $('power-status').textContent=!device||!known?LT('电量待更新'):`${pct}% · ${LT(telemetry[12]===1?'正在充电':telemetry[12]===2?'已充满':telemetry[12]===0?'使用电池':'电池状态未知')}`;
  $('power-status').dataset.level=known&&pct<=10&&telemetry[12]===0?'low':'normal';
+ paintVerdict();
 }
 function refresh(){
  const enabled=!!device&&!busy;
@@ -347,21 +378,36 @@ function clearInput(){lastInput=0;lastPaint=0;touchTrail=[];for(const d of touch
 
 function disconnected(){gyroBase=null;gyroRaw=null;gyroSmooth=null;gyroBias=null;gyroBiasFrames=0;accSmooth=null;void stopTests();epoch++;if(device)device.removeEventListener('inputreport',onInput);device=null;firmwareVersion=null;paintFirmware();baseline=null;draft={};table=null;tableBaseline=null;telemetry=null;mapDirty=false;restartNeeded=false;clearInput();render()}
 async function load(){const cfg=decode(await readCfg());const m=await readTable(profile);baseline=cfg;draft={};table=m.table;tableBaseline=m.table.slice();mapDirty=false;render()}
-$('connect').onclick=()=>exclusive(async()=>{
- if(device){const d=device;await hidWait(stopTests(),'停止测试',3000).catch(()=>{});disconnected();if(d.opened)await hidWait(d.close(),'关闭设备接口',1000).catch(()=>{});say('已断开连接');return}
- if(!navigator.hid)throw Error('请使用支持 WebHID 的 Chrome / Edge');
- const list=await navigator.hid.requestDevice({filters:[{vendorId:0x054c,productId:0x0ce6},{vendorId:0x054c,productId:0x0df2}]});
- const d=list.find(d=>d.collections.some(c=>c.featureReports.some(r=>r.reportId===0xf7)));if(!d)throw Error('未选择包含配置报告的接收器接口');
+const HID_FILTERS=[{vendorId:0x054c,productId:0x0ce6},{vendorId:0x054c,productId:0x0df2}];
+const pickConfigDevice=list=>list?.find(d=>d.collections.some(c=>c.featureReports.some(r=>r.reportId===0xf7)));
+async function attachDevice(d){
+ if(!d)throw Error('未选择包含配置报告的接收器接口');
  let expired=false;const connectionEpoch=epoch;
  const step=async(label,fn)=>{say(label+'…');const result=await hidWait(fn(),label,label==='验证设备身份'?12000:5000);if(expired||epoch!==connectionEpoch)throw Error('连接已中断，请重新连接');return result};
- try{if(!d.opened)await step('打开接收器',()=>{const opening=d.open();opening.then(()=>{if(expired)void d.close().catch(()=>{})},()=>{});return opening});
+ try{
+  if(!d.opened)await step('打开接收器',()=>{const opening=d.open();opening.then(()=>{if(expired)void d.close().catch(()=>{})},()=>{});return opening});
   if(PRODUCTION_AUTH){await step('验证设备身份',()=>authenticateHid(d,AUTH_AUTHORITY));say('设备身份验证通过')}
   const v=payload(await step('读取固件信息',()=>d.receiveFeatureReport(0xf8)),0xf8,1);const fw=new TextDecoder().decode(v).replace(/\0.*$/s,'');if(!/^(LCT616|M0S|BL618)-DS5 /.test(fw))throw Error('这不是本工程支持的 BL616 接收器');
   const cfg=decode(await step('读取配置',()=>d.receiveFeatureReport(0xf7)));
   await step('选择映射组',()=>d.sendFeatureReport(0xfb,command(3,[profile],127)));
   const m=remapRead(await step('读取按键映射',()=>d.receiveFeatureReport(0xfb)),profile);
-  device=d;firmwareVersion=fw;paintFirmware();baseline=cfg;draft={};table=m.table;tableBaseline=m.table.slice();mapDirty=false;restartNeeded=restartDevices.has(d);epoch++;render();d.addEventListener('inputreport',onInput);$('version').textContent=fw;$('device-title').textContent=d.productId===0x0df2?'DualSense Edge':'DualSense';showArt(d.productId===0x0df2);say('已读取当前设置。修改后点击应用并保存。')}
- catch(e){expired=true;disconnected();if(d.opened)await hidWait(d.close(),'关闭设备接口',500).catch(()=>{});throw e}
+  device=d;firmwareVersion=fw;paintFirmware();baseline=cfg;draft={};table=m.table;tableBaseline=m.table.slice();mapDirty=false;restartNeeded=restartDevices.has(d);epoch++;render();d.addEventListener('inputreport',onInput);$('version').textContent=fw;$('device-title').textContent=d.productId===0x0df2?'DualSense Edge':'DualSense';showArt(d.productId===0x0df2);say('已读取当前设置。修改后点击应用并保存。');return true;
+ }catch(e){expired=true;disconnected();if(d.opened)await hidWait(d.close(),'关闭设备接口',500).catch(()=>{});throw e}
+}
+/* 浏览器已经记住授权时，无需点击即可静默重连（老用户零操作） */
+async function autoReconnect(){
+ if(device)return false;
+ if(!navigator.hid?.getDevices)return false;
+ let known=[];try{known=await navigator.hid.getDevices()}catch{return false}
+ const d=pickConfigDevice(known);
+ if(!d)return false;
+ try{await exclusive(()=>attachDevice(d));return Boolean(device)}catch{return false}
+}
+$('connect').onclick=()=>exclusive(async()=>{
+ if(device){const d=device;await hidWait(stopTests(),'停止测试',3000).catch(()=>{});disconnected();if(d.opened)await hidWait(d.close(),'关闭设备接口',1000).catch(()=>{});say('已断开连接');return}
+ if(!navigator.hid)throw Error('请使用支持 WebHID 的 Chrome / Edge');
+ const list=await navigator.hid.requestDevice({filters:HID_FILTERS});
+ await attachDevice(pickConfigDevice(list));
 });
 navigator.hid?.addEventListener('disconnect',e=>{if(e.device===device){restartDevices.delete(e.device);disconnected();say('接收器已断开，未保存更改已清除。')}});
 $('revert').onclick=()=>{if(busy||!device)return;draft={};table=tableBaseline?.slice()??null;mapDirty=false;render();say('已撤销本页未应用的更改，设备设置未修改')};
@@ -588,9 +634,13 @@ setInterval(()=>{if(document.hidden)return;const pads=[...(navigator.getGamepads
  if(device&&s.value!==''){const p=pads.find(p=>p.index===Number(s.value));if(p?.mapping==='standard'){const parts=new Set(p.buttons.flatMap((b,i)=>b.pressed&&padNames[i]?[padNames[i]]:[]));paintInput({parts,axes:p.axes.slice(0,4).map(v=>Math.round((v+1)*127.5)),triggers:[p.buttons[6]?.value??0,p.buttons[7]?.value??0].map(v=>Math.round(v*255))},'手动选择的浏览器手柄')}else $('input-state').textContent=LT('此手柄未提供标准布局，请使用接收器 HID 输入。')}
  if(!device||Date.now()-lastInput>3000){{const _st=$('input-state'),_zh=(lang==='zh-CN'||lang==='zh-TW'),_raw=device?'等待手柄输入；若浏览器屏蔽 HID 输入，可手动选择上方的手柄输入源。':'连接接收器后，可点击手柄打开相应设置。',_msg=_zh?_raw:trText(_raw);if(_st.textContent!==_msg)_st.textContent=_msg;}for(const id of ['left-axis','right-axis','triggers'])$(id).textContent='—';resetLiveVisuals()}},50);
 $('gamepad').onchange=()=>{lastInput=0;lastPaint=0;resetLiveVisuals();for(const id of ['left-axis','right-axis','triggers'])$(id).textContent='—'};
+$('qa-rumble').onclick=()=>{if(!device)return;void outputTester.run('rumble',{left:140,right:140}).catch(()=>{})};
+$('qa-trigger').onclick=()=>{if(!device)return;void outputTester.run('trigger',{side:'left',mode:'rigid',strength:3,start:3,edge:false}).catch(()=>{})};
+$('qa-lights').onclick=()=>{if(!device)return;void outputTester.run('lights',{rgb:[102,199,255],brightness:1}).catch(()=>{})};
 $('theme').onclick=()=>{document.body.classList.toggle('light');try{localStorage.setItem('bl616-theme',document.body.classList.contains('light')?'light':'dark')}catch{}};try{document.body.classList.toggle('light',localStorage.getItem('bl616-theme')==='light')}catch{}
 mountLangSelect();applyI18n();
 document.querySelectorAll('[data-page]').forEach(b=>b.onclick=()=>{void stopTests();page=b.dataset.page;render()});
 globalThis.addEventListener?.('blur',()=>{void stopTests()});globalThis.addEventListener?.('pagehide',()=>{void stopTests()});document.addEventListener('visibilitychange',()=>{if(document.hidden)void stopTests()});
 $('firmware-notice').onclick=()=>{void stopTests();page='flash';render()};
 showArt(false);render();
+void autoReconnect();

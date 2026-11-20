@@ -9,7 +9,7 @@ const view=(id,b)=>new DataView(Uint8Array.of(id,...b).buffer);
 test('config: packed offsets, LE float, preserve runtime fields and reject corruption before write',()=>{const b=bytes();const v=view(247,b);const p=patch(v,{haptics_gain:1.7,tp_block_raw:1,combo_window:50});assert.equal(p[20],1);assert.equal(p[31],1);assert.equal(p[30],50);assert.equal(decode(view(247,p)).haptics_gain,Math.fround(1.7));for(let i=5;i<30;i++)assert.equal(p[i],b[i]);assert.throws(()=>patch(v,{speaker_volume:128}));assert.throws(()=>patch(v,{combo_window:NaN}));assert.throws(()=>patch(v,{controller_mode:1.2}));assert.throws(()=>decode(view(247,[7,...b.slice(1)])));assert.throws(()=>decode(view(247,b.slice(0,31))));assert.throws(()=>decode(view(246,b)));assert.throws(()=>patch(v,{dse_detected:0}));assert.equal(command(1,p).length,63)});
 test('remap: complete two-group format and invalid reply checks',()=>{const table=Uint8Array.from({length:124},(_,i)=>i%4===1?Math.floor(i/4):0);const r=remapRead(view(251,[1,0,...table]),0);assert.equal(r.active,1);assert.deepEqual(r.table,table);assert.deepEqual(remapWrite(1,table).slice(0,6),Uint8Array.of(1,1,0,0,0,0));assert.throws(()=>remapRead(view(251,[1,1,...table]),0));table[0]=3;assert.throws(()=>remapWrite(0,table))});
 test('input: diagonals, digital buttons and trigger channels follow firmware payload',()=>{const b=new Uint8Array(63);b.set([0,255,127,128,64,255]);b[7]=0x21;b[8]=0x21;const i=inputParts(b);for(const k of ['dpad-up','dpad-right','cross','l1','options'])assert(i.parts.has(k));assert.deepEqual(i.axes,[0,255,127,128]);assert.deepEqual(i.triggers,[64,255]);assert.equal(inputParts(new Uint8Array(9)),null)});
-function ui({version=6,corrupt=false,production=false}={}){
+function ui({version=6,corrupt=false,production=false,auto=false,noHid=false}={}){
  let telemetry=new Uint8Array(13);telemetry[11]=255;const timers=[];let telemetryFails=false,now=1000,gamepads=[];
  const html=readFileSync(new URL(production?'../auth-preview.html':'../index.html',import.meta.url),'utf8');const {window}=parseHTML(html);
  // linkedom omits native browser form value/validity setters.
@@ -18,7 +18,7 @@ function ui({version=6,corrupt=false,production=false}={}){
  let cfg=bytes();cfg[0]=version;let selected=0;const tables=[0,1].map(()=>Uint8Array.from({length:124},(_,i)=>i%4===1?Math.floor(i/4):0));const sent=[],listeners={};
  const device={vendorId:1356,productId:3302,opened:false,collections:[{featureReports:[{reportId:247}]}],async open(){this.opened=true},async close(){this.opened=false},addEventListener(n,f){listeners[n]=f},removeEventListener(n){delete listeners[n]},async receiveFeatureReport(id){if(id===248)return view(id,new TextEncoder().encode('LCT616-DS5 3.18-oc2'));if(id===247)return view(id,cfg);if(id===251)return view(id,[0,selected,...tables[selected]]);if(id===249){if(telemetryFails)throw Error('telemetry failed');return view(id,telemetry)}throw Error('unexpected read')},async sendFeatureReport(id,p){sent.push([id,p.slice()]);if(id===246&&p[0]===1){cfg=p.slice(1,33);if(corrupt)cfg[31]=0}if(id===251&&p[0]===3)selected=p[1];if(id===251&&p[0]===1)tables[p[1]]=p.slice(2,126)}};
  const outputs=[];device.sendReport=async(id,p)=>{outputs.push([id,p.slice()])};
- const navigator={hid:{async requestDevice(){return [device]},addEventListener(n,f){listeners[n]=f}},getGamepads(){return gamepads}};
+ const navigator=noHid?{getGamepads(){return gamepads}}:{hid:{async requestDevice(){return [device]},async getDevices(){return auto?[device]:[]},addEventListener(n,f){listeners[n]=f}},getGamepads(){return gamepads}};
  const ctx={__DS5_LANG:'zh-CN',atob,Blob,URL,isSecureContext:true,Date:class extends Date{static now(){return now}},document:window.document,navigator,localStorage:{getItem(k){return k==='ds5.lang'?'zh-CN':null},setItem(){}},setTimeout(fn,ms){const t={fn,ms};timers.push(t);return t},clearTimeout(t){if(t)t.cancelled=true},clearInterval(){},setInterval(fn,ms){timers.push({fn,ms})},confirm:()=>true,TextDecoder,Uint8Array,DataView,TextEncoder,Event:window.Event,console};vm.runInNewContext(html.match(/<script type="module">([\s\S]*?)<\/script>/)[1],ctx);
  const el=id=>window.document.getElementById(id);return {el,window,device,sent,outputs,expire(ms=5000){const t=timers.find(t=>t.ms===ms&&!t.cancelled&&!t.fired);if(!t)throw Error("No pending timeout");t.fired=true;t.fn()},
  input(axes,buttons=0){now+=50;const b=new Uint8Array(63);b.set(axes);b[7]=8;b[8]=buttons;listeners.inputreport({device,reportId:1,data:new DataView(b.buffer)})},
@@ -187,4 +187,73 @@ test('latency v3: real processing and pending wait are distinct, reject truncati
  [25,350,300,100,1000,500,300,50,180,120,100].forEach((n,i)=>v.setUint32(19+i*4,n,true));
  const d=decodeLatency(b);assert.equal(d.processingOnly,20);assert.equal(d.pendingWait,100);assert.equal(d.queueWait+d.processingOnly+d.pendingWait+d.usb,d.last);
  assert.equal(decodeLatency(b.slice(0,62)),null);v.setUint32(59,121,true);assert.equal(decodeLatency(b),null);
+});
+
+test('UI: silently reconnects when the browser already granted access',async()=>{
+ const u=ui({auto:true});
+ // 初始化里的 void autoReconnect() 走微任务
+ for(let i=0;i<6;i++)await new Promise(r=>setImmediate(r));
+ assert.equal(u.el('connection').textContent,'接收器已连接');
+ assert.match(u.el('version').textContent,/LCT616/);
+ assert.equal(u.el('connect').textContent,'断开连接');
+});
+test('UI: stays disconnected without prior permission and never auto-prompts',async()=>{
+ const u=ui({auto:false});
+ for(let i=0;i<6;i++)await new Promise(r=>setImmediate(r));
+ assert.equal(u.el('connection').textContent,'尚未连接接收器');
+ assert.equal(u.el('connect').textContent,'连接接收器');
+});
+
+test('verdict: one line answers whether the player can start',async()=>{
+ const u=ui();
+ await u.poll();
+ assert.equal(u.el('verdict-title').textContent,'接收器尚未连接');
+ assert.equal(u.el('verdict').dataset.state,'warn');
+
+ await u.el('connect').onclick();
+ await u.poll();
+ assert.equal(u.el('verdict-title').textContent,'手柄尚未配对');
+ assert.equal(u.el('verdict-detail').textContent,'同时按住 PS + Create 3 秒');
+
+ u.setBattery(85,0);
+ u.setLink(7,1);
+ await u.poll();
+ assert.equal(u.el('verdict-title').textContent,'已就绪，可以开始游戏');
+ assert.equal(u.el('verdict-detail').textContent,'DualSense · 85%');
+ assert.equal(u.el('verdict').dataset.state,'ok');
+
+ u.disconnect();
+ await u.poll();
+ assert.equal(u.el('verdict').dataset.state,'warn');
+});
+
+test('verdict: explains a browser without WebHID instead of showing an empty page',async()=>{
+ const u=ui({noHid:true});
+ await u.poll();
+ assert.equal(u.el('verdict-title').textContent,'此浏览器不支持 WebHID');
+ assert.equal(u.el('verdict').dataset.state,'bad');
+});
+
+test('quick actions: disabled until the controller is ready, then send output reports only',async()=>{
+ const u=ui();
+ await u.poll();
+ for(const id of ['qa-rumble','qa-trigger','qa-lights']){
+  assert.equal(u.el(id).disabled,true,'disabled before connect');
+  assert.equal(u.el(id).textContent,{ 'qa-rumble':'试震动','qa-trigger':'试扳机','qa-lights':'试灯光' }[id]);
+ }
+ await u.el('connect').onclick();
+ await u.poll();
+ assert.equal(u.el('qa-rumble').disabled,true,'still disabled without a paired controller');
+
+ u.setLink(7,1);
+ await u.poll();
+ for(const id of ['qa-rumble','qa-trigger','qa-lights'])assert.equal(u.el(id).disabled,false);
+
+ const before=u.outputs.length;
+ u.el('qa-rumble').onclick();
+ await new Promise(r=>setImmediate(r));
+ assert.ok(u.outputs.length>before,'rumble sends an output report');
+ // 快捷按钮不得写入配置
+ assert.equal(u.sent.filter(([id])=>id===246).length,0);
+ assert.equal(u.el('qa-hint').textContent,'临时测试，不写入设置');
 });
