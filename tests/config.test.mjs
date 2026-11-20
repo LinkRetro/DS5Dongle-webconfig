@@ -127,7 +127,7 @@ test('sliders: precise input syncs, stages only, rejects invalid steps and undo 
 });
 test('savebar: color is one change, mapping undo restores baseline, restart requirement survives reread and undo',async()=>{
  const u=ui();await u.el('connect').onclick();
- const color=u.window.document.querySelector('#controls input[type="color"]');color.value='#66c7ff';color.oninput();assert.equal(u.el('dirty').textContent,'有 1 项未应用');u.el('revert').onclick();
+ const color=u.window.document.getElementById('qa-color');color.value='#66c7ff';color.oninput();assert.equal(u.el('dirty').textContent,'有 1 项未应用');u.el('revert').onclick();
  u.window.document.querySelector('[data-page="remap"]').onclick();let selects=u.window.document.querySelectorAll('#controls select');selects[3].value=1;selects[3].onchange();assert.equal(u.el('dirty').textContent,'有 1 项未应用');u.el('revert').onclick();assert.equal(u.el('save').disabled,true);
  u.window.document.querySelector('[data-page="device"]').onclick();const mode=u.window.document.querySelector('#controls select');mode.value=0;mode.onchange();assert.equal(u.el('restart-hint').hidden,false);assert.equal(u.el('reboot').disabled,true);
  await u.el('save').onclick();assert.match(u.el('restart-hint').textContent,/重启接收器后生效/);assert.equal(u.el('reboot').disabled,false);assert.equal(u.el('save').disabled,true);
@@ -296,4 +296,26 @@ test('quick actions: each test opens its own settings block',async()=>{
  await u.el('qa-lights').onclick();
  assert.equal(u.window.document.body.dataset.page,'test');
  assert.ok(u.window.document.getElementById('test-lights'));
+});
+
+test('plan A: lightbar colour lives on the home row, receiver LED toggle lives in the Dongle tab',async()=>{
+ const u=ui();
+ await u.poll();
+ // 未连接时颜色控件隐藏，连接后出现
+ assert.equal(u.window.document.getElementById('qa-color-wrap').hidden,true);
+ await u.el('connect').onclick();
+ await u.poll();
+ assert.equal(u.window.document.getElementById('qa-color-wrap').hidden,false);
+
+ // 颜色不再出现在「手感」页
+ await u.window.document.querySelector('.nav [data-page="feel"]').onclick();
+ assert.equal(u.window.document.querySelector('#controls input[type="color"]'),null,'colour left the Feel tab');
+ assert.equal(u.window.document.querySelector('#controls input[type="checkbox"][id*="disable_led"]'),null,'LED toggle left the Feel tab');
+ const feelLabels=[...u.window.document.querySelectorAll('#controls .row')].map(l=>l.textContent).join('|');
+ assert.match(feelLabels,/触觉增益/);assert.match(feelLabels,/扳机阻力减弱/);
+
+ // 熄灯开关出现在接收器页
+ await u.window.document.querySelector('.nav [data-page="device"]').onclick();
+ const devLabels=[...u.window.document.querySelectorAll('#controls .row')].map(l=>l.textContent).join('|');
+ assert.match(devLabels,/接收器一分钟后熄灯/);
 });

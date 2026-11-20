@@ -192,11 +192,11 @@ function stopTests(){audioTester.stop();return outputTester.stop()}
 async function testAction(fn){try{await fn()}catch(e){say(e.message??String(e),'error')}}
 const names=['□ 方块','× 叉键','○ 圆圈','△ 三角','L1','R1','L2','R2','Create','Options','L3','R3','PS','触摸板点击','静音','方向上','方向下','方向左','方向右','左区触摸','左区上','左区下','左区左','左区右','左区点击','右区触摸','右区上','右区下','右区左','右区右','右区点击'];
 const specs={
-feel:[['color','灯条颜色','重连手柄后显示；游戏仍可控制灯光。'],['haptics_gain','触觉增益','',1,2,.1],['trigger_reduce','扳机阻力减弱','0 为游戏原始强度。',0,10,1],['disable_led','接收器一分钟后熄灯']],
+feel:[['haptics_gain','触觉增益','',1,2,.1],['trigger_reduce','扳机阻力减弱','0 为游戏原始强度。',0,10,1]],
 audio:[['speaker_volume','扬声器音量','',0,127,1],['headset_volume','耳机音量','',0,127,1],['speaker_gain','扬声器增益','',0,7,1],['audio_buffer_length','音频缓冲','',16,128,1],['audio_haptic','音频转触觉','',['关闭','自动（游戏优先）','强制']],['disable_speaker','关闭扬声器编码'],['disable_mic','关闭麦克风透传'],['lock_volume','锁定音量','忽略电脑和游戏的音量调整。']],
 touch:[['tp_mode','触摸板模式','',['关闭','方向键','左鼠标 / 右方向键','左方向键 / 右鼠标','分区映射']],['tp_mouse_sensitivity','鼠标灵敏度','',1,32,1],['tp_block_raw','屏蔽原始触摸和点击','仅映射模式启用时生效。'],['combo_window','组合键保持时间','单位 100ms；0 为立即触发。',0,50,1],['mask','允许循环切换的模式','Create + 触摸板在勾选模式间切换。']],
-device:[['controller_mode','USB 手柄模式','重启后生效。',['DualSense','DualSense Edge','自动识别']],['polling_rate_mode','回报率','重启后生效。500 Hz / 1 kHz 为 USB 端点轮询率；「实时」在 V1 上等于 1 ms，在 V1.2 上为 125 µs。实际可达上报率受蓝牙链路限制（约 1 kHz）。',['500 Hz','1 kHz','实时']],['inactive_time','闲置断开时间','单位分钟，0 为关闭。',0,60,1],['idle_save','闲置射频省电','关闭可尝试改善主机挂起后的手柄重连。'],['enable_wake','PS 键唤醒主机'],['ps_shortcut_enabled','PS 扩展键盘快捷键','可能增加 USB 键盘接口，重启后生效。'],['enable_usb_sn','USB 序列号','重启后生效。'],['usb_stealth','USB 隐身','手柄连接前隐藏 USB，重启后生效。']]};
-const titles={feel:'灯光与触觉',audio:'音频',test:'测试中心',flash:'固件更新',touch:'触摸板与鼠标',remap:'按键映射',device:'接收器',about:'关于这个界面'};
+device:[['controller_mode','USB 手柄模式','重启后生效。',['DualSense','DualSense Edge','自动识别']],['polling_rate_mode','回报率','重启后生效。500 Hz / 1 kHz 为 USB 端点轮询率；「实时」在 V1 上等于 1 ms，在 V1.2 上为 125 µs。实际可达上报率受蓝牙链路限制（约 1 kHz）。',['500 Hz','1 kHz','实时']],['inactive_time','闲置断开时间','单位分钟，0 为关闭。',0,60,1],['idle_save','闲置射频省电','关闭可尝试改善主机挂起后的手柄重连。'],['enable_wake','PS 键唤醒主机'],['ps_shortcut_enabled','PS 扩展键盘快捷键','可能增加 USB 键盘接口，重启后生效。'],['enable_usb_sn','USB 序列号','重启后生效。'],['usb_stealth','USB 隐身','手柄连接前隐藏 USB，重启后生效。'],['disable_led','接收器一分钟后熄灯','接收器自身的指示灯，与手柄灯条无关。']]};
+const titles={feel:'手感',audio:'音频',test:'测试中心',flash:'固件更新',touch:'触摸板与鼠标',remap:'按键映射',device:'接收器',about:'关于这个界面'};
 function val(k){return k in draft?draft[k]:baseline?.[k]}
 const restartDevices=new WeakSet();
 const restartFields=new Set(['polling_rate_mode','controller_mode','enable_usb_sn','ps_shortcut_enabled','usb_stealth','tp_mode','enable_wake']);
@@ -214,6 +214,17 @@ function paintQuickActions(){
  }
  const hint=$('qa-hint');
  if(hint){const text=ready?t('qa_hint'):'';if(hint.textContent!==text)hint.textContent=text}
+}
+const hex2=n=>(n??255).toString(16).padStart(2,'0');
+function paintHeroColor(){
+ const wrap=$('qa-color-wrap'),input=$('qa-color'),label=$('qa-color-label');
+ if(!wrap||!input)return;
+ wrap.hidden=!device;
+ if(label){const text=t('lightbar_color');if(label.textContent!==text)label.textContent=text}
+ const rgb=['led_r','led_g','led_b'].map(k=>val(k)??255);
+ const hex='#'+rgb.map(hex2).join('');
+ if(input.value.toLowerCase()!==hex.toLowerCase())input.value=hex;
+ input.disabled=!device||busy;
 }
 function paintVerdict(){
  const box=$('verdict');if(!box)return;
@@ -233,6 +244,7 @@ function paintVerdict(){
  if(tt&&tt.textContent!==title)tt.textContent=title;
  if(dd&&dd.textContent!==detail)dd.textContent=detail;
  paintQuickActions();
+ paintHeroColor();
 }
 function paintConnection(){
  $('dot').classList.toggle('on',!!device);
@@ -272,7 +284,7 @@ function refresh(){
 function set(k,v){const same=k==='haptics_gain'?Math.fround(v)===Math.fround(baseline?.[k]):v===baseline?.[k];if(same)delete draft[k];else draft[k]=v;refresh();if(k.startsWith('led_'))paintLight()}
 function option(select,value,label){const o=document.createElement('option');o.value=value;o.textContent=label;select.append(o)}
 function row(label,hint,group=false){const r=document.createElement(group?'div':'label');if(group){r.setAttribute('role','group');r.setAttribute('aria-label',label)}r.className='row';const s=document.createElement('span');s.textContent=label;if(hint){const h=document.createElement('small');h.textContent=hint;s.append(h)}r.append(s);return r}
-function render(){ if(flashSession?.isBusy()&&page!=='flash'){page='flash';say('正在烧录，请等待完成后切换分类');return}document.body.dataset.page=page;setTimeout(()=>applyPhrases(document.body),0);paintMappingSource();$('panel-title').textContent=titles[page];$('panel-sub').textContent=LT(page==='flash'?'设备版本 · 本工程最新固件 · 页面内升级':page==='test'?'临时测试立即发送，不写入保存设置。':page==='about'?'OLED 视觉语言 · BL616 专用协议':'设置只在点击“应用并保存”后发送。');const box=$('controls');box.replaceChildren();document.querySelectorAll('[data-page]').forEach(b=>b.classList.toggle('active',b.dataset.page===page));
+function render(){ if(flashSession?.isBusy()&&page!=='flash'){page='flash';say('正在烧录，请等待完成后切换分类');return}document.body.dataset.page=page;setTimeout(()=>applyPhrases(document.body),0);paintMappingSource();$('panel-title').textContent=NAV_KEYS[page]?t(NAV_KEYS[page]):titles[page];$('panel-sub').textContent=LT(page==='flash'?'设备版本 · 本工程最新固件 · 页面内升级':page==='test'?'临时测试立即发送，不写入保存设置。':page==='about'?'OLED 视觉语言 · BL616 专用协议':'设置只在点击“应用并保存”后发送。');const box=$('controls');box.replaceChildren();document.querySelectorAll('[data-page]').forEach(b=>b.classList.toggle('active',b.dataset.page===page));
  if(page==='flash'){renderFirmware(box);refresh();return}
  if(page==='test'){renderTests(box);refresh();return}
  if(page==='about'){const p=document.createElement('p');p.className='hint';p.textContent=LT('适用于本工程配置版本 4（oc2 及后续本地版本）。复用 MarcelineVPQ OLED 配置器的手柄画作与界面布局思路。包含临时震动、扳机、灯光和音频测试；未包含 Pico OLED、UF2 刷机、校准和游戏自动配置功能。配置通过 WebHID 读写；真实按键数据取决于浏览器开放的输入报告，也可手动选择浏览器手柄输入源。');box.append(p);const a=document.createElement('a');a.href='LICENSES.txt';a.textContent=LT('第三方许可与来源');box.append(a);refresh();return}
@@ -641,6 +653,13 @@ function qaGoto(pageId,anchorId){
  const target=anchor?.closest?.('.test-card')??anchor;
  try{target?.scrollIntoView?.({block:'center',behavior:'smooth'})}catch{try{target?.scrollIntoView?.()}catch{}}
 }
+$('qa-color').oninput=()=>{
+ if(!device)return;
+ const v=$('qa-color').value.replace('#','');
+ if(!/^[0-9a-f]{6}$/i.test(v))return;
+ draft.led_r=parseInt(v.slice(0,2),16);draft.led_g=parseInt(v.slice(2,4),16);draft.led_b=parseInt(v.slice(4,6),16);
+ paintLight();refresh();
+};
 $('qa-rumble').onclick=()=>{if(!device)return;qaGoto('test','test-rumble');testAction(()=>outputTester.run('rumble',{left:140,right:140}))};
 /* 扳机：先左后右各 2 秒。模式必须用 feedback/vibration/weapon，rigid 不存在 */
 $('qa-trigger').onclick=()=>{if(!device)return;qaGoto('test','test-trigger');testAction(async()=>{

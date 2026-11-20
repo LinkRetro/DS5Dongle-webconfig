@@ -19,7 +19,7 @@ export const S={
     fr:'DualSense · Édition BL616', es:'DualSense · Edición BL616', it:'DualSense · Edizione BL616',
     'pt-BR':'DualSense · Edição BL616', ru:'DualSense · издание BL616', pl:'DualSense · edycja BL616', tr:'DualSense · BL616 Sürümü'},
 
-  nav_feel:{en:'Lighting','zh-CN':'灯光与触觉','zh-TW':'燈光與觸覺',ja:'ライトと触覚',ko:'라이트·햅틱',de:'Lightbar & Haptik',fr:'Barre lumineuse',es:'Barra de luz',it:'Barra luminosa','pt-BR':'Barra de luz',ru:'Подсветка',pl:'Podświetlenie',tr:'Işık ve Haptik'},
+  nav_feel:{en:'Feel','zh-CN':'手感','zh-TW':'手感',ja:'操作感',ko:'조작감',de:'Haptik',fr:'Ressenti',es:'Tacto',it:'Tatto','pt-BR':'Toque',ru:'Ощущения',pl:'Odczucie',tr:'His'},
   nav_audio:{en:'Audio','zh-CN':'音频','zh-TW':'音訊',ja:'オーディオ',ko:'오디오',de:'Audio',fr:'Audio',es:'Audio',it:'Audio','pt-BR':'Áudio',ru:'Звук',pl:'Dźwięk',tr:'Ses'},
   nav_test:{en:'Diagnostics','zh-CN':'测试中心','zh-TW':'測試中心',ja:'診断',ko:'진단',de:'Diagnose',fr:'Diagnostic',es:'Diagnóstico',it:'Diagnostica','pt-BR':'Diagnóstico',ru:'Диагностика',pl:'Diagnostyka',tr:'Tanılama'},
   nav_flash:{en:'Firmware','zh-CN':'固件更新','zh-TW':'韌體更新',ja:'ファームウェア',ko:'펌웨어',de:'Firmware',fr:'Firmware',es:'Firmware',it:'Firmware','pt-BR':'Firmware',ru:'Прошивка',pl:'Firmware',tr:'Yazılım'},
@@ -44,6 +44,7 @@ export const S={
   qa_lights:{en:'Test lightbar','zh-CN':'试灯光','zh-TW':'試燈光',ja:'ライトテスト',ko:'라이트 테스트',de:'Lightbar testen',fr:'Tester la barre',es:'Probar la luz',it:'Prova la barra','pt-BR':'Testar a luz',ru:'Проверить подсветку',pl:'Testuj podświetlenie',tr:'Işığı dene'},
   qa_hint:{en:'Temporary test — nothing is saved','zh-CN':'临时测试，不写入设置','zh-TW':'臨時測試，不寫入設定',ja:'一時テスト（設定は保存されません）',ko:'임시 테스트, 설정은 저장되지 않음',de:'Nur ein Test – nichts wird gespeichert',fr:'Test temporaire — rien n’est enregistré',es:'Prueba temporal, no se guarda nada',it:'Prova temporanea, nulla viene salvato','pt-BR':'Teste temporário, nada é salvo',ru:'Временная проверка, настройки не сохраняются',pl:'Test tymczasowy, nic nie jest zapisywane',tr:'Geçici test, hiçbir şey kaydedilmez'},
 
+  lightbar_color:{en:'Lightbar color','zh-CN':'灯条颜色','zh-TW':'燈條顏色',ja:'ライトバー色',ko:'라이트바 색상',de:'Lightbar-Farbe',fr:'Couleur de la barre',es:'Color de la barra',it:'Colore barra','pt-BR':'Cor da barra',ru:'Цвет подсветки',pl:'Kolor podświetlenia',tr:'Işık rengi'},
   connect:{en:'Connect Dongle','zh-CN':'连接接收器','zh-TW':'連接接收器',ja:'ドングルを接続',ko:'동글 연결',de:'Dongle verbinden',fr:'Connecter le dongle',es:'Conectar dongle',it:'Connetti dongle','pt-BR':'Conectar dongle',ru:'Подключить донгл',pl:'Połącz dongle',tr:'Dongle bağla'},
   disconnect:{en:'Disconnect','zh-CN':'断开连接','zh-TW':'中斷連線',ja:'切断',ko:'연결 해제',de:'Trennen',fr:'Déconnecter',es:'Desconectar',it:'Disconnetti','pt-BR':'Desconectar',ru:'Отключить',pl:'Rozłącz',tr:'Bağlantıyı kes'},
   apply:{en:'Apply & Save','zh-CN':'应用并保存','zh-TW':'套用並儲存',ja:'適用して保存',ko:'적용 및 저장',de:'Übernehmen',fr:'Appliquer',es:'Aplicar',it:'Applica','pt-BR':'Aplicar',ru:'Применить',pl:'Zastosuj',tr:'Uygula'},
