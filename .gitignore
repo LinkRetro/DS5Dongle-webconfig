@@ -3,7 +3,4 @@ node_modules/
 /auth-preview.html
 deploy.env.json
 .syntax_*.js
-firmware/*/*.bin
-firmware/*/boot2_*.bin
-firmware/*/partition.bin
 *.log
