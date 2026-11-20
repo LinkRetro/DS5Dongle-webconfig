@@ -1,0 +1,248 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>BL616 · 固件烧录</title>
+  <style>
+    :root {
+      font-family: Inter, "Noto Sans SC", "Microsoft YaHei", system-ui, sans-serif;
+      color: #17211b;
+      background: #f3f5f1;
+      font-synthesis: none;
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; min-width: 320px; }
+    button, input { font: inherit; }
+    button { cursor: pointer; }
+    button:disabled { cursor: not-allowed; opacity: .48; }
+    .topbar {
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 max(20px, calc((100vw - 1080px) / 2));
+      color: #fff;
+      background: #163f31;
+      border-bottom: 3px solid #e7b23b;
+    }
+    .brand { display: flex; align-items: center; gap: 12px; }
+    .brand-mark {
+      display: grid;
+      place-items: center;
+      width: 32px;
+      height: 32px;
+      color: #163f31;
+      background: #f2c04f;
+      border-radius: 6px;
+      font: 800 13px/1 ui-monospace, monospace;
+    }
+    h1 { margin: 0; font-size: 18px; letter-spacing: 0; }
+    .chip-label { color: #bed1c8; font: 12px/1 ui-monospace, monospace; }
+    .status { display: flex; align-items: center; gap: 8px; font-size: 13px; }
+    .status-dot { width: 9px; height: 9px; border-radius: 50%; background: #9cac9f; }
+    .status-dot[data-status="connected"] { background: #67d29a; }
+    .status-dot[data-status="working"] { background: #f2c04f; box-shadow: 0 0 0 4px #f2c04f33; }
+    .status-dot[data-status="success"] { background: #67d29a; }
+    .status-dot[data-status="error"] { background: #ff7e6c; }
+    main { width: min(1080px, calc(100% - 40px)); margin: 28px auto 44px; }
+    .support-notice {
+      margin-bottom: 18px;
+      padding: 12px 14px;
+      color: #7a281f;
+      background: #fff0ed;
+      border: 1px solid #edb9b1;
+      border-radius: 6px;
+      font-size: 14px;
+    }
+    .workspace { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(300px, .9fr); gap: 20px; }
+    .panel { background: #fff; border: 1px solid #d7ddd7; border-radius: 8px; }
+    .panel-body { padding: 22px; }
+    .panel-title {
+      margin: 0 0 16px;
+      color: #26352d;
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: 0;
+    }
+    .drop-zone {
+      position: relative;
+      min-height: 170px;
+      display: grid;
+      place-items: center;
+      padding: 28px;
+      border: 1px dashed #9ca9a0;
+      border-radius: 6px;
+      background: #fafbf9;
+      text-align: center;
+      transition: border-color .15s, background .15s;
+    }
+    .drop-zone:hover, .drop-zone.dragging { border-color: #237452; background: #f0f7f3; }
+    .drop-zone.has-file { border-style: solid; border-color: #65a587; background: #f4faf6; }
+    .file-input { position: absolute; inset: 0; width: 100%; opacity: 0; cursor: pointer; }
+    .file-symbol { margin: 0 auto 14px; color: #237452; font: 800 27px/1 ui-monospace, monospace; }
+    .file-name { margin: 0; color: #1b2921; font-size: 15px; font-weight: 700; overflow-wrap: anywhere; }
+    .file-meta { margin: 7px 0 0; color: #6e7972; font-size: 12px; }
+    .settings { display: grid; gap: 1px; margin-top: 18px; border: 1px solid #e0e4e0; border-radius: 6px; overflow: hidden; }
+    .setting-row { display: flex; align-items: center; justify-content: space-between; gap: 18px; min-height: 52px; padding: 0 14px; background: #fafbf9; }
+    .setting-row + .setting-row { border-top: 1px solid #e0e4e0; }
+    .setting-copy strong { display: block; font-size: 13px; }
+    .setting-copy span { display: block; margin-top: 3px; color: #758078; font-size: 11px; }
+    .chip-select { width: 132px; min-height: 32px; padding: 0 8px; border: 1px solid #b8c1ba; border-radius: 4px; color: #26352d; background: #fff; font-size: 12px; }
+    .switch { position: relative; flex: 0 0 auto; width: 38px; height: 22px; }
+    .switch input { position: absolute; opacity: 0; }
+    .switch-track { position: absolute; inset: 0; border-radius: 11px; background: #bdc5bf; transition: background .15s; }
+    .switch-track::after { content: ""; position: absolute; top: 3px; left: 3px; width: 16px; height: 16px; border-radius: 50%; background: #fff; transition: transform .15s; }
+    .switch input:checked + .switch-track { background: #237452; }
+    .switch input:checked + .switch-track::after { transform: translateX(16px); }
+    .actions { display: flex; gap: 10px; margin-top: 18px; }
+    .button { min-height: 42px; padding: 0 16px; border: 1px solid #b8c1ba; border-radius: 6px; color: #26352d; background: #fff; font-weight: 700; font-size: 13px; }
+    .button:hover:not(:disabled) { background: #f3f6f3; }
+    .button-primary { flex: 1; color: #fff; border-color: #1d6346; background: #237452; }
+    .button-primary:hover:not(:disabled) { background: #1d6346; }
+    .button-danger { color: #8c2e24; border-color: #dcaaa4; }
+    .serial-actions { display: flex; gap: 10px; }
+    .serial-actions .button { flex: 1; }
+    .progress-wrap { margin-top: 22px; }
+    .progress-heading { display: flex; justify-content: space-between; gap: 12px; margin-bottom: 9px; font-size: 12px; }
+    .stage-text { color: #4e5d54; overflow-wrap: anywhere; }
+    .progress-value { color: #237452; font: 700 12px/1 ui-monospace, monospace; }
+    progress { display: block; width: 100%; height: 8px; overflow: hidden; border: 0; border-radius: 4px; background: #e4e9e5; }
+    progress::-webkit-progress-bar { background: #e4e9e5; }
+    progress::-webkit-progress-value { background: #237452; transition: width .12s; }
+    progress::-moz-progress-bar { background: #237452; }
+    .manual { margin-top: 22px; padding-top: 18px; border-top: 1px solid #e2e6e2; }
+    .manual summary { color: #3f4e45; cursor: pointer; font-size: 13px; font-weight: 700; }
+    .manual ol { margin: 12px 0 0; padding-left: 20px; color: #667269; font-size: 12px; line-height: 1.8; }
+    .log-panel { grid-column: 1 / -1; overflow: hidden; }
+    .log-header { height: 48px; display: flex; align-items: center; justify-content: space-between; padding: 0 16px; border-bottom: 1px solid #dfe4df; }
+    .log-header .panel-title { margin: 0; }
+    .clear-log { padding: 5px 8px; border: 0; color: #657168; background: transparent; font-size: 12px; }
+    .log {
+      height: 230px;
+      overflow: auto;
+      padding: 13px 16px;
+      color: #b9c8bf;
+      background: #18241e;
+      font: 12px/1.65 ui-monospace, SFMono-Regular, Consolas, monospace;
+    }
+    .log-row { white-space: pre-wrap; overflow-wrap: anywhere; }
+    .log-success { color: #74d9a3; }
+    .log-warn { color: #eac26a; }
+    .log-error { color: #ff9182; }
+    @media (max-width: 760px) {
+      .topbar { padding: 0 16px; }
+      .chip-label { display: none; }
+      main { width: min(100% - 24px, 560px); margin-top: 16px; }
+      .workspace { grid-template-columns: 1fr; gap: 12px; }
+      .log-panel { grid-column: 1; }
+      .panel-body { padding: 16px; }
+      .drop-zone { min-height: 148px; padding: 20px; }
+      .actions { flex-wrap: wrap; }
+      .actions .button-primary { flex-basis: 100%; }
+    }
+  body{background:#10141c;color:#edf3fa}.topbar,.panel{background:#1b2330;border-color:#344355}.brand h1,.panel-title,.setting-copy strong,.file-name,.stage-text{color:#edf3fa}.chip-label,.file-meta,.setting-copy span{color:#aab8ca}a{color:#66c7ff}.button-primary{background:#66c7ff;color:#092334}.log{background:#10141c;color:#edf3fa}</style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <span class="brand-mark">BL</span>
+      <h1>DS5Dongle 烧录</h1>
+      <span class="chip-label">BL616 · V1 / V1.2</span>
+    </div>
+    <div class="status" aria-live="polite">
+      <span id="status-dot" class="status-dot" data-status="idle"></span>
+      <span id="status-text">未连接</span>
+    </div>
+  </header>
+
+  <main>
+    <div id="support-notice" class="support-notice" hidden>
+      当前浏览器不支持 Web Serial，请使用桌面版 Chrome 或 Edge，并通过 localhost 或 HTTPS 打开本页。
+    </div>
+
+    <p hidden><a href="../index.html">← 返回配置页</a> · <a href="ds5dongle-lctech616-3.18H-oc8-hs.bin" download>下载本工程 oc8 固件</a></p>
+    <p hidden>仅适用于本工程 BL616 V1 / V1.2 和旧 LCTech 版本，且已经使用现有引导与分区布局的接收器。固定更新 0x10000 固件区，不用于空白板首刷。仅接受已核对 SHA-256 的 oc8 / oc12-v1 / oc12-v12 文件。下载模式不能识别 PCB 版本，请按实物选固件，禁止跨硬件误刷。</p>
+    <p hidden>关闭其他配置页及串口工具，按住 BOOT 插入 USB，松开后选择下载串口。点击烧录后请保持页面打开；停止或拔线可能留下不完整固件，需要重新进入 BOOT 再烧录。此页面没有正常运行模式下的 OTA 功能。</p>
+    <div class="workspace">
+      <section class="panel" hidden>
+        <div class="panel-body">
+          <h2 class="panel-title">固件</h2>
+          <label class="setting-row">
+            <span class="setting-copy"><strong>芯片</strong><span>本版本固定 BL616，握手时核对芯片</span></span>
+            <select id="chip-select" class="chip-select">
+              <option value="">自动检测</option>
+              <option value="bl602">BL602</option>
+              <option value="bl616">BL616</option>
+              <option value="bl616cl">BL616CL</option>
+            </select>
+          </label>
+          <div id="drop-zone" class="drop-zone">
+            <input id="bin-file" class="file-input" type="file" accept=".bin,application/octet-stream">
+            <div>
+              <div class="file-symbol">BIN</div>
+              <p id="file-name" class="file-name">选择或拖入 oc8 固件 .bin</p>
+              <p id="file-meta" class="file-meta">oc8 固件 .bin · 写入地址 0x00010000</p>
+            </div>
+          </div>
+
+          <div class="settings" hidden><input id="auto-reset" type="checkbox"><input id="run-after-flash" type="checkbox"></div>
+        </div>
+      </section>
+
+      <section class="panel">
+        <div class="panel-body">
+          <h2 class="panel-title">设备</h2>
+          <div class="serial-actions">
+            <button id="connect-button" class="button button-primary" type="button">连接串口</button>
+            <button id="disconnect-button" class="button" type="button" disabled>断开</button>
+          </div>
+
+          <div class="progress-wrap" aria-live="polite">
+            <div class="progress-heading">
+              <span id="stage-text" class="stage-text">等待连接和固件</span>
+              <span id="progress-value" class="progress-value">0%</span>
+            </div>
+            <progress id="progress-bar" max="100" value="0">0%</progress>
+          </div>
+
+          <div class="actions">
+            <button id="flash-button" class="button button-primary" type="button" disabled>开始烧写</button>
+            <button id="cancel-button" class="button button-danger" type="button" hidden>停止</button>
+          </div>
+
+          <details class="manual">
+            <summary>手动进入 BootROM</summary>
+            <ol>
+              <li>按住 BOOT 插入 USB，随后松开 BOOT。</li>
+              <li>按住开发板 BOOT 键。</li>
+              <li>在本页上方"固件更新"里选择固件版本。</li>
+              <li>点击"更新到此版本"，再选下载串口。</li>
+            </ol>
+          </details>
+        </div>
+      </section>
+
+      <section class="panel log-panel">
+        <div class="log-header">
+          <h2 class="panel-title">日志</h2>
+          <button id="clear-log" class="clear-log" type="button">清空</button>
+        </div>
+        <div id="log" class="log" role="log" aria-live="polite"></div>
+      </section>
+    </div>
+  </main>
+
+  <script src="protocol.js?v=20260902-2"></script>
+  <script src="targets/common.js?v=20260902-2"></script>
+  <script src="targets/bl602.js?v=20260902-2"></script>
+  <script src="targets/bl616.js?v=20260902-2"></script>
+  <script src="targets/bl616cl.js?v=20260902-2"></script>
+  <script src="targets/index.js?v=20260902-2"></script>
+  <script src="loader.js?v=20260902-2"></script>
+  <script src="policy.js"></script>
+  <script src="app.js?v=20260902-2"></script>
+<script>mountDongleFlash(document);</script>
+</body>
+</html>

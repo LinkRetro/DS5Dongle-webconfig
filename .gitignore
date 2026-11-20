@@ -1,6 +1,6 @@
 node_modules/
-index.html
-auth-preview.html
+/index.html
+/auth-preview.html
 .syntax_*.js
 firmware/*/*.bin
 flasher/ds5dongle-*.bin
