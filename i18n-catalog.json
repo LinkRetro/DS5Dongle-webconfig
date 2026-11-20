@@ -60,36 +60,6 @@
       "pl": "Wejście na żywo · HID odbiornika (wyjście USB z przypisaniami)",
       "tr": "Canlı girdi · Alıcı HID (eşlenmiş USB çıkışı)"
     },
-    "product": {
-      "en": "DS5Dongle",
-      "zh-CN": "DS5Dongle",
-      "zh-TW": "DS5Dongle",
-      "ja": "DS5Dongle",
-      "ko": "DS5Dongle",
-      "de": "DS5Dongle",
-      "fr": "DS5Dongle",
-      "es": "DS5Dongle",
-      "it": "DS5Dongle",
-      "pt-BR": "DS5Dongle",
-      "ru": "DS5Dongle",
-      "pl": "DS5Dongle",
-      "tr": "DS5Dongle"
-    },
-    "subtitle": {
-      "en": "DualSense · BL616 Edition",
-      "zh-CN": "DualSense · BL616 版",
-      "zh-TW": "DualSense · BL616 版",
-      "ja": "DualSense · BL616 エディション",
-      "ko": "DualSense · BL616 에디션",
-      "de": "DualSense · BL616 Edition",
-      "fr": "DualSense · Édition BL616",
-      "es": "DualSense · Edición BL616",
-      "it": "DualSense · Edizione BL616",
-      "pt-BR": "DualSense · Edição BL616",
-      "ru": "DualSense · издание BL616",
-      "pl": "DualSense · edycja BL616",
-      "tr": "DualSense · BL616 Sürümü"
-    },
     "nav_feel": {
       "en": "Feel",
       "zh-CN": "手感",
@@ -390,21 +360,6 @@
       "pl": "Testuj wibracje",
       "tr": "Titreşimi dene"
     },
-    "qa_trigger": {
-      "en": "Test triggers",
-      "zh-CN": "试扳机",
-      "zh-TW": "試扳機",
-      "ja": "トリガーテスト",
-      "ko": "트리거 테스트",
-      "de": "Trigger testen",
-      "fr": "Tester les gâchettes",
-      "es": "Probar gatillos",
-      "it": "Prova grilletti",
-      "pt-BR": "Testar gatilhos",
-      "ru": "Проверить триггеры",
-      "pl": "Testuj spusty",
-      "tr": "Tetiği dene"
-    },
     "qa_lights": {
       "en": "Test lightbar",
       "zh-CN": "测试手柄灯光",
@@ -434,21 +389,6 @@
       "ru": "Временная проверка, настройки не сохраняются",
       "pl": "Test tymczasowy, nic nie jest zapisywane",
       "tr": "Geçici test, hiçbir şey kaydedilmez"
-    },
-    "lightbar_color": {
-      "en": "Lightbar color",
-      "zh-CN": "灯条颜色",
-      "zh-TW": "燈條顏色",
-      "ja": "ライトバー色",
-      "ko": "라이트바 색상",
-      "de": "Lightbar-Farbe",
-      "fr": "Couleur de la barre",
-      "es": "Color de la barra",
-      "it": "Colore barra",
-      "pt-BR": "Cor da barra",
-      "ru": "Цвет подсветки",
-      "pl": "Kolor podświetlenia",
-      "tr": "Işık rengi"
     },
     "connect": {
       "en": "Connect Dongle",
@@ -524,21 +464,6 @@
       "ru": "Всё сохранено",
       "pl": "Zapisano",
       "tr": "Kaydedildi"
-    },
-    "unsaved": {
-      "en": "{n} unsaved changes",
-      "zh-CN": "有 {n} 项未应用",
-      "zh-TW": "有 {n} 項未套用",
-      "ja": "未保存 {n} 件",
-      "ko": "저장 안 됨 {n}개",
-      "de": "{n} nicht gespeichert",
-      "fr": "{n} non enregistré(s)",
-      "es": "{n} sin guardar",
-      "it": "{n} non salvate",
-      "pt-BR": "{n} não salvas",
-      "ru": "Не сохранено: {n}",
-      "pl": "{n} niezapisanych",
-      "tr": "{n} kaydedilmedi"
     },
     "left_stick": {
       "en": "Left stick",
@@ -630,81 +555,6 @@
       "pl": "Przysp. g",
       "tr": "İvme g"
     },
-    "signal": {
-      "en": "Signal",
-      "zh-CN": "信号",
-      "zh-TW": "訊號",
-      "ja": "信号",
-      "ko": "신호",
-      "de": "Signal",
-      "fr": "Signal",
-      "es": "Señal",
-      "it": "Segnale",
-      "pt-BR": "Sinal",
-      "ru": "Сигнал",
-      "pl": "Sygnał",
-      "tr": "Sinyal"
-    },
-    "paired": {
-      "en": "paired",
-      "zh-CN": "已配对",
-      "zh-TW": "已配對",
-      "ja": "ペアリング済み",
-      "ko": "페어링됨",
-      "de": "gekoppelt",
-      "fr": "appairés",
-      "es": "emparejados",
-      "it": "associati",
-      "pt-BR": "pareados",
-      "ru": "сопряжено",
-      "pl": "sparowano",
-      "tr": "eşleşti"
-    },
-    "save_ok": {
-      "en": "Saved ✓",
-      "zh-CN": "已保存 ✓",
-      "zh-TW": "已儲存 ✓",
-      "ja": "保存しました ✓",
-      "ko": "저장됨 ✓",
-      "de": "Gespeichert ✓",
-      "fr": "Enregistré ✓",
-      "es": "Guardado ✓",
-      "it": "Salvato ✓",
-      "pt-BR": "Salvo ✓",
-      "ru": "Сохранено ✓",
-      "pl": "Zapisano ✓",
-      "tr": "Kaydedildi ✓"
-    },
-    "need_connect": {
-      "en": "Connect your dongle first",
-      "zh-CN": "请先连接接收器",
-      "zh-TW": "請先連接接收器",
-      "ja": "先にドングルを接続してください",
-      "ko": "먼저 동글을 연결하세요",
-      "de": "Dongle zuerst verbinden",
-      "fr": "Connectez d’abord le dongle",
-      "es": "Conecta el dongle primero",
-      "it": "Connetti prima il dongle",
-      "pt-BR": "Conecte o dongle primeiro",
-      "ru": "Сначала подключите донгл",
-      "pl": "Najpierw połącz dongle",
-      "tr": "Önce dongle bağlayın"
-    },
-    "disabled_hint": {
-      "en": "Connect your dongle to edit settings",
-      "zh-CN": "连接接收器后才能修改设置",
-      "zh-TW": "連接接收器後才能修改設定",
-      "ja": "設定の変更にはドングルの接続が必要です",
-      "ko": "설정을 변경하려면 동글을 연결하세요",
-      "de": "Zum Bearbeiten Dongle verbinden",
-      "fr": "Connectez le dongle pour modifier",
-      "es": "Conecta el dongle para editar",
-      "it": "Connetti il dongle per modificare",
-      "pt-BR": "Conecte o dongle para editar",
-      "ru": "Подключите донгл для настройки",
-      "pl": "Połącz dongle, aby edytować",
-      "tr": "Ayarlar için dongle bağlayın"
-    },
     "phrase.open_dongle": {
       "zh-CN": "打开接收器",
       "en": "Open dongle"
@@ -724,18 +574,6 @@
     "phrase.dongle_hid": {
       "zh-CN": "接收器 HID",
       "en": "Dongle HID"
-    },
-    "phrase.keyboard_keys": {
-      "zh-CN": "键盘按键",
-      "en": "Keyboard keys"
-    },
-    "phrase.mouse_buttons": {
-      "zh-CN": "鼠标按键",
-      "en": "Mouse buttons"
-    },
-    "phrase.mute": {
-      "zh-CN": "静音",
-      "en": "Mute"
     },
     "phrase.microphone": {
       "zh-CN": "麦克风",
@@ -760,18 +598,9 @@
       "zh-CN": "陀螺仪 / 加速度",
       "en": "Gyro / Accel"
     },
-    "phrase.requires_oc4_or_newer_firmware": {
-      "zh-CN": "需 oc4 或更新固件",
-      "en": "Requires oc4 or newer firmware"
-    },
     "phrase.verifying_device_identity": {
       "zh-CN": "验证设备身份",
       "en": "Verifying device identity"
-    },
-    "phrase.re_detect_firmware_version": {
-      "zh-CN": "重新检测设备版本",
-      "en": "Re-detect firmware version",
-      "zh-TW": "重新偵測裝置版本"
     },
     "phrase.reloading_discards_unsaved_changes_continue": {
       "zh-CN": "重新读取会放弃未保存更改，继续吗？",
@@ -788,26 +617,6 @@
       "pl": "Ponowny odczyt odrzuci niezapisane zmiany. Kontynuować?",
       "tr": "Yeniden okumak kaydedilmemiş değişiklikleri siler. Devam edilsin mi?"
     },
-    "phrase.shown_after_the_controller_reconnects_the_game": {
-      "zh-CN": "重连手柄后显示；游戏仍可控制灯光。",
-      "en": "Shown after the controller reconnects; the game can still control the lightbar."
-    },
-    "phrase.current_version": {
-      "zh-CN": "（设备当前版本）",
-      "en": "(current version)"
-    },
-    "phrase.then_plug_it_back_in_the_page": {
-      "zh-CN": "，再插回电脑（此时本页与接收器断开，属正常）",
-      "en": ", then plug it back in (the page losing the dongle is normal)"
-    },
-    "phrase.takes_effect_after_restart": {
-      "zh-CN": "重启后生效。",
-      "en": "Takes effect after restart."
-    },
-    "phrase.takes_effect_after_restart_500_hz_1": {
-      "zh-CN": "重启后生效。500 Hz / 1 kHz 为 USB 端点轮询率；「实时」在 V1 上等于 1 ms，在 V1.2 上为 125 µs。实际可达上报率受蓝牙链路限制（约 1 kHz）。",
-      "en": "Takes effect after restart. 500 Hz / 1 kHz are USB endpoint rates; \"Realtime\" is 1 ms on V1 and 125 µs on V1.2. The actual report rate is limited by Bluetooth (~1 kHz)."
-    },
     "phrase.stop_command_not_delivered_disconnect_the_controller": {
       "zh-CN": "停止指令未送达，请断开手柄以复位：",
       "en": "Stop command not delivered — disconnect the controller to reset:"
@@ -815,10 +624,6 @@
     "phrase.stop_command_sent": {
       "zh-CN": "已发送停止测试指令",
       "en": "Stop command sent"
-    },
-    "phrase.lightbar_reset_sent_restores_the_connected_color": {
-      "zh-CN": "已发送灯光复位：恢复已读取的连接色，玩家灯和麦克风指示灯关闭。",
-      "en": "Lightbar reset sent: restores the connected color, player and mic LEDs off."
     },
     "phrase.cannot_access_the_microphone_check_browser_permissions": {
       "zh-CN": "无法使用麦克风，请检查浏览器权限与安全上下文",
@@ -900,17 +705,9 @@
       "zh-CN": "映射表包含不支持的字段",
       "en": "Mapping table contains unsupported fields"
     },
-    "phrase.unknown_config_key": {
-      "zh-CN": "未知配置项",
-      "en": "Unknown config key"
-    },
     "phrase.device_returned_incomplete_or_mismatched_data": {
       "zh-CN": "设备返回的数据不完整或格式不匹配",
       "en": "Device returned incomplete or mismatched data"
-    },
-    "phrase.bl616_dualsense_console": {
-      "zh-CN": "BL616 · DualSense 控制台",
-      "en": "BL616 · DualSense Console"
     },
     "phrase.make_your_dualsense_yours": {
       "zh-CN": "你的 DualSense，由你定义。",
@@ -927,58 +724,6 @@
       "pl": "Dostosuj DualSense do siebie.",
       "tr": "DualSense’i kendine uyarla."
     },
-    "phrase.after_connecting_click_the_lightbar_triggers_or": {
-      "zh-CN": "连接接收器后，可点击手柄的灯条、扳机或触摸板打开相应设置。",
-      "en": "After connecting, click the lightbar, triggers or touchpad to open their settings."
-    },
-    "phrase.diagnostics": {
-      "zh-CN": "中心",
-      "en": "Diagnostics"
-    },
-    "phrase.firmware": {
-      "zh-CN": "固件",
-      "en": "Firmware"
-    },
-    "phrase.buttons": {
-      "zh-CN": "按键",
-      "en": "Buttons"
-    },
-    "phrase.mapping": {
-      "zh-CN": "映射",
-      "en": "Mapping"
-    },
-    "phrase.update": {
-      "zh-CN": "更新",
-      "en": "Update"
-    },
-    "phrase.test": {
-      "zh-CN": "测试",
-      "en": "Test"
-    },
-    "phrase.touchpad": {
-      "zh-CN": "触摸板",
-      "en": "Touchpad"
-    },
-    "phrase.audio": {
-      "zh-CN": "音频",
-      "en": "Audio"
-    },
-    "phrase.dongle": {
-      "zh-CN": "接收器",
-      "en": "Dongle"
-    },
-    "phrase.about": {
-      "zh-CN": "关于",
-      "en": "About"
-    },
-    "phrase.light": {
-      "zh-CN": "灯光",
-      "en": "Light"
-    },
-    "phrase.haptics": {
-      "zh-CN": "触觉",
-      "en": "Haptics"
-    },
     "phrase.toggle_theme": {
       "zh-CN": "明暗主题",
       "en": "Toggle theme",
@@ -993,98 +738,6 @@
       "ru": "Переключить тему",
       "pl": "Zmień motyw",
       "tr": "Temayı değiştir"
-    },
-    "phrase.ds5dongle_flasher": {
-      "zh-CN": "DS5Dongle 烧录",
-      "en": "DS5Dongle Flasher"
-    },
-    "phrase.bl616_firmware_flasher": {
-      "zh-CN": "BL616 · 固件烧录",
-      "en": "BL616 · Firmware Flasher"
-    },
-    "phrase.oc8_firmware_bin_write_address_0x00010000": {
-      "zh-CN": "oc8 固件 .bin · 写入地址 0x00010000",
-      "en": "oc8 firmware .bin · write address 0x00010000"
-    },
-    "phrase.back_to_config": {
-      "zh-CN": "← 返回配置页",
-      "en": "← Back to config"
-    },
-    "phrase.download_this_project_s_oc8_firmware": {
-      "zh-CN": "下载本工程 oc8 固件",
-      "en": "Download this project's oc8 firmware"
-    },
-    "phrase.for_this_project_s_bl616_v1_v1": {
-      "zh-CN": "仅适用于本工程 BL616 V1 / V1.2 和旧 LCTech 版本，且已经使用现有引导与分区布局的接收器。固定更新 0x10000 固件区，不用于空白板首刷。仅接受已核对 SHA-256 的 oc8 / oc12-v1 / oc12-v12 文件。下载模式不能识别 PCB 版本，请按实物选固件，禁止跨硬件误刷。",
-      "en": "For this project's BL616 V1 / V1.2 and legacy LCTech dongles that already use the current boot/partition layout. Writes the firmware region at 0x10000 only — not for blank boards. Only SHA-256 verified oc8 / oc12-v1 / oc12-v12 files are accepted. Download mode cannot detect the PCB revision, so pick the file matching your hardware."
-    },
-    "phrase.stop": {
-      "zh-CN": "停止",
-      "en": "Stop"
-    },
-    "phrase.close_other_config_pages_and_serial_tools": {
-      "zh-CN": "关闭其他配置页及串口工具，按住 BOOT 插入 USB，松开后选择下载串口。点击烧录后请保持页面打开；停止或拔线可能留下不完整固件，需要重新进入 BOOT 再烧录。此页面没有正常运行模式下的 OTA 功能。",
-      "en": "Close other config pages and serial tools. Hold BOOT while plugging USB, then release and pick the download port. Keep this page open while flashing; stopping or unplugging can leave partial firmware. This page has no OTA while the dongle runs normally."
-    },
-    "phrase.choose_a_firmware_version_in_the_firmware": {
-      "zh-CN": "在本页上方\"固件更新\"里选择固件版本。",
-      "en": "Choose a firmware version in the Firmware tab above."
-    },
-    "phrase.start_flashing": {
-      "zh-CN": "开始烧写",
-      "en": "Start flashing"
-    },
-    "phrase.enter_bootrom_manually": {
-      "zh-CN": "手动进入 BootROM",
-      "en": "Enter BootROM manually"
-    },
-    "phrase.hold_boot_while_plugging_usb_then_release": {
-      "zh-CN": "按住 BOOT 插入 USB，随后松开 BOOT。",
-      "en": "Hold BOOT while plugging USB, then release BOOT."
-    },
-    "phrase.hold_the_boot_button_on_the_board": {
-      "zh-CN": "按住开发板 BOOT 键。",
-      "en": "Hold the BOOT button on the board."
-    },
-    "phrase.disconnect": {
-      "zh-CN": "断开",
-      "en": "Disconnect"
-    },
-    "phrase.log": {
-      "zh-CN": "日志",
-      "en": "Log"
-    },
-    "phrase.this_build_targets_bl616_the_chip_is": {
-      "zh-CN": "本版本固定 BL616，握手时核对芯片",
-      "en": "This build targets BL616; the chip is verified during handshake"
-    },
-    "phrase.clear": {
-      "zh-CN": "清空",
-      "en": "Clear"
-    },
-    "phrase.click_install_this_version_then_pick_the": {
-      "zh-CN": "点击\"更新到此版本\"，再选下载串口。",
-      "en": "Click \"Install this version\", then pick the download port."
-    },
-    "phrase.waiting_for_connection_and_firmware": {
-      "zh-CN": "等待连接和固件",
-      "en": "Waiting for connection and firmware"
-    },
-    "phrase.chip": {
-      "zh-CN": "芯片",
-      "en": "Chip"
-    },
-    "phrase.device": {
-      "zh-CN": "设备",
-      "en": "Device"
-    },
-    "phrase.connect_serial": {
-      "zh-CN": "连接串口",
-      "en": "Connect serial"
-    },
-    "phrase.choose_or_drop_an_oc8_firmware_bin": {
-      "zh-CN": "选择或拖入 oc8 固件 .bin",
-      "en": "Choose or drop an oc8 firmware .bin"
     },
     "phrase.serial_in_use": {
       "zh-CN": "串口使用",
@@ -1145,10 +798,6 @@
     "phrase.flash_complete": {
       "zh-CN": "烧写完成",
       "en": "Flash complete"
-    },
-    "phrase.auto_detect": {
-      "zh-CN": "自动检测",
-      "en": "Auto detect"
     },
     "phrase.computing_local_sha_256": {
       "zh-CN": "计算本地 SHA-256",
@@ -1222,33 +871,9 @@
       "zh-CN": "等待设备响应超时",
       "en": "Timed out waiting for device response"
     },
-    "phrase.unexpected_device_response": {
-      "zh-CN": "意外设备响应",
-      "en": "Unexpected device response "
-    },
-    "phrase.invalid_device_response_0x": {
-      "zh-CN": "无效设备响应 0x",
-      "en": "Invalid device response 0x"
-    },
     "phrase.open_via_the_local_start_script_in": {
       "zh-CN": "请通过本地启动脚本在 Chrome / Edge 打开",
       "en": "Open via the local start script in Chrome / Edge"
-    },
-    "phrase.flash_and_verify_complete_in": {
-      "zh-CN": "烧写和校验完成，用时",
-      "en": "Flash and verify complete in "
-    },
-    "phrase.s_disconnect_serial_release_boot_replug_normally": {
-      "zh-CN": "秒。请先断开串口，松开 BOOT，正常重新插拔后返回配置页连接。",
-      "en": " s. Disconnect serial, release BOOT, replug normally, then connect from the config page."
-    },
-    "phrase.apply_save": {
-      "zh-CN": "应用并保存",
-      "en": "Apply & Save"
-    },
-    "phrase.revert": {
-      "zh-CN": "撤销更改",
-      "en": "Revert"
     },
     "phrase.reload": {
       "zh-CN": "重新读取",
@@ -1280,14 +905,6 @@
       "pl": "Uruchom ponownie odbiornik",
       "tr": "Alıcıyı yeniden başlat"
     },
-    "phrase.rescan_firmware": {
-      "zh-CN": "重新扫描固件",
-      "en": "Rescan Firmware"
-    },
-    "phrase.refresh_ports": {
-      "zh-CN": "刷新串口",
-      "en": "Refresh ports"
-    },
     "phrase.refresh_audio_devices": {
       "zh-CN": "刷新音频设备",
       "en": "Refresh audio devices",
@@ -1302,46 +919,6 @@
       "ru": "Обновить список аудиоустройств",
       "pl": "Odśwież urządzenia audio",
       "tr": "Ses cihazlarını yenile"
-    },
-    "phrase.open_log_folder": {
-      "zh-CN": "打开日志目录",
-      "en": "Open log folder"
-    },
-    "phrase.hardware_version": {
-      "zh-CN": "硬件版本",
-      "en": "Hardware version"
-    },
-    "phrase.first_flash_boot_partition_firmware": {
-      "zh-CN": "新板首刷（引导 + 分区 + 固件）",
-      "en": "First flash (boot + partition + firmware)"
-    },
-    "phrase.firmware_only_keep_boot_partition": {
-      "zh-CN": "仅更新固件（保留原引导/分区）",
-      "en": "Firmware only (keep boot/partition)"
-    },
-    "phrase.firmware_folder": {
-      "zh-CN": "固件目录",
-      "en": "Firmware folder"
-    },
-    "phrase.browse": {
-      "zh-CN": "浏览…",
-      "en": "Browse…"
-    },
-    "phrase.flash_this_unit": {
-      "zh-CN": "手动烧录这一台",
-      "en": "Flash this unit"
-    },
-    "phrase.start_batch_flashing": {
-      "zh-CN": "启动连续烧录",
-      "en": "Start batch flashing"
-    },
-    "phrase.stop_all_tests_reset": {
-      "zh-CN": "■ 停止全部测试 / 复位",
-      "en": "Stop all tests / Reset"
-    },
-    "phrase.stop_all_tests_reset_2": {
-      "zh-CN": "停止全部测试 / 复位",
-      "en": "Stop all tests / Reset"
     },
     "phrase.stop_test": {
       "zh-CN": "停止测试",
@@ -1358,56 +935,6 @@
       "pl": "Zatrzymaj test",
       "tr": "Testi durdur"
     },
-    "phrase.diagnostics_2": {
-      "zh-CN": "测试中心",
-      "en": "Diagnostics"
-    },
-    "phrase.lightbar_haptics": {
-      "zh-CN": "灯光与触觉",
-      "en": "Lightbar & Haptics"
-    },
-    "phrase.firmware_2": {
-      "zh-CN": "固件更新",
-      "en": "Firmware"
-    },
-    "phrase.touchpad_mouse": {
-      "zh-CN": "触摸板与鼠标",
-      "en": "Touchpad & Mouse"
-    },
-    "phrase.button_remapping": {
-      "zh-CN": "按键映射",
-      "en": "Button Remapping"
-    },
-    "phrase.about_2": {
-      "zh-CN": "关于这个界面",
-      "en": "About"
-    },
-    "phrase.connect_dongle": {
-      "zh-CN": "连接接收器",
-      "en": "Connect Dongle"
-    },
-    "phrase.disconnect_2": {
-      "zh-CN": "断开连接",
-      "en": "Disconnect"
-    },
-    "phrase.not_connected_2": {
-      "zh-CN": "尚未连接接收器",
-      "en": "Not connected",
-      "ja": "ドングル未接続",
-      "ko": "동글 연결 안 됨"
-    },
-    "phrase.dongle_connected": {
-      "zh-CN": "接收器已连接",
-      "en": "Dongle connected",
-      "ja": "ドングル接続済み",
-      "ko": "동글 연결됨"
-    },
-    "phrase.controller_status_unknown": {
-      "zh-CN": "手柄状态未读取",
-      "en": "Controller status unknown",
-      "ja": "コントローラーの状態は未取得",
-      "ko": "컨트롤러 상태를 읽지 않음"
-    },
     "phrase.controller_connected": {
       "zh-CN": "手柄已连接",
       "en": "Controller connected",
@@ -1422,10 +949,6 @@
       "ru": "Контроллер подключён",
       "pl": "Kontroler połączony",
       "tr": "Oyun kumandası bağlı"
-    },
-    "phrase.controller_disconnected": {
-      "zh-CN": "手柄已断开",
-      "en": "Controller disconnected"
     },
     "phrase.controller_disconnecting": {
       "zh-CN": "手柄正在断开",
@@ -1532,22 +1055,6 @@
       "pl": "Oczekiwanie na kontroler",
       "tr": "Kumanda bekleniyor"
     },
-    "phrase.all_changes_saved": {
-      "zh-CN": "没有未应用的更改",
-      "en": "All changes saved"
-    },
-    "phrase.unsaved_changes": {
-      "zh-CN": "有未应用的更改",
-      "en": "Unsaved changes"
-    },
-    "phrase.saved": {
-      "zh-CN": "保存成功",
-      "en": "Saved"
-    },
-    "phrase.saved_2": {
-      "zh-CN": "已保存",
-      "en": "Saved"
-    },
     "phrase.disconnected": {
       "zh-CN": "已断开连接",
       "en": "Disconnected",
@@ -1562,10 +1069,6 @@
       "ru": "Отключено",
       "pl": "Rozłączono",
       "tr": "Bağlantı kesildi"
-    },
-    "phrase.settings_saved": {
-      "zh-CN": "设置已保存",
-      "en": "Settings saved"
     },
     "phrase.settings_reloaded_from_device": {
       "zh-CN": "已重新读取设备设置",
@@ -1631,21 +1134,9 @@
       "pl": "Zastosowano ustawienia i zażądano zapisu. Uruchom ponownie odbiornik, aby je aktywować.",
       "tr": "Ayarlar uygulandı ve kayıt istendi. Etkinleştirmek için alıcıyı yeniden başlatın."
     },
-    "phrase.read_back_verified_save_requested_do_not": {
-      "zh-CN": "设备回读一致，已请求异步保存。请稍候再拔出；此固件不提供 Flash 写入结果查询。",
-      "en": "Read-back verified, save requested. Do not unplug yet; this firmware cannot report flash write results."
-    },
     "phrase.read_back_mismatch_save_was_not_requested": {
       "zh-CN": "配置回读不一致，未请求保存",
       "en": "Read-back mismatch — save was not requested"
-    },
-    "phrase.mapping_read_back_mismatch_reload_and_try": {
-      "zh-CN": "映射回读不一致，请重新读取后重试",
-      "en": "Mapping read-back mismatch. Reload and try again."
-    },
-    "phrase.discarded_unsaved_changes_on_this_page_device": {
-      "zh-CN": "已撤销本页未应用的更改，设备设置未修改",
-      "en": "Discarded unsaved changes on this page. Device settings untouched."
     },
     "phrase.controller_disconnected_and_restart_requested_click_connect": {
       "zh-CN": "已确认手柄断开并发送重启请求。等待设备重新出现后点击连接。",
@@ -1681,11 +1172,6 @@
       "pl": "Tylko HID odbiornika",
       "tr": "Yalnızca alıcı HID"
     },
-    "phrase.browser_gamepad_source": {
-      "zh-CN": "浏览器手柄输入源",
-      "en": "Browser gamepad source",
-      "ko": "브라우저 게임패드 입력 소스"
-    },
     "phrase.system_default_output": {
       "zh-CN": "系统默认输出",
       "en": "System default output",
@@ -1716,62 +1202,14 @@
       "pl": "Domyślny mikrofon systemowy",
       "tr": "Varsayılan sistem mikrofonu"
     },
-    "phrase.left_stick": {
-      "zh-CN": "左摇杆",
-      "en": "Left stick"
-    },
-    "phrase.right_stick": {
-      "zh-CN": "右摇杆",
-      "en": "Right stick"
-    },
-    "phrase.triggers_l_r": {
-      "zh-CN": "扳机 L / R",
-      "en": "Triggers L / R"
-    },
-    "phrase.battery": {
-      "zh-CN": "手柄电量",
-      "en": "Battery"
-    },
-    "phrase.gyro_s": {
-      "zh-CN": "陀螺仪 °/s",
-      "en": "Gyro °/s"
-    },
-    "phrase.accel_g": {
-      "zh-CN": "加速度 g",
-      "en": "Accel g"
-    },
-    "phrase.signal": {
-      "zh-CN": "信号",
-      "en": "Signal"
-    },
-    "phrase.paired": {
-      "zh-CN": "已配对",
-      "en": "paired"
-    },
-    "phrase.polling_rate": {
-      "zh-CN": "回报率",
-      "en": "Polling rate"
-    },
     "phrase.brightness": {
       "zh-CN": "亮度",
       "en": "Brightness"
-    },
-    "phrase.color": {
-      "zh-CN": "颜色",
-      "en": "Color"
-    },
-    "phrase.breathing": {
-      "zh-CN": "呼吸",
-      "en": "Breathing"
     },
     "phrase.off": {
       "zh-CN": "关闭",
       "en": "Off",
       "zh-TW": "關閉"
-    },
-    "phrase.solid": {
-      "zh-CN": "常亮",
-      "en": "Solid"
     },
     "phrase.medium": {
       "zh-CN": "中等",
@@ -1864,18 +1302,6 @@
       "pl": "Oczekiwanie na stan baterii",
       "tr": "Pil durumu bekleniyor"
     },
-    "phrase.realtime": {
-      "zh-CN": "实时",
-      "en": "Realtime"
-    },
-    "phrase.live_sampling": {
-      "zh-CN": "实时采样",
-      "en": "Live sampling"
-    },
-    "phrase.live_lightbar": {
-      "zh-CN": "实时灯光",
-      "en": "Live lightbar"
-    },
     "phrase.live_data_not_zeroed": {
       "zh-CN": "实时数据（未归零）",
       "en": "Live data (not zeroed)"
@@ -1916,10 +1342,6 @@
       "zh-CN": "死区（原始单位）",
       "en": "Deadband (raw units)"
     },
-    "phrase.auto_bias": {
-      "zh-CN": "自动零偏",
-      "en": "Auto bias"
-    },
     "phrase.on": {
       "zh-CN": "开启",
       "en": "On"
@@ -1927,10 +1349,6 @@
     "phrase.flat": {
       "zh-CN": "平放",
       "en": "Flat"
-    },
-    "phrase.rumble": {
-      "zh-CN": "普通震动",
-      "en": "Rumble"
     },
     "phrase.adaptive_triggers": {
       "zh-CN": "自适应扳机",
@@ -1947,21 +1365,9 @@
       "pl": "Spusty adaptacyjne",
       "tr": "Uyarlanabilir tetikler"
     },
-    "phrase.audio_microphone": {
-      "zh-CN": "音频与麦克风",
-      "en": "Audio & microphone"
-    },
-    "phrase.mic_led": {
-      "zh-CN": "麦克风指示灯",
-      "en": "Mic LED"
-    },
     "phrase.player_leds": {
       "zh-CN": "玩家指示灯",
       "en": "Player LEDs"
-    },
-    "phrase.lightbar_color": {
-      "zh-CN": "灯条颜色",
-      "en": "Lightbar color"
     },
     "phrase.audio_output": {
       "zh-CN": "声音输出",
@@ -2053,26 +1459,6 @@
       "pl": "Testuj spust przez 2 s",
       "tr": "2 sn tetik testi"
     },
-    "phrase.light_test_5s": {
-      "zh-CN": "灯光测试 5 秒",
-      "en": "Light test 5s"
-    },
-    "phrase.left_strength_0_255": {
-      "zh-CN": "左侧强度（0–255）",
-      "en": "Left strength (0–255)"
-    },
-    "phrase.right_strength_0_255": {
-      "zh-CN": "右侧强度（0–255）",
-      "en": "Right strength (0–255)"
-    },
-    "phrase.strength_1_8": {
-      "zh-CN": "强度（1–8）",
-      "en": "Strength (1–8)"
-    },
-    "phrase.start_0_9": {
-      "zh-CN": "起点（0–9）",
-      "en": "Start (0–9)"
-    },
     "phrase.trigger_under_test": {
       "zh-CN": "测试扳机",
       "en": "Trigger under test",
@@ -2087,10 +1473,6 @@
       "ru": "Проверяемый курок",
       "pl": "Testowany spust",
       "tr": "Test edilecek tetik"
-    },
-    "phrase.effect": {
-      "zh-CN": "效果",
-      "en": "Effect"
     },
     "phrase.constant_resistance": {
       "zh-CN": "持续阻力",
@@ -2167,42 +1549,6 @@
       "pl": "R2 · Prawy spust",
       "tr": "R2 · Sağ tetik"
     },
-    "phrase.usb_controller_mode": {
-      "zh-CN": "USB 手柄模式",
-      "en": "USB controller mode"
-    },
-    "phrase.auto_detect_2": {
-      "zh-CN": "自动识别",
-      "en": "Auto detect"
-    },
-    "phrase.idle_disconnect": {
-      "zh-CN": "闲置断开时间",
-      "en": "Idle disconnect"
-    },
-    "phrase.idle_power_saving": {
-      "zh-CN": "闲置射频省电",
-      "en": "Idle power saving"
-    },
-    "phrase.ps_button_wakes_host": {
-      "zh-CN": "PS 键唤醒主机",
-      "en": "PS button wakes host"
-    },
-    "phrase.ps_keyboard_shortcuts": {
-      "zh-CN": "PS 扩展键盘快捷键",
-      "en": "PS keyboard shortcuts"
-    },
-    "phrase.usb_serial_number": {
-      "zh-CN": "USB 序列号",
-      "en": "USB serial number"
-    },
-    "phrase.hide_usb_until_connected": {
-      "zh-CN": "USB 隐身",
-      "en": "Hide USB until connected"
-    },
-    "phrase.hides_usb_until_a_controller_connects_takes": {
-      "zh-CN": "手柄连接前隐藏 USB，重启后生效。",
-      "en": "Hides USB until a controller connects. Takes effect after restart."
-    },
     "phrase.haptic_strength": {
       "zh-CN": "触觉增益",
       "en": "Haptic strength",
@@ -2232,10 +1578,6 @@
       "ru": "Ослабление сопротивления курков",
       "pl": "Zmniejszenie oporu spustów",
       "tr": "Tetik direncini azaltma"
-    },
-    "phrase.turn_off_led_after_1_min": {
-      "zh-CN": "接收器一分钟后熄灯",
-      "en": "Turn off LED after 1 min"
     },
     "phrase.audio_buffer": {
       "zh-CN": "音频缓冲",
@@ -2269,74 +1611,6 @@
       "zh-CN": "忽略电脑和游戏的音量调整。",
       "en": "Ignores volume changes from the PC or game."
     },
-    "phrase.touchpad_mode": {
-      "zh-CN": "触摸板模式",
-      "en": "Touchpad mode"
-    },
-    "phrase.d_pad": {
-      "zh-CN": "方向键",
-      "en": "D-pad"
-    },
-    "phrase.left_mouse_right_d_pad": {
-      "zh-CN": "左鼠标 / 右方向键",
-      "en": "Left mouse / right D-pad"
-    },
-    "phrase.left_d_pad_right_mouse": {
-      "zh-CN": "左方向键 / 右鼠标",
-      "en": "Left D-pad / right mouse"
-    },
-    "phrase.zone_mapping": {
-      "zh-CN": "分区映射",
-      "en": "Zone mapping"
-    },
-    "phrase.zones": {
-      "zh-CN": "分区",
-      "en": "Zones"
-    },
-    "phrase.mouse_sensitivity": {
-      "zh-CN": "鼠标灵敏度",
-      "en": "Mouse sensitivity"
-    },
-    "phrase.block_raw_touch_and_click": {
-      "zh-CN": "屏蔽原始触摸和点击",
-      "en": "Block raw touch and click"
-    },
-    "phrase.block_raw_controller_buttons": {
-      "zh-CN": "屏蔽原始手柄按键",
-      "en": "Block raw controller buttons"
-    },
-    "phrase.only_applies_in_mapping_modes": {
-      "zh-CN": "仅映射模式启用时生效。",
-      "en": "Only applies in mapping modes."
-    },
-    "phrase.combo_hold_window": {
-      "zh-CN": "组合键保持时间",
-      "en": "Combo hold window"
-    },
-    "phrase.cycles_through_enabled_modes": {
-      "zh-CN": "允许循环切换的模式",
-      "en": "Cycles through enabled modes"
-    },
-    "phrase.use_the_group_being_edited": {
-      "zh-CN": "使用当前编辑组",
-      "en": "Use the group being edited"
-    },
-    "phrase.in_minutes_0_disables": {
-      "zh-CN": "单位分钟，0 为关闭。",
-      "en": "In minutes, 0 disables."
-    },
-    "phrase.in_100_ms_units_0_fires_instantly": {
-      "zh-CN": "单位 100ms；0 为立即触发。",
-      "en": "In 100 ms units, 0 fires instantly."
-    },
-    "phrase.adds_a_usb_keyboard_interface_takes_effect": {
-      "zh-CN": "可能增加 USB 键盘接口，重启后生效。",
-      "en": "Adds a USB keyboard interface. Takes effect after restart."
-    },
-    "phrase.may_improve_reconnection_after_host_suspend": {
-      "zh-CN": "关闭可尝试改善主机挂起后的手柄重连。",
-      "en": "May improve reconnection after host suspend."
-    },
     "phrase.0_keeps_the_game_s_original_strength": {
       "zh-CN": "0 为游戏原始强度。",
       "en": "0 keeps the game's original strength.",
@@ -2352,22 +1626,6 @@
       "pl": "0 zachowuje pierwotną siłę gry.",
       "tr": "0, oyunun özgün gücünü korur."
     },
-    "phrase.create_touchpad_cycles_the_enabled_modes": {
-      "zh-CN": "Create + 触摸板在勾选模式间切换。",
-      "en": "Create + touchpad cycles the enabled modes."
-    },
-    "phrase.saved_asynchronously_by_the_firmware_do_not": {
-      "zh-CN": "保存由固件异步写入，请稍候再拔出。灯色在手柄重连后应用；USB 模式、键鼠接口和序列号等设置需重启生效。",
-      "en": "Saved asynchronously by the firmware — do not unplug yet. Lightbar color applies after reconnect; USB mode, keyboard/mouse interface and serial number need a restart."
-    },
-    "phrase.ready_connect_your_bl616_dongle_with_chrome": {
-      "zh-CN": "就绪 · 使用 Chrome 或 Edge 连接你的 BL616 接收器。",
-      "en": "Ready · Connect your BL616 dongle with Chrome or Edge."
-    },
-    "phrase.wireless_controller_console": {
-      "zh-CN": "BL616 无线手柄控制台",
-      "en": "Wireless controller console"
-    },
     "phrase.bl616_config_v4": {
       "zh-CN": "BL616 · 配置版本 4",
       "en": "BL616 · config v4",
@@ -2382,10 +1640,6 @@
       "ru": "BL616 · Конфигурация v4",
       "pl": "BL616 · Konfiguracja v4",
       "tr": "BL616 · Yapılandırma v4"
-    },
-    "phrase.make_the_controller_feel_like_yours": {
-      "zh-CN": "把手柄调整成你喜欢的样子。",
-      "en": "Make the controller feel like yours."
     },
     "phrase.toggle_light_or_dark_theme": {
       "zh-CN": "切换明暗主题",
@@ -2417,17 +1671,9 @@
       "pl": "Stan urządzenia",
       "tr": "Cihaz durumu"
     },
-    "phrase.device_status_2": {
-      "zh-CN": "设备状态：",
-      "en": "Device status:"
-    },
     "phrase.device_status_disconnected": {
       "zh-CN": "设备状态：未连接",
       "en": "Device status: disconnected"
-    },
-    "phrase.device_status_reading": {
-      "zh-CN": "设备状态：读取中…",
-      "en": "Device status: reading…"
     },
     "phrase.reading_config": {
       "zh-CN": "读取配置",
@@ -2461,161 +1707,9 @@
       "zh-CN": "切换映射组失败",
       "en": "Failed to switch mapping group"
     },
-    "phrase.mapping_group": {
-      "zh-CN": "映射组",
-      "en": "Mapping group"
-    },
-    "phrase.group_1": {
-      "zh-CN": "组 1",
-      "en": "Group 1"
-    },
-    "phrase.group_2": {
-      "zh-CN": "组 2",
-      "en": "Group 2"
-    },
-    "phrase.pick_the_edited_group_separately_from_the": {
-      "zh-CN": "编辑组与当前使用组分别选择。",
-      "en": "Pick the edited group separately from the active group."
-    },
-    "phrase.map_to": {
-      "zh-CN": "映射到",
-      "en": "Map to"
-    },
-    "phrase.source_button": {
-      "zh-CN": "来源按键",
-      "en": "Source button"
-    },
-    "phrase.controller_buttons": {
-      "zh-CN": "手柄按键",
-      "en": "Controller buttons"
-    },
-    "phrase.target": {
-      "zh-CN": "目标",
-      "en": "Target"
-    },
-    "phrase.exact_value": {
-      "zh-CN": "精确值",
-      "en": "Exact value"
-    },
-    "phrase.flags_0_3_bit_1_second_keycode": {
-      "zh-CN": "标志（0–3；位 1 为第二键码）",
-      "en": "Flags (0–3; bit 1 = second keycode)"
-    },
-    "phrase.modifier_mask_second_keycode": {
-      "zh-CN": "修饰键位掩码 / 第二键码",
-      "en": "Modifier mask / second keycode"
-    },
-    "phrase.usb_hid_keycode": {
-      "zh-CN": "USB HID 键码",
-      "en": "USB HID keycode"
-    },
     "phrase.output": {
       "zh-CN": "输出",
       "en": "Output"
-    },
-    "phrase.middle": {
-      "zh-CN": "中键",
-      "en": "Middle"
-    },
-    "phrase.left": {
-      "zh-CN": "左键",
-      "en": "Left"
-    },
-    "phrase.right": {
-      "zh-CN": "右键",
-      "en": "Right"
-    },
-    "phrase.left_mouse": {
-      "zh-CN": "左鼠标",
-      "en": "Left mouse"
-    },
-    "phrase.right_mouse": {
-      "zh-CN": "右鼠标",
-      "en": "Right mouse"
-    },
-    "phrase.d_pad_left": {
-      "zh-CN": "方向左",
-      "en": "D-pad left"
-    },
-    "phrase.d_pad_right": {
-      "zh-CN": "方向右",
-      "en": "D-pad right"
-    },
-    "phrase.d_pad_up": {
-      "zh-CN": "方向上",
-      "en": "D-pad up"
-    },
-    "phrase.d_pad_down": {
-      "zh-CN": "方向下",
-      "en": "D-pad down"
-    },
-    "phrase.left_zone_touch": {
-      "zh-CN": "左区触摸",
-      "en": "Left zone touch"
-    },
-    "phrase.left_zone_up": {
-      "zh-CN": "左区上",
-      "en": "Left zone up"
-    },
-    "phrase.left_zone_down": {
-      "zh-CN": "左区下",
-      "en": "Left zone down"
-    },
-    "phrase.left_zone_left": {
-      "zh-CN": "左区左",
-      "en": "Left zone left"
-    },
-    "phrase.left_zone_right": {
-      "zh-CN": "左区右",
-      "en": "Left zone right"
-    },
-    "phrase.left_zone_click": {
-      "zh-CN": "左区点击",
-      "en": "Left zone click"
-    },
-    "phrase.right_zone_touch": {
-      "zh-CN": "右区触摸",
-      "en": "Right zone touch"
-    },
-    "phrase.right_zone_up": {
-      "zh-CN": "右区上",
-      "en": "Right zone up"
-    },
-    "phrase.right_zone_down": {
-      "zh-CN": "右区下",
-      "en": "Right zone down"
-    },
-    "phrase.right_zone_left": {
-      "zh-CN": "右区左",
-      "en": "Right zone left"
-    },
-    "phrase.right_zone_right": {
-      "zh-CN": "右区右",
-      "en": "Right zone right"
-    },
-    "phrase.right_zone_click": {
-      "zh-CN": "右区点击",
-      "en": "Right zone click"
-    },
-    "phrase.touchpad_click": {
-      "zh-CN": "触摸板点击",
-      "en": "Touchpad click"
-    },
-    "phrase.square": {
-      "zh-CN": "□ 方块",
-      "en": "Square"
-    },
-    "phrase.cross": {
-      "zh-CN": "× 叉键",
-      "en": "Cross"
-    },
-    "phrase.circle": {
-      "zh-CN": "○ 圆圈",
-      "en": "Circle"
-    },
-    "phrase.triangle": {
-      "zh-CN": "△ 三角",
-      "en": "Triangle"
     },
     "phrase.1_middle": {
       "zh-CN": "1 · 中间",
@@ -2657,26 +1751,6 @@
       "zh-CN": "陀螺仪 Z",
       "en": "Gyro Z"
     },
-    "phrase.0_relative_level": {
-      "zh-CN": "0% · 相对电平",
-      "en": "0% · relative level"
-    },
-    "phrase.no_new_sample_yet": {
-      "zh-CN": "暂无新样本",
-      "en": "No new sample yet"
-    },
-    "phrase.connect_to_read": {
-      "zh-CN": "连接后读取",
-      "en": "Connect to read"
-    },
-    "phrase.waiting_for_first_hid_sample": {
-      "zh-CN": "等待首个 HID 就绪样本",
-      "en": "Waiting for first HID sample"
-    },
-    "phrase.timed_per_report_by_the_firmware_not": {
-      "zh-CN": "由固件逐报告计时，不使用浏览器推算。",
-      "en": "Timed per report by the firmware, not inferred by the browser."
-    },
     "phrase.working": {
       "zh-CN": "正在处理…",
       "en": "Working…",
@@ -2692,14 +1766,6 @@
       "pl": "Przetwarzanie…",
       "tr": "İşleniyor…"
     },
-    "phrase.read_failed": {
-      "zh-CN": "读取失败",
-      "en": "Read failed"
-    },
-    "phrase.cannot_get_firmware_file": {
-      "zh-CN": "无法获取固件文件",
-      "en": "Cannot get firmware file"
-    },
     "phrase.preparing_firmware": {
       "zh-CN": "正在准备固件…",
       "en": "Preparing firmware…"
@@ -2707,15 +1773,6 @@
     "phrase.flashing_component_not_ready_go_back_to": {
       "zh-CN": "烧录组件未就绪，请回到“固件更新”页重试",
       "en": "Flashing component not ready. Go back to Firmware and retry."
-    },
-    "phrase.install_this_version": {
-      "zh-CN": "更新到此版本",
-      "en": "Install this version"
-    },
-    "phrase.reinstall_current_version": {
-      "zh-CN": "重写当前版本",
-      "en": "Reinstall current version",
-      "zh-TW": "重新安裝目前版本"
     },
     "phrase.update_dongle_firmware": {
       "zh-CN": "更新接收器固件",
@@ -2762,17 +1819,9 @@
       "pl": "Wersja urządzenia · Najnowsze oprogramowanie · Aktualizacja w przeglądarce",
       "tr": "Cihaz sürümü · En yeni ürün yazılımı · Tarayıcıda güncelleme"
     },
-    "phrase.versions_come_from_the_manifest_shipped_with": {
-      "zh-CN": "版本比较依据随页面发布的本工程清单，并非在线查询官方全部版本。",
-      "en": "Versions come from the manifest shipped with this page, not an online lookup."
-    },
     "phrase.device_identity_verified": {
       "zh-CN": "设备身份验证通过",
       "en": "Device identity verified"
-    },
-    "phrase.oc8_cannot_identify_v1_v1_2_check": {
-      "zh-CN": "旧版 oc8 无法识别 V1/V1.2，请核对硬件",
-      "en": "oc8 cannot identify V1/V1.2 — check your hardware"
     },
     "phrase.not_on_the_server": {
       "zh-CN": "服务器上没有",
@@ -2793,30 +1842,6 @@
     "phrase.use_chrome_or_edge_with_webhid_support": {
       "zh-CN": "请使用支持 WebHID 的 Chrome / Edge",
       "en": "Use Chrome or Edge with WebHID support"
-    },
-    "phrase.audio_devices_and_the_dongle_hid_are": {
-      "zh-CN": "浏览器音频设备与接收器 HID 分开选择。请在下方或系统声音设置中选择 DS5Dongle 的扬声器 / 麦克风；默认设备可能是电脑音箱。麦克风只显示相对电平，不录音、不回放。",
-      "en": "Audio devices and the dongle HID are selected separately. Pick the DS5Dongle speaker/mic below or in Windows Sound. The mic meter is level-only — nothing is recorded or played back."
-    },
-    "phrase.live_raw_six_axis_data_gyro_values": {
-      "zh-CN": "实时读取手柄六轴原始值。转动手柄时陀螺仪数值应随之变化，静止时加速度约等于 1g。若数值不随动作变化，请用「复制原始数据」回传，我们据实校正报告偏移。",
-      "en": "Live raw six-axis data. Gyro values must change when you rotate the controller; at rest accel should read about 1g. If they never change, use Copy raw data so we can correct the report offsets."
-    },
-    "phrase.test_l2_or_r2_individually_using_the": {
-      "zh-CN": "独立测试 L2 或 R2；使用当前固件的扳机减弱设置。起点 0–9，段落阻力起点为 2–7、终点固定为 8。",
-      "en": "Test L2 or R2 individually using the current trigger-resistance setting. Start 0–9; section resistance starts at 2–7 and ends at 8."
-    },
-    "phrase.lights_up_for_5_s_then_restores": {
-      "zh-CN": "临时点亮 5 秒；复位到已读取的连接色，玩家灯和麦克风指示灯关闭。橙灯测试仅控制指示灯，不改变实际静音状态。",
-      "en": "Lights up for 5 s, then restores the connected color and turns off player/mic LEDs. The orange test only drives the LED."
-    },
-    "phrase.temporary_tests_are_sent_immediately_and_are": {
-      "zh-CN": "临时测试立即发送，不写入保存设置。",
-      "en": "Temporary tests are sent immediately and are not saved."
-    },
-    "phrase.independent_left_right_rumble_this_is_not": {
-      "zh-CN": "左右独立调节。与高清音频触觉不同；当前固件设置可能影响体感。",
-      "en": "Independent left/right rumble. This is not audio-based haptics; current firmware settings may affect the feel."
     },
     "phrase.waiting_for_controller_input_if_the_browser": {
       "zh-CN": "等待手柄输入；若浏览器屏蔽 HID 输入，可手动选择上方的手柄输入源。",
@@ -2848,26 +1873,6 @@
       "pl": "Po połączeniu wybierz część kontrolera, aby otworzyć jej ustawienia.",
       "tr": "Bağlandıktan sonra ayarlarını açmak için çizimde kumandanın bir bölümünü seçin."
     },
-    "phrase.blue_highlights_the_matching_part_on_the": {
-      "zh-CN": "蓝色高亮标出左侧手柄图的对应位置；触摸分区来源会标出触摸板。",
-      "en": "Blue highlights the matching part on the controller image; touch zones highlight the touchpad."
-    },
-    "phrase.pick_a_source_to_edit_the_target": {
-      "zh-CN": "选择来源后可编辑下方目标；蓝色高亮不会锁定编辑。",
-      "en": "Pick a source to edit the target below. The blue highlight does not lock editing."
-    },
-    "phrase.click_the_button_below_and_pick_the": {
-      "zh-CN": "点击下面按钮，在浏览器弹出的串口列表里选接收器的下载口",
-      "en": "Click the button below and pick the dongle's download port"
-    },
-    "phrase.hold_the_boot_button": {
-      "zh-CN": "按住 BOOT 键不放",
-      "en": "Hold the BOOT button"
-    },
-    "phrase.unplug_the_dongle": {
-      "zh-CN": "拔掉接收器，",
-      "en": "Unplug the dongle,"
-    },
     "phrase.release_boot_to_enter_download_mode": {
       "zh-CN": "松开 BOOT：接收器进入下载模式",
       "en": "Release BOOT to enter download mode",
@@ -2882,10 +1887,6 @@
       "ru": "Отпустите BOOT, чтобы перейти в режим загрузки.",
       "pl": "Puść BOOT, aby wejść w tryb pobierania.",
       "tr": "İndirme moduna geçmek için BOOT’u bırakın."
-    },
-    "phrase.if_no_port_appears_hold_boot_while": {
-      "zh-CN": "串口列表里没有出现接收器？请按住 BOOT 键再插 USB，松手后会多出一个串口。",
-      "en": "If no port appears, hold BOOT while plugging in the dongle, then release it."
     },
     "phrase.firmware_ready_follow_the_3_steps_above": {
       "zh-CN": "固件已就绪。请按上面 3 步操作，然后点“选择串口并开始烧录”。",
@@ -2933,10 +1934,6 @@
       "zh-CN": "已清除加速度校准，恢复原始读数",
       "en": "Accel calibration cleared — raw values restored"
     },
-    "phrase.auto_bias_off_showing_raw_offsets": {
-      "zh-CN": "自动零偏已关闭，显示原始偏移",
-      "en": "Auto bias off — showing raw offsets"
-    },
     "phrase.no_input_report_received_yet": {
       "zh-CN": "还没有收到输入报告",
       "en": "No input report received yet"
@@ -2949,45 +1946,9 @@
       "zh-CN": "还没有收到输入报告：请先连接手柄并静止 2 秒",
       "en": "No input report yet. Connect the controller and hold it still for 2s."
     },
-    "phrase.connect_the_dongle_first_the_reset_command": {
-      "zh-CN": "请先连接接收器：复位指令需要通过接收器下发",
-      "en": "Connect the dongle first — the reset command goes through it"
-    },
-    "phrase.connect_the_dongle_to_read_its_version": {
-      "zh-CN": "请先连接接收器读取版本；进入 BOOT 后配置接口会消失。",
-      "en": "Connect the dongle to read its version first. The config interface disappears in BOOT mode."
-    },
     "phrase.save_or_reload_before_switching_mapping_groups": {
       "zh-CN": "请先保存或重新读取，再切换映射组",
       "en": "Save or reload before switching mapping groups"
-    },
-    "phrase.fix_the_invalid_input_values_first": {
-      "zh-CN": "请先修正无效的输入值",
-      "en": "Fix the invalid input values first"
-    },
-    "phrase.enter_a_valid_value_within_range": {
-      "zh-CN": "请输入范围内的有效步进值",
-      "en": "Enter a valid value within range"
-    },
-    "phrase.keep_at_least_one_cycling_mode_enabled": {
-      "zh-CN": "至少保留一种循环模式",
-      "en": "Keep at least one cycling mode enabled"
-    },
-    "phrase.not_connected_click_connect_first_then_edit": {
-      "zh-CN": "尚未连接接收器：请先点击右上角连接，读取成功后才能编辑映射。",
-      "en": "Not connected. Click Connect first, then edit the mapping."
-    },
-    "phrase.not_connected_version_unavailable": {
-      "zh-CN": "尚未连接，无法检测",
-      "en": "Not connected; version unavailable"
-    },
-    "phrase.reading_or_saving_the_mapping_please_wait": {
-      "zh-CN": "正在读取或保存映射，请稍候…",
-      "en": "Reading or saving the mapping, please wait…"
-    },
-    "phrase.currently_mapping": {
-      "zh-CN": "正在映射：",
-      "en": "Currently mapping:"
     },
     "phrase.device_disconnected_while_saving": {
       "zh-CN": "保存期间设备已断开",
@@ -3058,14 +2019,6 @@
       "zh-CN": "发送重启流程指令",
       "en": "Sending restart command"
     },
-    "phrase.all_tests_stopped_outputs_reset_rumble_off": {
-      "zh-CN": "已停止全部测试，并复位手柄输出（震动归零 / 扳机松开 / 灯光恢复）",
-      "en": "All tests stopped. Outputs reset (rumble off / triggers released / lightbar restored)."
-    },
-    "phrase.no_test_was_running_reset_sent_rumble": {
-      "zh-CN": "当前没有测试在运行，已发送一次复位（震动归零 / 扳机松开 / 灯光恢复）",
-      "en": "No test was running. Reset sent (rumble off / triggers released / lightbar restored)."
-    },
     "phrase.fast_blue_flashing_means_low_battery_not": {
       "zh-CN": "板载蓝灯快速闪烁是低电量提示，不代表连接失败。请给手柄充电。",
       "en": "Fast blue flashing means low battery, not a failed connection. Charge the controller.",
@@ -3096,14 +2049,6 @@
       "pl": "Kontroler się ładuje. Miganie ustanie po aktualizacji stanu baterii.",
       "tr": "Kumanda şarj oluyor. Pil durumu güncellendiğinde uyarı ışığı söner."
     },
-    "phrase.dongle_disconnected_unsaved_changes_were_discarded": {
-      "zh-CN": "接收器已断开，未保存更改已清除。",
-      "en": "Dongle disconnected — unsaved changes were discarded."
-    },
-    "phrase.write_address_0x_1": {
-      "zh-CN": "· 写入地址 0x([0-9A-Fa-f]+)$",
-      "en": "· write address 0x$1"
-    },
     "phrase.device_status_still_connected_to_the_dongle": {
       "zh-CN": "设备状态：仍与接收器连接（需按住 BOOT 拔插一次，才会出现下载串口）",
       "en": "Device status: still connected to the dongle (hold BOOT while replugging to get the download port)"
@@ -3131,71 +2076,6 @@
     "phrase.invalid_flash_jedec_id_length": {
       "zh-CN": "Flash JEDEC ID 长度无效",
       "en": "Invalid flash JEDEC ID length"
-    },
-    "phrase.sha_256_verification_failed": {
-      "zh-CN": "SHA-256 校验失败：",
-      "en": "SHA-256 verification failed: "
-    },
-    "phrase.image_exceeds_flash_capacity_of": {
-      "zh-CN": "镜像范围超过 Flash 容量",
-      "en": "Image exceeds flash capacity of "
-    },
-    "phrase.cannot_reset_via_dtr_rts_press_reset": {
-      "zh-CN": "无法通过 DTR/RTS 复位，请手动按 RESET：",
-      "en": "Cannot reset via DTR/RTS — press RESET manually:"
-    },
-    "phrase.auto_reset_failed_disable_auto_reset_and": {
-      "zh-CN": "自动复位失败，请关闭自动复位并手动进入 BootROM：",
-      "en": "Auto-reset failed. Disable auto-reset and enter BootROM manually:"
-    },
-    "phrase.command": {
-      "zh-CN": "命令",
-      "en": "Command "
-    },
-    "phrase.retry": {
-      "zh-CN": "重试",
-      "en": " retry"
-    },
-    "phrase.loaded": {
-      "zh-CN": "已加载",
-      "en": "Loaded "
-    },
-    "phrase.unsupported_bootrom_chip_id_0x": {
-      "zh-CN": "不支持的 BootROM 芯片标识 0x",
-      "en": "Unsupported BootROM chip ID 0x"
-    },
-    "phrase.unsupported_chip": {
-      "zh-CN": "不支持的芯片：",
-      "en": "Unsupported chip: "
-    },
-    "phrase.serial_read_failed": {
-      "zh-CN": "串口读取失败：",
-      "en": "Serial read failed: "
-    },
-    "phrase.cannot_load_target_resource": {
-      "zh-CN": "无法读取目标资源",
-      "en": "Cannot load target resource "
-    },
-    "phrase.flashing_2": {
-      "zh-CN": "正在烧写 ·",
-      "en": "Flashing · "
-    },
-    "phrase.failed_to_close_serial": {
-      "zh-CN": "关闭串口失败：",
-      "en": "Failed to close serial: "
-    },
-    "phrase.device_returned_error": {
-      "zh-CN": "设备返回错误",
-      "en": "Device returned error "
-    },
-    "phrase.signal_paired_usb": {
-      "zh-CN": "信号 — · 已配对 — · USB —",
-      "en": "Signal — · paired — · USB —",
-      "ja": "信号 — · ペアリング済み — · USB —"
-    },
-    "phrase.firmware_version": {
-      "zh-CN": "固件版本：",
-      "en": "Firmware version: "
     },
     "phrase.save_this_page": {
       "zh-CN": "保存本页设置",
@@ -3314,10 +2194,6 @@
       "ru": "Удерживайте Create + PS до быстрого мигания, затем дважды нажмите BOOT на адаптере.",
       "pl": "Przytrzymaj Create + PS do szybkiego migania, a następnie naciśnij BOOT odbiornika dwa razy.",
       "tr": "Işık hızlı yanıp sönene kadar Create + PS’yi basılı tutun, ardından alıcıdaki BOOT’a iki kez basın."
-    },
-    "phrase.live_input": {
-      "zh-CN": "实时输入",
-      "en": "Live input"
     },
     "phrase.discard_changes_on_this_page": {
       "zh-CN": "撤销本页更改",
@@ -3844,31 +2720,6 @@
       "pl": "Ustawienia diagnostyczne są zapisywane w tej przeglądarce.",
       "tr": "Tanılama ayarları bu tarayıcıda saklanır."
     },
-    "phrase.target_board": {
-      "zh-CN": "目标板型",
-      "en": "Target board",
-      "zh-TW": "目標板型"
-    },
-    "phrase.select_a_pcb_revision": {
-      "zh-CN": "请选择 PCB 板型",
-      "en": "Select a PCB revision"
-    },
-    "phrase.v1_single_led": {
-      "zh-CN": "V1 · 单灯",
-      "en": "V1 · Single LED"
-    },
-    "phrase.select_the_revision_printed_on_your_board": {
-      "zh-CN": "请选择与实物一致的板型。",
-      "en": "Select the revision printed on your board."
-    },
-    "phrase.could_not_detect_board_revision_check_the": {
-      "zh-CN": "无法自动确认板型。请核对 PCB 版本后手动选择。",
-      "en": "Could not detect board revision. Check the PCB and select it manually."
-    },
-    "phrase.versions_come_from_this_page_s_release": {
-      "zh-CN": "版本来自本页面发布清单。升级前请保存设置；部分版本升级后需要重新配对。",
-      "en": "Versions come from this page's release list. Save settings before updating; some versions require pairing again."
-    },
     "phrase.latest_version_for_this_board": {
       "zh-CN": "已是对应硬件的最新版本",
       "en": "Latest version for this board"
@@ -3896,18 +2747,9 @@
       "pl": "Kliknij poniżej i wybierz port pobierania odbiornika z listy w przeglądarce.",
       "tr": "Aşağıdaki düğmeye basın ve tarayıcı listesinden alıcının indirme bağlantı noktasını seçin."
     },
-    "phrase.unknown_older_firmware": {
-      "zh-CN": "未知（旧固件）",
-      "en": "Unknown (older firmware)",
-      "ko": "알 수 없음(이전 펌웨어)"
-    },
     "phrase.this_image_is_not_embedded_open_the": {
       "zh-CN": "该镜像没有内嵌，请用 start-web.cmd 打开配置页。",
       "en": "This image is not embedded. Open the configurator with start-web.cmd."
-    },
-    "phrase.this_controls_the_dongle_indicator_not_the": {
-      "zh-CN": "接收器自身的指示灯，与手柄灯条无关。",
-      "en": "This controls the dongle indicator, not the controller lightbar."
     },
     "phrase.retry_saving_connection_color": {
       "zh-CN": "重试保存灯色",
@@ -3920,10 +2762,6 @@
     "phrase.current_firmware_cannot_save_pure_black": {
       "zh-CN": "当前固件无法保存纯黑灯色。",
       "en": "Current firmware cannot save pure black."
-    },
-    "phrase.mappings_are_unavailable_edit_other_settings_or": {
-      "zh-CN": "映射暂不可用。可继续修改其他设置，或点击“重新读取”重试。",
-      "en": "Mappings are unavailable. Edit other settings or select Reload to retry."
     },
     "phrase.haptic_gain_can_be_saved_the_standard": {
       "zh-CN": "触觉增益是可保存的设置；下面的普通震动测试用于检查马达，不代表高清触觉增益效果。",
@@ -4150,10 +2988,6 @@
       "zh-CN": "已应用并请求保存。旧固件无法确认 Flash 写入，请稍候再拔出。",
       "en": "Settings applied and save requested. Older firmware cannot confirm the flash write; wait before unplugging."
     },
-    "phrase.use_this_saved_group": {
-      "zh-CN": "使用已保存的此组",
-      "en": "Use this saved group"
-    },
     "phrase.save_this_group_s_changes_before_switching": {
       "zh-CN": "请先保存本组更改再切换",
       "en": "Save this group's changes before switching."
@@ -4161,10 +2995,6 @@
     "phrase.switch_mapping_group": {
       "zh-CN": "切换映射组",
       "en": "Switch mapping group"
-    },
-    "phrase.signal_2": {
-      "zh-CN": "信号 —",
-      "en": "Signal —"
     },
     "phrase.browser_selected_gamepad": {
       "zh-CN": "手动选择的浏览器手柄",

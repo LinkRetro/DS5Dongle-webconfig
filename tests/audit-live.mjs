@@ -65,6 +65,13 @@ for (const p of pages) {
 const heroFound = scan('hero');
 for (const [text, where] of heroFound) if (!report.has(text)) report.set(text, {pages: new Set(['hero']), where});
 
+if (process.env.DS5_MODE === 'ascii') {
+  // 非中文语言下，收集"仍然是纯英文"的文本节点（说明该条没被翻译）
+  const ascii = [...report.keys()].filter(t => !CJK.test(t) && /[A-Za-z]{3}/.test(t));
+  console.log(`LANG=${ctx.__DS5_LANG} 纯英文文本节点: ${ascii.length}`);
+  for (const t of ascii.sort().slice(0, 40)) console.log('  ' + t);
+  process.exit(0);
+}
 const rows = [...report.entries()].sort((a, b) => a[0].localeCompare(b[0]));
 console.log(`LANG=${ctx.__DS5_LANG} 仍显示中文的文本节点: ${rows.length}`);
 for (const [text, meta] of rows) console.log(`  [${[...meta.pages].join(',')}] ${meta.where} :: ${text}`);
