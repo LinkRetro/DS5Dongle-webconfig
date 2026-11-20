@@ -257,3 +257,20 @@ test('quick actions: disabled until the controller is ready, then send output re
  assert.equal(u.sent.filter(([id])=>id===246).length,0);
  assert.equal(u.el('qa-hint').textContent,'临时测试，不写入设置');
 });
+
+test('quick actions: trigger test uses a real effect mode and covers both sides',async()=>{
+ const u=ui();
+ await u.poll();
+ await u.el('connect').onclick();
+ u.setLink(7,1);
+ await u.poll();
+ const before=u.outputs.length;
+ await u.el('qa-trigger').onclick();
+ for(let i=0;i<4;i++)await new Promise(r=>setImmediate(r));
+ const sent=u.outputs.slice(before);
+ assert.ok(sent.length>0,'trigger test sends a report');
+ const left=sent.find(([,b])=>b[0]===8);
+ assert.ok(left,'left trigger report');
+ assert.equal(left[1][21],0x21,'feedback effect byte (0x21), not an unknown mode');
+ assert.equal(u.el('message').textContent.includes('未知'),false,'no silent failure');
+});
