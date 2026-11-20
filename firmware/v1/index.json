@@ -10,33 +10,6 @@
       "sha256": "77d4eb8394bb8f7c3024da1dfb53767cb30a84464c8a53777e167a5cf379464f",
       "date": "2026-11-20",
       "notes": "当前推荐：修复板型识别、V1 回报率、更新后清配对"
-    },
-    {
-      "version": "LCT616-DS5 3.18H-oc11-v1",
-      "tag": "3.18H-oc11",
-      "file": "ds5dongle-v1-3.18H-oc11-hs.bin",
-      "size": 798384,
-      "sha256": "b2764da1175525668e8ea2cc8ea588803927b6014b8933da49be81c0271a2efe",
-      "date": "2026-11-16",
-      "notes": "过渡版本"
-    },
-    {
-      "version": "LCT616-DS5 3.18H-oc10-v1",
-      "tag": "3.18H-oc10",
-      "file": "ds5dongle-v1-3.18H-oc10-hs.bin",
-      "size": 798640,
-      "sha256": "0618c9c1f54b43f0e01eadcf8ec341f5cf9693c24cef7c375d8bfef4b864a214",
-      "date": "2026-11-16",
-      "notes": "早期版本，存在板型宏与重连问题"
-    },
-    {
-      "version": "LCT616-DS5 3.18H-oc9-v1",
-      "tag": "3.18H-oc9",
-      "file": "ds5dongle-v1-3.18H-oc9-hs.bin",
-      "size": 794988,
-      "sha256": "fbbba9d997bb28d9fbc2fad50a1ae9e56f0a55e5666c8b8e08c25bf9e97d7425",
-      "date": "2026-11-16",
-      "notes": "早期版本，存在“已配对后不再主动扫描”问题"
     }
   ]
 }

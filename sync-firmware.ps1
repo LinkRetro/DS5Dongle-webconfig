@@ -72,7 +72,8 @@ foreach ($board in 'v1', 'v12') {
     [pscustomobject]@{
         board    = $board
         latest   = $items[0].version
-        versions = $items | Select-Object version, tag, file, size, sha256, date, notes
+        # 注意：只有一个版本时 PowerShell 会把它解包成单个对象，必须强制成数组
+        versions = @($items | Select-Object version, tag, file, size, sha256, date, notes)
     } | ConvertTo-Json -Depth 5 | Set-Content (Join-Path $dst 'index.json') -Encoding utf8
 
     $summary += [pscustomobject]@{

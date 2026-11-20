@@ -56,6 +56,12 @@ Windows helpers: `start-web.cmd` (server) and `open-ui.cmd` (server + browser).
 
 ## Test
 
+The suites use `linkedom` for DOM emulation, so install it once:
+
+```bash
+npm install
+```
+
 ```bash
 node tests/auth.test.mjs
 node tests/config.test.mjs

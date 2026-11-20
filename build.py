@@ -89,7 +89,20 @@ for variant,c in catalog.items():
         if raw is None:
             continue
         release_policy[hashlib.sha256(raw).hexdigest()]={'model':label+' · '+entry['tag'],'size':len(raw)}
-policy_text=re.sub(r'const RELEASES=\{[\s\S]*?\};',lambda _: 'const RELEASES='+json.dumps(release_policy,ensure_ascii=False)+';',policy_text,count=1)
+# 直接重写 policy.js，避免正则匹配失败导致旧版本哈希残留
+policy_text=('/* Local policy for the LCTech BL616 oc8 partition layout. */\n'
+ "(function(root){\n"
+ " 'use strict';\n"
+ " const RELEASES="+json.dumps(release_policy,ensure_ascii=False)+";\n"
+ " async function validate(data){\n"
+ "  if(!(data instanceof Uint8Array)||!Object.values(RELEASES).some(r=>r.size===data.length))throw Error('文件长度不属于本工程已发布固件，禁止烧录');\n"
+ "  if(!root.crypto?.subtle)throw Error('SHA-256 不可用，请通过 localhost 或 HTTPS 打开');\n"
+ "  const hash=Array.from(new Uint8Array(await root.crypto.subtle.digest('SHA-256',data)),v=>v.toString(16).padStart(2,'0')).join('');\n"
+ "  const release=RELEASES[hash];if(!release||release.size!==data.length)throw Error('固件 SHA-256 与本工程发布清单不一致，已阻止烧录');\n"
+ "  return {address:0x10000,length:data.length,sha256:hash,model:release.model};\n"
+ " }\n"
+ " root.DongleFlashPolicy=Object.freeze({validate});\n"
+ "})(globalThis);\n")
 policy_file.write_text(policy_text,encoding='utf-8')
 flash_scripts=['protocol.js','targets/common.js','targets/bl602.js','targets/bl616.js','targets/bl616cl.js','targets/index.js','loader.js','policy.js','app.js']
 js='\n'.join((f/p).read_text(encoding='utf-8-sig') for p in flash_scripts)+'\nconst FLASH_MARKUP='+json.dumps('<style>'+flash_style+'</style>'+flash_main)+';\nglobalThis.DONGLE_FLASH_RESOURCES='+json.dumps(resources)+';\nconst BOARD_FIRMWARE_CATALOG='+json.dumps(catalog,ensure_ascii=False)+';\nconst BOARD_FIRMWARE_IMAGES='+json.dumps(board_images)+';\nconst BUNDLED_FIRMWARE='+json.dumps(base64.b64encode(firmware).decode())+';\n'+(r/'firmware-version.mjs').read_text(encoding='utf-8').replace('export ','')+'\n'+js
