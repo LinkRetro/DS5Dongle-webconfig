@@ -38,8 +38,8 @@ Push-Location $web
 try {
     $pyExe = (Get-Command python -ErrorAction SilentlyContinue).Source
     if (-not $pyExe) { $pyExe = 'python' }
-    & $pyExe check-i18n.py --uncovered
-    if ($LASTEXITCODE -ne 0) { throw 'i18n: 存在未登记的界面文案' }
+    & $pyExe check-i18n.py --strict
+    if ($LASTEXITCODE -ne 0) { throw 'i18n: 翻译缺失或存在未登记文案' }
     & $pyExe i18n-gate.py
     if ($LASTEXITCODE -ne 0) { throw 'i18n 回归：翻译缺口变大' }
 } finally { Pop-Location }
