@@ -7514,6 +7514,36 @@
       "pl": "Wgrywanie · 2,000,000 baud",
       "ru": "Запись · 2,000,000 baud",
       "tr": "Flash yazılıyor · 2,000,000 baud"
+    },
+    "nav_controller": {
+      "en": "Controller",
+      "zh-CN": "手柄",
+      "zh-TW": "手把",
+      "ja": "コントローラー",
+      "ko": "컨트롤러",
+      "de": "Controller",
+      "fr": "Manette",
+      "es": "Mando",
+      "it": "Controller",
+      "pt-BR": "Controle",
+      "ru": "Геймпад",
+      "pl": "Kontroler",
+      "tr": "Kol"
+    },
+    "nav_controls": {
+      "en": "Controls",
+      "zh-CN": "操控",
+      "zh-TW": "操控",
+      "ja": "操作",
+      "ko": "조작",
+      "de": "Steuerung",
+      "fr": "Commandes",
+      "es": "Controles",
+      "it": "Comandi",
+      "pt-BR": "Controles",
+      "ru": "Управление",
+      "pl": "Sterowanie",
+      "tr": "Kontroller"
     }
   }
 }
