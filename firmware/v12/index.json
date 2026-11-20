@@ -6,8 +6,8 @@
       "version": "LCT616-DS5 3.18H-oc12-v12",
       "tag": "3.18H-oc12",
       "file": "ds5dongle-v12-3.18H-oc12-hs.bin",
-      "size": 796336,
-      "sha256": "94b7673b03351599bf286b177d36be405a971cc02225bb8a5802a5a501f1b133",
+      "size": 796344,
+      "sha256": "ef051c4797cf07c5b7b46061a2a7882dea2a1b4f6676d254878912978e2dbe62",
       "date": "2026-11-20",
       "notes": "当前推荐：修复板型识别、V1 回报率、更新后清配对"
     }
