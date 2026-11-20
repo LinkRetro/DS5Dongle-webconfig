@@ -7724,6 +7724,66 @@
       "ru": "Эта прошивка поддерживает только внутреннюю/внешнюю мёртвую зону. Обновитесь до oc15, чтобы получить анти-зону, кривую, компенсацию диагонали и ограничение оси.",
       "pl": "Ten firmware obsługuje tylko strefę martwą wewnętrzną/zewnętrzną. Zaktualizuj do oc15, aby uzyskać strefę antymartwą, krzywą, korekcję przekątnej i ograniczenie osi.",
       "tr": "Bu yazılım yalnızca iç/dış ölü bölgeyi destekler. Anti ölü bölge, eğri, köşegen düzeltmesi ve eksen sınırlaması için oc15’e güncelleyin."
+    },
+    "phrase.unplug_the_dongle_hold_boot_then_replug": {
+      "en": "Unplug the dongle, hold BOOT, then plug it back in (losing the dongle on this page is normal).",
+      "zh-CN": "拔掉接收器，按住 BOOT 键不放，再插回电脑（此时本页与接收器断开，属正常）",
+      "zh-TW": "拔掉接收器，按住 BOOT 鍵不放，再插回電腦（此時本頁與接收器斷開，屬正常）",
+      "ja": "ドングルを抜き、BOOT を押したまま再接続します（このページから切断されますが正常です）。",
+      "ko": "동글을 뽑고 BOOT를 누른 채 다시 연결하세요. (이 페이지에서 연결이 끊겨도 정상입니다)",
+      "de": "Dongle abziehen, BOOT halten, wieder anstecken (die Trennung auf dieser Seite ist normal).",
+      "fr": "Débranchez le dongle, maintenez BOOT, rebranchez-le (la déconnexion ici est normale).",
+      "es": "Desconecta el dongle, mantén BOOT y vuelve a conectarlo (la desconexión aquí es normal).",
+      "it": "Scollega il dongle, tieni premuto BOOT e ricollegalo (la disconnessione qui è normale).",
+      "pt-BR": "Desconecte o dongle, segure BOOT e conecte de novo (a desconexão aqui é normal).",
+      "ru": "Отключите донгл, удерживайте BOOT и подключите снова (отключение на этой странице нормально).",
+      "pl": "Odłącz dongle, przytrzymaj BOOT i podłącz ponownie (rozłączenie tutaj jest normalne).",
+      "tr": "Dongle’ı çıkarın, BOOT’a basılı tutup yeniden takın (bu sayfada bağlantının kesilmesi normaldir)."
+    },
+    "phrase.no_port_found_hold_boot_while_plugging_usb": {
+      "en": "No dongle in the list? Hold BOOT while plugging the USB cable, then release.",
+      "zh-CN": "串口列表里没有出现接收器？请按住 BOOT 键再插 USB，松手后会多出一个串口。",
+      "zh-TW": "序列埠列表裡沒有出現接收器？請按住 BOOT 鍵再插 USB，鬆手後會多出一個序列埠。",
+      "ja": "一覧にドングルが出ない場合は、BOOT を押したまま USB を接続し、離してください。",
+      "ko": "목록에 동글이 없나요? BOOT를 누른 채 USB를 연결한 뒤 놓으세요.",
+      "de": "Kein Dongle in der Liste? BOOT halten, USB anstecken, dann loslassen.",
+      "fr": "Pas de dongle dans la liste ? Maintenez BOOT en branchant l’USB, puis relâchez.",
+      "es": "¿No aparece el dongle? Mantén BOOT al conectar el USB y suéltalo después.",
+      "it": "Nessun dongle nell’elenco? Tieni premuto BOOT collegando l’USB, poi rilascia.",
+      "pt-BR": "Dongle não aparece na lista? Segure BOOT ao conectar o USB e solte.",
+      "ru": "Донгла нет в списке? Удерживайте BOOT при подключении USB, затем отпустите.",
+      "pl": "Brak dongle na liście? Przytrzymaj BOOT przy podłączaniu USB, potem puść.",
+      "tr": "Listede dongle yok mu? USB’yi takarken BOOT’a basılı tutun, sonra bırakın."
+    },
+    "phrase.device_status_reading": {
+      "en": "Device status: reading…",
+      "zh-CN": "设备状态：读取中…",
+      "zh-TW": "裝置狀態：讀取中…",
+      "ja": "デバイス状態：読み取り中…",
+      "ko": "장치 상태: 읽는 중…",
+      "de": "Gerätestatus: wird gelesen…",
+      "fr": "État de l’appareil : lecture…",
+      "es": "Estado del dispositivo: leyendo…",
+      "it": "Stato dispositivo: lettura…",
+      "pt-BR": "Status do dispositivo: lendo…",
+      "ru": "Статус устройства: чтение…",
+      "pl": "Stan urządzenia: odczyt…",
+      "tr": "Cihaz durumu: okunuyor…"
+    },
+    "phrase.close": {
+      "en": "Close",
+      "zh-CN": "关闭",
+      "zh-TW": "關閉",
+      "ja": "閉じる",
+      "ko": "닫기",
+      "de": "Schließen",
+      "fr": "Fermer",
+      "es": "Cerrar",
+      "it": "Chiudi",
+      "pt-BR": "Fechar",
+      "ru": "Закрыть",
+      "pl": "Zamknij",
+      "tr": "Kapat"
     }
   }
 }

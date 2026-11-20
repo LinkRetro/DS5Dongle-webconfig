@@ -224,18 +224,19 @@ function fwDialogNode(){
   <h3 id="fw-dialog-title" data-i18n="phrase.update_dongle_firmware">更新接收器固件</h3>
   <p class="fw-version"></p>
   <ol class="fw-steps">
-   <li>拔掉接收器，<strong>按住 BOOT 键不放</strong>，再插回电脑（此时本页与接收器断开，属正常）</li>
+   <li data-i18n="phrase.unplug_the_dongle_hold_boot_then_replug">拔掉接收器，按住 BOOT 键不放，再插回电脑（此时本页与接收器断开，属正常）</li>
    <li data-i18n="phrase.release_boot_to_enter_download_mode">松开 BOOT：接收器进入下载模式</li>
    <li data-i18n="phrase.click_below_and_select_the_dongle_s">点下面按钮，在浏览器弹出的串口列表里选接收器的下载口</li>
   </ol>
-  <p class="fw-device">设备状态：读取中…</p>
+  <p class="fw-device" data-i18n="phrase.device_status_reading">设备状态：读取中…</p>
   <div class="fw-bar"><progress max="100" value="0"></progress><span class="fw-pct">0%</span></div>
-  <p class="fw-stage">正在准备固件…</p>
-  <p class="fw-tip" hidden>串口列表里没有出现接收器？请按住 BOOT 键再插 USB，松手后会多出一个串口。</p>
+  <p class="fw-stage" data-i18n="phrase.preparing_firmware">正在准备固件…</p>
+  <p class="fw-tip" hidden data-i18n="phrase.no_port_found_hold_boot_while_plugging_usb">串口列表里没有出现接收器？请按住 BOOT 键再插 USB，松手后会多出一个串口。</p>
   <details class="fw-details"><summary data-i18n="phrase.detailed_log">详细日志</summary><pre class="fw-log"></pre></details>
-  <div class="fw-actions"><button class="fw-start primary" disabled data-i18n="phrase.select_serial_port_and_flash">选择串口并开始烧录</button><button class="fw-close">关闭</button></div>
+  <div class="fw-actions"><button class="fw-start primary" disabled data-i18n="phrase.select_serial_port_and_flash">选择串口并开始烧录</button><button class="fw-close" data-i18n="phrase.close">关闭</button></div>
  </div>`;
  document.body.append(m);
+ applyPhrases(m);
  const q=s=>m.querySelector(s);
  q('.fw-close').onclick=()=>{if(flashSession?.isBusy())return;fwDialogGeneration++;m.hidden=true;if(fwDialogTick){clearInterval(fwDialogTick);fwDialogTick=null}};
  q('.fw-start').onclick=()=>{
