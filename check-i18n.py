@@ -22,6 +22,7 @@ def main():
     parser.add_argument('--locale', help='List missing message IDs for this locale')
     parser.add_argument('--strict', action='store_true', help='Fail on missing translations and possible unregistered copy')
     parser.add_argument('--build', action='store_true', help='Require complete translations for key-bound UI only')
+    parser.add_argument('--uncovered', action='store_true', help='Fail only when unregistered literals exist')
     args = parser.parse_args()
     catalog = json.loads((ROOT / 'i18n-catalog.json').read_text(encoding='utf-8-sig'), object_pairs_hook=unique_object)
     locales, messages = catalog['locales'], catalog['messages']
@@ -55,7 +56,8 @@ def main():
                 literals = [''.join(groups) for groups in literals]
             for text in literals:
                 text = text.strip()
-                if HAN.search(text) and text not in sources and '<' not in text:
+                # 动态模板（含 ${...}）无法静态登记，交由运行时审计覆盖
+                if HAN.search(text) and '${' not in text and text not in sources and '<' not in text:
                     uncovered.add((file.relative_to(ROOT).as_posix(), text))
     for key in sorted(required):
         if key not in messages:
@@ -84,6 +86,8 @@ def main():
             print(f'  {location}: {text}')
     for error in errors:
         print('ERROR:', error)
+    if args.uncovered:
+        return bool(errors or uncovered)
     return bool(errors or (args.strict and (sum(missing.values()) or uncovered)))
 
 

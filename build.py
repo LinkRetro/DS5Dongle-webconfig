@@ -91,7 +91,7 @@ computed={}
 if _oc8_file.exists():
     computed[hashlib.sha256(_oc8_file.read_bytes()).hexdigest()]={'model':'LCTech BL616 · oc8','size':_oc8_file.stat().st_size}
 for variant,c in catalog.items():
-    label='V1 单灯' if variant=='v1' else 'V1.2 RGB'
+    label='V1 single LED' if variant=='v1' else 'V1.2 RGB'
     for entry in c.get('versions',[]):
         raw=catalog_bytes.get(entry['file'])
         if raw is None:
@@ -114,10 +114,10 @@ policy_text=('/* Local policy for the LCTech BL616 oc8 partition layout. */\n'
  " 'use strict';\n"
  " const RELEASES="+json.dumps(release_policy,ensure_ascii=False)+";\n"
  " async function validate(data){\n"
- "  if(!(data instanceof Uint8Array)||!Object.values(RELEASES).some(r=>r.size===data.length))throw Error('文件长度不属于本工程已发布固件，禁止烧录');\n"
- "  if(!root.crypto?.subtle)throw Error('SHA-256 不可用，请通过 localhost 或 HTTPS 打开');\n"
+ "  if(!(data instanceof Uint8Array)||!Object.values(RELEASES).some(r=>r.size===data.length))throw Error('Image length does not match any published DS5Dongle release');\n"
+ "  if(!root.crypto?.subtle)throw Error('SHA-256 unavailable; open the page over localhost or HTTPS');\n"
  "  const hash=Array.from(new Uint8Array(await root.crypto.subtle.digest('SHA-256',data)),v=>v.toString(16).padStart(2,'0')).join('');\n"
- "  const release=RELEASES[hash];if(!release||release.size!==data.length)throw Error('固件 SHA-256 与本工程发布清单不一致，已阻止烧录');\n"
+ "  const release=RELEASES[hash];if(!release||release.size!==data.length)throw Error('Firmware SHA-256 does not match the release list; flashing blocked');\n"
  "  return {address:0x10000,length:data.length,sha256:hash,model:release.model};\n"
  " }\n"
  " root.DongleFlashPolicy=Object.freeze({validate});\n"

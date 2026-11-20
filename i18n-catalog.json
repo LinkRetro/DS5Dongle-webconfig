@@ -4934,6 +4934,70 @@
       "ru": "Макс.",
       "pl": "Maks.",
       "tr": "Maks."
+    },
+    "err_release_checksum_missing": {
+      "en": "Firmware release list is missing a checksum",
+      "zh-CN": "固件发布清单缺少校验值"
+    },
+    "err_audio_list_refreshed": {
+      "en": "Audio devices refreshed; names may need microphone permission",
+      "zh-CN": "已更新音频设备列表；名称可能需要麦克风权限后才显示"
+    },
+    "err_copied_for_calibration": {
+      "en": "Copied — send it back to calibrate the offset",
+      "zh-CN": "已复制，可直接发回用于校正偏移"
+    },
+    "err_unsupported_dongle": {
+      "en": "This is not a supported BL616 dongle",
+      "zh-CN": "这不是本工程支持的 BL616 接收器"
+    },
+    "err_mapping_read_failed": {
+      "en": "Connected, but reading the mapping failed:",
+      "zh-CN": "已连接，但映射读取失败："
+    },
+    "err_mapping_save_unconfirmed": {
+      "en": "Mapping save was not confirmed:",
+      "zh-CN": "映射未确认保存："
+    },
+    "err_test_params_saved": {
+      "en": "Test parameters saved in this browser. Dongle:",
+      "zh-CN": "测试参数已保存到此浏览器。接收器："
+    },
+    "ui_board_v1_single_led": {
+      "en": "DS5Dongle V1 · single LED",
+      "zh-CN": "DS5Dongle V1 · 单灯"
+    },
+    "ui_oc8_switch_hint": {
+      "en": "You can switch to the oc8 High-Speed firmware; check the board and partition layout",
+      "zh-CN": "可切换到 oc8 High-Speed 固件，请核对板型与现有分区"
+    },
+    "err_stick_report_incomplete": {
+      "en": "Incomplete stick configuration report",
+      "zh-CN": "摇杆配置报告不完整"
+    },
+    "err_setting_unsupported": {
+      "en": "This firmware does not support this setting:",
+      "zh-CN": "当前固件不支持此配置项："
+    },
+    "ui_lights_connected_sent": {
+      "en": "Connection colour sent; any player-LED test is turned off.",
+      "zh-CN": "已发送连接灯色；若试过玩家灯，会将其关闭。"
+    },
+    "ui_test_sent": {
+      "en": "Test command sent ·",
+      "zh-CN": "测试指令已发送 ·"
+    },
+    "ui_until_auto_reset": {
+      "en": "s until auto reset",
+      "zh-CN": "秒后自动复位"
+    },
+    "err_firmware_board_mismatch": {
+      "en": "Firmware does not match the selected board or version; flashing blocked",
+      "zh-CN": "固件与所选板型或版本不一致，已阻止烧录"
+    },
+    "ui_flashing_baud": {
+      "en": "Flashing · 2,000,000 baud",
+      "zh-CN": "正在烧写 · 2,000,000 baud"
     }
   }
 }
