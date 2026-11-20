@@ -47,7 +47,9 @@ flash_header=re.search(r'<header[\s\S]*?</header>',flash_html)[0]
 flash_main=flash_header+'<main>'+re.search(r'<main>([\s\S]*?)</main>',flash_html)[1]+'</main>'
 flash_main=re.sub(r'<p><a href="../index.html">[\s\S]*?</p>','',flash_main,count=1)
 flash_main=flash_main.replace('href="ds5dongle-lctech616-3.18H-oc8-hs.bin"','href="flasher/ds5dongle-lctech616-3.18H-oc8-hs.bin"')
-firmware=(f/'ds5dongle-lctech616-3.18H-oc8-hs.bin').read_bytes() if EMBED_FIRMWARE else b''
+_oc8_file = f/'ds5dongle-lctech616-3.18H-oc8-hs.bin'
+# 旧的 oc8 固件是可选资源：仓库不携带固件镜像时也能构建
+firmware = _oc8_file.read_bytes() if (EMBED_FIRMWARE and _oc8_file.exists()) else b''
 # Version catalog: a dedicated firmware/ folder beside this script holds every
 # released .bin plus one index.json per board.  Publishing a new release only
 # means dropping the file in and re-running this build (or uploading the folder
@@ -75,8 +77,9 @@ resources={'targets/bl616/flash_para.bin':base64.b64encode((f/'targets/bl616/fla
 import hashlib
 policy_file=f/'policy.js'
 policy_text=policy_file.read_text(encoding='utf-8')
-_oc8=(f/'ds5dongle-lctech616-3.18H-oc8-hs.bin')
-release_policy={hashlib.sha256(_oc8.read_bytes()).hexdigest():{'model':'LCTech BL616 · oc8','size':_oc8.stat().st_size}}
+release_policy={}
+if _oc8_file.exists():
+    release_policy[hashlib.sha256(_oc8_file.read_bytes()).hexdigest()]={'model':'LCTech BL616 · oc8','size':_oc8_file.stat().st_size}
 # Every catalogued version is allowed, so rolling back to an older release
 # passes exactly the same hash check as upgrading.
 for variant,c in catalog.items():
