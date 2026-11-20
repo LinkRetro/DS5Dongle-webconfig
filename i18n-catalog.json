@@ -7709,6 +7709,21 @@
       "ru": "Разрешает полный ход даже при внешней обрезке.",
       "pl": "Pozwala na pełny wychył mimo przycięcia zewnętrznego.",
       "tr": "Dış kırpma olsa bile tam harekete izin verir."
+    },
+    "phrase.warp_params_need_oc15": {
+      "en": "This firmware supports inner/outer deadzone only. Update to oc15 for anti-deadzone, curve, diagonal boost and axis restriction.",
+      "zh-CN": "当前固件只支持内/外死区。升级到 oc15 后才有反死区、曲线、对角补偿和轴向限制。",
+      "zh-TW": "目前韌體只支援內/外死區。升級到 oc15 後才有反死區、曲線、對角補償與軸向限制。",
+      "ja": "このファームウェアは内側/外側デッドゾーンのみ対応です。oc15 に更新すると逆デッドゾーン・カーブ・斜め補正・軸制限が使えます。",
+      "ko": "이 펌웨어는 안쪽/바깥쪽 데드존만 지원합니다. oc15로 업데이트하면 안티 데드존, 곡선, 대각 보정, 축 제한을 사용할 수 있습니다.",
+      "de": "Diese Firmware unterstützt nur Innen-/Außentotzone. Mit oc15 kommen Anti-Totzone, Kennlinie, Diagonalausgleich und Achsenbegrenzung hinzu.",
+      "fr": "Ce firmware ne gère que les zones mortes interne/externe. Passez en oc15 pour l’anti-zone morte, la courbe, la correction diagonale et la restriction d’axe.",
+      "es": "Este firmware solo admite zonas muertas interna/externa. Actualiza a oc15 para anti-zona muerta, curva, compensación diagonal y restricción de eje.",
+      "it": "Questo firmware supporta solo le zone morte interna/esterna. Aggiorna a oc15 per anti-zona morta, curva, compenso diagonale e restrizione asse.",
+      "pt-BR": "Este firmware só suporta zona morta interna/externa. Atualize para oc15 para anti-zona morta, curva, compensação diagonal e restrição de eixo.",
+      "ru": "Эта прошивка поддерживает только внутреннюю/внешнюю мёртвую зону. Обновитесь до oc15, чтобы получить анти-зону, кривую, компенсацию диагонали и ограничение оси.",
+      "pl": "Ten firmware obsługuje tylko strefę martwą wewnętrzną/zewnętrzną. Zaktualizuj do oc15, aby uzyskać strefę antymartwą, krzywą, korekcję przekątnej i ograniczenie osi.",
+      "tr": "Bu yazılım yalnızca iç/dış ölü bölgeyi destekler. Anti ölü bölge, eğri, köşegen düzeltmesi ve eksen sınırlaması için oc15’e güncelleyin."
     }
   }
 }

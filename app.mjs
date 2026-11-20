@@ -483,10 +483,21 @@ function renderPanel(){ if(flashSession?.isBusy()&&page!=='flash'){page='flash';
   box.append(card);refresh();return}
  if(page==='remap'){renderRemap(box);refresh();return}
  if(page==='sticks'){
-  const p=document.createElement('p');p.className='hint';paintLocalized(p,!device?msg('phrase.connect_the_dongle_to_read_stick_settings'):baseline?.stick_left_inner===undefined?msg('phrase.stick_deadzones_require_oc14_or_newer_firmware'):msg('phrase.the_diagram_and_coordinates_show_usb_output'));box.append(p);
+  const hasStick=baseline?('stick_left_inner' in baseline):false;
+  const hasWarp=baseline?('stick_left_curve' in baseline):false;
+  const p=document.createElement('p');p.className='hint';
+  paintLocalized(p,!device?msg('phrase.connect_the_dongle_to_read_stick_settings')
+    :!hasStick?msg('phrase.stick_deadzones_require_oc14_or_newer_firmware')
+    :!hasWarp?msg('phrase.warp_params_need_oc15')
+    :msg('phrase.the_diagram_and_coordinates_show_usb_output'));
+  box.append(p);
  }
  const inlineSettings=new Map();
- for(const [k,label,hint,min,max,step]of (page==='sticks'&&baseline?.stick_left_inner===undefined?[]:specs[page])){
+ /* 未连接时不显示摇杆字段；连接后按固件实际具备的字段过滤 */
+ const pageSpecs=page==='sticks'
+  ? (baseline?specs.sticks.filter(([k])=>k==='stick_flags'?('stick_left_curve' in baseline):(k in baseline)):[])
+  : specs[page];
+ for(const [k,label,hint,min,max,step]of pageSpecs){
   if(k==='mask'){const g=document.createElement('fieldset');g.className='row';const title=document.createElement('span');const caption=document.createElement('span');paintLocalized(caption,label);title.append(caption);const help=document.createElement('small');paintLocalized(help,hint);title.append(help);g.append(title);const choices=document.createElement('div');[msg('control_off'),msg('touch_dpad'),msg('touch_left_mouse'),msg('touch_right_mouse'),msg('touch_zones')].forEach((choice,i)=>{const l=document.createElement('label');l.style.display='block';const c=document.createElement('input');c.type='checkbox';c.checked=!!(val('tp_mode_enabled_mask')&(1<<i));c.onchange=()=>{let mask=val('tp_mode_enabled_mask')??1;mask=c.checked?mask|(1<<i):mask&~(1<<i);if(!mask){c.checked=true;say(msg('touch_keep_mode'));return}set('tp_mode_enabled_mask',mask)};const caption=document.createElement('span');paintLocalized(caption,choice);l.append(c,caption);choices.append(l)});g.append(choices);box.append(g);continue}
   const r=row(label,hint,min!==undefined&&!Array.isArray(min));let c;
   if(k==='color'){c=document.createElement('input');c.type='color';c.value='#'+['led_r','led_g','led_b'].map(n=>(val(n)??255).toString(16).padStart(2,'0')).join('');c.oninput=()=>['led_r','led_g','led_b'].forEach((n,i)=>set(n,parseInt(c.value.slice(1+i*2,3+i*2),16)))}

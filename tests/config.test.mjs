@@ -108,7 +108,7 @@ test('Japanese stick settings and acceleration label use their selected locale',
  assert.match(u.el('controls').textContent,/ドングルを接続すると/);
  await u.el('connect').onclick();
  const text=u.el('controls').textContent;
- assert.match(text,/実際の USB 出力/);
+ assert.match(text,/oc15/);
  for(const side of ['左','右']) for(const edge of ['内','外'])assert.ok(text.includes(side+'スティック · '+edge+'側デッドゾーン'));
  assert.match(text,/中心付近の小さな動き/);
  assert.match(text,/出力が最大になる範囲/);
