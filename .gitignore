@@ -1,0 +1,8 @@
+node_modules/
+index.html
+auth-preview.html
+.syntax_*.js
+firmware/*/*.bin
+firmware/*/boot2_*.bin
+firmware/*/partition.bin
+*.log

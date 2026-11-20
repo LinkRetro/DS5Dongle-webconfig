@@ -1,0 +1,107 @@
+from pathlib import Path
+import sys
+# 默认不把固件 base64 内嵌进页面（3.6MB -> 约 0.45MB）；
+# 需要完全离线的单文件页面时用：python build.py --embed
+EMBED_FIRMWARE = '--embed' in sys.argv
+import re
+r=Path(__file__).resolve().parent
+up=r.parent/'DS5Dongle-OLED-Config-Web'
+_a=r/'assets'
+_std=_a/'dualsense.svg'
+_edge=_a/'dualsense-edge.svg'
+# 优先用本仓库自带的 SVG（开源仓库不包含上游参考项目时也能构建）
+standard=(_std if _std.exists() else up/'src/assets/dualsense.svg').read_text(encoding='utf-8-sig')
+edge=(_edge if _edge.exists() else up/'src/assets/dualsense-edge.svg').read_text(encoding='utf-8-sig')
+import json
+js=(r/'protocol.mjs').read_text(encoding='utf-8-sig').replace('export ','')+'\n'+(r/'test-center.mjs').read_text(encoding='utf-8-sig').replace('export ','')+'\n'+(r/'i18n.mjs').read_text(encoding='utf-8-sig').replace('export ','')+'\n'+(r/'i18n_phrases.mjs').read_text(encoding='utf-8-sig').replace('export ','')+'\nconst STANDARD_ART='+json.dumps(standard)+';\nconst EDGE_ART='+json.dumps(edge)+';\n'+re.sub(r"^import .*?;\s*",'',(r/'app.mjs').read_text(encoding='utf-8-sig'),flags=re.M)
+# Embed serial resources and UI so file:// does not fetch binary support files.
+import base64
+
+import subprocess, sys
+
+def syntax_check(text, label):
+    """打包前用 node --check 校验语法，坏文件直接中止，避免打出白屏页面。"""
+    tmp = Path(__file__).resolve().parent / f'.syntax_{label}.js'
+    tmp.write_text(text, encoding='utf-8')
+    import shutil
+    node = shutil.which('node') or shutil.which('node.cmd') or shutil.which('node.exe')
+    if not node:
+        print('[build] 未找到 node，跳过语法校验', file=sys.stderr)
+        return
+    try:
+        # node 在本机是 .cmd 包装脚本，必须经 shell 调用
+        r = subprocess.run(f'"{node}" --check "{tmp}"', shell=True)
+        if r.returncode != 0:
+            print(f'[build] 语法校验失败（{label}），已中止打包', file=sys.stderr)
+            raise SystemExit(1)
+    except FileNotFoundError:
+        print('[build] 未找到 node，跳过语法校验', file=sys.stderr)
+    finally:
+        try: tmp.unlink()
+        except Exception: pass
+
+f=r/'flasher'
+flash_html=(f/'index.html').read_text(encoding='utf-8-sig')
+flash_style=re.search(r'<style>([\s\S]*?)</style>',flash_html)[1]+' .workspace{display:block}.panel{margin-bottom:14px}.topbar{flex-wrap:wrap;padding:12px}main{padding:12px}.brand h1{font-size:16px}'
+flash_header=re.search(r'<header[\s\S]*?</header>',flash_html)[0]
+flash_main=flash_header+'<main>'+re.search(r'<main>([\s\S]*?)</main>',flash_html)[1]+'</main>'
+flash_main=re.sub(r'<p><a href="../index.html">[\s\S]*?</p>','',flash_main,count=1)
+flash_main=flash_main.replace('href="ds5dongle-lctech616-3.18H-oc8-hs.bin"','href="flasher/ds5dongle-lctech616-3.18H-oc8-hs.bin"')
+firmware=(f/'ds5dongle-lctech616-3.18H-oc8-hs.bin').read_bytes() if EMBED_FIRMWARE else b''
+# Version catalog: a dedicated firmware/ folder beside this script holds every
+# released .bin plus one index.json per board.  Publishing a new release only
+# means dropping the file in and re-running this build (or uploading the folder
+# to the server).  Only the newest image per board is embedded, for file:// use;
+# older versions are fetched from that folder when the page is served over HTTP.
+catalog={};catalog_bytes={}
+for _v in ('v1','v12'):
+    _idx=r/'firmware'/_v/'index.json'
+    if not _idx.exists():
+        continue
+    catalog[_v]=json.loads(_idx.read_text(encoding='utf-8-sig'))
+    for _e in catalog[_v].get('versions',[]):
+        _p=r/'firmware'/_v/_e['file']
+        if _p.exists():
+            catalog_bytes[_e['file']]=_p.read_bytes()
+board_images={}
+for _v,_c in catalog.items():
+    _vs=_c.get('versions') or []
+    if _vs and _vs[0].get('file') in catalog_bytes:
+        if EMBED_FIRMWARE:
+            board_images[_v]=base64.b64encode(catalog_bytes[_vs[0]['file']]).decode()
+
+resources={'targets/bl616/flash_para.bin':base64.b64encode((f/'targets/bl616/flash_para.bin').read_bytes()).decode()}
+# Rebuild the allowed-image hashes from actual variant release files.
+import hashlib
+policy_file=f/'policy.js'
+policy_text=policy_file.read_text(encoding='utf-8')
+_oc8=(f/'ds5dongle-lctech616-3.18H-oc8-hs.bin')
+release_policy={hashlib.sha256(_oc8.read_bytes()).hexdigest():{'model':'LCTech BL616 · oc8','size':_oc8.stat().st_size}}
+# Every catalogued version is allowed, so rolling back to an older release
+# passes exactly the same hash check as upgrading.
+for variant,c in catalog.items():
+    label='V1 单灯' if variant=='v1' else 'V1.2 RGB'
+    for entry in c.get('versions',[]):
+        raw=catalog_bytes.get(entry['file'])
+        if raw is None:
+            continue
+        release_policy[hashlib.sha256(raw).hexdigest()]={'model':label+' · '+entry['tag'],'size':len(raw)}
+policy_text=re.sub(r'const RELEASES=\{[\s\S]*?\};',lambda _: 'const RELEASES='+json.dumps(release_policy,ensure_ascii=False)+';',policy_text,count=1)
+policy_file.write_text(policy_text,encoding='utf-8')
+flash_scripts=['protocol.js','targets/common.js','targets/bl602.js','targets/bl616.js','targets/bl616cl.js','targets/index.js','loader.js','policy.js','app.js']
+js='\n'.join((f/p).read_text(encoding='utf-8-sig') for p in flash_scripts)+'\nconst FLASH_MARKUP='+json.dumps('<style>'+flash_style+'</style>'+flash_main)+';\nglobalThis.DONGLE_FLASH_RESOURCES='+json.dumps(resources)+';\nconst BOARD_FIRMWARE_CATALOG='+json.dumps(catalog,ensure_ascii=False)+';\nconst BOARD_FIRMWARE_IMAGES='+json.dumps(board_images)+';\nconst BUNDLED_FIRMWARE='+json.dumps(base64.b64encode(firmware).decode())+';\n'+(r/'firmware-version.mjs').read_text(encoding='utf-8').replace('export ','')+'\n'+js
+
+assert '</script' not in js.lower()
+authority_path=r.parent.parent/'security/authority.public.json'
+authority=json.loads(authority_path.read_text(encoding='utf-8-sig')) if authority_path.exists() else None
+js=(r/'restart.mjs').read_text(encoding='utf-8').replace('export ','')+'\n'+js
+js='const PRODUCTION_AUTH=false;\nconst AUTH_AUTHORITY='+json.dumps(authority)+';\n'+(r/'auth.mjs').read_text(encoding='utf-8').replace('export ','')+'\n'+js
+html=(r/'template.html').read_text(encoding='utf-8-sig').replace('/*STYLE*/',(r/'style.css').read_text(encoding='utf-8-sig')).replace('/*ART*/','').replace('/*SCRIPT*/',js)
+syntax_check(js,'bundle')
+(r/'index.html').write_text(html,encoding='utf-8')
+(r/'auth-preview.html').write_text(html.replace('const PRODUCTION_AUTH=false;','const PRODUCTION_AUTH=true;').replace('<title>BL616 · DualSense 控制台</title>','<title>BL616 · 身份认证实验版（未量产）</title>'),encoding='utf-8')
+licenses=['BL616 configuration UI: locally implemented; controller SVGs reused from MarcelineVPQ/DS5Dongle-OLED-Config-Web, commit babb41488a040c2bb88affccc644e075eaa15211.\n']
+for p in ['LICENSE','src/assets/AL2009MAN-LICENSE.txt','src/assets/DAIDR-LICENSE.txt']:
+ licenses.append('\n--- '+p+' ---\n'+(up/p).read_text(encoding='utf-8-sig'))
+(r/'LICENSES.txt').write_text('\n'.join(licenses),encoding='utf-8')
+print('Built standalone index.html',len(html.encode('utf-8')),'bytes')

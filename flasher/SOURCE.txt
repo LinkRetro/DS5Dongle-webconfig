@@ -1,0 +1,2 @@
+Upstream: https://github.com/bouffalolab/bouffalo_sdk/tree/eba87edced5a03ce8bcad8cf6002494982f83a5f/tools/bflb_flash_web
+Local modifications: app.js, index.html; added policy.js; firmware-only address 0x10000, BL616, no automatic reset; oc8 hash allowlist.
