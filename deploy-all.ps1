@@ -13,7 +13,8 @@ param(
     [switch]$NoGitHub,
     [switch]$NoStage,
     [string]$SiteTarget = 'H:\网站源码\linkretro\tools\DS5Dongle',
-    [string]$ServerCommand
+    [string]$ServerCommand,
+    [switch]$SkipI18n
 )
 
 $ErrorActionPreference = 'Stop'
@@ -38,6 +39,18 @@ if (-not $SkipBuild) {
             else { Write-Host "  ok   $($f.Name)" -ForegroundColor DarkGray }
         }
         if ($fail -gt 0) { throw "$fail 个测试失败" }
+    } finally { Pop-Location }
+}
+
+# ---------- 1.5) i18n 回归闸门 ----------
+if (-not $SkipI18n) {
+    Step 'i18n 回归检查'
+    $pyExe = (Get-Command python -ErrorAction SilentlyContinue).Source
+    if (-not $pyExe) { $pyExe = 'python' }
+    Push-Location $web
+    try {
+        & $pyExe i18n-gate.py
+        if ($LASTEXITCODE -ne 0) { throw 'i18n 回归：翻译缺口变大' }
     } finally { Pop-Location }
 }
 

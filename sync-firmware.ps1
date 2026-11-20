@@ -116,7 +116,8 @@ $summary | Format-Table -AutoSize | Out-String -Width 100 | Write-Host
 if ($Build) {
     $py = 'python'
     Push-Location $web
-    try { & $py build.py --embed; if($LASTEXITCODE -ne 0){throw '网页构建失败'} } finally { Pop-Location }
+    # 默认瘦身构建（页面运行时从 firmware/ 取件）；需要离线单文件时用 -Embed
+try { if ($Embed) { & $py build.py --embed } else { & $py build.py }; if($LASTEXITCODE -ne 0){throw '网页构建失败'} } finally { Pop-Location }
 }
 
 Write-Host '完成。记得把 index.html 和 firmware\ 整个目录上传到服务器。' -ForegroundColor Green

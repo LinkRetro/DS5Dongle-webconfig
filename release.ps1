@@ -33,6 +33,15 @@ foreach ($f in Get-ChildItem (Join-Path $web 'tests') -Filter '*.test.mjs') {
 }
 if ($fail -gt 0) { throw "$fail 个测试文件失败" }
 
+Step 'i18n 回归检查'
+Push-Location $web
+try {
+    $pyExe = (Get-Command python -ErrorAction SilentlyContinue).Source
+    if (-not $pyExe) { $pyExe = 'python' }
+    & $pyExe i18n-gate.py
+    if ($LASTEXITCODE -ne 0) { throw 'i18n 回归：翻译缺口变大' }
+} finally { Pop-Location }
+
 Step '产物'
 foreach ($b in 'v1', 'v12') {
     $bin = Join-Path $root "firmware\$b"
