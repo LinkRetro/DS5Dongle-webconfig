@@ -1,7 +1,16 @@
 {
   "board": "v1",
-  "latest": "LCT616-DS5 3.18H-oc14-v1",
+  "latest": "LCT616-DS5 3.18H-oc15-v1",
   "versions": [
+    {
+      "version": "LCT616-DS5 3.18H-oc15-v1",
+      "tag": "3.18H-oc15",
+      "file": "ds5dongle-v1-3.18H-oc15-hs.bin",
+      "size": 801052,
+      "sha256": "1bbd27630671661e7b25f53442b30f0355739b2786c80d8b676ee1527fa8cb04",
+      "date": "2026-11-20",
+      "notes": null
+    },
     {
       "version": "LCT616-DS5 3.18H-oc14-v1",
       "tag": "3.18H-oc14",
