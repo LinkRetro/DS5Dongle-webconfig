@@ -274,3 +274,26 @@ test('quick actions: trigger test uses a real effect mode and covers both sides'
  assert.equal(left[1][21],0x21,'feedback effect byte (0x21), not an unknown mode');
  assert.equal(u.el('message').textContent.includes('未知'),false,'no silent failure');
 });
+
+test('quick actions: each test opens its own settings block',async()=>{
+ const u=ui();
+ await u.poll();
+ await u.el('connect').onclick();
+ u.setLink(7,1);
+ await u.poll();
+
+ assert.notEqual(u.window.document.body.dataset.page,'test');
+ await u.el('qa-rumble').onclick();
+ assert.equal(u.window.document.body.dataset.page,'test','rumble test opens diagnostics');
+ assert.ok(u.window.document.getElementById('test-rumble'),'rumble controls exist');
+
+ await u.window.document.querySelector('[data-page="feel"]').onclick();
+ assert.equal(u.window.document.body.dataset.page,'feel');
+ await u.el('qa-trigger').onclick();
+ assert.equal(u.window.document.body.dataset.page,'test','trigger test returns to diagnostics');
+ assert.ok(u.window.document.getElementById('test-trigger'));
+
+ await u.el('qa-lights').onclick();
+ assert.equal(u.window.document.body.dataset.page,'test');
+ assert.ok(u.window.document.getElementById('test-lights'));
+});

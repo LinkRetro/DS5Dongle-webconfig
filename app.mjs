@@ -634,13 +634,20 @@ setInterval(()=>{if(document.hidden)return;const pads=[...(navigator.getGamepads
  if(device&&s.value!==''){const p=pads.find(p=>p.index===Number(s.value));if(p?.mapping==='standard'){const parts=new Set(p.buttons.flatMap((b,i)=>b.pressed&&padNames[i]?[padNames[i]]:[]));paintInput({parts,axes:p.axes.slice(0,4).map(v=>Math.round((v+1)*127.5)),triggers:[p.buttons[6]?.value??0,p.buttons[7]?.value??0].map(v=>Math.round(v*255))},'手动选择的浏览器手柄')}else $('input-state').textContent=LT('此手柄未提供标准布局，请使用接收器 HID 输入。')}
  if(!device||Date.now()-lastInput>3000){{const _st=$('input-state'),_zh=(lang==='zh-CN'||lang==='zh-TW'),_raw=device?'等待手柄输入；若浏览器屏蔽 HID 输入，可手动选择上方的手柄输入源。':'连接接收器后，可点击手柄打开相应设置。',_msg=_zh?_raw:trText(_raw);if(_st.textContent!==_msg)_st.textContent=_msg;}for(const id of ['left-axis','right-axis','triggers'])$(id).textContent='—';resetLiveVisuals()}},50);
 $('gamepad').onchange=()=>{lastInput=0;lastPaint=0;resetLiveVisuals();for(const id of ['left-axis','right-axis','triggers'])$(id).textContent='—'};
-$('qa-rumble').onclick=()=>{if(!device)return;testAction(()=>outputTester.run('rumble',{left:140,right:140}))};
+/* 点击快捷验证后同时打开右侧对应设置块，玩家可以接着调参数 */
+function qaGoto(pageId,anchorId){
+ if(page!==pageId){page=pageId;render()}
+ const anchor=$(anchorId);
+ const target=anchor?.closest?.('.test-card')??anchor;
+ try{target?.scrollIntoView?.({block:'center',behavior:'smooth'})}catch{try{target?.scrollIntoView?.()}catch{}}
+}
+$('qa-rumble').onclick=()=>{if(!device)return;qaGoto('test','test-rumble');testAction(()=>outputTester.run('rumble',{left:140,right:140}))};
 /* 扳机：先左后右各 2 秒。模式必须用 feedback/vibration/weapon，rigid 不存在 */
-$('qa-trigger').onclick=()=>{if(!device)return;testAction(async()=>{
+$('qa-trigger').onclick=()=>{if(!device)return;qaGoto('test','test-trigger');testAction(async()=>{
  await outputTester.run('trigger',{side:'left',mode:'feedback',strength:5,start:0});
  setTimeout(()=>{if(device)void outputTester.run('trigger',{side:'right',mode:'feedback',strength:5,start:0}).catch(()=>{})},2300);
 })};
-$('qa-lights').onclick=()=>{if(!device)return;testAction(()=>outputTester.run('lights',{rgb:[102,199,255],brightness:1}))};
+$('qa-lights').onclick=()=>{if(!device)return;qaGoto('test','test-lights');testAction(()=>outputTester.run('lights',{rgb:[102,199,255],brightness:1}))};
 $('theme').onclick=()=>{document.body.classList.toggle('light');try{localStorage.setItem('bl616-theme',document.body.classList.contains('light')?'light':'dark')}catch{}};try{document.body.classList.toggle('light',localStorage.getItem('bl616-theme')==='light')}catch{}
 mountLangSelect();applyI18n();
 document.querySelectorAll('[data-page]').forEach(b=>b.onclick=()=>{void stopTests();page=b.dataset.page;render()});
