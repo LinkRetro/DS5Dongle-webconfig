@@ -696,28 +696,3 @@ test('plan A: lightbar colour lives on the home row, receiver LED toggle lives i
  const devLabels=[...u.window.document.querySelectorAll('#controls .row')].map(l=>l.textContent).join('|');
  assert.match(devLabels,/接收器一分钟后熄灯/);
 });
-
-test('navigation: five groups, each opens its first page, chips still switch',async()=>{
- const u=ui();
- await u.poll();
- const groups=[...u.window.document.querySelectorAll('[data-nav]')].map(b=>b.dataset.nav);
- assert.deepEqual(groups,['controller','audio','controls','device','about']);
-
- // 组按钮切换到组内第一页
- const click=g=>u.window.document.querySelector(`[data-nav="${g}"]`).onclick();
- click('controls');
- assert.equal(u.window.document.body.dataset.page,'touch');
- assert.ok(u.window.document.querySelector('[data-nav="controls"]').classList.contains('active'));
-
- // 组内 chip 仍然可用
- u.window.document.querySelector('.subnav [data-page="remap"]').onclick();
- assert.equal(u.window.document.body.dataset.page,'remap');
-
- click('device');
- assert.equal(u.window.document.body.dataset.page,'device');
- u.window.document.querySelector('.subnav [data-page="flash"]').onclick();
- assert.equal(u.window.document.body.dataset.page,'flash');
-
- click('about');
- assert.equal(u.window.document.body.dataset.page,'about');
-});

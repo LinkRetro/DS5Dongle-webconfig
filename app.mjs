@@ -35,10 +35,7 @@ function paintLocalized(node,value,attribute='textContent'){
  else if(attribute==='validationMessage')node.setCustomValidity(text);
  else if(node.getAttribute(attribute)!==text)node.setAttribute(attribute,text);
 }
-const NAV_GROUPS={controller:['vision','feel','sticks','motion'],audio:['audio'],controls:['touch','remap'],device:['device','flash'],about:['about']};
-const NAV_GROUP_KEYS={controller:'nav_controller',audio:'nav_audio',controls:'nav_controls',device:'nav_device',about:'nav_about'};
-const groupOf=page=>Object.keys(NAV_GROUPS).find(g=>NAV_GROUPS[g].includes(page))||'controller';
-NAV_KEYS={vision:'nav_vision',feel:'nav_feel',audio:'nav_audio',motion:'nav_motion',sticks:'nav_sticks',flash:'nav_flash',touch:'nav_touch',remap:'nav_remap',device:'nav_device',about:'nav_about'};
+const NAV_KEYS={vision:'nav_vision',feel:'nav_feel',audio:'nav_audio',motion:'nav_motion',sticks:'nav_sticks',flash:'nav_flash',touch:'nav_touch',remap:'nav_remap',device:'nav_device',about:'nav_about'};
 /* 旧版文案仍通过原文查找。已绑定 ID 的文案直接从词库读取。 */
 const phrasesBySource=new Map();
 for(const entry of Object.values(S)){
@@ -473,21 +470,8 @@ function refresh(){
 function set(k,v){const same=k==='haptics_gain'?Math.fround(v)===Math.fround(baseline?.[k]):v===baseline?.[k];if(same)delete draft[k];else draft[k]=v;refresh();if(k.startsWith('led_'))paintLight()}
 function option(select,value,label,translateLegacy=true){const o=document.createElement('option');o.value=value;if(!translateLegacy)o.setAttribute('translate','no');paintLocalized(o,translateLegacy?bindCopy(label):label);select.append(o)}
 function row(label,hint,group=false){const r=document.createElement(group?'div':'label');if(group){r.setAttribute('role','group');paintLocalized(r,bindCopy(label),'aria-label')}r.className='row';const s=document.createElement('span');const caption=document.createElement('span');paintLocalized(caption,bindCopy(label));s.append(caption);if(hint){const h=document.createElement('small');paintLocalized(h,bindCopy(hint));s.append(h)}r.append(s);return r}
-function paintNav(){
- const active=groupOf(page);
- document.querySelectorAll('[data-nav]').forEach(b=>{
-  const g=b.dataset.nav;
-  const label=t(NAV_GROUP_KEYS[g]);if(b.textContent!==label)b.textContent=label;
-  b.classList.toggle('active',g===active);
- });
- document.querySelectorAll('.subnav[data-group]').forEach(box=>{
-  const on=box.dataset.group===active;
-  box.hidden=!on||box.children.length<2;
-  for(const chip of box.children)chip.classList.toggle('active',chip.dataset.page===page);
- });
-}
 function render(){renderPanel();applyPhrases(document.body)}
-function renderPanel(){paintNav(); if(flashSession?.isBusy()&&page!=='flash'){page='flash';say('正在烧录，请等待完成后切换分类');return}document.body.dataset.page=page;paintMappingSource();paintLocalized($('panel-title'),msg(NAV_KEYS[page]));paintLocalized($('panel-sub'),page==='flash'?msg('phrase.device_version_latest_local_firmware_browser_update'):page==='vision'?msg('phrase.preview_a_color_then_save_it_as'):page==='motion'?msg('phrase.diagnostic_settings_are_stored_in_this_browser'):scopedSavePages.has(page)?msg('phrase.tests_are_temporary_save_submits_only_this'):page==='about'?msg('phrase.oled_visual_language_bl616_protocol'):msg('phrase.changes_are_only_sent_when_you_click'));const box=$('controls');box.replaceChildren();document.querySelectorAll('[data-page]').forEach(b=>b.classList.toggle('active',b.dataset.page===page));
+function renderPanel(){ if(flashSession?.isBusy()&&page!=='flash'){page='flash';say('正在烧录，请等待完成后切换分类');return}document.body.dataset.page=page;paintMappingSource();paintLocalized($('panel-title'),msg(NAV_KEYS[page]));paintLocalized($('panel-sub'),page==='flash'?msg('phrase.device_version_latest_local_firmware_browser_update'):page==='vision'?msg('phrase.preview_a_color_then_save_it_as'):page==='motion'?msg('phrase.diagnostic_settings_are_stored_in_this_browser'):scopedSavePages.has(page)?msg('phrase.tests_are_temporary_save_submits_only_this'):page==='about'?msg('phrase.oled_visual_language_bl616_protocol'):msg('phrase.changes_are_only_sent_when_you_click'));const box=$('controls');box.replaceChildren();document.querySelectorAll('[data-page]').forEach(b=>b.classList.toggle('active',b.dataset.page===page));
  if(page==='flash'){renderFirmware(box);refresh();return}
  if(page==='about'){const p=document.createElement('p');p.className='hint';paintLocalized(p,msg('about_description'));box.append(p);const a=document.createElement('a');a.href='LICENSES.txt';paintLocalized(a,msg('about_licenses'));box.append(a);refresh();return}
  if(page==='remap'){renderRemap(box);refresh();return}
@@ -1062,7 +1046,6 @@ paintLocalized($('input-state'),msg('phrase.after_connecting_click_a_part_of_the
 paintLocalized($('version'),msg('console_name'));
 mountLangSelect();applyI18n();
 document.querySelectorAll('[data-page]').forEach(b=>b.onclick=()=>{void stopTests();page=b.dataset.page;render()});
-document.querySelectorAll('[data-nav]').forEach(b=>b.onclick=()=>{const g=b.dataset.nav;if(NAV_GROUPS[g]&&!NAV_GROUPS[g].includes(page)){void stopTests();page=NAV_GROUPS[g][0]}render()});
 globalThis.addEventListener?.('blur',()=>{void stopTests()});globalThis.addEventListener?.('pagehide',()=>{void stopTests()});document.addEventListener('visibilitychange',()=>{if(document.hidden)void stopTests()});
 $('firmware-notice').onclick=()=>{void stopTests();page='flash';render()};
 showArt(false);render();
