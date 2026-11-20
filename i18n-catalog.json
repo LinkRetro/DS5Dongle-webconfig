@@ -5761,19 +5761,19 @@
       "tr": "BL616 kablosuz kumanda konsolu"
     },
     "about_description": {
-      "zh-CN": "适用于本工程配置版本 4（oc2 及后续本地版本）。手柄图和布局参考 MarcelineVPQ OLED 配置器。可测试震动、扳机、灯光和音频。通过 WebHID 读写设置。实时输入取决于浏览器提供的报告，也可手动选择浏览器手柄。",
-      "en": "For configuration version 4 (oc2 and later local releases). Controller artwork and layout draw on the MarcelineVPQ OLED configurator. Test vibration, triggers, lighting and audio. Settings are read and written over WebHID. Live input uses reports provided by the browser. You can also select a browser gamepad manually.",
-      "zh-TW": "適用於設定版本 4（oc2 及後續本機版本）。控制器圖示與版面參考 MarcelineVPQ OLED 設定工具。可測試震動、扳機、燈光與音訊。透過 WebHID 讀寫設定。即時輸入取決於瀏覽器提供的報告，也可以手動選擇瀏覽器控制器。",
-      "ja": "設定バージョン 4（oc2 以降のローカルリリース）に対応しています。コントローラーのイラストとレイアウトは MarcelineVPQ の OLED 設定ツールを参考にしています。振動、トリガー、ライト、音声をテストできます。設定の読み書きには WebHID を使用します。リアルタイム入力はブラウザーが提供するレポートに基づき、ブラウザーのゲームパッドを手動で選ぶこともできます。",
-      "ko": "설정 버전 4(oc2 및 이후 로컬 릴리스)를 지원합니다. 컨트롤러 그림과 레이아웃은 MarcelineVPQ OLED 설정 도구를 참고했습니다. 진동, 트리거, 조명, 오디오를 테스트할 수 있습니다. WebHID로 설정을 읽고 씁니다. 실시간 입력은 브라우저가 제공하는 보고서를 사용하며 브라우저 게임패드를 직접 선택할 수도 있습니다.",
-      "de": "Für Konfigurationsversion 4 (oc2 und neuere lokale Versionen). Controller-Grafik und Layout orientieren sich am OLED-Konfigurator von MarcelineVPQ. Vibration, Trigger, Beleuchtung und Ton lassen sich testen. Einstellungen werden über WebHID gelesen und geschrieben. Die Live-Eingabe nutzt Berichte des Browsers. Ein Browser-Gamepad kann auch manuell gewählt werden.",
-      "fr": "Pour la configuration version 4 (oc2 et versions locales ultérieures). Le dessin de la manette et la mise en page s’inspirent du configurateur OLED de MarcelineVPQ. Vous pouvez tester les vibrations, les gâchettes, l’éclairage et le son. Les réglages sont lus et écrits via WebHID. L’entrée en direct utilise les rapports du navigateur, où vous pouvez également sélectionner une manette manuellement.",
-      "es": "Compatible con la configuración versión 4 (oc2 y versiones locales posteriores). El dibujo del mando y el diseño se inspiran en el configurador OLED de MarcelineVPQ. Puedes probar vibración, gatillos, luces y audio. Los ajustes se leen y escriben mediante WebHID. La entrada en directo usa informes del navegador. También puedes elegir un mando manualmente.",
-      "it": "Per la configurazione versione 4 (oc2 e versioni locali successive). Il disegno del controller e il layout si ispirano al configuratore OLED di MarcelineVPQ. Puoi provare vibrazione, grilletti, luci e audio. Le impostazioni si leggono e scrivono tramite WebHID. L’input in tempo reale usa i report del browser. Puoi anche scegliere manualmente un gamepad nel browser.",
-      "pt-BR": "Para a configuração versão 4 (oc2 e versões locais posteriores). A imagem do controle e o layout se inspiram no configurador OLED de MarcelineVPQ. Você pode testar vibração, gatilhos, luzes e áudio. As configurações são lidas e gravadas via WebHID. A entrada ao vivo usa relatórios do navegador. Você também pode selecionar um controle manualmente.",
-      "ru": "Для конфигурации версии 4 (oc2 и более поздних локальных выпусков). Рисунок контроллера и компоновка основаны на конфигураторе OLED от MarcelineVPQ. Можно проверить вибрацию, курки, подсветку и звук. Настройки читаются и записываются через WebHID. Ввод использует отчёты браузера. В браузере также можно выбрать контроллер вручную.",
-      "pl": "Dla konfiguracji w wersji 4 (oc2 i nowszych wydań lokalnych). Rysunek kontrolera i układ wzorowano na konfiguratorze OLED MarcelineVPQ. Można testować wibracje, spusty, oświetlenie i dźwięk. Odczyt i zapis ustawień odbywa się przez WebHID. Wejście na żywo korzysta z raportów przeglądarki. Można też ręcznie wybrać kontroler w przeglądarce.",
-      "tr": "Yapılandırma sürümü 4 (oc2 ve sonraki yerel sürümler) içindir. Kumanda görseli ve düzeni MarcelineVPQ OLED yapılandırıcısından esinlenmiştir. Titreşim, tetikler, ışıklar ve ses test edilebilir. Ayarlar WebHID üzerinden okunup yazılır. Canlı girdi tarayıcı raporlarını kullanır. Tarayıcıdaki bir kumandayı elle de seçebilirsiniz."
+      "zh-CN": "DS5Dongle 是 LinkRetro 的开源项目。本页面针对 LinkRetro 发布的两款 DS5Dongle 硬件设计：V1 与 V1.2。",
+      "en": "DS5Dongle is an open-source project by LinkRetro. This page is designed for the two DS5Dongle boards LinkRetro ships: V1 and V1.2.",
+      "zh-TW": "DS5Dongle 是 LinkRetro 的開源專案。本頁面針對 LinkRetro 推出的兩款 DS5Dongle 硬體設計：V1 與 V1.2。",
+      "ja": "DS5Dongle は LinkRetro のオープンソースプロジェクトです。このページは LinkRetro が販売する 2 種類の DS5Dongle 基板（V1 / V1.2）向けに作られています。",
+      "ko": "DS5Dongle는 LinkRetro의 오픈소스 프로젝트입니다. 이 페이지는 LinkRetro가 출시한 두 가지 DS5Dongle 하드웨어(V1, V1.2)를 위해 만들어졌습니다.",
+      "de": "DS5Dongle ist ein Open-Source-Projekt von LinkRetro. Diese Seite ist für die beiden DS5Dongle-Platinen von LinkRetro ausgelegt: V1 und V1.2.",
+      "fr": "DS5Dongle est un projet open source de LinkRetro. Cette page est conçue pour les deux cartes DS5Dongle commercialisées par LinkRetro : V1 et V1.2.",
+      "es": "DS5Dongle es un proyecto de código abierto de LinkRetro. Esta página está diseñada para las dos placas DS5Dongle de LinkRetro: V1 y V1.2.",
+      "it": "DS5Dongle è un progetto open source di LinkRetro. Questa pagina è pensata per le due schede DS5Dongle di LinkRetro: V1 e V1.2.",
+      "pt-BR": "DS5Dongle é um projeto de código aberto da LinkRetro. Esta página foi feita para as duas placas DS5Dongle da LinkRetro: V1 e V1.2.",
+      "ru": "DS5Dongle — открытый проект LinkRetro. Эта страница рассчитана на две платы DS5Dongle от LinkRetro: V1 и V1.2.",
+      "pl": "DS5Dongle to projekt open source firmy LinkRetro. Ta strona jest przeznaczona dla dwóch płytek DS5Dongle od LinkRetro: V1 i V1.2.",
+      "tr": "DS5Dongle, LinkRetro'nun açık kaynak projesidir. Bu sayfa LinkRetro'nun sunduğu iki DS5Dongle kartı için tasarlandı: V1 ve V1.2."
     },
     "about_licenses": {
       "zh-CN": "第三方许可与来源",
@@ -7514,6 +7514,51 @@
       "pl": "Wgrywanie · 2,000,000 baud",
       "ru": "Запись · 2,000,000 baud",
       "tr": "Flash yazılıyor · 2,000,000 baud"
+    },
+    "about_hardware": {
+      "en": "V1 — single LED model. V1.2 — RGB model.",
+      "zh-CN": "V1 为单灯版本，V1.2 为 RGB 灯效版本。",
+      "zh-TW": "V1 為單燈版本，V1.2 為 RGB 燈效版本。",
+      "ja": "V1 は単色 LED モデル、V1.2 は RGB モデルです。",
+      "ko": "V1은 단일 LED 모델, V1.2는 RGB 모델입니다.",
+      "de": "V1 – Modell mit einzelner LED. V1.2 – RGB-Modell.",
+      "fr": "V1 — modèle à LED unique. V1.2 — modèle RGB.",
+      "es": "V1 — modelo con un solo LED. V1.2 — modelo RGB.",
+      "it": "V1 — modello con LED singolo. V1.2 — modello RGB.",
+      "pt-BR": "V1 — modelo com LED único. V1.2 — modelo RGB.",
+      "ru": "V1 — модель с одним светодиодом. V1.2 — модель с RGB.",
+      "pl": "V1 — model z pojedynczym LED. V1.2 — model RGB.",
+      "tr": "V1 — tek LED modeli. V1.2 — RGB modeli."
+    },
+    "about_support": {
+      "en": "Found a bug? Contact LinkRetro support or ask in our Discord.",
+      "zh-CN": "遇到任何问题？请联系 LinkRetro 客服，或加入我们的 Discord 询问。",
+      "zh-TW": "遇到任何問題？請聯絡 LinkRetro 客服，或加入我們的 Discord 詢問。",
+      "ja": "不具合を見つけたら、LinkRetro サポートに連絡するか、Discord でお尋ねください。",
+      "ko": "문제를 발견하셨나요? LinkRetro 고객 지원에 문의하거나 Discord에서 질문해 주세요.",
+      "de": "Fehler gefunden? Wende dich an den LinkRetro-Support oder frag in unserem Discord.",
+      "fr": "Un bug ? Contactez le support LinkRetro ou posez la question sur notre Discord.",
+      "es": "¿Encuentras un error? Contacta con el soporte de LinkRetro o pregunta en nuestro Discord.",
+      "it": "Hai trovato un bug? Contatta il supporto LinkRetro o chiedi sul nostro Discord.",
+      "pt-BR": "Encontrou um bug? Fale com o suporte da LinkRetro ou pergunte no nosso Discord.",
+      "ru": "Нашли ошибку? Обратитесь в поддержку LinkRetro или спросите в нашем Discord.",
+      "pl": "Znalazłeś błąd? Skontaktuj się z pomocą LinkRetro lub zapytaj na naszym Discordzie.",
+      "tr": "Hata mı buldunuz? LinkRetro desteğine yazın veya Discord'umuzda sorun."
+    },
+    "about_discord": {
+      "en": "Join the Discord",
+      "zh-CN": "加入 Discord 社区",
+      "zh-TW": "加入 Discord 社群",
+      "ja": "Discord に参加",
+      "ko": "Discord 참여",
+      "de": "Discord beitreten",
+      "fr": "Rejoindre le Discord",
+      "es": "Unirse al Discord",
+      "it": "Entra nel Discord",
+      "pt-BR": "Entrar no Discord",
+      "ru": "Присоединиться к Discord",
+      "pl": "Dołącz do Discorda",
+      "tr": "Discord'a katıl"
     }
   }
 }

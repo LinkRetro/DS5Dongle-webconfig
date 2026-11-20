@@ -473,7 +473,14 @@ function row(label,hint,group=false){const r=document.createElement(group?'div':
 function render(){renderPanel();applyPhrases(document.body)}
 function renderPanel(){ if(flashSession?.isBusy()&&page!=='flash'){page='flash';say('正在烧录，请等待完成后切换分类');return}document.body.dataset.page=page;paintMappingSource();paintLocalized($('panel-title'),msg(NAV_KEYS[page]));paintLocalized($('panel-sub'),page==='flash'?msg('phrase.device_version_latest_local_firmware_browser_update'):page==='vision'?msg('phrase.preview_a_color_then_save_it_as'):page==='motion'?msg('phrase.diagnostic_settings_are_stored_in_this_browser'):scopedSavePages.has(page)?msg('phrase.tests_are_temporary_save_submits_only_this'):page==='about'?msg('phrase.oled_visual_language_bl616_protocol'):msg('phrase.changes_are_only_sent_when_you_click'));const box=$('controls');box.replaceChildren();document.querySelectorAll('[data-page]').forEach(b=>b.classList.toggle('active',b.dataset.page===page));
  if(page==='flash'){renderFirmware(box);refresh();return}
- if(page==='about'){const p=document.createElement('p');p.className='hint';paintLocalized(p,msg('about_description'));box.append(p);const a=document.createElement('a');a.href='LICENSES.txt';paintLocalized(a,msg('about_licenses'));box.append(a);refresh();return}
+ if(page==='about'){
+  const card=document.createElement('section');card.className='test-card';
+  const intro=document.createElement('p');paintLocalized(intro,msg('about_description'));card.append(intro);
+  const hw=document.createElement('p');hw.className='hint';paintLocalized(hw,msg('about_hardware'));card.append(hw);
+  const sup=document.createElement('p');sup.className='hint';paintLocalized(sup,msg('about_support'));card.append(sup);
+  const dc=document.createElement('a');dc.href='https://discord.com/invite/s3xcU2PgqZ';dc.target='_blank';dc.rel='noreferrer';paintLocalized(dc,msg('about_discord'));card.append(dc);
+  const lic=document.createElement('a');lic.href='LICENSES.txt';paintLocalized(lic,msg('about_licenses'));card.append(lic);
+  box.append(card);refresh();return}
  if(page==='remap'){renderRemap(box);refresh();return}
  if(page==='sticks'){
   const p=document.createElement('p');p.className='hint';paintLocalized(p,!device?msg('phrase.connect_the_dongle_to_read_stick_settings'):baseline?.stick_left_inner===undefined?msg('phrase.stick_deadzones_require_oc14_or_newer_firmware'):msg('phrase.the_diagram_and_coordinates_show_usb_output'));box.append(p);
