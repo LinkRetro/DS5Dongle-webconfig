@@ -108,7 +108,8 @@ flash_scripts=['protocol.js','targets/common.js','targets/bl602.js','targets/bl6
 js='\n'.join((f/p).read_text(encoding='utf-8-sig') for p in flash_scripts)+'\nconst FLASH_MARKUP='+json.dumps('<style>'+flash_style+'</style>'+flash_main)+';\nglobalThis.DONGLE_FLASH_RESOURCES='+json.dumps(resources)+';\nconst BOARD_FIRMWARE_CATALOG='+json.dumps(catalog,ensure_ascii=False)+';\nconst BOARD_FIRMWARE_IMAGES='+json.dumps(board_images)+';\nconst BUNDLED_FIRMWARE='+json.dumps(base64.b64encode(firmware).decode())+';\n'+(r/'firmware-version.mjs').read_text(encoding='utf-8').replace('export ','')+'\n'+js
 
 assert '</script' not in js.lower()
-authority_path=r.parent.parent/'security/authority.public.json'
+_auth_candidates=[r/'security/authority.public.json', r.parent.parent/'security/authority.public.json']
+authority_path=next((c for c in _auth_candidates if c.exists()), _auth_candidates[0])
 authority=json.loads(authority_path.read_text(encoding='utf-8-sig')) if authority_path.exists() else None
 js=(r/'restart.mjs').read_text(encoding='utf-8').replace('export ','')+'\n'+js
 js='const PRODUCTION_AUTH=false;\nconst AUTH_AUTHORITY='+json.dumps(authority)+';\n'+(r/'auth.mjs').read_text(encoding='utf-8').replace('export ','')+'\n'+js

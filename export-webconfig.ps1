@@ -44,6 +44,9 @@ function Copy-Tree([string]$from, [string]$to, [switch]$Root) {
     }
 }
 Copy-Tree $src $Target -Root
+# 公钥文件：让仓库能独立复现线上页面
+$sec = Join-Path (Split-Path (Split-Path $src -Parent) -Parent) 'security'
+if (Test-Path $sec) { New-Item -ItemType Directory -Force -Path (Join-Path $Target 'security') | Out-Null; Copy-Item (Join-Path $sec '*') (Join-Path $Target 'security') -Force }
 
 @'
 node_modules/
