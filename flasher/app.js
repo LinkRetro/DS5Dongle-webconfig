@@ -264,11 +264,13 @@ globalThis.mountDongleFlash = function (document) {
     updateControls();
   }
 
-  async function setImage(name, data, label) {
+  async function setImage(name, data, label, expectedHash, isCurrent = () => true) {
     if (flashing) return;
     if (!data || data.length < 256) throw new Error("固件文件太小");
     if (String.fromCharCode(...data.slice(0, 4)) !== "BFNP") throw new Error("固件 0x0 处没有 Bouffalo Boot Header (BFNP)");
     const release = await globalThis.DongleFlashPolicy.validate(data);
+    if (expectedHash && release.sha256 !== expectedHash) throw new Error("固件与所选板型或版本不一致，已阻止烧录");
+    if (!isCurrent() || flashing) return;
     image = data;
     if (elements.fileName) elements.fileName.textContent = label ?? name;
     if (elements.fileMeta) elements.fileMeta.textContent = `${release.model} · ${formatSize(data.length)} · 写入地址 0x00010000`;

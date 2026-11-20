@@ -1,7 +1,25 @@
 {
   "board": "v12",
-  "latest": "LCT616-DS5 3.18H-oc12-v12",
+  "latest": "LCT616-DS5 3.18H-oc14-v12",
   "versions": [
+    {
+      "version": "LCT616-DS5 3.18H-oc14-v12",
+      "tag": "3.18H-oc14",
+      "file": "ds5dongle-v12-3.18H-oc14-hs.bin",
+      "size": 797552,
+      "sha256": "1075e00ba2cd207ff8c953197744072f03fa767c01ffb420fae9d0ec07957012",
+      "date": "2026-11-20",
+      "notes": "测试版：新增左右摇杆内外死区"
+    },
+    {
+      "version": "LCT616-DS5 3.18H-oc13-v12",
+      "tag": "3.18H-oc13",
+      "file": "ds5dongle-v12-3.18H-oc13-hs.bin",
+      "size": 796784,
+      "sha256": "3b67001a37ef4dba0bb172e3512ccc3922c3e5e3a60df4770fa59cd4c1e60c34",
+      "date": "2026-11-20",
+      "notes": "测试版：保存结果确认、鼠标映射和实际 USB 速率"
+    },
     {
       "version": "LCT616-DS5 3.18H-oc12-v12",
       "tag": "3.18H-oc12",

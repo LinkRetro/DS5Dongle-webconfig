@@ -3,9 +3,25 @@
   "model": "LCTech BL616 · oc8",
   "size": 794988
  },
+ "de82a799b4c259fead0a74fefff66aabeb22edc5a117fa172b80f8c5431e3b2b": {
+  "model": "V1 单灯 · 3.18H-oc14",
+  "size": 797304
+ },
+ "609d48b8fd2bf7900fd53bb90ae6b672730610804331bd20514de2cf87b353fb": {
+  "model": "V1 单灯 · 3.18H-oc13",
+  "size": 796280
+ },
  "5b56dc4c2cf3a43a25a74712086267b79be412259739a0a59576d935f9583c0f": {
   "model": "V1 单灯 · 3.18H-oc12",
   "size": 795840
+ },
+ "1075e00ba2cd207ff8c953197744072f03fa767c01ffb420fae9d0ec07957012": {
+  "model": "V1.2 RGB · 3.18H-oc14",
+  "size": 797552
+ },
+ "3b67001a37ef4dba0bb172e3512ccc3922c3e5e3a60df4770fa59cd4c1e60c34": {
+  "model": "V1.2 RGB · 3.18H-oc13",
+  "size": 796784
  },
  "ef051c4797cf07c5b7b46061a2a7882dea2a1b4f6676d254878912978e2dbe62": {
   "model": "V1.2 RGB · 3.18H-oc12",

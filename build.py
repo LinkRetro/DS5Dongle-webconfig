@@ -1,10 +1,12 @@
 from pathlib import Path
 import sys
+import subprocess
 # 默认不把固件 base64 内嵌进页面（3.6MB -> 约 0.45MB）；
 # 需要完全离线的单文件页面时用：python build.py --embed
 EMBED_FIRMWARE = '--embed' in sys.argv
 import re
 r=Path(__file__).resolve().parent
+subprocess.run([sys.executable, '-X', 'utf8', str(r/'check-i18n.py'), '--build'], check=True)
 up=r.parent/'DS5Dongle-OLED-Config-Web'
 _a=r/'assets'
 _std=_a/'dualsense.svg'
@@ -13,11 +15,18 @@ _edge=_a/'dualsense-edge.svg'
 standard=(_std if _std.exists() else up/'src/assets/dualsense.svg').read_text(encoding='utf-8-sig')
 edge=(_edge if _edge.exists() else up/'src/assets/dualsense-edge.svg').read_text(encoding='utf-8-sig')
 import json
-js=(r/'protocol.mjs').read_text(encoding='utf-8-sig').replace('export ','')+'\n'+(r/'test-center.mjs').read_text(encoding='utf-8-sig').replace('export ','')+'\n'+(r/'i18n.mjs').read_text(encoding='utf-8-sig').replace('export ','')+'\n'+(r/'i18n_phrases.mjs').read_text(encoding='utf-8-sig').replace('export ','')+'\nconst STANDARD_ART='+json.dumps(standard)+';\nconst EDGE_ART='+json.dumps(edge)+';\n'+re.sub(r"^import .*?;\s*",'',(r/'app.mjs').read_text(encoding='utf-8-sig'),flags=re.M)
+def module_body(name):
+    source = (r/name).read_text(encoding='utf-8-sig')
+    return re.sub(r'^(?:import [^\n]*\n|export )', '', source, flags=re.M)
+
+catalog = json.loads((r/'i18n-catalog.json').read_text(encoding='utf-8-sig'))
+catalog_source = json.dumps(catalog).replace('<', '\\u003c')
+js='const catalog='+catalog_source+';\n'+'\n'.join(module_body(name) for name in (
+    'protocol.mjs','test-center.mjs','i18n.mjs','i18n_phrases.mjs'
+))+'\nconst STANDARD_ART='+json.dumps(standard)+';\nconst EDGE_ART='+json.dumps(edge)+';\n'+module_body('app.mjs')
 # Embed serial resources and UI so file:// does not fetch binary support files.
 import base64
 
-import subprocess, sys
 
 def syntax_check(text, label):
     """打包前用 node --check 校验语法，坏文件直接中止，避免打出白屏页面。"""

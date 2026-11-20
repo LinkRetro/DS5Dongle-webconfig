@@ -7,6 +7,7 @@ test('output: DS / Edge lengths, channel isolation, no configuration or volume f
  const rumble=testOutput('rumble',{left:80,right:30});assert.equal(rumble.length,47);assert.deepEqual([...rumble.slice(0,10)],[3,0,30,80,0,0,0,0,0,0]);
  const left=testOutput('trigger',{side:'left',mode:'feedback',strength:3,start:3},true);assert.equal(left.length,63);assert.equal(left[0],8);assert(left.slice(10,21).every(v=>v===0));assert.equal(left[21],0x21);
  const right=testOutput('trigger',{side:'right',mode:'off'});assert.equal(right[0],4);assert.equal(right[10],5);assert(right.slice(21,32).every(v=>v===0));
+ const light=testOutput('lights',{rgb:[144,76,129]});assert.equal(light[1],0x04);assert.equal(light[38],0x03);assert.deepEqual([...light.slice(41,47)],[2,0,0,144,76,129]);
  assert.throws(()=>testOutput('rumble',{left:256}));assert.throws(()=>testOutput('rumble',{right:NaN}));assert.throws(()=>testOutput('trigger',{side:'both'}));
 });
 test('trigger: documented active zones, packed force, weapon bounds, vibration frequency and explicit off',()=>{
@@ -17,7 +18,7 @@ test('trigger: documented active zones, packed force, weapon bounds, vibration f
 test('timed tests: rumble automatically stops, switching triggers resets previous side, lights restore baseline',async()=>{
  const u=setup();await u.tester.run('rumble',{left:80,right:0});assert.equal(u.timers[0].ms,2000);await u.timers[0].fn();await flush();assert.equal(u.packets.at(-1)[1][3],0);
  await u.tester.run('trigger',{side:'left',mode:'feedback',strength:3,start:3});await u.tester.run('trigger',{side:'right',mode:'vibration',strength:3,start:3});assert.equal(u.packets.at(-2)[1][21],5);assert.equal(u.packets.at(-1)[1][10],0x26);
- await u.tester.run('lights',{rgb:[90,80,70],players:31,mic:2,brightness:2});assert.equal(u.timers.at(-1).ms,5000);await u.tester.stop();const b=u.packets.at(-1)[1];assert.deepEqual([...b.slice(42,47)],[0,0,10,20,30]);assert.equal(b[8],0);assert.equal(b[1],0x15);assert.equal(b[38],1);
+ await u.tester.run('lights',{rgb:[90,80,70],players:31,brightness:2});assert.equal(u.timers.at(-1).ms,5000);await u.tester.stop();const b=u.packets.at(-1)[1];assert.deepEqual([...b.slice(42,47)],[0,0,10,20,30]);assert.equal(b[1],0x14);assert.equal(b[38],3);
 });
 test('stop races: pending start is cancelled, in-flight write finishes before reset, unplug never writes new effects',async()=>{
  const u=setup();const pending=u.tester.run('rumble',{left:50});await u.tester.stop();await pending;assert.equal(u.packets.length,0);

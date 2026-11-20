@@ -21,6 +21,14 @@ This repository contains **only the web part**. Firmware sources, PCB design and
 
 Everything runs in **Chrome or Edge**. There is no installer and no background service: the page talks to the dongle over **WebHID** for configuration and **Web Serial** for flashing.
 
+Tests are grouped with the feature they verify: Visual (lightbar and player indicators), Feel (rumble and triggers), Audio & Mic (test tone and mic meter), and Gyro / Accelerometer (browser-only diagnostics). Feel, Audio & Mic, and Sticks save only their own settings. Sticks requires oc14 firmware: each stick has independent inner and outer deadzones (0–30%, per axis). Inner deadzone suppresses center drift, outer deadzone reaches full output earlier, and 0% for both preserves unmodified input. The live stick graphic shows the USB output after saved adjustments.
+
+The connection color picker previews the color in the browser and stages it for saving. On a connected controller, dragging the picker previews the latest color; either test button can replay it for five seconds. Preview touches only the lightbar by default. Stopping sends the configured connection color, not a snapshot of the game's lights. The optional player-light test turns those indicators off when it ends. Use **Save as connection color** in the test center to submit only the lightbar color, leaving other pending edits untouched. Pure black cannot be saved on current firmware. The saved color applies on controller reconnect; a game can send a different color later.
+
+The local offline build (`python build.py --embed`) includes the newest image for each PCB variant. If board detection is unavailable, select the physical PCB variant explicitly; the USB bootloader does not identify the PCB revision. Older images are served from the firmware directory over HTTP. The update dialog verifies the exact selected release hash before enabling flashing.
+
+The oc13 test firmware reports Flash write results for settings and button mappings. Older firmware can acknowledge the write request but does not confirm persistence. Unsaved drafts can be restored in the same tab when the same browser device handle reconnects. The receiver diagnostics panel shows board-side latency; it does not measure button-to-screen latency. USB negotiation is reported by oc13 and shown as unknown on older firmware.
+
 ---
 
 ## Requirements
@@ -100,10 +108,13 @@ Drop the built `.bin` files into those folders before deploying, or serve them f
 
 `en · zh-CN · zh-TW · ja · ko · de · fr · es · it · pt-BR · ru · pl · tr`
 
-- `i18n.mjs` — core dictionary (navigation, metrics, primary actions) for all 13 languages
-- `i18n_phrases.mjs` — zh → en phrase table plus regex rules for dynamic strings
+- `i18n-catalog.json` is the source of truth for message IDs and translations across all 13 locales. Edit it instead of the generated `index.html`.
+- For new UI copy, add a stable ID under `messages` and translate it for all 13 locales. Use `data-i18n="your_message_id"` on text-only HTML elements, `data-i18n-label="your_message_id"` for accessible labels, or `paintLocalized(node, msg('your_message_id', {count}))` in the app. Keep the ID when editing the wording, and use the same named placeholders in every translation. The node retains its message ID and parameters so switching languages keeps inputs and selections in place.
+- Legacy text is still matched against its Simplified Chinese source. For those entries, edit the translations in the catalog; if you change the Chinese wording, update the source in both places or migrate the caller to a stable ID. Existing dynamic patterns are in `i18n_phrases.mjs`.
+- Run `npm run i18n:check` to see coverage and possible uncatalogued text, or `npm run i18n:check -- --locale ja` to list missing Japanese IDs. The build checks completeness and placeholders for key-bound UI. `--strict` additionally fails on legacy translation gaps and scan candidates; the text scan is heuristic and can include technical diagnostics.
+- Run `python build.py --embed` to regenerate the offline page. The catalog is embedded, so switching languages reads the new translations without fetching files or reloading the page. The tool detects missing translations; it does not generate them.
 
-Switching is instant and persisted in `localStorage` (`ds5.lang`). Languages other than English fall back to English for strings that are not translated yet.
+Language choice is stored in `localStorage` (`ds5.lang`). Localized copy falls back to English where available (legacy Traditional Chinese details fall back to their Simplified Chinese source). Technical flashing logs are preserved as reported.
 
 ---
 
@@ -113,8 +124,10 @@ Switching is instant and persisted in `localStorage` (`ds5.lang`). Languages oth
 app.mjs               application logic (config, live view, dialogs)
 protocol.mjs          HID report codec — config 0xF7, remap 0xFB, telemetry 0xF9
 test-center.mjs       rumble / trigger / lightbar / audio testers
-i18n.mjs              core multilingual dictionary
-i18n_phrases.mjs      zh→en phrases and regex rules
+i18n-catalog.json     shared message IDs and translations
+i18n.mjs              locale selection and message lookup
+i18n_phrases.mjs      legacy dynamic translation patterns
+check-i18n.py         translation coverage and source checks
 template.html         page skeleton (build input)
 style.css             styles, dark and light themes
 assets/               controller artwork (SVG)

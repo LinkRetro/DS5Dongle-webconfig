@@ -75,6 +75,8 @@ body[data-page="test"] .savebar{display:none}.test-card{padding:16px 0;border-bo
 .nav .flash-nav{display:flex;align-items:center;justify-content:center;text-align:center;text-decoration:none;border:1px solid var(--line);border-radius:15px;height:57px;font-size:11px;background:var(--panel);color:var(--ink)}@media(max-width:1100px){.nav .flash-nav{flex:1;height:44px}}
 
 body[data-page="flash"] .savebar{display:none}#firmware-notice{margin-top:12px;border-color:var(--accent);color:var(--accent)}.embedded-flasher{margin-top:20px}body[data-page="flash"] .panel{min-width:0}
+body[data-page="vision"] .savebar,body[data-page="motion"] .savebar{display:none}
+.nav button[data-page="motion"],.nav button[data-page="audio"]{line-height:1.3;white-space:normal}
 
 /* Editing selection is independent from live input and uses the theme accent. */
 .art [data-part].mapping-source{filter:drop-shadow(0 0 4px var(--accent))}
@@ -101,6 +103,7 @@ body[data-page="flash"] .savebar{display:none}#firmware-notice{margin-top:12px;b
 .fw-details{margin-bottom:14px;font-size:12px;color:#a9b2c3}
 .fw-log{max-height:160px;overflow:auto;background:#0b0e14;color:#9fe0a0;padding:8px;border-radius:6px;white-space:pre-wrap;margin:6px 0 0}
 .fw-actions{display:flex;gap:10px;justify-content:flex-end}
+#controls button[data-firmware-check],#controls .fw-open{display:block;margin-inline:auto}
 .fw-open{margin-top:6px}
 
 .fw-device{margin:0 0 8px;font-size:12.5px;color:#8fb8ff}
@@ -226,6 +229,7 @@ input[type=range]{height:22px;cursor:pointer}
 .layout{grid-template-columns:minmax(360px,1fr) 404px 104px}
 .nav{width:104px}
 .nav button{white-space:nowrap;padding:8px 10px;font-size:12px;letter-spacing:0;text-overflow:ellipsis;overflow:hidden}
+:lang(ja) .nav button[data-page="flash"]{white-space:normal;overflow-wrap:anywhere}
 @media(max-width:1100px){.layout{grid-template-columns:minmax(320px,1fr) 380px 96px}.nav{width:96px}.nav button{font-size:11.5px;padding:8px 8px}}
 
 /* 面板高度：原来封顶 780px，底部会留一段空白；改为按可视区拉伸 */
@@ -253,6 +257,12 @@ input[type=range]{height:22px;cursor:pointer}
 .quick-actions button:hover:not(:disabled){border-color:color-mix(in srgb,var(--accent) 50%,var(--line));
   background:color-mix(in srgb,var(--accent) 10%,var(--panel))}
 .quick-actions .hint{font-size:12px;color:color-mix(in srgb,var(--ink) 55%,transparent)}
+.quick-actions #test-stop{color:var(--danger);border-color:var(--danger)}
+.test-card.trigger-target{outline:2px solid var(--accent);outline-offset:-2px;background:color-mix(in srgb,var(--accent) 9%,transparent);border-radius:10px;padding-inline:10px}
+#art-trigger-hint{margin:0 0 8px}
+.trigger-trial{margin-top:12px;padding:0 10px 8px;border-inline-start:2px solid var(--line)}
+#test-color,#test-saved-color{display:inline-flex;align-items:center;gap:9px;font-variant-numeric:tabular-nums}
+#test-color::before,#test-saved-color::before{content:'';width:27px;height:19px;border:1px solid var(--muted);border-radius:4px;background:var(--preview-color)}
 
 /* 首页灯条颜色：最高频的外观需求，直接放在验证按钮旁 */
 .qa-color{display:inline-flex;align-items:center;gap:8px;font-size:13px;font-weight:600;color:var(--ink)}

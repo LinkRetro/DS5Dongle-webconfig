@@ -31,6 +31,8 @@ $notes = @{
     10 = '早期版本，存在板型宏与重连问题'
     11 = '过渡版本'
     12 = '当前推荐：修复板型识别、V1 回报率、更新后清配对'
+    13 = '测试版：保存结果确认、鼠标映射和实际 USB 速率'
+    14 = '测试版：新增左右摇杆内外死区'
 }
 
 $labels = @{ v1 = 'DS5Dongle V1 · 单灯'; v12 = 'DS5Dongle V1.2 · RGB' }
@@ -114,7 +116,7 @@ $summary | Format-Table -AutoSize | Out-String -Width 100 | Write-Host
 if ($Build) {
     $py = 'python'
     Push-Location $web
-    try { & $py build.py } finally { Pop-Location }
+    try { & $py build.py --embed; if($LASTEXITCODE -ne 0){throw '网页构建失败'} } finally { Pop-Location }
 }
 
 Write-Host '完成。记得把 index.html 和 firmware\ 整个目录上传到服务器。' -ForegroundColor Green
