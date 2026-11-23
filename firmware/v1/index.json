@@ -1,7 +1,16 @@
 {
   "board": "v1",
-  "latest": "LCT616-DS5 3.18H-oc19-v1",
+  "latest": "LCT616-DS5 3.18H-oc20-v1",
   "versions": [
+    {
+      "version": "LCT616-DS5 3.18H-oc20-v1",
+      "tag": "3.18H-oc20",
+      "file": "ds5dongle-v1-3.18H-oc20-hs.bin",
+      "size": 801452,
+      "sha256": "9ab9f1041215a0cb5cf02f62ea204ee8c8a0de231350ba1461eab9de2ea9f468",
+      "date": "2026-11-23",
+      "notes": "配对双闪灯效（搜索中）；连接超时 8s→5s、L2CAP 3s→2s，失败更快重来"
+    },
     {
       "version": "LCT616-DS5 3.18H-oc19-v1",
       "tag": "3.18H-oc19",
