@@ -1,7 +1,16 @@
 {
   "board": "v1",
-  "latest": "LCT616-DS5 3.18H-oc52-v1",
+  "latest": "LCT616-DS5 3.18H-oc53-v1",
   "versions": [
+    {
+      "version": "LCT616-DS5 3.18H-oc53-v1",
+      "tag": "3.18H-oc53",
+      "file": "ds5dongle-v1-3.18H-oc53-hs.bin",
+      "size": 809408,
+      "sha256": "489aba5e356e9b75f9da126dc07e4019de5b91f9936f96900aeaee07ce6a095b",
+      "date": "2026-11-23",
+      "notes": "修复按键映射到鼠标键无效：不再要求先开触摸板鼠标模式"
+    },
     {
       "version": "LCT616-DS5 3.18H-oc52-v1",
       "tag": "3.18H-oc52",
