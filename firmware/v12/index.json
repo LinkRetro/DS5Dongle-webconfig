@@ -1,7 +1,16 @@
 {
   "board": "v12",
-  "latest": "LCT616-DS5 3.18H-oc60-v12",
+  "latest": "LCT616-DS5 3.18H-oc61-v12",
   "versions": [
+    {
+      "version": "LCT616-DS5 3.18H-oc61-v12",
+      "tag": "3.18H-oc61",
+      "file": "ds5dongle-v12-3.18H-oc61-hs.bin",
+      "size": 813276,
+      "sha256": "b398fecc25f457b0e6479c6e5c082fa53931dc5e0c79ec8524db183f4781d44e",
+      "date": "2026-11-23",
+      "notes": "连不上时自愈：连续 3 次 L2CAP 握手失败自动清除失效配对，提示用 PS+Create 重新配对"
+    },
     {
       "version": "LCT616-DS5 3.18H-oc60-v12",
       "tag": "3.18H-oc60",
