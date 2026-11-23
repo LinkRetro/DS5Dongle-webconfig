@@ -1,7 +1,16 @@
 {
   "board": "v12",
-  "latest": "LCT616-DS5 3.18H-oc34-v12",
+  "latest": "LCT616-DS5 3.18H-oc35-v12",
   "versions": [
+    {
+      "version": "LCT616-DS5 3.18H-oc35-v12",
+      "tag": "3.18H-oc35",
+      "file": "ds5dongle-v12-3.18H-oc35-hs.bin",
+      "size": 807040,
+      "sha256": "af79dca195cf16f1ca8e8b130fd3532365ebea8dd0b96d39522273398ac792eb",
+      "date": "2026-11-23",
+      "notes": "回退 960/定点（实测定点慢 6%、精确 20ms 供给导致卡顿）：恢复 1024+重采样+浮点"
+    },
     {
       "version": "LCT616-DS5 3.18H-oc34-v12",
       "tag": "3.18H-oc34",
