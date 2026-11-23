@@ -1,7 +1,16 @@
 {
   "board": "v1",
-  "latest": "LCT616-DS5 3.18H-oc21-v1",
+  "latest": "LCT616-DS5 3.18H-oc22-v1",
   "versions": [
+    {
+      "version": "LCT616-DS5 3.18H-oc22-v1",
+      "tag": "3.18H-oc22",
+      "file": "ds5dongle-v1-3.18H-oc22-hs.bin",
+      "size": 801964,
+      "sha256": "bf2f4ffbebfb4bfe18f429c76a3a5349f61f2a8befd34a7b3af1eccbf8dd2109",
+      "date": "2026-11-23",
+      "notes": "扬声器音量曲线：1–100 铺满手柄可听区间 0x3D–0x64，滑块行程线性化"
+    },
     {
       "version": "LCT616-DS5 3.18H-oc21-v1",
       "tag": "3.18H-oc21",
