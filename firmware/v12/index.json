@@ -1,7 +1,16 @@
 {
   "board": "v12",
-  "latest": "LCT616-DS5 3.18H-oc31-v12",
+  "latest": "LCT616-DS5 3.18H-oc32-v12",
   "versions": [
+    {
+      "version": "LCT616-DS5 3.18H-oc32-v12",
+      "tag": "3.18H-oc32",
+      "file": "ds5dongle-v12-3.18H-oc32-hs.bin",
+      "size": 807044,
+      "sha256": "63ff59547c76642ca3cd9505fcb77fd4397a10165b051a30f140708f20852c01",
+      "date": "2026-11-23",
+      "notes": "耳机立体声：插耳机时开立体声并把带宽限到 12 kHz 以控制编码耗时；无耳机仍单声道"
+    },
     {
       "version": "LCT616-DS5 3.18H-oc31-v12",
       "tag": "3.18H-oc31",
