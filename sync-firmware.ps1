@@ -62,6 +62,7 @@ $notes = @{
     41 = '配对：长按 BOOT 清配对时把相关手柄加入持久黑名单，PS 键自动重连会被拒绝，必须 PS+Create 重配'
     42 = '修正 SDK 地址 API 误用：配对完成时用 BR 地址（此前 bt_conn_get_dst 返回 LE 联合体，导致地址错位一位）'
     43 = '修复 PS+Create 无法重配：黑名单不再掐断连接/通道，只在配对成功时解封'
+    44 = 'inquiry 名称过滤（只认 DualSense，防邻居手柄抢连）+ 握手失败跳过表；BOOT 连按 5 次清空黑名单'
 }
 
 $labels = @{ v1 = 'DS5Dongle V1 · 单灯'; v12 = 'DS5Dongle V1.2 · RGB' }
