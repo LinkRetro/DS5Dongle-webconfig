@@ -414,7 +414,7 @@ function paintConnection(){
  const state=telemetry?.length>=17&&telemetry[13]===0xD3?telemetry[14]:null;
  $('controller-dot').classList.toggle('on',!!device&&state===7);
  $('controller-dot').classList.toggle('working',!!device&&state!==null&&state>0&&state<7);
- paintLocalized($('controller-connection'),!device?msg('ctrl_unknown'):state===null?msg('phrase.controller_status_pending'):states[state]??msg('phrase.controller_status_unknown_2'));
+ paintLocalized($('controller-connection'),!device?dt('ctrl_unknown'):state===null?msg('phrase.controller_status_pending'):states[state]??msg('phrase.controller_status_unknown_2'));
  paintLocalized($('controller-connection'),state===null?'':msg('link_bound',{count:telemetry[15]}),'title');
  const pct=telemetry?.[11],known=Number.isInteger(pct)&&pct>=0&&pct<=100;
  const power=telemetry?.[12];
@@ -661,6 +661,8 @@ function diagMount(){
  return mount;
 }
 const dhex=n=>n.toString(16).toUpperCase().padStart(2,'0');
+/* msg() returns a descriptor ({id,params}); messageText() resolves it. */
+const dt=(id,params)=>messageText(msg(id,params));
 function paintDiag(b,fw){
  const u16=i=>b[i]|(b[i+1]<<8);
  const addr=[...b.slice(6,12)].map(dhex).join(':');
@@ -668,18 +670,18 @@ function paintDiag(b,fw){
  const flags=b[1],edge=!!(flags&1),linked=!!(flags&4),haveScan=!!b[61];
  /* Without a live link the model is unknown - showing "DualSense" there was
   * misleading when a customer simply cannot pair. */
- const model=linked?(edge?msg('diag_model_edge'):msg('diag_model_std')):msg('ctrl_unknown');
+ const model=linked?(edge?dt('diag_model_edge'):dt('diag_model_std')):dt('ctrl_unknown');
  const rssi=haveScan?((b[60]>127?b[60]-256:b[60])+' dBm'):'';
  const board=b[58]===1?'v1':b[58]===2?'v1.2':'-';
  const usb=b[59]===1?'High-Speed':b[59]===0?'Full-Speed':b[59]===2?'-':'n/a';
  diagText=[
-  msg('diag_controller',{model,address:addr||'-'})+(rssi?' · '+rssi:''),
-  msg('diag_eir_name',{name:name||'-'}),
-  msg('diag_handshake',{code:dhex(b[3]),bonded:b[4],blacklist:b[5]}),
-  msg('diag_scan',{rounds:u16(12),connect:u16(14),handshake:u16(16)}),
-  msg('diag_audio',{avg:(u16(18)/10).toFixed(1),max:(u16(20)/10).toFixed(1),overruns:u16(22),fill:u16(24)}),
-  msg('diag_hw',{board,usb}),
-  msg('diag_firmware',{firmware:fw||'-',captured:new Date().toISOString().slice(0,19).replace('T',' ')+' UTC'})
+  dt('diag_controller',{model,address:addr||'-'})+(rssi?' · '+rssi:''),
+  dt('diag_eir_name',{name:name||'-'}),
+  dt('diag_handshake',{code:dhex(b[3]),bonded:b[4],blacklist:b[5]}),
+  dt('diag_scan',{rounds:u16(12),connect:u16(14),handshake:u16(16)}),
+  dt('diag_audio',{avg:(u16(18)/10).toFixed(1),max:(u16(20)/10).toFixed(1),overruns:u16(22),fill:u16(24)}),
+  dt('diag_hw',{board,usb}),
+  dt('diag_firmware',{firmware:fw||'-',captured:new Date().toISOString().slice(0,19).replace('T',' ')+' UTC'})
  ].join('\n');
  let box=document.getElementById('diag-card');
  if(!box){
@@ -691,11 +693,11 @@ function paintDiag(b,fw){
   pre.style.cssText='white-space:pre-wrap;font-size:12px;line-height:1.5;margin:8px 0;user-select:text';
   body.append(pre);
   const btn=document.createElement('button');btn.id='diag-copy';
-  btn.textContent=msg('diag_copy');
-  btn.onclick=async()=>{try{await navigator.clipboard.writeText(diagText);btn.textContent=msg('diag_copied');setTimeout(()=>btn.textContent=msg('diag_copy'),1500)}catch{btn.textContent=msg('diag_copy_failed')}};
+  btn.textContent=dt('diag_copy');
+  btn.onclick=async()=>{try{await navigator.clipboard.writeText(diagText);btn.textContent=dt('diag_copied');setTimeout(()=>btn.textContent=dt('diag_copy'),1500)}catch{btn.textContent=dt('diag_copy_failed')}};
   body.append(btn);
   const dl=document.createElement('button');dl.id='diag-download';dl.style.marginLeft='8px';
-  dl.textContent=msg('diag_download');
+  dl.textContent=dt('diag_download');
   dl.onclick=()=>{const blob=new Blob([diagText],{type:'text/plain'});const a=document.createElement('a');
    a.href=URL.createObjectURL(blob);a.download='ds5dongle-diagnostics.txt';a.click();setTimeout(()=>URL.revokeObjectURL(a.href),2000)};
   body.append(dl);
@@ -703,9 +705,9 @@ function paintDiag(b,fw){
  }
  if(box.parentElement!==diagMount())diagMount().append(box);
  /* Labels follow the page language; refresh them on every update. */
- const sum=document.getElementById('diag-summary');if(sum)sum.textContent=msg('diag_title');
- const copyBtn=document.getElementById('diag-copy');if(copyBtn)copyBtn.textContent=msg('diag_copy');
- const dlBtn=document.getElementById('diag-download');if(dlBtn)dlBtn.textContent=msg('diag_download');
+ const sum=document.getElementById('diag-summary');if(sum)sum.textContent=dt('diag_title');
+ const copyBtn=document.getElementById('diag-copy');if(copyBtn)copyBtn.textContent=dt('diag_copy');
+ const dlBtn=document.getElementById('diag-download');if(dlBtn)dlBtn.textContent=dt('diag_download');
  const pre=document.getElementById('diag-text');
  if(pre)pre.textContent=diagText;
 }
@@ -734,9 +736,9 @@ function paintDiagNotice(){
   diagMount().append(box);
  }
  if(box.parentElement!==diagMount())diagMount().append(box);
- const sum=document.getElementById('diag-summary');if(sum)sum.textContent=msg('diag_title');
+ const sum=document.getElementById('diag-summary');if(sum)sum.textContent=dt('diag_title');
  const p=document.getElementById('diag-text');
- if(p)p.textContent=msg('diag_unavailable');
+ if(p)p.textContent=dt('diag_unavailable');
 }async function readTable(p){const d=device;await hidWait(d.sendFeatureReport(0xfb,command(3,[p],127)),'选择映射组');const m=remapRead(await hidWait(d.receiveFeatureReport(0xfb),'读取按键映射'),p);if(device!==d)throw Error('读取映射期间设备已断开');activeProfile=m.active;return m}
 function moveSticks(axes){
  const offset=v=>{v=Number.isFinite(v)?Math.max(0,Math.min(255,v)):128;return v>=127&&v<=128?0:(v<127?(v-127)/127:(v-128)/127)*9};
