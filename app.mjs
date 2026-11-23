@@ -682,8 +682,14 @@ function paintDiag(b,fw){
   dl.onclick=()=>{const blob=new Blob([diagText],{type:'text/plain'});const a=document.createElement('a');
    a.href=URL.createObjectURL(blob);a.download='ds5dongle-diagnostics.txt';a.click();setTimeout(()=>URL.revokeObjectURL(a.href),2000)};
   box.append(dl);
-  const anchor=document.getElementById('battery-card');
-  if(anchor)anchor.insertAdjacentElement('afterend',box);else document.body.append(box);
+  /* battery-card is a metric tile inside .axis-grid; appending after the tile
+   * squeezed the panel into a grid cell.  Place it after the whole grid so it
+   * spans the device panel width. */
+  const tile=document.getElementById('battery-card');
+  const grid=tile?.closest?.('.axis-grid');
+  if(grid)grid.insertAdjacentElement('afterend',box);
+  else if(tile)tile.insertAdjacentElement('afterend',box);
+  else document.body.append(box);
  }
  const pre=document.getElementById('diag-text');
  if(pre)pre.textContent=diagText;
