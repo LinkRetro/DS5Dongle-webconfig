@@ -60,7 +60,7 @@ export function createAudioTester({env=globalThis,notify,onLevel=()=>{},onState=
   stop();const token=generation;const Audio=env.AudioContext??env.webkitAudioContext;if(!Audio)throw Error('浏览器不支持音频测试');
   const c=new Audio();context=c;onState();
   try{if(output){if(!c.setSinkId)throw Error('此浏览器无法选择输出设备，请在系统声音设置中选择');await c.setSinkId(output)}await c.resume();if(token!==generation)return;
-   const oscillator=c.createOscillator(),gain=c.createGain();oscillator.frequency.value=440;gain.gain.value=.06;oscillator.connect(gain).connect(c.destination);oscillator.start();oscillator.stop(c.currentTime+1);timeout=env.setTimeout(()=>{stop();notify('测试音已结束')},1100);notify('正在播放 1 秒测试音 · 请确认所选输出设备')
+   const oscillator=c.createOscillator(),gain=c.createGain();oscillator.frequency.value=440;gain.gain.value=.707;oscillator.connect(gain).connect(c.destination);oscillator.start();oscillator.stop(c.currentTime+1);timeout=env.setTimeout(()=>{stop();notify('测试音已结束')},1100);notify('正在播放 1 秒测试音 · 请确认所选输出设备')
   }catch(e){if(token===generation)stop();throw e}
  }
  async function microphone(input=''){

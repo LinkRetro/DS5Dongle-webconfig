@@ -1,7 +1,16 @@
 {
   "board": "v12",
-  "latest": "LCT616-DS5 3.18H-oc15-v12",
+  "latest": "LCT616-DS5 3.18H-oc16-v12",
   "versions": [
+    {
+      "version": "LCT616-DS5 3.18H-oc16-v12",
+      "tag": "3.18H-oc16",
+      "file": "ds5dongle-v12-3.18H-oc16-hs.bin",
+      "size": 801556,
+      "sha256": "674e0b6c1ddf84aa9521082447467ede7c5bb81529bb6c5af5eb2a5b7bcdad64",
+      "date": "2026-11-23",
+      "notes": "修复扬声器音量偏小；对角补偿默认关闭；BT RX 抢占音频编码；有声时输出 24ms→8ms"
+    },
     {
       "version": "LCT616-DS5 3.18H-oc15-v12",
       "tag": "3.18H-oc15",
@@ -9,7 +18,7 @@
       "size": 801556,
       "sha256": "920c8377bd883a38ca9889275694705f820c2998adf3a5bb9c28f614fe15d4bc",
       "date": "2026-11-20",
-      "notes": null
+      "notes": "新增摇杆曲线、对角补偿、轴向限制（oc15 基线）"
     },
     {
       "version": "LCT616-DS5 3.18H-oc14-v12",

@@ -1,13 +1,13 @@
 export const SIZE=32, VERSION=6;
 /* config v8 body size (packed struct): 40 (v7) + 9 warp bytes = 49 */
-export const BODY_SIZE={7:40,8:49};
-export const CONFIG_VERSION=8;
-export const fields={haptics_gain:[1,1,2,'float'],speaker_volume:[5,0,127],headset_volume:[6,0,127],speaker_gain:[7,0,7],inactive_time:[8,0,60],disable_led:[9,0,1],polling_rate_mode:[10,0,2],audio_buffer_length:[11,16,128],controller_mode:[12,0,2],enable_usb_sn:[13,0,1],ps_shortcut_enabled:[14,0,1],disable_mic:[15,0,1],disable_speaker:[16,0,1],enable_wake:[17,0,1],trigger_reduce:[18,0,10],lock_volume:[19,0,1],usb_stealth:[21,0,1],led_r:[22,0,255],led_g:[23,0,255],led_b:[24,0,255],tp_mode:[25,0,4],tp_mode_enabled_mask:[26,1,31],tp_mouse_sensitivity:[27,1,32],audio_haptic:[28,0,2],idle_save:[29,0,1],combo_window:[30,0,50],tp_block_raw:[31,0,1]};
+export const BODY_SIZE={7:40,8:49,9:49};
+export const CONFIG_VERSION=9;
+export const fields={haptics_gain:[1,1,2,'float'],speaker_volume:[5,0,100],headset_volume:[6,0,127],speaker_gain:[7,0,7],inactive_time:[8,0,60],disable_led:[9,0,1],polling_rate_mode:[10,0,2],audio_buffer_length:[11,16,128],controller_mode:[12,0,2],enable_usb_sn:[13,0,1],ps_shortcut_enabled:[14,0,1],disable_mic:[15,0,1],disable_speaker:[16,0,1],enable_wake:[17,0,1],trigger_reduce:[18,0,10],lock_volume:[19,0,1],usb_stealth:[21,0,1],led_r:[22,0,255],led_g:[23,0,255],led_b:[24,0,255],tp_mode:[25,0,4],tp_mode_enabled_mask:[26,1,31],tp_mouse_sensitivity:[27,1,32],audio_haptic:[28,0,2],idle_save:[29,0,1],combo_window:[30,0,50],tp_block_raw:[31,0,1]};
 export function payload(view,id,min){const b=new Uint8Array(view.buffer,view.byteOffset,view.byteLength);if(b.length<min+1||b[0]!==id)throw Error('设备返回的数据不完整或格式不匹配');return b.slice(1)}
 Object.assign(fields,{stick_left_inner:[36,0,30],stick_left_outer:[37,0,30],stick_right_inner:[38,0,30],stick_right_outer:[39,0,30],stick_left_anti:[40,0,30],stick_right_anti:[41,0,30],stick_left_curve:[42,50,200],stick_right_curve:[43,50,200],stick_left_diag:[44,0,100],stick_right_diag:[45,0,100],stick_left_restrict:[46,0,30],stick_right_restrict:[47,0,30],stick_flags:[48,0,3]});
 export function decode(view){
  const head=payload(view,0xf7,SIZE);const ver=head[0];
- if(![4,5,6,7,8].includes(ver))throw Error(`固件配置版本 ${ver} 不兼容，需要 oc14 或更新固件`);
+ if(![4,5,6,7,8,9].includes(ver))throw Error(`固件配置版本 ${ver} 不兼容，需要 oc14 或更新固件`);
  const size=BODY_SIZE[ver]??SIZE;
  const b=payload(view,0xf7,size);
  if(b.length<size)throw Error('摇杆配置报告不完整');
