@@ -1,7 +1,16 @@
 {
   "board": "v12",
-  "latest": "LCT616-DS5 3.18H-oc37-v12",
+  "latest": "LCT616-DS5 3.18H-oc38-v12",
   "versions": [
+    {
+      "version": "LCT616-DS5 3.18H-oc38-v12",
+      "tag": "3.18H-oc38",
+      "file": "ds5dongle-v12-3.18H-oc38-hs.bin",
+      "size": 807016,
+      "sha256": "e5cb098ada0189c03b3c025bb8d56cd2f2a4e5b60fe4cc44a75be9080629b7cb",
+      "date": "2026-11-23",
+      "notes": "抑制编码尖峰：BT RX 优先级回 5（不再每包抢占编码）；编码看门狗 15→25 ms"
+    },
     {
       "version": "LCT616-DS5 3.18H-oc37-v12",
       "tag": "3.18H-oc37",
