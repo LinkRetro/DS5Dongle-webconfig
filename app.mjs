@@ -665,80 +665,76 @@ function paintDiag(b,fw){
  const u16=i=>b[i]|(b[i+1]<<8);
  const addr=[...b.slice(6,12)].map(dhex).join(':');
  const name=new TextDecoder().decode(b.slice(26,58)).replace(/\0+$/,'').trim();
- const flags=b[1],edge=!!(flags&1),hsOk=!!(flags&2);
- const board=b[58]===1?'v1':b[58]===2?'v1.2':'unknown';
- const usb=b[59]===1?'High-Speed':b[59]===0?'Full-Speed':b[59]===2?'not configured':'n/a';
+ const flags=b[1],edge=!!(flags&1);
+ const model=edge?msg('diag_model_edge'):msg('diag_model_std');
+ const board=b[58]===1?'v1':b[58]===2?'v1.2':'-';
+ const usb=b[59]===1?'High-Speed':b[59]===0?'Full-Speed':b[59]===2?'-':'n/a';
  diagText=[
-  `Model: ${edge?'DualSense Edge':(hsOk?'DualSense (non-Edge)':'unknown')}`,
-  `Address: ${addr||'-'}`,
-  `EIR name: ${name||'(no name in EIR)'}`,
-  `HID handshake: ${hsOk?'ok':'incomplete'} (0x${dhex(b[3])})`,
-  `Bonded: ${b[4]}   Blacklist: ${b[5]}`,
-  `Scan rounds: ${u16(12)}   connect fail: ${u16(14)}   handshake fail: ${u16(16)}`,
-  `Encode: ${(u16(18)/10).toFixed(1)} ms avg / ${(u16(20)/10).toFixed(1)} ms max`,
-  `PCM overruns: ${u16(22)}   fill: ${u16(24)}`,
-  `Board: ${board}   USB: ${usb}`,
-  `Firmware: ${fw||'-'}`,
-  `Captured: ${new Date().toISOString().slice(0,19).replace('T',' ')} UTC`
+  msg('diag_controller',{model,address:addr||'-'}),
+  msg('diag_eir_name',{name:name||'-'}),
+  msg('diag_handshake',{code:dhex(b[3]),bonded:b[4],blacklist:b[5]}),
+  msg('diag_scan',{rounds:u16(12),connect:u16(14),handshake:u16(16)}),
+  msg('diag_audio',{avg:(u16(18)/10).toFixed(1),max:(u16(20)/10).toFixed(1),overruns:u16(22),fill:u16(24)}),
+  msg('diag_hw',{board,usb}),
+  msg('diag_firmware',{firmware:fw||'-',captured:new Date().toISOString().slice(0,19).replace('T',' ')+' UTC'})
  ].join('\n');
  let box=document.getElementById('diag-card');
  if(!box){
-  /* Same collapsible pattern as the latency diagnostics block next to it. */
   box=document.createElement('details');
   box.id='diag-card';box.className='latency-panel';
-  const h=document.createElement('summary');h.textContent='Compatibility diagnostics';box.append(h);
+  const sum=document.createElement('summary');sum.id='diag-summary';box.append(sum);
   const body=document.createElement('div');body.id='diag-body';box.append(body);
   const pre=document.createElement('pre');pre.id='diag-text';
   pre.style.cssText='white-space:pre-wrap;font-size:12px;line-height:1.5;margin:8px 0;user-select:text';
   body.append(pre);
-  const btn=document.createElement('button');btn.textContent='Copy diagnostics';
-  btn.onclick=async()=>{try{await navigator.clipboard.writeText(diagText);btn.textContent='Copied';setTimeout(()=>btn.textContent='Copy diagnostics',1500)}catch{btn.textContent='Copy failed - select manually'}};
+  const btn=document.createElement('button');btn.id='diag-copy';
+  btn.textContent=msg('diag_copy');
+  btn.onclick=async()=>{try{await navigator.clipboard.writeText(diagText);btn.textContent=msg('diag_copied');setTimeout(()=>btn.textContent=msg('diag_copy'),1500)}catch{btn.textContent=msg('diag_copy_failed')}};
   body.append(btn);
-  const dl=document.createElement('button');dl.textContent='Download .txt';dl.style.marginLeft='8px';
+  const dl=document.createElement('button');dl.id='diag-download';dl.style.marginLeft='8px';
+  dl.textContent=msg('diag_download');
   dl.onclick=()=>{const blob=new Blob([diagText],{type:'text/plain'});const a=document.createElement('a');
    a.href=URL.createObjectURL(blob);a.download='ds5dongle-diagnostics.txt';a.click();setTimeout(()=>URL.revokeObjectURL(a.href),2000)};
   body.append(dl);
   diagMount().append(box);
  }
  if(box.parentElement!==diagMount())diagMount().append(box);
+ /* Labels follow the page language; refresh them on every update. */
+ const sum=document.getElementById('diag-summary');if(sum)sum.textContent=msg('diag_title');
+ const copyBtn=document.getElementById('diag-copy');if(copyBtn)copyBtn.textContent=msg('diag_copy');
+ const dlBtn=document.getElementById('diag-download');if(dlBtn)dlBtn.textContent=msg('diag_download');
  const pre=document.getElementById('diag-text');
  if(pre)pre.textContent=diagText;
 }
 async function refreshDiag(){
  if(!device||busy)return;
+ /* Only touch the DOM once the dongle page (the mount anchor) exists; keeps the
+ * poller quiet on other tabs and in DOM-less test harnesses. */
+ if(!document.getElementById('latency-detail')&&!document.getElementById('latency-state'))return;
  try{
   const r=await hidWait(device.receiveFeatureReport(0xfa),'read diagnostics',1000);
   const b=payload(r,0xfa,26);
   paintDiag(b,firmwareVersion);
  }catch{
-  /* Firmware older than oc46 has no 0xFA report.  Show the card with an
-   * explanation instead of hiding it, so users know the feature exists. */
-  paintDiagNotice('Diagnostics unavailable: firmware too old (needs oc46 or newer).');
+  paintDiagNotice();
  }
 }
-function paintDiagNotice(text){
- if(document.getElementById('diag-card'))return;
- const box=document.createElement('details');
- box.id='diag-card';box.className='latency-panel';
- const h=document.createElement('summary');h.textContent='Compatibility diagnostics';box.append(h);
- const p=document.createElement('p');p.id='diag-text';
- p.style.cssText='font-size:12px;line-height:1.5;margin:8px 0';
- p.textContent=text;box.append(p);
- diagMount().append(box);
-}async function saveStatus(d,check,shift){
- for(let attempt=0;attempt<14;attempt++){
-  check();
-  const b=payload(await hidWait(d.receiveFeatureReport(0xf9),'确认保存状态',1000),0xf9,13);
-  check();
-  if(b[13]!==0xd3||!(b[16]&2))return false;
-  const state=(b[16]>>shift)&3;
-  if(state===2)return true;
-  if(state===3)throw Error('Flash 写入失败，设置可能已临时应用。请重试保存。');
-  await new Promise(resolve=>setTimeout(resolve,200));
+function paintDiagNotice(){
+ let box=document.getElementById('diag-card');
+ if(!box){
+  box=document.createElement('details');
+  box.id='diag-card';box.className='latency-panel';
+  const sum=document.createElement('summary');sum.id='diag-summary';box.append(sum);
+  const p=document.createElement('p');p.id='diag-text';
+  p.style.cssText='font-size:12px;line-height:1.5;margin:8px 0';
+  box.append(p);
+  diagMount().append(box);
  }
- throw Error('未能确认 Flash 写入结果，请重试保存。');
-}
-async function readTable(p){const d=device;await hidWait(d.sendFeatureReport(0xfb,command(3,[p],127)),'选择映射组');const m=remapRead(await hidWait(d.receiveFeatureReport(0xfb),'读取按键映射'),p);if(device!==d)throw Error('读取映射期间设备已断开');activeProfile=m.active;return m}
+ if(box.parentElement!==diagMount())diagMount().append(box);
+ const sum=document.getElementById('diag-summary');if(sum)sum.textContent=msg('diag_title');
+ const p=document.getElementById('diag-text');
+ if(p)p.textContent=msg('diag_unavailable');
+}async function readTable(p){const d=device;await hidWait(d.sendFeatureReport(0xfb,command(3,[p],127)),'选择映射组');const m=remapRead(await hidWait(d.receiveFeatureReport(0xfb),'读取按键映射'),p);if(device!==d)throw Error('读取映射期间设备已断开');activeProfile=m.active;return m}
 function moveSticks(axes){
  const offset=v=>{v=Number.isFinite(v)?Math.max(0,Math.min(255,v)):128;return v>=127&&v<=128?0:(v<127?(v-127)/127:(v-128)/127)*9};
  for(let i=0;i<stickParts.length;i++){
@@ -1171,3 +1167,18 @@ globalThis.addEventListener?.('blur',()=>{void stopTests()});globalThis.addEvent
 $('firmware-notice').onclick=()=>{void stopTests();page='flash';render()};
 showArt(false);render();
 void autoReconnect();
+
+/* Restored: was accidentally removed while rewriting the diagnostics block. */
+async function saveStatus(d,check,shift){
+ for(let attempt=0;attempt<14;attempt++){
+  check();
+  const b=payload(await hidWait(d.receiveFeatureReport(0xf9),'确认保存状态',1000),0xf9,13);
+  check();
+  if(b[13]!==0xd3||!(b[16]&2))return false;
+  const state=(b[16]>>shift)&3;
+  if(state===2)return true;
+  if(state===3)throw Error('Flash 写入失败，设置可能已临时应用。请重试保存。');
+  await new Promise(resolve=>setTimeout(resolve,200));
+ }
+ throw Error('未能确认 Flash 写入结果，请重试保存。');
+}
