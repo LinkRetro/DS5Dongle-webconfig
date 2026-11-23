@@ -1,7 +1,16 @@
 {
   "board": "v1",
-  "latest": "LCT616-DS5 3.18H-oc59-v1",
+  "latest": "LCT616-DS5 3.18H-oc60-v1",
   "versions": [
+    {
+      "version": "LCT616-DS5 3.18H-oc60-v1",
+      "tag": "3.18H-oc60",
+      "file": "ds5dongle-v1-3.18H-oc60-hs.bin",
+      "size": 812936,
+      "sha256": "7e74e4a2e81c38ed1e35788a3908db92a9e092db39db1a2c6c0cb1b94480ccc9",
+      "date": "2026-11-23",
+      "notes": "音频任务优先级提到与 USB 同级；陀螺仪采样降到 200Hz，进一步让出 CPU 给音频编码"
+    },
     {
       "version": "LCT616-DS5 3.18H-oc59-v1",
       "tag": "3.18H-oc59",
