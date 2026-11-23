@@ -1,7 +1,16 @@
 {
   "board": "v12",
-  "latest": "LCT616-DS5 3.18H-oc26-v12",
+  "latest": "LCT616-DS5 3.18H-oc27-v12",
   "versions": [
+    {
+      "version": "LCT616-DS5 3.18H-oc27-v12",
+      "tag": "3.18H-oc27",
+      "file": "ds5dongle-v12-3.18H-oc27-hs.bin",
+      "size": 806428,
+      "sha256": "7af6ca1062ba41675446d96f6a18712a8906f9919d68b74351e84a388e51db7c",
+      "date": "2026-11-23",
+      "notes": "音频包改走带流控的发送队列，不再因 net_buf 池空整包丢弃（杂音/卡顿主因）"
+    },
     {
       "version": "LCT616-DS5 3.18H-oc26-v12",
       "tag": "3.18H-oc26",
