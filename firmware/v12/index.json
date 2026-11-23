@@ -1,7 +1,16 @@
 {
   "board": "v12",
-  "latest": "LCT616-DS5 3.18H-oc56-v12",
+  "latest": "LCT616-DS5 3.18H-oc57-v12",
   "versions": [
+    {
+      "version": "LCT616-DS5 3.18H-oc57-v12",
+      "tag": "3.18H-oc57",
+      "file": "ds5dongle-v12-3.18H-oc57-hs.bin",
+      "size": 812664,
+      "sha256": "f11ef7b23fb0f4d26e977d04a740a45918cde1235710ee01ef20d82d4a1b2570",
+      "date": "2026-11-23",
+      "notes": "修复陀螺仪当鼠标左右几乎不动（水平改取 Y 轴偏航）；新增轴向反转/交换选项"
+    },
     {
       "version": "LCT616-DS5 3.18H-oc56-v12",
       "tag": "3.18H-oc56",

@@ -533,6 +533,21 @@ function renderPanel(){ if(flashSession?.isBusy()&&page!=='flash'){page='flash';
   else{c=document.createElement('input');c.type='checkbox';c.checked=!!val(k);c.onchange=()=>set(k,+c.checked)}r.append(c);
   if(page==='feel')inlineSettings.set(k,r);else box.append(r)
  }
+  if(page==='sticks'&&baseline&&('gyro_invert_flags' in baseline)){
+   const flagsOf=()=>val('gyro_invert_flags')??0;
+   const axisToggle=(bit,labelKey)=>{
+    const wrap=document.createElement('label');wrap.className='row';
+    const cap=document.createElement('span');paintLocalized(cap,msg(labelKey));
+    const cb=document.createElement('input');cb.type='checkbox';
+    cb.checked=!!(flagsOf()&bit);cb.dataset.field='gyro_invert_flags';
+    cb.onchange=()=>{set('gyro_invert_flags',cb.checked?(flagsOf()|bit):(flagsOf()&~bit));refresh()};
+    wrap.append(cap,cb);return wrap;
+   };
+   const group=document.createElement('fieldset');group.className='row';
+   const legend=document.createElement('span');paintLocalized(legend,msg('gyro_axis'));
+   group.append(legend,axisToggle(1,'gyro_inv_x'),axisToggle(2,'gyro_inv_y'),axisToggle(4,'gyro_swap'));
+   box.append(group);
+  }
  if(page==='device'){
   const diagnostics=document.createElement('details');diagnostics.className='latency-panel';
   diagnostics.innerHTML='<summary data-i18n="device_latency">诊断 · 板内蓝牙输入至 USB 提交完成</summary><p id="latency-state"></p><div class="latency-grid"><div><span data-i18n="device_latency_last">最新</span><strong id="latency-last">—</strong></div><div><span data-i18n="device_latency_average">平均</span><strong id="latency-average">—</strong></div><div><span data-i18n="device_latency_max">最大</span><strong id="latency-max">—</strong></div></div><p class="hint" id="latency-detail"></p>';

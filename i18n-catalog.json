@@ -8144,6 +8144,66 @@
       "ru": "Мёртвая зона (°/s)",
       "pl": "Martwa strefa (°/s)",
       "tr": "Ölü bölge (°/s)"
+    },
+    "gyro_axis": {
+      "zh-CN": "轴向",
+      "en": "Axes",
+      "zh-TW": "軸向",
+      "ja": "軸",
+      "ko": "축",
+      "de": "Achsen",
+      "fr": "Axes",
+      "es": "Ejes",
+      "it": "Assi",
+      "pt-BR": "Eixos",
+      "ru": "Оси",
+      "pl": "Osie",
+      "tr": "Eksenler"
+    },
+    "gyro_inv_x": {
+      "zh-CN": "反转左右",
+      "en": "Invert X",
+      "zh-TW": "反轉左右",
+      "ja": "左右を反転",
+      "ko": "좌우 반전",
+      "de": "X invertieren",
+      "fr": "Inverser X",
+      "es": "Invertir X",
+      "it": "Inverti X",
+      "pt-BR": "Inverter X",
+      "ru": "Инвертировать X",
+      "pl": "Odwróć X",
+      "tr": "X ters"
+    },
+    "gyro_inv_y": {
+      "zh-CN": "反转上下",
+      "en": "Invert Y",
+      "zh-TW": "反轉上下",
+      "ja": "上下を反転",
+      "ko": "상하 반전",
+      "de": "Y invertieren",
+      "fr": "Inverser Y",
+      "es": "Invertir Y",
+      "it": "Inverti Y",
+      "pt-BR": "Inverter Y",
+      "ru": "Инвертировать Y",
+      "pl": "Odwróć Y",
+      "tr": "Y ters"
+    },
+    "gyro_swap": {
+      "zh-CN": "交换 X/Y",
+      "en": "Swap X/Y",
+      "zh-TW": "交換 X/Y",
+      "ja": "X/Y を入れ替え",
+      "ko": "X/Y 교환",
+      "de": "X/Y tauschen",
+      "fr": "Permuter X/Y",
+      "es": "Intercambiar X/Y",
+      "it": "Scambia X/Y",
+      "pt-BR": "Trocar X/Y",
+      "ru": "Поменять X/Y",
+      "pl": "Zamień X/Y",
+      "tr": "X/Y değiştir"
     }
   }
 }
