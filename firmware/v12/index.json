@@ -1,7 +1,16 @@
 {
   "board": "v12",
-  "latest": "LCT616-DS5 3.18H-oc62-v12",
+  "latest": "LCT616-DS5 3.18H-oc63-v12",
   "versions": [
+    {
+      "version": "LCT616-DS5 3.18H-oc63-v12",
+      "tag": "3.18H-oc63",
+      "file": "ds5dongle-v12-3.18H-oc63-hs.bin",
+      "size": 812720,
+      "sha256": "f7058d5a4da6d7e8f04be860322db6cdd600274e81d2b6fb0f6eaa9614709fee",
+      "date": "2026-11-23",
+      "notes": "Edge 探测加强：按 Fn/背键时打印 0x20-0x3F 原始字节（用于定位按键位，正式映射下一版）"
+    },
     {
       "version": "LCT616-DS5 3.18H-oc62-v12",
       "tag": "3.18H-oc62",
