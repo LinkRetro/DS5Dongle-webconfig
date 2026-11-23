@@ -1,7 +1,16 @@
 {
   "board": "v1",
-  "latest": "LCT616-DS5 3.18H-oc43-v1",
+  "latest": "LCT616-DS5 3.18H-oc44-v1",
   "versions": [
+    {
+      "version": "LCT616-DS5 3.18H-oc44-v1",
+      "tag": "3.18H-oc44",
+      "file": "ds5dongle-v1-3.18H-oc44-hs.bin",
+      "size": 808060,
+      "sha256": "f9e5297ac0243a6cdcab501d80b8d5a9d603ae3f792432048b60d907155322ac",
+      "date": "2026-11-23",
+      "notes": "inquiry 名称过滤（只认 DualSense，防邻居手柄抢连）+ 握手失败跳过表；BOOT 连按 5 次清空黑名单"
+    },
     {
       "version": "LCT616-DS5 3.18H-oc43-v1",
       "tag": "3.18H-oc43",
