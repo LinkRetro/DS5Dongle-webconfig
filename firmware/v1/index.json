@@ -1,7 +1,16 @@
 {
   "board": "v1",
-  "latest": "LCT616-DS5 3.18H-oc58-v1",
+  "latest": "LCT616-DS5 3.18H-oc59-v1",
   "versions": [
+    {
+      "version": "LCT616-DS5 3.18H-oc59-v1",
+      "tag": "3.18H-oc59",
+      "file": "ds5dongle-v1-3.18H-oc59-hs.bin",
+      "size": 812936,
+      "sha256": "c96239b269fa62a9af30754ac9a89465925e35ed4c322fda421c429b2a208810",
+      "date": "2026-11-23",
+      "notes": "修复开陀螺仪当鼠标后音频卡顿：鼠标上报限流到 200Hz（位移累加，不丢精度）"
+    },
     {
       "version": "LCT616-DS5 3.18H-oc58-v1",
       "tag": "3.18H-oc58",
