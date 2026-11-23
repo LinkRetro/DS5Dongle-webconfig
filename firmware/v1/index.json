@@ -1,7 +1,16 @@
 {
   "board": "v1",
-  "latest": "LCT616-DS5 3.18H-oc55-v1",
+  "latest": "LCT616-DS5 3.18H-oc56-v1",
   "versions": [
+    {
+      "version": "LCT616-DS5 3.18H-oc56-v1",
+      "tag": "3.18H-oc56",
+      "file": "ds5dongle-v1-3.18H-oc56-hs.bin",
+      "size": 812424,
+      "sha256": "931efe847f915ec95502aba26ca3f8e8f731a7f931e3548eea88e930e9675bbf",
+      "date": "2026-11-23",
+      "notes": "DualSense Edge 探测版：连接 Edge 后按 Fn/背键，串口会打印尚未解析字节的位图（用于确认按键位后再正式映射）"
+    },
     {
       "version": "LCT616-DS5 3.18H-oc55-v1",
       "tag": "3.18H-oc55",
