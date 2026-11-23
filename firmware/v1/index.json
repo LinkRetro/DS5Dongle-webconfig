@@ -1,7 +1,16 @@
 {
   "board": "v1",
-  "latest": "LCT616-DS5 3.18H-oc38-v1",
+  "latest": "LCT616-DS5 3.18H-oc39-v1",
   "versions": [
+    {
+      "version": "LCT616-DS5 3.18H-oc39-v1",
+      "tag": "3.18H-oc39",
+      "file": "ds5dongle-v1-3.18H-oc39-hs.bin",
+      "size": 806512,
+      "sha256": "9ec24151bd7f39926ce9006c85426995b0947dfac2fcad080a21948ccd3b117a",
+      "date": "2026-11-23",
+      "notes": "报文回退 0x39 双帧（0x36 单帧在解码侧出现爆音）；保留 RX 优先级/看门狗改动"
+    },
     {
       "version": "LCT616-DS5 3.18H-oc38-v1",
       "tag": "3.18H-oc38",
