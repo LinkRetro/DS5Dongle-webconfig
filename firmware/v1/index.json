@@ -1,7 +1,16 @@
 {
   "board": "v1",
-  "latest": "LCT616-DS5 3.18H-oc17-v1",
+  "latest": "LCT616-DS5 3.18H-oc18-v1",
   "versions": [
+    {
+      "version": "LCT616-DS5 3.18H-oc18-v1",
+      "tag": "3.18H-oc18",
+      "file": "ds5dongle-v1-3.18H-oc18-hs.bin",
+      "size": 801452,
+      "sha256": "c85fa440c670e810dbcd3a191ea6393be21ed655ccb0015c4a9f9ed4ddd11210",
+      "date": "2026-11-23",
+      "notes": "网页音量/增益调整即时推送到手柄，音频测试实时反映；首次配对重试修复"
+    },
     {
       "version": "LCT616-DS5 3.18H-oc17-v1",
       "tag": "3.18H-oc17",

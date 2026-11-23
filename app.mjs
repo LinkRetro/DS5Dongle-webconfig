@@ -468,7 +468,25 @@ function refresh(){
    go.disabled=versions.disabled;
   }
 }
-function set(k,v){const same=k==='haptics_gain'?Math.fround(v)===Math.fround(baseline?.[k]):v===baseline?.[k];if(same)delete draft[k];else draft[k]=v;refresh();if(k.startsWith('led_'))paintLight()}
+const audioLiveKeys=new Set(['speaker_volume','headset_volume','speaker_gain']);
+let audioApplyTimer=null;
+async function applyAudioLive(){
+  const d=device;
+  if(!d||busy)return;
+  try{
+    const wanted=settingsToSave();
+    if(!Object.keys(wanted).some(k=>audioLiveKeys.has(k)))return;
+    const bytes=patch(await readCfg(d),wanted);
+    if(d!==device)return;
+    await d.sendFeatureReport(0xf6,command(1,bytes));
+  }catch(e){/* live preview is best effort */}
+}
+function scheduleAudioApply(){
+  if(typeof setTimeout!=='function')return;
+  if(audioApplyTimer)clearTimeout(audioApplyTimer);
+  audioApplyTimer=setTimeout(()=>{audioApplyTimer=null;void applyAudioLive()},200);
+}
+function set(k,v){const same=k==='haptics_gain'?Math.fround(v)===Math.fround(baseline?.[k]):v===baseline?.[k];if(same)delete draft[k];else draft[k]=v;refresh();if(k.startsWith('led_'))paintLight();else if(audioLiveKeys.has(k))scheduleAudioApply()}
 function option(select,value,label,translateLegacy=true){const o=document.createElement('option');o.value=value;if(!translateLegacy)o.setAttribute('translate','no');paintLocalized(o,translateLegacy?bindCopy(label):label);select.append(o)}
 function row(label,hint,group=false){const r=document.createElement(group?'div':'label');if(group){r.setAttribute('role','group');paintLocalized(r,bindCopy(label),'aria-label')}r.className='row';const s=document.createElement('span');const caption=document.createElement('span');paintLocalized(caption,bindCopy(label));s.append(caption);if(hint){const h=document.createElement('small');paintLocalized(h,bindCopy(hint));s.append(h)}r.append(s);return r}
 function render(){renderPanel();applyPhrases(document.body)}
@@ -590,7 +608,7 @@ function renderTests(box,inlineSettings){
  const out=select(audio,'test-output',msg('phrase.audio_output'),[['',msg('phrase.system_default_output')]]),source=select(audio,'test-input',msg('phrase.microphone_input'),[['',msg('phrase.system_default_microphone')]]);
  async function devices(){if(!navigator.mediaDevices?.enumerateDevices)throw Error('此浏览器无法列出音频设备，请检查安全上下文');const devices=await navigator.mediaDevices.enumerateDevices();if(!out.isConnected)return;const oldOut=out.value,oldIn=source.value;for(const [s,kind,label,old]of [[out,'audiooutput','输出',oldOut],[source,'audioinput','麦克风',oldIn]]){s.replaceChildren();option(s,'',kind==='audiooutput'?msg('phrase.system_default_output'):msg('phrase.system_default_microphone'));devices.filter(d=>d.kind===kind&&d.deviceId).forEach((d,i)=>option(s,d.deviceId,d.label||`${label} ${i+1}（名称未授权）`,!d.label));s.value=[...s.options].some(o=>o.value===old)?old:''}say('已更新音频设备列表；名称可能需要麦克风权限后才显示')}
  button(audio,'test-devices',msg('phrase.refresh_audio_devices'),devices,false);
- button(audio,'test-tone',msg('phrase.play_1s_test_tone'),()=>audioTester.tone(out.value),false);
+ button(audio,'test-tone',msg('phrase.play_1s_test_tone'),async()=>{await applyAudioLive();return audioTester.tone(out.value)},false);
  button(audio,'test-microphone',msg('phrase.start_mic_level_30s'),()=>audioTester.microphone(source.value),false);
  const meter=document.createElement('meter');meter.id='mic-level';meter.min=0;meter.max=100;meter.value=0;paintLocalized(meter,msg('phrase.mic_relative_level'),'aria-label');const reading=document.createElement('span');reading.id='mic-reading';paintLocalized(reading,msg('microphone_level',{pct:0}));audio.append(meter,reading);
  return;
