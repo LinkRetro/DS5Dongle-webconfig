@@ -549,7 +549,7 @@ test('save connection color only, preserve other edits, retry unsuccessful Flash
 test('another test replaces the two-trigger sequence instead of allowing its delayed right trigger',async()=>{
  const u=ui();await u.el('connect').onclick();u.setLink(7);await u.poll();
  await u.el('qa-trigger').onclick();assert.equal(u.pending(2300),true);
- assert.equal(u.el('test-stop').hidden,false);
+ assert.equal(u.el('test-stop').hidden,true);
  await u.el('qa-lights').onclick();assert.equal(u.pending(2300),false);
  assert.equal(u.outputs.at(-1)[1][1],4);
 });

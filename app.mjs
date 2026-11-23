@@ -290,9 +290,9 @@ const audioTester=createAudioTester({notify:say,onState:paintStopTest,onLevel:n=
 let triggerSequence=null,testGeneration=0;
 let colorTimer=null,nextPreview=null,sendingColor=false;
 function paintStopTest(){
- const button=$('test-stop');
- button.hidden=!(outputTester.isActive()||audioTester.isActive()||triggerSequence!==null||nextPreview);
- paintLocalized(button,msg('phrase.stop_test'));
+ /* The global "stop test" button is gone: every test ends on its own and the
+  * light colour now stays on the controller by design. */
+ $('test-stop').hidden=true;
 }
 function cancelTriggerSequence(){testGeneration++;clearTimeout(triggerSequence);triggerSequence=null;paintStopTest()}
 function cancelColorPreview(){clearTimeout(colorTimer);colorTimer=null;nextPreview=null;paintStopTest()}
@@ -1227,7 +1227,6 @@ $('qa-rumble').onclick=()=>{if($('qa-rumble').disabled)return;qaGoto('feel','tes
 })};
 $('qa-lights').onclick=()=>{if($('qa-lights').disabled)return;cancelTriggerSequence();cancelColorPreview();qaGoto('vision','vision-color');return testAction(()=>outputTester.previewColor(connectionColor(),{hold:true}))};
 $('test-stop').onclick=()=>testAction(async()=>{
- if($('test-stop').hidden)return;
  const active=outputTester.isActive();
  if(await stopTests()&&!active)say('网页测试已停止。');
 });

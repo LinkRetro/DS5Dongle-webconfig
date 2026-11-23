@@ -26,6 +26,7 @@ export function createOutputTester({getDevice,isConnected,getColor,notify,onStat
  const send=(d,b)=>{const task=queue.catch(()=>{}).then(()=>{if(!d.opened)throw Error('设备接口已关闭');return d.sendReport(2,b)});queue=task;return task};
  async function stop(){generation++;cancel(timeout);timeout=null;const previous=active;active=null;onState();if(!previous)return true;
   const {d,kind,values,color}=previous;
+ if(!d?.opened)return true;   /* device gone: nothing to reset, stay quiet */
   const reset=kind==='lights'?{rgb:color,players:values.players==null?null:0,brightness:values.brightness==null?null:0}:kind==='trigger'?{side:values.side,mode:'off'}:{};
   try{await send(d,testOutput(kind,reset,d.productId===0x0df2));notify(kind==='lights'?'已发送连接灯色；若试过玩家灯，会将其关闭。':'已发送停止测试指令');return true}
   catch(e){notify('停止指令未送达，请断开手柄以复位：'+e.message,'error');return false}
