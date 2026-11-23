@@ -63,6 +63,7 @@ $notes = @{
     42 = '修正 SDK 地址 API 误用：配对完成时用 BR 地址（此前 bt_conn_get_dst 返回 LE 联合体，导致地址错位一位）'
     43 = '修复 PS+Create 无法重配：黑名单不再掐断连接/通道，只在配对成功时解封'
     44 = 'inquiry 名称过滤（只认 DualSense，防邻居手柄抢连）+ 握手失败跳过表；BOOT 连按 5 次清空黑名单'
+    45 = 'inquiry 选型统一（结束扫描路径也按名称识别）；无名称手柄不再自动选中；扫描日志打印设备名'
 }
 
 $labels = @{ v1 = 'DS5Dongle V1 · 单灯'; v12 = 'DS5Dongle V1.2 · RGB' }

@@ -1,7 +1,16 @@
 {
   "board": "v12",
-  "latest": "LCT616-DS5 3.18H-oc44-v12",
+  "latest": "LCT616-DS5 3.18H-oc45-v12",
   "versions": [
+    {
+      "version": "LCT616-DS5 3.18H-oc45-v12",
+      "tag": "3.18H-oc45",
+      "file": "ds5dongle-v12-3.18H-oc45-hs.bin",
+      "size": 808592,
+      "sha256": "b210e856702490db9407dbe6ec156280404d83b89039a7693c9dc9b503b3a25a",
+      "date": "2026-11-23",
+      "notes": "inquiry 选型统一（结束扫描路径也按名称识别）；无名称手柄不再自动选中；扫描日志打印设备名"
+    },
     {
       "version": "LCT616-DS5 3.18H-oc44-v12",
       "tag": "3.18H-oc44",
