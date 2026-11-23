@@ -1,7 +1,16 @@
 {
   "board": "v12",
-  "latest": "LCT616-DS5 3.18H-oc53-v12",
+  "latest": "LCT616-DS5 3.18H-oc54-v12",
   "versions": [
+    {
+      "version": "LCT616-DS5 3.18H-oc54-v12",
+      "tag": "3.18H-oc54",
+      "file": "ds5dongle-v12-3.18H-oc54-hs.bin",
+      "size": 809752,
+      "sha256": "8325cd3888718dcb41d6ee8282716e5211ccb5891b72a03cef2e4aa2a62a1919",
+      "date": "2026-11-23",
+      "notes": "按键映射组由 2 套扩展到 8 套；Create+方向键上下 循环切换分组"
+    },
     {
       "version": "LCT616-DS5 3.18H-oc53-v12",
       "tag": "3.18H-oc53",
