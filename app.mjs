@@ -646,6 +646,20 @@ async function readCfg(d=device){return hidWait(d.receiveFeatureReport(0xf7),'è¯
  * handshake result, pairing/scan counters and audio health.  Read-only; the
  * card is skipped automatically when the firmware has no 0xFA report. */
 let diagText='',diagTick=0;
+/* Mount point: inside the dongle page, right below its latency diagnostics
+ * block.  Falls back to the document body until that page is rendered; every
+ * refresh re-parents the card so switching tabs keeps it in place. */
+function diagMount(){
+ let mount=document.getElementById('diag-mount');
+ if(!mount){
+  const det=document.getElementById('latency-detail')?.closest?.('details')
+        || document.getElementById('latency-state')?.closest?.('details');
+  if(!det)return document.body;
+  mount=document.createElement('div');mount.id='diag-mount';
+  det.insertAdjacentElement('afterend',mount);
+ }
+ return mount;
+}
 const dhex=n=>n.toString(16).toUpperCase().padStart(2,'0');
 function paintDiag(b,fw){
  const u16=i=>b[i]|(b[i+1]<<8);
@@ -682,15 +696,9 @@ function paintDiag(b,fw){
   dl.onclick=()=>{const blob=new Blob([diagText],{type:'text/plain'});const a=document.createElement('a');
    a.href=URL.createObjectURL(blob);a.download='ds5dongle-diagnostics.txt';a.click();setTimeout(()=>URL.revokeObjectURL(a.href),2000)};
   box.append(dl);
-  /* battery-card is a metric tile inside .axis-grid; appending after the tile
-   * squeezed the panel into a grid cell.  Place it after the whole grid so it
-   * spans the device panel width. */
-  const tile=document.getElementById('battery-card');
-  const grid=tile?.closest?.('.axis-grid');
-  if(grid)grid.insertAdjacentElement('afterend',box);
-  else if(tile)tile.insertAdjacentElement('afterend',box);
-  else document.body.append(box);
+  diagMount().append(box);
  }
+ if(box.parentElement!==diagMount())diagMount().append(box);
  const pre=document.getElementById('diag-text');
  if(pre)pre.textContent=diagText;
 }
@@ -714,11 +722,7 @@ function paintDiagNotice(text){
  const p=document.createElement('p');p.id='diag-text';
  p.style.cssText='font-size:12px;line-height:1.5;margin:8px 0';
  p.textContent=text;box.append(p);
- const tile=document.getElementById('battery-card');
- const grid=tile?.closest?.('.axis-grid');
- if(grid)grid.insertAdjacentElement('afterend',box);
- else if(tile)tile.insertAdjacentElement('afterend',box);
- else document.body.append(box);
+ diagMount().append(box);
 }async function saveStatus(d,check,shift){
  for(let attempt=0;attempt<14;attempt++){
   check();
