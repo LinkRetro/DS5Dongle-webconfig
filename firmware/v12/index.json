@@ -1,7 +1,16 @@
 {
   "board": "v12",
-  "latest": "LCT616-DS5 3.18H-oc40-v12",
+  "latest": "LCT616-DS5 3.18H-oc41-v12",
   "versions": [
+    {
+      "version": "LCT616-DS5 3.18H-oc41-v12",
+      "tag": "3.18H-oc41",
+      "file": "ds5dongle-v12-3.18H-oc41-hs.bin",
+      "size": 808088,
+      "sha256": "0a9d316495c5bebf13873ebaa83ff3ecde6628f49bffb6da4e9d5a557250da3a",
+      "date": "2026-11-23",
+      "notes": "配对：长按 BOOT 清配对时把相关手柄加入持久黑名单，PS 键自动重连会被拒绝，必须 PS+Create 重配"
+    },
     {
       "version": "LCT616-DS5 3.18H-oc40-v12",
       "tag": "3.18H-oc40",
