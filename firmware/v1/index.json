@@ -1,7 +1,16 @@
 {
   "board": "v1",
-  "latest": "LCT616-DS5 3.18H-oc61-v1",
+  "latest": "LCT616-DS5 3.18H-oc62-v1",
   "versions": [
+    {
+      "version": "LCT616-DS5 3.18H-oc62-v1",
+      "tag": "3.18H-oc62",
+      "file": "ds5dongle-v1-3.18H-oc62-hs.bin",
+      "size": 813324,
+      "sha256": "0be76703d9865120490bec7736484f6a9b3350f0d29e9cac02f96a2775cb366d",
+      "date": "2026-11-23",
+      "notes": "音频遥测增加发包耗时 tx（诊断偶发卡顿是编码慢还是发包慢）"
+    },
     {
       "version": "LCT616-DS5 3.18H-oc61-v1",
       "tag": "3.18H-oc61",
