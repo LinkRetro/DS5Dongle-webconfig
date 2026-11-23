@@ -1,7 +1,16 @@
 {
   "board": "v1",
-  "latest": "LCT616-DS5 3.18H-oc47-v1",
+  "latest": "LCT616-DS5 3.18H-oc48-v1",
   "versions": [
+    {
+      "version": "LCT616-DS5 3.18H-oc48-v1",
+      "tag": "3.18H-oc48",
+      "file": "ds5dongle-v1-3.18H-oc48-hs.bin",
+      "size": 808608,
+      "sha256": "eeba20620883090d1e6c7f7f1b0a618aa41808fdd264aedbd153cf8a76c1070a",
+      "date": "2026-11-23",
+      "notes": "修复诊断卡片取不到数据：HID 描述符补声明 0xFA 报告，并按声明长度返回 63 字节"
+    },
     {
       "version": "LCT616-DS5 3.18H-oc47-v1",
       "tag": "3.18H-oc47",
