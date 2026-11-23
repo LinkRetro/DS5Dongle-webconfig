@@ -1,7 +1,16 @@
 {
   "board": "v12",
-  "latest": "LCT616-DS5 3.18H-oc29-v12",
+  "latest": "LCT616-DS5 3.18H-oc30-v12",
   "versions": [
+    {
+      "version": "LCT616-DS5 3.18H-oc30-v12",
+      "tag": "3.18H-oc30",
+      "file": "ds5dongle-v12-3.18H-oc30-hs.bin",
+      "size": 806684,
+      "sha256": "28ffaa6095fb2b43a5390de27a6b18d21c8e595b919129a86e0a81ca56dec881",
+      "date": "2026-11-23",
+      "notes": "实验版：Opus 改为浮点 CELT（利用 FPU），测量单帧编码耗时是否为立体声腾出预算"
+    },
     {
       "version": "LCT616-DS5 3.18H-oc29-v12",
       "tag": "3.18H-oc29",
