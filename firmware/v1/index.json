@@ -1,7 +1,16 @@
 {
   "board": "v1",
-  "latest": "LCT616-DS5 3.18H-oc39-v1",
+  "latest": "LCT616-DS5 3.18H-oc40-v1",
   "versions": [
+    {
+      "version": "LCT616-DS5 3.18H-oc40-v1",
+      "tag": "3.18H-oc40",
+      "file": "ds5dongle-v1-3.18H-oc40-hs.bin",
+      "size": 806520,
+      "sha256": "b171798532290ef59a193f21f9552ef528c2fc3a0a93f926783842673fecc2d3",
+      "date": "2026-11-23",
+      "notes": "音频遥测增加 PCM 缓冲水位 fill（为弹性缓冲判断漂移方向，行为不变）"
+    },
     {
       "version": "LCT616-DS5 3.18H-oc39-v1",
       "tag": "3.18H-oc39",
