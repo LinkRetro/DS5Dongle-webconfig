@@ -8116,19 +8116,19 @@
       "tr": "L2 basılıyken"
     },
     "gyro_sens": {
-      "zh-CN": "灵敏度",
-      "en": "Sensitivity",
-      "zh-TW": "靈敏度",
-      "ja": "感度",
-      "ko": "감도",
-      "de": "Empfindlichkeit",
-      "fr": "Sensibilité",
-      "es": "Sensibilidad",
-      "it": "Sensibilità",
-      "pt-BR": "Sensibilidade",
-      "ru": "Чувствительность",
-      "pl": "Czułość",
-      "tr": "Hassasiyet"
+      "zh-CN": "左右灵敏度",
+      "en": "Horizontal",
+      "zh-TW": "左右靈敏度",
+      "ja": "左右",
+      "ko": "좌우",
+      "de": "Horizontal",
+      "fr": "Horizontal",
+      "es": "Horizontal",
+      "it": "Orizzontale",
+      "pt-BR": "Horizontal",
+      "ru": "Горизонт",
+      "pl": "Pozioma",
+      "tr": "Yatay"
     },
     "gyro_dead": {
       "zh-CN": "死区 (°/s)",
@@ -8204,6 +8204,21 @@
       "ru": "Поменять X/Y",
       "pl": "Zamień X/Y",
       "tr": "X/Y değiştir"
+    },
+    "gyro_sens_y": {
+      "zh-CN": "上下灵敏度",
+      "en": "Vertical",
+      "zh-TW": "上下靈敏度",
+      "ja": "上下",
+      "ko": "상하",
+      "de": "Vertikal",
+      "fr": "Vertical",
+      "es": "Vertical",
+      "it": "Verticale",
+      "pt-BR": "Vertical",
+      "ru": "Вертик",
+      "pl": "Pionowa",
+      "tr": "Dikey"
     }
   }
 }

@@ -1,7 +1,16 @@
 {
   "board": "v12",
-  "latest": "LCT616-DS5 3.18H-oc57-v12",
+  "latest": "LCT616-DS5 3.18H-oc58-v12",
   "versions": [
+    {
+      "version": "LCT616-DS5 3.18H-oc58-v12",
+      "tag": "3.18H-oc58",
+      "file": "ds5dongle-v12-3.18H-oc58-hs.bin",
+      "size": 812920,
+      "sha256": "1e8a0471a4ff17ce406dfd722c281c5d686b46f9a8eaec41cf7601f6d96e5453",
+      "date": "2026-11-23",
+      "notes": "陀螺仪当鼠标移到触摸板与鼠标页；左右/上下灵敏度可分别调节（配置版本 10）"
+    },
     {
       "version": "LCT616-DS5 3.18H-oc57-v12",
       "tag": "3.18H-oc57",
