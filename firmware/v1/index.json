@@ -1,7 +1,16 @@
 {
   "board": "v1",
-  "latest": "LCT616-DS5 3.18H-oc30-v1",
+  "latest": "LCT616-DS5 3.18H-oc31-v1",
   "versions": [
+    {
+      "version": "LCT616-DS5 3.18H-oc31-v1",
+      "tag": "3.18H-oc31",
+      "file": "ds5dongle-v1-3.18H-oc31-hs.bin",
+      "size": 806484,
+      "sha256": "e75e36312c3eb410d1f5b2c1f2b522957405d799d2776d3a7ecc466c62064c27",
+      "date": "2026-11-23",
+      "notes": "浮点 CELT + 每 500 帧输出编码耗时统计（avg/max/overruns），用于判断能否开立体声"
+    },
     {
       "version": "LCT616-DS5 3.18H-oc30-v1",
       "tag": "3.18H-oc30",
