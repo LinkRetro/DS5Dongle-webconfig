@@ -1,7 +1,16 @@
 {
   "board": "v12",
-  "latest": "LCT616-DS5 3.18H-oc51-v12",
+  "latest": "LCT616-DS5 3.18H-oc52-v12",
   "versions": [
+    {
+      "version": "LCT616-DS5 3.18H-oc52-v12",
+      "tag": "3.18H-oc52",
+      "file": "ds5dongle-v12-3.18H-oc52-hs.bin",
+      "size": 809144,
+      "sha256": "8b88ca1045b7bd8463c9166cda170037b5b519a12d49969530babcfcaf2cb22e",
+      "date": "2026-11-23",
+      "notes": "诊断补充最后一轮扫描 RSSI；未连接时不再显示虚假型号（便于排查连不上的情况）"
+    },
     {
       "version": "LCT616-DS5 3.18H-oc51-v12",
       "tag": "3.18H-oc51",

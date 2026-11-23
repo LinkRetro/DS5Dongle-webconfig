@@ -665,12 +665,15 @@ function paintDiag(b,fw){
  const u16=i=>b[i]|(b[i+1]<<8);
  const addr=[...b.slice(6,12)].map(dhex).join(':');
  const name=new TextDecoder().decode(b.slice(26,58)).replace(/\0+$/,'').trim();
- const flags=b[1],edge=!!(flags&1);
- const model=edge?msg('diag_model_edge'):msg('diag_model_std');
+ const flags=b[1],edge=!!(flags&1),linked=!!(flags&4),haveScan=!!b[61];
+ /* Without a live link the model is unknown - showing "DualSense" there was
+  * misleading when a customer simply cannot pair. */
+ const model=linked?(edge?msg('diag_model_edge'):msg('diag_model_std')):msg('ctrl_unknown');
+ const rssi=haveScan?((b[60]>127?b[60]-256:b[60])+' dBm'):'';
  const board=b[58]===1?'v1':b[58]===2?'v1.2':'-';
  const usb=b[59]===1?'High-Speed':b[59]===0?'Full-Speed':b[59]===2?'-':'n/a';
  diagText=[
-  msg('diag_controller',{model,address:addr||'-'}),
+  msg('diag_controller',{model,address:addr||'-'})+(rssi?' · '+rssi:''),
   msg('diag_eir_name',{name:name||'-'}),
   msg('diag_handshake',{code:dhex(b[3]),bonded:b[4],blacklist:b[5]}),
   msg('diag_scan',{rounds:u16(12),connect:u16(14),handshake:u16(16)}),
