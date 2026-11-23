@@ -1,7 +1,16 @@
 {
   "board": "v12",
-  "latest": "LCT616-DS5 3.18H-oc48-v12",
+  "latest": "LCT616-DS5 3.18H-oc49-v12",
   "versions": [
+    {
+      "version": "LCT616-DS5 3.18H-oc49-v12",
+      "tag": "3.18H-oc49",
+      "file": "ds5dongle-v12-3.18H-oc49-hs.bin",
+      "size": 808864,
+      "sha256": "8f451fd5e05206c021ffc512f8530e026c0694f2086dfe366c175d3bd8d83016",
+      "date": "2026-11-23",
+      "notes": "修复 0xFA 描述符截断（数组长度未同步 +8，导致 End Collection 被丢弃、HID 无法枚举）"
+    },
     {
       "version": "LCT616-DS5 3.18H-oc48-v12",
       "tag": "3.18H-oc48",
