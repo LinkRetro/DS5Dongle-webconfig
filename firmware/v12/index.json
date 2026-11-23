@@ -1,7 +1,16 @@
 {
   "board": "v12",
-  "latest": "LCT616-DS5 3.18H-oc41-v12",
+  "latest": "LCT616-DS5 3.18H-oc42-v12",
   "versions": [
+    {
+      "version": "LCT616-DS5 3.18H-oc42-v12",
+      "tag": "3.18H-oc42",
+      "file": "ds5dongle-v12-3.18H-oc42-hs.bin",
+      "size": 808088,
+      "sha256": "5544bb38866f72283075f5fa785083de239200b7d1ae4db45a85eb31700182bf",
+      "date": "2026-11-23",
+      "notes": "修正 SDK 地址 API 误用：配对完成时用 BR 地址（此前 bt_conn_get_dst 返回 LE 联合体，导致地址错位一位）"
+    },
     {
       "version": "LCT616-DS5 3.18H-oc41-v12",
       "tag": "3.18H-oc41",
