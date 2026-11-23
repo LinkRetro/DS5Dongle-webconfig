@@ -1,7 +1,16 @@
 {
   "board": "v1",
-  "latest": "LCT616-DS5 3.18H-oc33-v1",
+  "latest": "LCT616-DS5 3.18H-oc34-v1",
   "versions": [
+    {
+      "version": "LCT616-DS5 3.18H-oc34-v1",
+      "tag": "3.18H-oc34",
+      "file": "ds5dongle-v1-3.18H-oc34-hs.bin",
+      "size": 806024,
+      "sha256": "1a4ebc4f317ac5b03b9dc5e7763a032ad2de52cc6d932a856edcebd6c5e47e7c",
+      "date": "2026-11-23",
+      "notes": "P0 优化：累积 960 样本（2×480）去掉重采样/音高偏差；定点编码 A/B"
+    },
     {
       "version": "LCT616-DS5 3.18H-oc33-v1",
       "tag": "3.18H-oc33",
