@@ -61,6 +61,7 @@ $notes = @{
     40 = '音频遥测增加 PCM 缓冲水位 fill（为弹性缓冲判断漂移方向，行为不变）'
     41 = '配对：长按 BOOT 清配对时把相关手柄加入持久黑名单，PS 键自动重连会被拒绝，必须 PS+Create 重配'
     42 = '修正 SDK 地址 API 误用：配对完成时用 BR 地址（此前 bt_conn_get_dst 返回 LE 联合体，导致地址错位一位）'
+    43 = '修复 PS+Create 无法重配：黑名单不再掐断连接/通道，只在配对成功时解封'
 }
 
 $labels = @{ v1 = 'DS5Dongle V1 · 单灯'; v12 = 'DS5Dongle V1.2 · RGB' }

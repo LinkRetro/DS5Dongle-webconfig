@@ -1,7 +1,16 @@
 {
   "board": "v1",
-  "latest": "LCT616-DS5 3.18H-oc42-v1",
+  "latest": "LCT616-DS5 3.18H-oc43-v1",
   "versions": [
+    {
+      "version": "LCT616-DS5 3.18H-oc43-v1",
+      "tag": "3.18H-oc43",
+      "file": "ds5dongle-v1-3.18H-oc43-hs.bin",
+      "size": 807324,
+      "sha256": "1ed346e4cdeff0a3087d2b81f80d975f15cdf5f23ad895a27e010064404eda0b",
+      "date": "2026-11-23",
+      "notes": "修复 PS+Create 无法重配：黑名单不再掐断连接/通道，只在配对成功时解封"
+    },
     {
       "version": "LCT616-DS5 3.18H-oc42-v1",
       "tag": "3.18H-oc42",
