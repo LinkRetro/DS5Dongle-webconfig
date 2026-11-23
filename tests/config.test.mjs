@@ -502,7 +502,8 @@ test('both light tests use the connection color draft and leave other indicators
  await u.el('test-stop').onclick();assert.equal(u.outputs.length,count);
  color.value='#000000';color.oninput();
  assert.equal(color.value,'#19650c');assert.match(u.el('message').textContent,/不能保存纯黑/);
- await u.el('test-lights').onclick();assert.deepEqual([...u.outputs.at(-1)[1].slice(44,47)],[25,101,12]);
+ color.value='#a03080';color.oninput();u.expire(60);await new Promise(r=>setImmediate(r));
+ assert.deepEqual([...u.outputs.at(-1)[1].slice(44,47)],[160,48,128]);
  assert.equal(u.sent.some(([id])=>id===246),false);
 });
 
@@ -618,10 +619,10 @@ test('quick actions: each test opens its own settings block',async()=>{
 
  await u.el('qa-lights').onclick();
  assert.equal(u.window.document.body.dataset.page,'vision');
- assert.ok(u.window.document.getElementById('test-lights'));
+ assert.ok(u.window.document.getElementById('vision-color'));
  u.window.document.querySelector('.nav [data-page="motion"]').onclick();
  assert.ok(u.el('gyro-readout'));
- assert.equal(u.el('test-lights'),null);
+ assert.equal(u.el('vision-color'),null);
 });
 
 test('stick deadzones require v7, preserve gyro config and save independent settings',async()=>{

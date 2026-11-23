@@ -305,7 +305,7 @@ function scheduleColorPreview(){
   const preview=nextPreview;nextPreview=null;
   if(!preview||device!==preview.device||busy||document.hidden||$('qa-lights').disabled){paintStopTest();return}
   sendingColor=true;
-  try{await testAction(()=>outputTester.previewColor(preview.rgb))}
+  try{await testAction(()=>outputTester.previewColor(preview.rgb,{hold:true}))}
   finally{sendingColor=false;scheduleColorPreview()}
  },60);
 }
@@ -605,13 +605,12 @@ function renderTests(box,inlineSettings){
  return;
  }
  if(page==='vision'){
- const lights=section('手柄灯光','选色时实时试亮；停止调色 5 秒后恢复配置灯色。满意后点「保存为连接灯色」。');
- const picker=input(lights,'vision-color','连接灯色','color',connectionColorHex());picker.oninput=()=>stageColor(picker);
+ const lights=section(msg('light_color_title'),msg('light_color_hint'));
+ const picker=input(lights,'vision-color',msg('light_color_label'),'color',connectionColorHex());picker.oninput=()=>stageColor(picker);
  const colorRow=row('当前选色（左侧预览）',null,true),color=document.createElement('output');color.id='test-color';colorRow.append(color);lights.append(colorRow);
  const savedRow=row('接收器配置灯色',null,true),saved=document.createElement('output');saved.id='test-saved-color';savedRow.append(saved);lights.append(savedRow);
  const colorStatus=document.createElement('p');colorStatus.id='test-color-status';colorStatus.className='hint';colorStatus.setAttribute('role','status');lights.append(colorStatus);
- const saveColor=button(lights,'test-save-color','保存为连接灯色',saveConnectionColor,false);saveColor.classList.add('primary');
- button(lights,'test-lights','再试 5 秒',()=>outputTester.previewColor(connectionColor()));
+ const saveColor=button(lights,'test-save-color',msg('light_save'),saveConnectionColor,false);saveColor.classList.add('primary');
  const advanced=document.createElement('details');const summary=document.createElement('summary');summary.textContent='高级：玩家指示灯';advanced.append(summary);lights.append(advanced);
  const brightness=select(advanced,'test-brightness','亮度',[[0,'明亮'],[1,'中等'],[2,'暗淡']]);
  const players=select(advanced,'test-players','玩家指示灯',[[4,'1 · 中间'],[10,'2 · 内侧'],[21,'3 · 间隔'],[27,'4 · 外侧与内侧'],[31,'全部点亮']]);
@@ -1226,7 +1225,7 @@ $('qa-rumble').onclick=()=>{if($('qa-rumble').disabled)return;qaGoto('feel','tes
   triggerSequence=setTimeout(()=>{triggerSequence=null;paintStopTest();if(d&&device===d&&page==='feel'&&!document.hidden)void testAction(()=>outputTester.run('trigger',{side:'right',mode:'feedback',strength:5,start:0}))},2300);
   paintStopTest();
 })};
-$('qa-lights').onclick=()=>{if($('qa-lights').disabled)return;qaGoto('vision','test-lights');return $('test-lights')?.onclick()};
+$('qa-lights').onclick=()=>{if($('qa-lights').disabled)return;cancelTriggerSequence();cancelColorPreview();qaGoto('vision','vision-color');return testAction(()=>outputTester.previewColor(connectionColor(),{hold:true}))};
 $('test-stop').onclick=()=>testAction(async()=>{
  if($('test-stop').hidden)return;
  const active=outputTester.isActive();

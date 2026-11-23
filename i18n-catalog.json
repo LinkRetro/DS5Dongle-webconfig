@@ -8219,6 +8219,66 @@
       "ru": "Вертик",
       "pl": "Pionowa",
       "tr": "Dikey"
+    },
+    "light_color_title": {
+      "zh-CN": "手柄灯光",
+      "en": "Controller lighting",
+      "zh-TW": "手把燈光",
+      "ja": "コントローラーライト",
+      "ko": "컨트롤러 조명",
+      "de": "Controller-Beleuchtung",
+      "fr": "Éclairage de la manette",
+      "es": "Iluminación del mando",
+      "it": "Illuminazione del controller",
+      "pt-BR": "Iluminação do controle",
+      "ru": "Подсветка геймпада",
+      "pl": "Oświetlenie pada",
+      "tr": "Kumanda ışığı"
+    },
+    "light_color_label": {
+      "zh-CN": "手柄灯色",
+      "en": "Controller colour",
+      "zh-TW": "手把燈色",
+      "ja": "ライトの色",
+      "ko": "조명 색상",
+      "de": "Controllfarbe",
+      "fr": "Couleur de la manette",
+      "es": "Color del mando",
+      "it": "Colore del controller",
+      "pt-BR": "Cor do controle",
+      "ru": "Цвет подсветки",
+      "pl": "Kolor pada",
+      "tr": "Kumanda rengi"
+    },
+    "light_color_hint": {
+      "zh-CN": "选中即实时改变手柄灯色；满意后点「保存灯色」写入接收器。",
+      "en": "The controller light changes as you pick; click Save colour to store it in the receiver.",
+      "zh-TW": "選中即時改變手把燈色；滿意後點「儲存燈色」寫入接收器。",
+      "ja": "選んだ色がすぐに反映されます。「色を保存」でレシーバーに書き込みます。",
+      "ko": "색을 고르면 즉시 반영됩니다. 저장하면 수신기에 기록됩니다.",
+      "de": "Die Farbe wirkt sofort; mit „Farbe speichern“ wird sie im Empfänger gesichert.",
+      "fr": "La couleur s'applique immédiatement ; « Enregistrer » l'écrit dans le récepteur.",
+      "es": "El color se aplica al instante; «Guardar color» lo graba en el receptor.",
+      "it": "Il colore si applica subito; «Salva colore» lo scrive nel ricevitore.",
+      "pt-BR": "A cor muda na hora; «Salvar cor» grava no receptor.",
+      "ru": "Цвет применяется сразу; «Сохранить цвет» записывает его в приёмник.",
+      "pl": "Kolor działa od razu; „Zapisz kolor” zapisuje go w odbiorniku.",
+      "tr": "Renk hemen uygulanır; «Rengi kaydet» alıcıya yazar."
+    },
+    "light_save": {
+      "zh-CN": "保存灯色",
+      "en": "Save colour",
+      "zh-TW": "儲存燈色",
+      "ja": "色を保存",
+      "ko": "색 저장",
+      "de": "Farbe speichern",
+      "fr": "Enregistrer la couleur",
+      "es": "Guardar color",
+      "it": "Salva colore",
+      "pt-BR": "Salvar cor",
+      "ru": "Сохранить цвет",
+      "pl": "Zapisz kolor",
+      "tr": "Rengi kaydet"
     }
   }
 }

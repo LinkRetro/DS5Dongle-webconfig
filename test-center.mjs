@@ -37,17 +37,23 @@ export function createOutputTester({getDevice,isConnected,getColor,notify,onStat
   try{await send(d,b);if(generation!==myGeneration)return;notify('测试指令已发送 · '+(kind==='lights'?'5':'2')+' 秒后自动复位');timeout=timer(()=>{void stop()},kind==='lights'?5000:2000)}
   catch(e){await stop();throw e}
  }
- async function previewColor(rgb){
+ async function previewColor(rgb,{hold=false}={}){
   const d=getDevice();
   if(!d?.opened||!isConnected())return;
   if(active?.d!==d||active.kind!=='lights'||active.values.players!=null||active.values.mic!=null||active.values.brightness!=null){
-   return run('lights',{rgb});
+   if(!hold)return run('lights',{rgb});
+   /* hold: take ownership of the light without any auto-revert timer, so the
+    * colour the user picks stays on the controller until they stop or save. */
+   const reset=await stop();if(!reset)throw Error('上次测试复位失败，请先断开手柄复位，再重新测试');
+   generation++;cancel(timeout);timeout=null;
+   active={d,kind:'lights',values:{rgb},color:getColor().slice()};onState();
+   return send(d,testOutput('lights',{rgb},d.productId===0x0df2));
   }
   const token=++generation;
   cancel(timeout);timeout=null;
   try{
    await send(d,testOutput('lights',{rgb},d.productId===0x0df2));
-   if(token===generation)timeout=timer(()=>{void stop()},5000);
+   if(!hold&&token===generation)timeout=timer(()=>{void stop()},5000);
   }catch(e){if(token===generation)await stop();throw e}
  }
  return {run,previewColor,stop,isActive:()=>active!==null};
