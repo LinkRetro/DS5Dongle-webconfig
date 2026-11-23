@@ -683,19 +683,21 @@ function paintDiag(b,fw){
  ].join('\n');
  let box=document.getElementById('diag-card');
  if(!box){
-  box=document.createElement('section');
-  box.id='diag-card';box.className='test-card';
-  const h=document.createElement('h3');h.textContent='Compatibility diagnostics';box.append(h);
+  /* Same collapsible pattern as the latency diagnostics block next to it. */
+  box=document.createElement('details');
+  box.id='diag-card';box.className='latency-panel';
+  const h=document.createElement('summary');h.textContent='Compatibility diagnostics';box.append(h);
+  const body=document.createElement('div');body.id='diag-body';box.append(body);
   const pre=document.createElement('pre');pre.id='diag-text';
   pre.style.cssText='white-space:pre-wrap;font-size:12px;line-height:1.5;margin:8px 0;user-select:text';
-  box.append(pre);
+  body.append(pre);
   const btn=document.createElement('button');btn.textContent='Copy diagnostics';
   btn.onclick=async()=>{try{await navigator.clipboard.writeText(diagText);btn.textContent='Copied';setTimeout(()=>btn.textContent='Copy diagnostics',1500)}catch{btn.textContent='Copy failed - select manually'}};
-  box.append(btn);
+  body.append(btn);
   const dl=document.createElement('button');dl.textContent='Download .txt';dl.style.marginLeft='8px';
   dl.onclick=()=>{const blob=new Blob([diagText],{type:'text/plain'});const a=document.createElement('a');
    a.href=URL.createObjectURL(blob);a.download='ds5dongle-diagnostics.txt';a.click();setTimeout(()=>URL.revokeObjectURL(a.href),2000)};
-  box.append(dl);
+  body.append(dl);
   diagMount().append(box);
  }
  if(box.parentElement!==diagMount())diagMount().append(box);
@@ -716,9 +718,9 @@ async function refreshDiag(){
 }
 function paintDiagNotice(text){
  if(document.getElementById('diag-card'))return;
- const box=document.createElement('section');
- box.id='diag-card';box.className='test-card';
- const h=document.createElement('h3');h.textContent='Compatibility diagnostics';box.append(h);
+ const box=document.createElement('details');
+ box.id='diag-card';box.className='latency-panel';
+ const h=document.createElement('summary');h.textContent='Compatibility diagnostics';box.append(h);
  const p=document.createElement('p');p.id='diag-text';
  p.style.cssText='font-size:12px;line-height:1.5;margin:8px 0';
  p.textContent=text;box.append(p);

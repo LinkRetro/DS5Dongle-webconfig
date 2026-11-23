@@ -1,7 +1,16 @@
 {
   "board": "v12",
-  "latest": "LCT616-DS5 3.18H-oc50-v12",
+  "latest": "LCT616-DS5 3.18H-oc51-v12",
   "versions": [
+    {
+      "version": "LCT616-DS5 3.18H-oc51-v12",
+      "tag": "3.18H-oc51",
+      "file": "ds5dongle-v12-3.18H-oc51-hs.bin",
+      "size": 809144,
+      "sha256": "c051a78e4f43e8414bf28b171eca2dee629688de734e37c78f3dbfea25439bfa",
+      "date": "2026-11-23",
+      "notes": "诊断面板改为可折叠；地址优先取当前连接（修正字节错位）；描述符长度加编译期断言"
+    },
     {
       "version": "LCT616-DS5 3.18H-oc50-v12",
       "tag": "3.18H-oc50",
