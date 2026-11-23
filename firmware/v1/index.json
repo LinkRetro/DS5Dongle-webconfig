@@ -1,7 +1,16 @@
 {
   "board": "v1",
-  "latest": "LCT616-DS5 3.18H-oc54-v1",
+  "latest": "LCT616-DS5 3.18H-oc55-v1",
   "versions": [
+    {
+      "version": "LCT616-DS5 3.18H-oc55-v1",
+      "tag": "3.18H-oc55",
+      "file": "ds5dongle-v1-3.18H-oc55-hs.bin",
+      "size": 811808,
+      "sha256": "992acd9a62efecd894164a20edb197dc0b202d4e8bfaabbc53f74d2ebb68f178",
+      "date": "2026-11-23",
+      "notes": "陀螺仪当鼠标：可选常开或按住 L2 激活，支持灵敏度/死区/轴向反转（网页新增设置）"
+    },
     {
       "version": "LCT616-DS5 3.18H-oc54-v1",
       "tag": "3.18H-oc54",
