@@ -1,7 +1,16 @@
 {
   "board": "v12",
-  "latest": "LCT616-DS5 3.18H-oc35-v12",
+  "latest": "LCT616-DS5 3.18H-oc36-v12",
   "versions": [
+    {
+      "version": "LCT616-DS5 3.18H-oc36-v12",
+      "tag": "3.18H-oc36",
+      "file": "ds5dongle-v12-3.18H-oc36-hs.bin",
+      "size": 806760,
+      "sha256": "fb91a98cc606e65d7dc6ae58a403064e9bb8ad664eb5526722a4e835b80bb40c",
+      "date": "2026-11-23",
+      "notes": "音频包走发送优先级槽（不再排在 0x31 后面）；限幅器改为块内斜坡（消除块边界咔哒）；有声时手柄输出降到 16ms"
+    },
     {
       "version": "LCT616-DS5 3.18H-oc35-v12",
       "tag": "3.18H-oc35",
