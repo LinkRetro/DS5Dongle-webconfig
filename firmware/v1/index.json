@@ -1,7 +1,16 @@
 {
   "board": "v1",
-  "latest": "LCT616-DS5 3.18H-oc20-v1",
+  "latest": "LCT616-DS5 3.18H-oc21-v1",
   "versions": [
+    {
+      "version": "LCT616-DS5 3.18H-oc21-v1",
+      "tag": "3.18H-oc21",
+      "file": "ds5dongle-v1-3.18H-oc21-hs.bin",
+      "size": 801708,
+      "sha256": "482ff6a56aa6a1a99902f712db680cd29e94ab6bf0940047cdcea91815cbb4b9",
+      "date": "2026-11-23",
+      "notes": "搜索状态改为呼吸灯（软件 PWM，2.4 秒一个呼吸）"
+    },
     {
       "version": "LCT616-DS5 3.18H-oc20-v1",
       "tag": "3.18H-oc20",
