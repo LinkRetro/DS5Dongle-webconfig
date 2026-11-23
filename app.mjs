@@ -700,7 +700,25 @@ async function refreshDiag(){
   const r=await hidWait(device.receiveFeatureReport(0xfa),'read diagnostics',1000);
   const b=payload(r,0xfa,26);
   paintDiag(b,firmwareVersion);
- }catch{/* older firmware without 0xFA: keep the card hidden */}
+ }catch{
+  /* Firmware older than oc46 has no 0xFA report.  Show the card with an
+   * explanation instead of hiding it, so users know the feature exists. */
+  paintDiagNotice('Diagnostics unavailable: firmware too old (needs oc46 or newer).');
+ }
+}
+function paintDiagNotice(text){
+ if(document.getElementById('diag-card'))return;
+ const box=document.createElement('section');
+ box.id='diag-card';box.className='test-card';
+ const h=document.createElement('h3');h.textContent='Compatibility diagnostics';box.append(h);
+ const p=document.createElement('p');p.id='diag-text';
+ p.style.cssText='font-size:12px;line-height:1.5;margin:8px 0';
+ p.textContent=text;box.append(p);
+ const tile=document.getElementById('battery-card');
+ const grid=tile?.closest?.('.axis-grid');
+ if(grid)grid.insertAdjacentElement('afterend',box);
+ else if(tile)tile.insertAdjacentElement('afterend',box);
+ else document.body.append(box);
 }async function saveStatus(d,check,shift){
  for(let attempt=0;attempt<14;attempt++){
   check();
