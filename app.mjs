@@ -907,6 +907,20 @@ $('reboot').onclick=()=>exclusive(async()=>{
  restartDevices.delete(d);disconnected();if(d.opened)await hidWait(d.close(),'关闭设备接口',500).catch(()=>{});
  say(msg('phrase.controller_disconnected_and_restart_requested_click_connect'));
 });
+
+/* Common HID keyboard usages offered in the dropdown (name · usage id). */
+const HID_KEYS=(()=>{
+ const out=[];
+ for(let i=0;i<26;i++)out.push([String.fromCharCode(65+i),4+i]);
+ for(let d=1;d<=9;d++)out.push([String(d),29+d]);
+ out.push(['0',39]);
+ [['Enter',40],['Esc',41],['Backspace',42],['Tab',43],['Space',44],['CapsLock',57],
+  ['-',45],['=',46],['[',47],[']',48],['\\',49],[';',51],["'",52],['`',53],[',',54],['.',55],['/',56]]
+  .forEach(([n,c])=>out.push([n,c]));
+ for(let f=1;f<=12;f++)out.push(['F'+f,57+f]);
+ [['Ins',73],['Home',74],['PgUp',75],['Del',76],['End',77],['PgDn',78],
+  ['Right',79],['Left',80],['Down',81],['Up',82]].forEach(([n,c])=>out.push([n,c]));
+ return out;})();
 /* Translate a browser keydown into the firmware's HID keyboard usage id plus
  * modifier bits (Ctrl=1, Shift=2, Alt=4).  Returns {mod, code} where code is
  * null for a modifier-only press, or null when the key cannot be mapped. */
@@ -929,19 +943,29 @@ function renderRemap(box){const state=document.createElement('p');state.id='mapp
  const activate=document.createElement('button');paintLocalized(activate,msg('map_use_group'));activate.onclick=()=>exclusive(async()=>{if(mapDirty)throw Error('请先保存本组更改再切换');await hidWait(device.sendFeatureReport(0xfb,command(5,[profile],127)),'切换映射组');const m=await readTable(profile);if(m.active!==profile)throw Error('切换映射组失败');say(`已切换到映射组 ${profile+1}`)});box.append(activate);
  const source=document.createElement('select');source.id='mapping-source';names.forEach((n,i)=>option(source,i,n));source.value=remapSource;const sr=row(msg('map_source'),msg('map_source_help'));sr.append(source);box.append(sr);const area=document.createElement('div');box.append(area);
  function edit(){const id=Number(source.value),o=id*4,t=table?.[o]??0;remapSource=id;paintMappingSource();area.replaceChildren();const tr=row(msg('map_to'));const type=document.createElement('select');[msg('map_controller'),msg('map_keyboard'),msg('map_mouse')].forEach((n,i)=>option(type,i,n));type.value=t;type.onchange=()=>{if(!table)return;table[o]=Number(type.value);table[o+1]=table[o]===0?id:0;table[o+2]=0;table[o+3]=0;mapDirty=true;edit();refresh()};tr.append(type);area.append(tr);
- const vr=row(t===1?msg('map_keycode'):msg('map_target'));let target;if(t===1){target=document.createElement('input');target.type='number';target.min=0;target.max=255;target.value=table?.[o+1]??0;target.oninput=()=>{const v=Number(target.value);if(target.value===''||!Number.isInteger(v)||v<0||v>255){paintLocalized(target,msg('invalid_integer',{min:0,max:255}),'validationMessage');return}paintLocalized(target,'','validationMessage');table[o+1]=v;mapDirty=true;refresh()}}
- else{target=document.createElement('select');(t===0?names:[msg('map_mouse_left'),msg('map_mouse_right'),msg('map_mouse_middle')]).forEach((n,i)=>option(target,i,n));target.value=table?.[o+1]??id;target.onchange=()=>{table[o+1]=Number(target.value);mapDirty=true;refresh()}}vr.append(target);area.append(vr);
+ const vr=row(t===1?msg('map_keycode'):msg('map_target'));let target;if(t===1){target=document.createElement('select');
+  for(const [name,code] of HID_KEYS)option(target,code,name+' · '+code);
+  const cur=table?.[o+1]??4;
+  if(!HID_KEYS.some(([,c])=>c===cur))option(target,cur,'0x'+Number(cur).toString(16).toUpperCase());
+  target.value=cur;
+  target.onchange=()=>{table[o+1]=Number(target.value);mapDirty=true;refresh()}} else{target=document.createElement('select');(t===0?names:[msg('map_mouse_left'),msg('map_mouse_right'),msg('map_mouse_middle')]).forEach((n,i)=>option(target,i,n));target.value=table?.[o+1]??id;target.onchange=()=>{table[o+1]=Number(target.value);mapDirty=true;refresh()}}vr.append(target);area.append(vr);
  if(t===1&&table){
-  /* Keyboard capture: press a key in the box and the code/modifiers fill in. */
-  target.addEventListener('keydown',ev=>{
-   const hit=hidKeyFromEvent(ev);
-   if(!hit)return;
-   ev.preventDefault();
-   if(hit.code!==null)table[o+1]=hit.code;
-   table[o+2]=hit.mod;
-   mapDirty=true;
-   edit();refresh();
-  });
+  const cap=document.createElement('button');cap.type='button';cap.style.marginLeft='8px';
+  paintLocalized(cap,msg('map_capture_key'));
+  cap.onclick=()=>{
+   paintLocalized(cap,msg('map_capture_wait'));
+   const once=ev=>{
+    const hit=hidKeyFromEvent(ev);
+    if(!hit)return;
+    ev.preventDefault();ev.stopPropagation();
+    window.removeEventListener('keydown',once,true);
+    if(hit.code!==null)table[o+1]=hit.code;
+    table[o+2]=hit.mod;
+    mapDirty=true;edit();refresh();
+   };
+   window.addEventListener('keydown',once,true);
+  };
+  vr.append(cap);
  }
  if(t!==0){const rr=row(msg('map_block_original'));const c=document.createElement('input');c.type='checkbox';c.checked=!!(table?.[o+3]&1);c.onchange=()=>{table[o+3]=(table[o+3]&~1)|+c.checked;mapDirty=true;refresh()};rr.append(c);area.append(rr)}
  if(t===1){for(const [label,offset]of [[msg('map_modifiers'),2],[msg('map_flags'),3]]){const rr=row(label);const c=document.createElement('input');c.type='number';c.min=0;c.max=offset===3?3:255;c.value=table?.[o+offset]??0;c.oninput=()=>{const v=Number(c.value);if(c.value===''||!Number.isInteger(v)||v<0||v>Number(c.max)){paintLocalized(c,msg('invalid_integer',{min:0,max:c.max}),'validationMessage');return}paintLocalized(c,'','validationMessage');table[o+offset]=v;mapDirty=true;refresh()};rr.append(c);area.append(rr)}}

@@ -8024,6 +8024,36 @@
       "ru": "Нажмите сюда и нажмите клавишу (можно с Ctrl/Shift/Alt) — код и модификаторы заполнятся автоматически",
       "pl": "Kliknij tutaj i naciśnij klawisz (dozwolone Ctrl/Shift/Alt) — kod i modyfikatory wypełnią się same",
       "tr": "Buraya tıklayıp bir tuşa basın (Ctrl/Shift/Alt olabilir); kod ve değiştiriciler otomatik dolar"
+    },
+    "map_capture_key": {
+      "zh-CN": "监听键盘",
+      "en": "Capture key",
+      "zh-TW": "監聽鍵盤",
+      "ja": "キーを取り込む",
+      "ko": "키 캡처",
+      "de": "Taste erfassen",
+      "fr": "Capturer une touche",
+      "es": "Capturar tecla",
+      "it": "Cattura tasto",
+      "pt-BR": "Capturar tecla",
+      "ru": "Захватить клавишу",
+      "pl": "Przechwyć klawisz",
+      "tr": "Tuşu yakala"
+    },
+    "map_capture_wait": {
+      "zh-CN": "请按键…",
+      "en": "Press a key…",
+      "zh-TW": "請按鍵…",
+      "ja": "キーを押してください…",
+      "ko": "키를 누르세요…",
+      "de": "Taste drücken…",
+      "fr": "Appuyez sur une touche…",
+      "es": "Pulsa una tecla…",
+      "it": "Premi un tasto…",
+      "pt-BR": "Pressione uma tecla…",
+      "ru": "Нажмите клавишу…",
+      "pl": "Naciśnij klawisz…",
+      "tr": "Bir tuşa basın…"
     }
   }
 }
