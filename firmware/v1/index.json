@@ -1,7 +1,16 @@
 {
   "board": "v1",
-  "latest": "LCT616-DS5 3.18H-oc36-v1",
+  "latest": "LCT616-DS5 3.18H-oc37-v1",
   "versions": [
+    {
+      "version": "LCT616-DS5 3.18H-oc37-v1",
+      "tag": "3.18H-oc37",
+      "file": "ds5dongle-v1-3.18H-oc37-hs.bin",
+      "size": 806768,
+      "sha256": "1c6e2b7514b251adf6c8014eccd2559c9bb921e8fc344785b14b89c5bf3d3789",
+      "date": "2026-11-23",
+      "notes": "音频改 0x36 单帧报文（10 ms 一帧，延迟减半），512 样本累积"
+    },
     {
       "version": "LCT616-DS5 3.18H-oc36-v1",
       "tag": "3.18H-oc36",
