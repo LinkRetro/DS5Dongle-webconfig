@@ -1,7 +1,16 @@
 {
   "board": "v12",
-  "latest": "LCT616-DS5 3.18H-oc24-v12",
+  "latest": "LCT616-DS5 3.18H-oc25-v12",
   "versions": [
+    {
+      "version": "LCT616-DS5 3.18H-oc25-v12",
+      "tag": "3.18H-oc25",
+      "file": "ds5dongle-v12-3.18H-oc25-hs.bin",
+      "size": 803148,
+      "sha256": "a646ed22ea074ab2060eb8a5d56582b124ca1ded19bfcdc121bcf9f923c0d1b5",
+      "date": "2026-11-23",
+      "notes": "音频：新增峰值限幅器（消除削波杂音）、Opus 复杂度 0→1；新增 PCM 溢出计数日志"
+    },
     {
       "version": "LCT616-DS5 3.18H-oc24-v12",
       "tag": "3.18H-oc24",
