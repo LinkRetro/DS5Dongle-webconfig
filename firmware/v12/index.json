@@ -1,7 +1,16 @@
 {
   "board": "v12",
-  "latest": "LCT616-DS5 3.18H-oc22-v12",
+  "latest": "LCT616-DS5 3.18H-oc23-v12",
   "versions": [
+    {
+      "version": "LCT616-DS5 3.18H-oc23-v12",
+      "tag": "3.18H-oc23",
+      "file": "ds5dongle-v12-3.18H-oc23-hs.bin",
+      "size": 802764,
+      "sha256": "22a136ace5c8955cd96187aaf8cc4da959f992c9b44d65e0193fa5dff4985856",
+      "date": "2026-11-23",
+      "notes": "修复断开后无法回连：保留射频扫描（PS 唤醒需要）；扫描中/已连接不再关射频；USB 不再自动软断开"
+    },
     {
       "version": "LCT616-DS5 3.18H-oc22-v12",
       "tag": "3.18H-oc22",
