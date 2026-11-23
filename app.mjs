@@ -268,7 +268,7 @@ function fwDialogOpen(version,entry,loadImage){
   const sr=flashHost?.shadowRoot;if(!sr)return;
   const bar=sr.querySelector('#progress-bar'),st=sr.querySelector('#stage-text'),lg=sr.querySelector('#log');
   const pct=Number(bar?.value??0);
-  q('.fw-bar progress').value=pct;q('.fw-pct').textContent=pct+'%';
+  q('.fw-bar progress').value=Math.round(pct*10)/10;q('.fw-pct').textContent=Math.round(pct)+'%';
    if(started&&'serial' in navigator&&globalThis.isSecureContext&&st?.textContent)paintLocalized(q('.fw-stage'),legacy(st.textContent));
   const stt=started&&'serial' in navigator&&globalThis.isSecureContext&&sr.querySelector('#status-text');
   if(stt?.textContent)paintLocalized(q('.fw-device'),msg('firmware_device_status',{state:legacy(stt.textContent)}));
@@ -912,14 +912,14 @@ function onGyro(p){
  ['x','y','z'].forEach((ax,i)=>{
   const gv=g[i],av=Math.round(accC[i]);
   const gt=$('gyro-'+ax),gm=$('gyro-'+ax+'-meter');
-  if(gt)gt.textContent=String(gv);
+  if(gt)gt.textContent=String(Math.round(gv));
   if(gm)gm.value=Math.max(-32768,Math.min(32767,gv));
   const at=$('acc-'+ax),am=$('acc-'+ax+'-meter');
   if(at)at.textContent=String(av);
   if(am)am.value=Math.max(-32768,Math.min(32767,av));
  });
  const gl=$('gyro-live'),al=$('accel-live');
- if(gl)gl.textContent=`${(g[0]/1024).toFixed(1)} / ${(g[1]/1024).toFixed(1)} / ${(g[2]/1024).toFixed(1)}`;
+ if(gl)gl.textContent=`${(g[0]/1024).toFixed(2)} / ${(g[1]/1024).toFixed(2)} / ${(g[2]/1024).toFixed(2)}`;
  if(al)al.textContent=`${(accC[0]/8192).toFixed(2)} / ${(accC[1]/8192).toFixed(2)} / ${(accC[2]/8192).toFixed(2)}  |a|=${accMag.toFixed(2)}`;
  const st=$('gyro-stamp');
  if(st)st.textContent=LT(gyroBase?'已归零，显示相对值':'实时数据（未归零）');
@@ -932,7 +932,7 @@ function onGyro(p){
  const m=gyroPeak.max,names=['X','Y','Z'];
  if(m[0]+m[1]+m[2]>50){
   const top=m.indexOf(Math.max(...m));
-  const deg=m.map(v=>(v/1024).toFixed(1));
+  const deg=m.map(v=>(v/1024).toFixed(2));
   const r=$('gyro-peak-result');
   if(r)r.textContent=`最近 2 秒峰值：X ${deg[0]}  Y ${deg[1]}  Z ${deg[2]} °/s → 主变化轴 ${names[top]}`;
  }

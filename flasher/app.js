@@ -230,7 +230,7 @@ globalThis.mountDongleFlash = function (document) {
 
   function setProgress(value, stage) {
     const normalized = Math.max(0, Math.min(100, value));
-    elements.progressBar.value = normalized;
+    elements.progressBar.value = Math.round(normalized * 10) / 10;
     elements.progressValue.textContent = `${Math.round(normalized)}%`;
     if (stage) elements.stageText.textContent = stage;
   }
