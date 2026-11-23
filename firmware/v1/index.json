@@ -1,7 +1,16 @@
 {
   "board": "v1",
-  "latest": "LCT616-DS5 3.18H-oc23-v1",
+  "latest": "LCT616-DS5 3.18H-oc24-v1",
   "versions": [
+    {
+      "version": "LCT616-DS5 3.18H-oc24-v1",
+      "tag": "3.18H-oc24",
+      "file": "ds5dongle-v1-3.18H-oc24-hs.bin",
+      "size": 802580,
+      "sha256": "a664c276aa58c6613518de8543729eacc30681031bce1d6ea844e9d8ae9ed306",
+      "date": "2026-11-23",
+      "notes": "配对链路加固：分页超时 5.12→10.24 秒、连接看门狗放宽到 12 秒；固件升级不再清空配对记录"
+    },
     {
       "version": "LCT616-DS5 3.18H-oc23-v1",
       "tag": "3.18H-oc23",
