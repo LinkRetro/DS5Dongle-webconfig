@@ -1,7 +1,16 @@
 {
   "board": "v1",
-  "latest": "LCT616-DS5 3.18H-oc25-v1",
+  "latest": "LCT616-DS5 3.18H-oc26-v1",
   "versions": [
+    {
+      "version": "LCT616-DS5 3.18H-oc26-v1",
+      "tag": "3.18H-oc26",
+      "file": "ds5dongle-v1-3.18H-oc26-hs.bin",
+      "size": 803196,
+      "sha256": "8d562de9bee951d81975a46d40f5ddc5de3fca0a2570506818c0a2e305060e7d",
+      "date": "2026-11-23",
+      "notes": "耳机杂音定位：耳机流改为单声道编码（保留 0xD6 tag），并记录所用音频 tag"
+    },
     {
       "version": "LCT616-DS5 3.18H-oc25-v1",
       "tag": "3.18H-oc25",
