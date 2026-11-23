@@ -1,7 +1,16 @@
 {
   "board": "v1",
-  "latest": "LCT616-DS5 3.18H-oc32-v1",
+  "latest": "LCT616-DS5 3.18H-oc33-v1",
   "versions": [
+    {
+      "version": "LCT616-DS5 3.18H-oc33-v1",
+      "tag": "3.18H-oc33",
+      "file": "ds5dongle-v1-3.18H-oc33-hs.bin",
+      "size": 806792,
+      "sha256": "7c923cd1575659ac8080f0d7acc0106315d1bd06e44ffda030091620b51fd083",
+      "date": "2026-11-23",
+      "notes": "耳机音量改为 0–100 百分比并映射到可听区间（0x3D–0x7F），滑块线性化"
+    },
     {
       "version": "LCT616-DS5 3.18H-oc32-v1",
       "tag": "3.18H-oc32",
