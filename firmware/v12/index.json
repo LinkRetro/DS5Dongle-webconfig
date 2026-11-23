@@ -1,7 +1,16 @@
 {
   "board": "v12",
-  "latest": "LCT616-DS5 3.18H-oc45-v12",
+  "latest": "LCT616-DS5 3.18H-oc46-v12",
   "versions": [
+    {
+      "version": "LCT616-DS5 3.18H-oc46-v12",
+      "tag": "3.18H-oc46",
+      "file": "ds5dongle-v12-3.18H-oc46-hs.bin",
+      "size": 808848,
+      "sha256": "5b175287a83651a3946584a635938cebab45c9dcdcf062d32e117ed4f2cde6ee",
+      "date": "2026-11-23",
+      "notes": "新增兼容性诊断接口（0xFA）：手柄型号/地址/EIR 名称/握手结果/配对与扫描计数/音频健康度，供网页导出"
+    },
     {
       "version": "LCT616-DS5 3.18H-oc45-v12",
       "tag": "3.18H-oc45",

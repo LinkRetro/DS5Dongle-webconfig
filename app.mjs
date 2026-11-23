@@ -641,7 +641,54 @@ function renderTests(box,inlineSettings){
 async function exclusive(fn){if(busy)return;busy=true;try{refresh();await fn()}catch(e){say(e.message??String(e),'error')}finally{busy=false;try{refresh()}catch(e){console.error(e)}}}
 function hidWait(promise,label,ms=5000){return new Promise((resolve,reject)=>{const timeout=setTimeout(()=>reject(Error(`${label}超时，请关闭其他配置页并重新插拔接收器后重试。`)),ms);Promise.resolve(promise).then(v=>{clearTimeout(timeout);resolve(v)},e=>{clearTimeout(timeout);reject(e)})})}
 async function readCfg(d=device){return hidWait(d.receiveFeatureReport(0xf7),'读取配置')}
-async function saveStatus(d,check,shift){
+/* ---- Compatibility diagnostics (firmware 0xFA) ----
+ * The single most useful bundle for a support ticket: model, address, EIR name,
+ * handshake result, pairing/scan counters and audio health.  Read-only; the
+ * card is skipped automatically when the firmware has no 0xFA report. */
+let diagText='',diagTick=0;
+const dhex=n=>n.toString(16).toUpperCase().padStart(2,'0');
+function paintDiag(b,fw){
+ const u16=i=>b[i]|(b[i+1]<<8);
+ const addr=[...b.slice(6,12)].map(dhex).join(':');
+ const name=new TextDecoder().decode(b.slice(26,58)).replace(/\0+$/,'').trim();
+ const flags=b[1],edge=!!(flags&1),hsOk=!!(flags&2);
+ diagText=[
+  `Model: ${edge?'DualSense Edge':(hsOk?'DualSense (non-Edge)':'unknown')}`,
+  `Address: ${addr||'-'}`,
+  `EIR name: ${name||'(no name in EIR)'}`,
+  `HID handshake: ${hsOk?'ok':'incomplete'} (0x${dhex(b[3])})`,
+  `Bonded: ${b[4]}   Blacklist: ${b[5]}`,
+  `Scan rounds: ${u16(12)}   connect fail: ${u16(14)}   handshake fail: ${u16(16)}`,
+  `Encode: ${(u16(18)/10).toFixed(1)} ms avg / ${(u16(20)/10).toFixed(1)} ms max`,
+  `PCM overruns: ${u16(22)}   fill: ${u16(24)}`,
+  `Firmware: ${fw||'-'}`,
+  `Captured: ${new Date().toISOString().slice(0,19).replace('T',' ')} UTC`
+ ].join('\n');
+ let box=document.getElementById('diag-card');
+ if(!box){
+  box=document.createElement('section');
+  box.id='diag-card';box.className='test-card';
+  const h=document.createElement('h3');h.textContent='Compatibility diagnostics';box.append(h);
+  const pre=document.createElement('pre');pre.id='diag-text';
+  pre.style.cssText='white-space:pre-wrap;font-size:12px;line-height:1.5;margin:8px 0;user-select:text';
+  box.append(pre);
+  const btn=document.createElement('button');btn.textContent='Copy diagnostics';
+  btn.onclick=async()=>{try{await navigator.clipboard.writeText(diagText);btn.textContent='Copied';setTimeout(()=>btn.textContent='Copy diagnostics',1500)}catch{btn.textContent='Copy failed - select manually'}};
+  box.append(btn);
+  const anchor=document.getElementById('battery-card');
+  if(anchor)anchor.insertAdjacentElement('afterend',box);else document.body.append(box);
+ }
+ const pre=document.getElementById('diag-text');
+ if(pre)pre.textContent=diagText;
+}
+async function refreshDiag(){
+ if(!device||busy)return;
+ try{
+  const r=await hidWait(device.receiveFeatureReport(0xfa),'read diagnostics',1000);
+  const b=payload(r,0xfa,26);
+  paintDiag(b,firmwareVersion);
+ }catch{/* older firmware without 0xFA: keep the card hidden */}
+}async function saveStatus(d,check,shift){
  for(let attempt=0;attempt<14;attempt++){
   check();
   const b=payload(await hidWait(d.receiveFeatureReport(0xf9),'确认保存状态',1000),0xf9,13);
@@ -1045,7 +1092,7 @@ function paintLatency(b){if(!$('latency-average'))return;   /* 面板已移除�
 let polling=false;setInterval(async()=>{
  if(document.hidden||!device||busy||polling)return;
  polling=true;const d=device;
-  try{const b=payload(await hidWait(d.receiveFeatureReport(0xf9),'读取设备状态'),0xf9,13);if(device===d){telemetry=b;if(b[13]!==0xd3||b[14]!==7)void stopTests();paintBattery(b);paintLatency(b);paintConnection()}}
+  try{const b=payload(await hidWait(d.receiveFeatureReport(0xf9),'读取设备状态'),0xf9,13);if(device===d){telemetry=b;if(b[13]!==0xd3||b[14]!==7)void stopTests();paintBattery(b);paintLatency(b);paintConnection();if((++diagTick%5)===0)void refreshDiag()}}
   catch{if(device===d){void stopTests();telemetry=null;paintBattery(null);paintLatency(null);paintConnection()}}
  finally{polling=false}
 },2000);
