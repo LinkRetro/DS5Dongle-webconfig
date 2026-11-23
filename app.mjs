@@ -652,6 +652,8 @@ function paintDiag(b,fw){
  const addr=[...b.slice(6,12)].map(dhex).join(':');
  const name=new TextDecoder().decode(b.slice(26,58)).replace(/\0+$/,'').trim();
  const flags=b[1],edge=!!(flags&1),hsOk=!!(flags&2);
+ const board=b[58]===1?'v1':b[58]===2?'v1.2':'unknown';
+ const usb=b[59]===1?'High-Speed':b[59]===0?'Full-Speed':b[59]===2?'not configured':'n/a';
  diagText=[
   `Model: ${edge?'DualSense Edge':(hsOk?'DualSense (non-Edge)':'unknown')}`,
   `Address: ${addr||'-'}`,
@@ -661,6 +663,7 @@ function paintDiag(b,fw){
   `Scan rounds: ${u16(12)}   connect fail: ${u16(14)}   handshake fail: ${u16(16)}`,
   `Encode: ${(u16(18)/10).toFixed(1)} ms avg / ${(u16(20)/10).toFixed(1)} ms max`,
   `PCM overruns: ${u16(22)}   fill: ${u16(24)}`,
+  `Board: ${board}   USB: ${usb}`,
   `Firmware: ${fw||'-'}`,
   `Captured: ${new Date().toISOString().slice(0,19).replace('T',' ')} UTC`
  ].join('\n');
@@ -675,6 +678,10 @@ function paintDiag(b,fw){
   const btn=document.createElement('button');btn.textContent='Copy diagnostics';
   btn.onclick=async()=>{try{await navigator.clipboard.writeText(diagText);btn.textContent='Copied';setTimeout(()=>btn.textContent='Copy diagnostics',1500)}catch{btn.textContent='Copy failed - select manually'}};
   box.append(btn);
+  const dl=document.createElement('button');dl.textContent='Download .txt';dl.style.marginLeft='8px';
+  dl.onclick=()=>{const blob=new Blob([diagText],{type:'text/plain'});const a=document.createElement('a');
+   a.href=URL.createObjectURL(blob);a.download='ds5dongle-diagnostics.txt';a.click();setTimeout(()=>URL.revokeObjectURL(a.href),2000)};
+  box.append(dl);
   const anchor=document.getElementById('battery-card');
   if(anchor)anchor.insertAdjacentElement('afterend',box);else document.body.append(box);
  }

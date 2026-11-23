@@ -1,7 +1,16 @@
 {
   "board": "v12",
-  "latest": "LCT616-DS5 3.18H-oc46-v12",
+  "latest": "LCT616-DS5 3.18H-oc47-v12",
   "versions": [
+    {
+      "version": "LCT616-DS5 3.18H-oc47-v12",
+      "tag": "3.18H-oc47",
+      "file": "ds5dongle-v12-3.18H-oc47-hs.bin",
+      "size": 808848,
+      "sha256": "049d0b2b10997f772d34b723ac4aeb96744aea855aee08f6186c3f308e612fa3",
+      "date": "2026-11-23",
+      "notes": "诊断信息补充硬件上下文：板型（v1 / v1.2）与 USB 枚举速率；网页支持下载诊断文本"
+    },
     {
       "version": "LCT616-DS5 3.18H-oc46-v12",
       "tag": "3.18H-oc46",
