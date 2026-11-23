@@ -1,7 +1,16 @@
 {
   "board": "v12",
-  "latest": "LCT616-DS5 3.18H-oc27-v12",
+  "latest": "LCT616-DS5 3.18H-oc28-v12",
   "versions": [
+    {
+      "version": "LCT616-DS5 3.18H-oc28-v12",
+      "tag": "3.18H-oc28",
+      "file": "ds5dongle-v12-3.18H-oc28-hs.bin",
+      "size": 806940,
+      "sha256": "c60f1c94a6eb11964a83a96444d5f70455150e9429285784e51dd1242d292036",
+      "date": "2026-11-23",
+      "notes": "对齐开源 DS5Dongle：始终立体声编码、队列 10×672B、complexity 0、重采样 8→16 taps"
+    },
     {
       "version": "LCT616-DS5 3.18H-oc27-v12",
       "tag": "3.18H-oc27",
