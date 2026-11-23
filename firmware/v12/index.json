@@ -1,7 +1,16 @@
 {
   "board": "v12",
-  "latest": "LCT616-DS5 3.18H-oc18-v12",
+  "latest": "LCT616-DS5 3.18H-oc19-v12",
   "versions": [
+    {
+      "version": "LCT616-DS5 3.18H-oc19-v12",
+      "tag": "3.18H-oc19",
+      "file": "ds5dongle-v12-3.18H-oc19-hs.bin",
+      "size": 801444,
+      "sha256": "5b1bdca7a6f8ad63383a823e843165e55e847b5bcc54b8f2ecd1952c811beda4",
+      "date": "2026-11-23",
+      "notes": "配对节奏对齐 BlueRetro：无配对时约 2 秒重扫一次；已配对未连接时 10 秒重试"
+    },
     {
       "version": "LCT616-DS5 3.18H-oc18-v12",
       "tag": "3.18H-oc18",
