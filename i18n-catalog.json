@@ -8354,6 +8354,66 @@
       "ru": "Качество связи: {quality}",
       "pl": "Jakość łącza: {quality}",
       "tr": "Bağlantı kalitesi: {quality}"
+    },
+    "audio_headset_output": {
+      "zh-CN": "耳机输出",
+      "en": "Headset output",
+      "zh-TW": "耳機輸出",
+      "ja": "ヘッドセット出力",
+      "ko": "헤드셋 출력",
+      "de": "Headset-Ausgabe",
+      "fr": "Sortie casque",
+      "es": "Salida de auriculares",
+      "it": "Uscita cuffie",
+      "pt-BR": "Saída de fone",
+      "ru": "Выход на наушники",
+      "pl": "Wyjście słuchawkowe",
+      "tr": "Kulaklık çıkışı"
+    },
+    "audio_headset_output_hint": {
+      "zh-CN": "立体声 = 80 kbps/声道；单声道 = 160 kbps，中高频更干净",
+      "en": "Stereo = 80 kbps per channel; mono = 160 kbps and cleaner in the mids/highs",
+      "zh-TW": "立體聲 = 80 kbps/聲道；單聲道 = 160 kbps，中高頻更乾淨",
+      "ja": "ステレオ=80 kbps/チャンネル、モノラル=160 kbps で中高域がきれい",
+      "ko": "스테레오=채널당 80 kbps, 모노=160 kbps로 중고음이 깨끗함",
+      "de": "Stereo = 80 kbit/s pro Kanal; Mono = 160 kbit/s und sauberer in den Mitten/Höhen",
+      "fr": "Stéréo = 80 kbit/s par canal ; mono = 160 kbit/s, plus propre dans les médiums",
+      "es": "Estéreo = 80 kbps por canal; mono = 160 kbps y más limpio en medios/agudos",
+      "it": "Stereo = 80 kbps per canale; mono = 160 kbps e più pulito su medi/acuti",
+      "pt-BR": "Estéreo = 80 kbps por canal; mono = 160 kbps e mais limpo nos médios/agudos",
+      "ru": "Стерео = 80 кбит/с на канал; моно = 160 кбит/с, чище в середине/верхах",
+      "pl": "Stereo = 80 kb/s na kanał; mono = 160 kb/s i czystsze w średnich/wysokich",
+      "tr": "Stereo = kanal başına 80 kbps; mono = 160 kbps ve orta/yükseklerde daha temiz"
+    },
+    "audio_stereo": {
+      "zh-CN": "立体声",
+      "en": "Stereo",
+      "zh-TW": "立體聲",
+      "ja": "ステレオ",
+      "ko": "스테레오",
+      "de": "Stereo",
+      "fr": "Stéréo",
+      "es": "Estéreo",
+      "it": "Stereo",
+      "pt-BR": "Estéreo",
+      "ru": "Стерео",
+      "pl": "Stereo",
+      "tr": "Stereo"
+    },
+    "audio_mono": {
+      "zh-CN": "单声道（更干净）",
+      "en": "Mono (cleaner)",
+      "zh-TW": "單聲道（更乾淨）",
+      "ja": "モノラル（きれい）",
+      "ko": "모노(더 깨끗함)",
+      "de": "Mono (sauberer)",
+      "fr": "Mono (plus propre)",
+      "es": "Mono (más limpio)",
+      "it": "Mono (più pulito)",
+      "pt-BR": "Mono (mais limpo)",
+      "ru": "Моно (чище)",
+      "pl": "Mono (czyściej)",
+      "tr": "Mono (daha temiz)"
     }
   }
 }

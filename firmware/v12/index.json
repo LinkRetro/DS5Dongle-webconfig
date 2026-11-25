@@ -1,13 +1,22 @@
 {
   "board": "v12",
-  "latest": "LCT616-DS5 3.18H-oc67-v12",
+  "latest": "LCT616-DS5 3.18H-oc68-v12",
   "versions": [
+    {
+      "version": "LCT616-DS5 3.18H-oc68-v12",
+      "tag": "3.18H-oc68",
+      "file": "ds5dongle-v12-3.18H-oc68-hs.bin",
+      "size": 812808,
+      "sha256": "5e6e29fb6d333e7b7f98578bbb16d2a5b93c3f36c1264fdb07923c111cfd0e4c",
+      "date": "2026-11-25",
+      "notes": "新增耳机输出立体声/单声道切换：单声道 160 kbps，中高频更干净（配置版本 11）"
+    },
     {
       "version": "LCT616-DS5 3.18H-oc67-v12",
       "tag": "3.18H-oc67",
       "file": "ds5dongle-v12-3.18H-oc67-hs.bin",
       "size": 812808,
-      "sha256": "f12cd8f751feb92152182632ea0a0dbde4db29947226ff60185ffd2c4f3b0fac",
+      "sha256": "43bdb970c8adc64bb27e6a3e2eae9ee95c20906861b6639fe71cd17641442c34",
       "date": "2026-11-25",
       "notes": "耳机孔中高频呲呲声修复：限幅器改为逐样本软包络 + 2.5 dB 余量，消除槽率调制与削波"
     },
