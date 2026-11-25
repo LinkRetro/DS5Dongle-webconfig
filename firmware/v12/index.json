@@ -1,14 +1,23 @@
 {
   "board": "v12",
-  "latest": "LCT616-DS5 3.18H-oc63-v12",
+  "latest": "LCT616-DS5 3.18H-oc64-v12",
   "versions": [
+    {
+      "version": "LCT616-DS5 3.18H-oc64-v12",
+      "tag": "3.18H-oc64",
+      "file": "ds5dongle-v12-3.18H-oc64-hs.bin",
+      "size": 812744,
+      "sha256": "43115171b3f51ec29767923befab3acb0a0fc84b9a7beb19a02323aff60f0c84",
+      "date": "2026-11-25",
+      "notes": "弱链路自适应：远距离时降低手柄上报频率、暂停音频转触觉；音频发送失败不再阻塞；遥测增加 drop/rssi"
+    },
     {
       "version": "LCT616-DS5 3.18H-oc63-v12",
       "tag": "3.18H-oc63",
       "file": "ds5dongle-v12-3.18H-oc63-hs.bin",
       "size": 812720,
-      "sha256": "f7058d5a4da6d7e8f04be860322db6cdd600274e81d2b6fb0f6eaa9614709fee",
-      "date": "2026-11-23",
+      "sha256": "a5cb80e136386d413601fe28ca08a47f9646c9c565661e27cec6894b106762d0",
+      "date": "2026-11-25",
       "notes": "Edge 探测加强：按 Fn/背键时打印 0x20-0x3F 原始字节（用于定位按键位，正式映射下一版）"
     },
     {
