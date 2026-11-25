@@ -1,7 +1,16 @@
 {
   "board": "v12",
-  "latest": "LCT616-DS5 3.18H-oc66-v12",
+  "latest": "LCT616-DS5 3.18H-oc67-v12",
   "versions": [
+    {
+      "version": "LCT616-DS5 3.18H-oc67-v12",
+      "tag": "3.18H-oc67",
+      "file": "ds5dongle-v12-3.18H-oc67-hs.bin",
+      "size": 812808,
+      "sha256": "f12cd8f751feb92152182632ea0a0dbde4db29947226ff60185ffd2c4f3b0fac",
+      "date": "2026-11-25",
+      "notes": "耳机孔中高频呲呲声修复：限幅器改为逐样本软包络 + 2.5 dB 余量，消除槽率调制与削波"
+    },
     {
       "version": "LCT616-DS5 3.18H-oc66-v12",
       "tag": "3.18H-oc66",
