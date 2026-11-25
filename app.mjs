@@ -677,7 +677,9 @@ function diagMount(){
 const dhex=n=>n.toString(16).toUpperCase().padStart(2,'0');
 /* msg() returns a descriptor ({id,params}); messageText() resolves it. */
 const dt=(id,params)=>messageText(msg(id,params));
+let lastLinkQuality=0;
 function paintDiag(b,fw){
+ lastLinkQuality=b[62]||0;
  const u16=i=>b[i]|(b[i+1]<<8);
  const addr=[...b.slice(6,12)].map(dhex).join(':');
  const name=new TextDecoder().decode(b.slice(26,58)).replace(/\0+$/,'').trim();
@@ -685,7 +687,9 @@ function paintDiag(b,fw){
  /* Without a live link the model is unknown - showing "DualSense" there was
   * misleading when a customer simply cannot pair. */
  const model=linked?(edge?dt('diag_model_edge'):dt('diag_model_std')):dt('ctrl_unknown');
- const rssi=haveScan?((b[60]>127?b[60]-256:b[60])+' dBm'):'';
+ const rssi=(b[60]&&b[60]!==1)?((b[60]>127?b[60]-256:b[60])+' dBm'):'';
+ const q=b[62]||0;
+ const qText=q===1?dt('link_good'):q===2?dt('link_fair'):q===3?dt('link_poor'):dt('link_unknown');
  const board=b[58]===1?'v1':b[58]===2?'v1.2':'-';
  const usb=b[59]===1?'High-Speed':b[59]===0?'Full-Speed':b[59]===2?'-':'n/a';
  diagText=[
@@ -694,6 +698,7 @@ function paintDiag(b,fw){
   dt('diag_handshake',{code:dhex(b[3]),bonded:b[4],blacklist:b[5]}),
   dt('diag_scan',{rounds:u16(12),connect:u16(14),handshake:u16(16)}),
   dt('diag_audio',{avg:(u16(18)/10).toFixed(1),max:(u16(20)/10).toFixed(1),overruns:u16(22),fill:u16(24)}),
+  dt('diag_link',{quality:qText}),
   dt('diag_hw',{board,usb}),
   dt('diag_firmware',{firmware:fw||'-',captured:new Date().toISOString().slice(0,19).replace('T',' ')+' UTC'})
  ].join('\n');
@@ -1178,7 +1183,9 @@ function paintBattery(b){
   else{
    const rssi=b[0]>127?b[0]-256:b[0];
     const links=b.length>=17&&b[13]===0xd3;
-    const signal=links&&b[14]===7&&rssi!==1&&rssi!==127?msg('link_signal_rssi',{value:rssi}):msg('link_signal_missing');
+    const ql=lastLinkQuality;
+    const signal=ql===1?msg('link_good'):ql===2?msg('link_fair'):ql===3?msg('link_poor'):
+      (links&&b[14]===7&&rssi!==1&&rssi!==127?msg('link_signal_rssi',{value:rssi}):msg('link_signal_missing'));
     const speed=links&&(b[16]&2)?((b[1]&0x40)?'HS':'FS'):msg('link_speed_unknown');
     paintLocalized(ls,msg('link_summary',{signal,count:links?b[15]:'—',speed}));
   }

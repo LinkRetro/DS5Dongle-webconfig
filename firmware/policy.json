@@ -3,9 +3,13 @@
   "model": "LCTech BL616 · oc8",
   "size": 794988
  },
- "d8f9a70f67cf5cf26b122f2d95e32c739477c5620700c478d338d893e5f2d090": {
+ "014948fa8af976c7040d07114a0825a68d50a198ffccd01268b29f3767688151": {
+  "model": "V1 single LED · 3.18H-oc65",
+  "size": 812552
+ },
+ "fa9e4b278a3ea92873e1090cf99c590ddb7e10260b2fbf13780585f54097d332": {
   "model": "V1 single LED · 3.18H-oc64",
-  "size": 812504
+  "size": 812500
  },
  "2e96f4852e17e606d3b05f5005a554f550093319c0c5b37910045e455f401aac": {
   "model": "V1 single LED · 3.18H-oc63",
@@ -215,7 +219,11 @@
   "model": "V1 single LED · 3.18H-oc12",
   "size": 795840
  },
- "43115171b3f51ec29767923befab3acb0a0fc84b9a7beb19a02323aff60f0c84": {
+ "a50feb802ff0611d0f870c0e261fba301281774c64b6b0d9658f89f53fe73581": {
+  "model": "V1.2 RGB · 3.18H-oc65",
+  "size": 813056
+ },
+ "911ae487a289851b21650e1c1fba0b9d7c7a702bfea17047bfc03dccdf69b0bb": {
   "model": "V1.2 RGB · 3.18H-oc64",
   "size": 812744
  },
