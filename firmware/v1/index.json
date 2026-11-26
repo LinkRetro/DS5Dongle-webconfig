@@ -1,13 +1,23 @@
 {
   "board": "v1",
-  "latest": "LCT616-DS5 3.18H-oc78-v1",
+  "latest": "LCT616-DS5 3.18H-oc79-v1",
   "versions": [
+    {
+      "version": "LCT616-DS5 3.18H-oc79-v1",
+      "tag": "3.18H-oc79",
+      "file": "ds5dongle-v1-3.18H-oc79-hs.bin",
+      "size": 813012,
+      "sha256": "f7de060c428598bdb04131697bb60ff287f931f651320c8ca313f100e128179c",
+      "date": "2026-11-26",
+      "notes": "XInput 模式保留最小 HID 配置接口：切到 Xbox 模式后网页仍能连接并切回；构建新增启动路径静态检查",
+      "stable": false
+    },
     {
       "version": "LCT616-DS5 3.18H-oc78-v1",
       "tag": "3.18H-oc78",
       "file": "ds5dongle-v1-3.18H-oc78-hs.bin",
-      "size": 813160,
-      "sha256": "31114c6a5a3efd40ef2bf3a6453cb4fffda7edec6bc263f1e57954f93808223a",
+      "size": 813012,
+      "sha256": "9275f9cb4229bd4ba2896199e31e126d5429fd36ce9eca5c543bcaa5d8818a42",
       "date": "2026-11-26",
       "notes": "修复 oc77 启动崩溃：调度器启动前误用 vTaskDelay 导致 Store/AMO access fault（BOOT 逃生窗口）",
       "stable": false

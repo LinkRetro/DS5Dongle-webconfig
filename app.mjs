@@ -837,7 +837,7 @@ function disconnected(){
  lastLinkQuality=0;paintLinkStatus(null);
  gyroBase=null;gyroRaw=null;gyroSmooth=null;gyroBias=null;gyroBiasFrames=0;accSmooth=null;void stopTests();epoch++;if(device){if(dirty())savedDrafts.set(device,{draft,profile,table:mapDirty?table.slice():null});device.removeEventListener('inputreport',onInput)}device=null;firmwareVersion=null;paintLocalized($('version'),msg('console_name'));paintFirmware();baseline=null;draft={};table=null;tableBaseline=null;telemetry=null;mapDirty=false;restartNeeded=false;clearInput();render()}
 async function load(){const cfg=decode(await readCfg());const m=await readTable(profile);baseline=cfg;draft={};table=m.table;tableBaseline=m.table.slice();mapDirty=false;render()}
-const HID_FILTERS=[{vendorId:0x054c,productId:0x0ce6},{vendorId:0x054c,productId:0x0df2}];
+const HID_FILTERS=[{vendorId:0x054c,productId:0x0ce6},{vendorId:0x054c,productId:0x0df2},{vendorId:0x045e,productId:0x028e}];   /* XInput 模式：保留的配置 HID 接口 */
 const pickConfigDevice=list=>list?.find(d=>d.collections.some(c=>c.featureReports.some(r=>r.reportId===0xf7)));
 async function attachDevice(d){
  if(!d)throw Error('未选择包含配置报告的接收器接口');

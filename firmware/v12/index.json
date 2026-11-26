@@ -1,7 +1,17 @@
 {
   "board": "v12",
-  "latest": "LCT616-DS5 3.18H-oc78-v12",
+  "latest": "LCT616-DS5 3.18H-oc79-v12",
   "versions": [
+    {
+      "version": "LCT616-DS5 3.18H-oc79-v12",
+      "tag": "3.18H-oc79",
+      "file": "ds5dongle-v12-3.18H-oc79-hs.bin",
+      "size": 813512,
+      "sha256": "ffc241cdc5ca9431a7c82299b80ce681294d8b7f45a5d5a8eba988ff162c43a7",
+      "date": "2026-11-26",
+      "notes": "XInput 模式保留最小 HID 配置接口：切到 Xbox 模式后网页仍能连接并切回；构建新增启动路径静态检查",
+      "stable": false
+    },
     {
       "version": "LCT616-DS5 3.18H-oc78-v12",
       "tag": "3.18H-oc78",
