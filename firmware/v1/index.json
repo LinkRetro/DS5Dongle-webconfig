@@ -1,7 +1,17 @@
 {
   "board": "v1",
-  "latest": "LCT616-DS5 3.18H-oc109-v1",
+  "latest": "LCT616-DS5 3.18H-oc110-v1",
   "versions": [
+    {
+      "version": "LCT616-DS5 3.18H-oc110-v1",
+      "tag": "3.18H-oc110",
+      "file": "ds5dongle-v1-3.18H-oc110-hs.bin",
+      "size": 817020,
+      "sha256": "083d97f67f80bf3d0082ee40775cff9faf33b94be88c523fe97b72854f31e73a",
+      "date": "2026-11-26",
+      "notes": "信号强度兜底：控制器不支持 HCI Read RSSI 时，用输入报告抖动换算链路质量，页面信号格恢复显示",
+      "stable": false
+    },
     {
       "version": "LCT616-DS5 3.18H-oc109-v1",
       "tag": "3.18H-oc109",
