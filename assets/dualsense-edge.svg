@@ -1,23 +1,27 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 544.70661 302.91098">
 <g class="edge-extras">
-  <!-- DualSense Edge 专属控件：位置取自真机（背键在握把外侧下方，Fn 在摇杆正下方）。
-       所有元素均保持在 viewBox 内，避免被 SVG 视口裁剪。 -->
-  <g data-part="fn-l">
-    <rect class="cap edge-control" x="172" y="276" width="26" height="12" rx="6"/>
-    <text x="185" y="284.4">Fn</text>
+  <!-- DualSense Edge 专属控件
+       背键：真机在握把外侧下方，掌心偏后，向外倾斜贴合手指；形状为上窄下宽的拨片，
+             正中有内凹按压面（深色），所以从正面看只露出有限的面积。
+       Fn  ：真机是带弧面凹槽的小按键，位于摇杆中心正下方，略随握把轮廓倾斜。 -->
+  <g data-part="fn-l" transform="translate(185,266) rotate(-12)">
+    <path class="cap edge-control" d="M -13,-6.2 C -13,-8 -11.6,-9 9.4,-9 C 12.2,-9 13,-7.6 13,-5.8 L 13,3.4 C 13,5.6 11.8,6.6 9.2,6.6 L -9.6,6.6 C -12,6.6 -13,5.4 -13,3.2 Z"/>
+    <path d="M -8.4,-2.2 C -4.6,-4.4 4.6,-4.4 8.4,-2.2" fill="none" stroke="#0d2233" stroke-width="1.1" opacity="0.55"/>
+    <text x="0" y="1.6">Fn</text>
   </g>
-  <g data-part="fn-r">
-    <rect class="cap edge-control" x="348" y="276" width="26" height="12" rx="6"/>
-    <text x="361" y="284.4">Fn</text>
+  <g data-part="fn-r" transform="translate(361,266) rotate(12)">
+    <path class="cap edge-control" d="M -13,-6.2 C -13,-8 -11.6,-9 9.4,-9 C 12.2,-9 13,-7.6 13,-5.8 L 13,3.4 C 13,5.6 11.8,6.6 9.2,6.6 L -9.6,6.6 C -12,6.6 -13,5.4 -13,3.2 Z"/>
+    <path d="M -8.4,-2.2 C -4.6,-4.4 4.6,-4.4 8.4,-2.2" fill="none" stroke="#0d2233" stroke-width="1.1" opacity="0.55"/>
+    <text x="0" y="1.6">Fn</text>
   </g>
-  <g data-part="paddle-l" transform="translate(112,270) rotate(-22)">
-    <path class="cap edge-control" d="M -9,-26 C -9,-30 -5,-32 0,-32 C 5,-32 9,-30 9,-26 L 11,16 C 11,23 6,26 0,26 C -6,26 -11,23 -11,16 Z"/>
-    <path d="M -5,-18 L 5,-18 L 6,8 L -6,8 Z" fill="#0d2233" opacity="0.55"/>
+  <g data-part="paddle-l" transform="translate(112,246) rotate(-26)">
+    <path class="cap edge-control" d="M -11,-31 C -11,-36 -6,-38 0,-38 C 6,-38 11,-36 11,-31 L 13,19 C 13,27 7,31 0,31 C -7,31 -13,27 -13,19 Z"/>
+    <path d="M -6.5,-23 L 6.5,-23 L 7.5,11 L -7.5,11 Z" fill="#0d2233" opacity="0.55"/>
     <text x="0" y="-1">L4</text>
   </g>
-  <g data-part="paddle-r" transform="translate(433,270) rotate(22)">
-    <path class="cap edge-control" d="M -9,-26 C -9,-30 -5,-32 0,-32 C 5,-32 9,-30 9,-26 L 11,16 C 11,23 6,26 0,26 C -6,26 -11,23 -11,16 Z"/>
-    <path d="M -5,-18 L 5,-18 L 6,8 L -6,8 Z" fill="#0d2233" opacity="0.55"/>
+  <g data-part="paddle-r" transform="translate(433,246) rotate(26)">
+    <path class="cap edge-control" d="M -11,-31 C -11,-36 -6,-38 0,-38 C 6,-38 11,-36 11,-31 L 13,19 C 13,27 7,31 0,31 C -7,31 -13,27 -13,19 Z"/>
+    <path d="M -6.5,-23 L 6.5,-23 L 7.5,11 L -7.5,11 Z" fill="#0d2233" opacity="0.55"/>
     <text x="0" y="-1">R4</text>
   </g>
 </g>
