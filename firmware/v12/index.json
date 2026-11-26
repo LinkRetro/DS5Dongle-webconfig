@@ -1,7 +1,17 @@
 {
   "board": "v12",
-  "latest": "LCT616-DS5 3.18H-oc75-v12",
+  "latest": "LCT616-DS5 3.18H-oc76-v12",
   "versions": [
+    {
+      "version": "LCT616-DS5 3.18H-oc76-v12",
+      "tag": "3.18H-oc76",
+      "file": "ds5dongle-v12-3.18H-oc76-hs.bin",
+      "size": 812984,
+      "sha256": "9c967771eaad692ab1428bd9736ae6d23d27c752761d9356e6458c0cfe3cf2a5",
+      "date": "2026-11-26",
+      "notes": "修复 XInput 模式枚举失败：全速（other-speed）描述符也要切到 Xbox 布局；启动日志打印当前输出模式",
+      "stable": false
+    },
     {
       "version": "LCT616-DS5 3.18H-oc75-v12",
       "tag": "3.18H-oc75",
