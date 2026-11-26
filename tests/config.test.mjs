@@ -864,9 +864,18 @@ test('Edge artwork highlights pressed trigger and face button like the standard 
  assert.equal(part('l2').classList.contains('pressed'),false);
 });
 
-test('Edge trigger outline uses the same pressed styling as the standard pad',async()=>{
+test('Edge press styling matches the standard pad rule for rule',async()=>{
  const html=readFileSync(new URL('../index.html',import.meta.url),'utf8');
- assert.match(html,/svg\[data-model="edge"\] \.ol\{[^}]*stroke/i,'Edge .ol base style missing');
- assert.match(html,/svg\[data-model="edge"\] \[data-part\]\.pressed \.ol\{[^}]*stroke:#f5f9ff/i,'Edge .ol pressed style missing');
- assert.match(html,/\.art \[data-part\]\.pressed \.ln\{fill:#fff/i,'standard pressed style missing');
+
+ // 1) 普通手柄：按下时 cap/stk 变紫、ln 变白（这是"紫色填充"的来源）
+ assert.match(html,/\.art \[data-part\]\.pressed \.cap[^{]*\{[^}]*fill:var\(--violet-feedback\)/i,'standard cap fill missing');
+ assert.match(html,/\.art \[data-part\]\.pressed \.ln\{fill:#fff/i,'standard pressed outline missing');
+
+ // 2) Edge 必须有一条同等效果的规则，且优先级要压过 Edge 自己的配色
+ assert.match(html,/svg\[data-model="edge"\] \[data-part\]\.pressed \.cap[^{]*\{[^}]*fill:var\(--violet-feedback\)/i,'Edge pressed cap fill missing or overridden');
+
+ // 3) 扳机必须和普通图一样用渐变表示按压力度
+ assert.match(html,/svg\[data-model="edge"\] \[data-part="l2"\] \.dk\{fill:url\(#ctl-l2-fill\)\}/i,'Edge L2 gradient not wired');
+ assert.match(html,/svg\[data-model="edge"\] \[data-part="r2"\] \.dk\{fill:url\(#ctl-r2-fill\)\}/i,'Edge R2 gradient not wired');
+ assert.match(html,/id=\\?"ctl-l2-fill\\?"[^>]*>[\s\S]{0,600}?data-edge/i,'Edge L2 gradient stops missing');
 });

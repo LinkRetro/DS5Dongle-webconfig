@@ -340,9 +340,10 @@ body:not(.light) .art svg[data-model="edge"] .tp-tex{fill:#3d4558}
 
 /* Edge 扳机的按下反馈要和普通图一致：轮廓变白，本体泛紫 */
 .art svg[data-model="edge"] [data-part].pressed .ol{stroke:#F5F9FF;stroke-width:1.3}
-.art svg[data-model="edge"] [data-part="l2"].pressed .dk,
-.art svg[data-model="edge"] [data-part="r2"].pressed .dk,
-.art svg[data-model="edge"] [data-part="l1"].pressed .dk,
-.art svg[data-model="edge"] [data-part="r1"].pressed .dk{
- fill:color-mix(in srgb,var(--violet-feedback) 45%,#2e3444);
-}
+
+/* EDGE_PRESS_PARITY */
+.art svg[data-model="edge"] [data-part].pressed .cap,
+.art svg[data-model="edge"] [data-part].pressed.cap,
+.art svg[data-model="edge"] [data-part].pressed .stk{fill:var(--violet-feedback)}
+.art svg[data-model="edge"] [data-part="l2"] .dk{fill:url(#ctl-l2-fill)}
+.art svg[data-model="edge"] [data-part="r2"] .dk{fill:url(#ctl-r2-fill)}
