@@ -1,7 +1,17 @@
 {
   "board": "v12",
-  "latest": "LCT616-DS5 3.18H-oc79-v12",
+  "latest": "LCT616-DS5 3.18H-oc80-v12",
   "versions": [
+    {
+      "version": "LCT616-DS5 3.18H-oc80-v12",
+      "tag": "3.18H-oc80",
+      "file": "ds5dongle-v12-3.18H-oc80-hs.bin",
+      "size": 813716,
+      "sha256": "e9b6ca2aa01a6a2c7e27b93b8db316fa9e267aea9dc59b550a52641fcd3281e2",
+      "date": "2026-11-26",
+      "notes": "XInput 模式再加一个完整 DualSense HID 手柄接口，确保 Chrome/网页一定能看到设备并切回",
+      "stable": false
+    },
     {
       "version": "LCT616-DS5 3.18H-oc79-v12",
       "tag": "3.18H-oc79",

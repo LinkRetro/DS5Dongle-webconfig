@@ -1,13 +1,23 @@
 {
   "board": "v1",
-  "latest": "LCT616-DS5 3.18H-oc79-v1",
+  "latest": "LCT616-DS5 3.18H-oc80-v1",
   "versions": [
+    {
+      "version": "LCT616-DS5 3.18H-oc80-v1",
+      "tag": "3.18H-oc80",
+      "file": "ds5dongle-v1-3.18H-oc80-hs.bin",
+      "size": 813216,
+      "sha256": "a067e7f8f40584394777c5948b07da34e9c25880117586443c0e1927b5a849ec",
+      "date": "2026-11-26",
+      "notes": "XInput 模式再加一个完整 DualSense HID 手柄接口，确保 Chrome/网页一定能看到设备并切回",
+      "stable": false
+    },
     {
       "version": "LCT616-DS5 3.18H-oc79-v1",
       "tag": "3.18H-oc79",
       "file": "ds5dongle-v1-3.18H-oc79-hs.bin",
-      "size": 813012,
-      "sha256": "f7de060c428598bdb04131697bb60ff287f931f651320c8ca313f100e128179c",
+      "size": 813216,
+      "sha256": "425b962a385ec42885abe1781c9c84f55df468288926ee54fd481d0d529aa937",
       "date": "2026-11-26",
       "notes": "XInput 模式保留最小 HID 配置接口：切到 Xbox 模式后网页仍能连接并切回；构建新增启动路径静态检查",
       "stable": false

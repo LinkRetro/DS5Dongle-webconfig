@@ -100,6 +100,7 @@ $notes = @{
     77 = 'XInput 模式逃生开关：开机 3 秒内按住 BOOT 1.5 秒，或手柄 PS+Options 长按 3 秒，即可切回 DualSense 并重启'
     78 = '修复 oc77 启动崩溃：调度器启动前误用 vTaskDelay 导致 Store/AMO access fault（BOOT 逃生窗口）'
     79 = 'XInput 模式保留最小 HID 配置接口：切到 Xbox 模式后网页仍能连接并切回；构建新增启动路径静态检查'
+    80 = 'XInput 模式再加一个完整 DualSense HID 手柄接口，确保 Chrome/网页一定能看到设备并切回'
 }
 
 $labels = @{ v1 = 'DS5Dongle V1 · 单灯'; v12 = 'DS5Dongle V1.2 · RGB' }
