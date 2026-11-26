@@ -1,7 +1,16 @@
 {
   "board": "v12",
-  "latest": "LCT616-DS5 3.18H-oc71-v12",
+  "latest": "LCT616-DS5 3.18H-oc72-v12",
   "versions": [
+    {
+      "version": "LCT616-DS5 3.18H-oc72-v12",
+      "tag": "3.18H-oc72",
+      "file": "ds5dongle-v12-3.18H-oc72-hs.bin",
+      "size": 813136,
+      "sha256": "12a03a30b14e2a4bd324339bf5c17dae608b57abd4600c8942989b1ca83a4f06",
+      "date": "2026-11-26",
+      "notes": "静音键行为可选（麦克风+音频 / 仅麦克风 / 仅音频），按下时点亮手柄橙色静音灯（配置版本 12）"
+    },
     {
       "version": "LCT616-DS5 3.18H-oc71-v12",
       "tag": "3.18H-oc71",
