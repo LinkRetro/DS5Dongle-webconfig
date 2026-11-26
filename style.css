@@ -315,3 +315,25 @@ input[type=range]{height:22px;cursor:pointer}
 .trigger-stop-row[data-level="short"]{border-color:var(--warning);color:var(--ink)}
 .trigger-stop-row[data-level="medium"]{border-color:var(--accent);color:var(--ink)}
 .trigger-stop-row[data-level="long"]{border-color:var(--success);color:var(--ink)}
+
+/* Edge 手绘图自带一套更深的配色，暗色主题下扳机/摇杆/触摸板会糊成一片。
+   这里给 Edge 单独调亮，并为 adapter（行程滑块的独立画法）补上描边。 */
+.art svg[data-model="edge"] .dk{fill:#2e3444}
+.art svg[data-model="edge"] .cap{fill:#4b5062}
+.art svg[data-model="edge"] .stk{fill:#585d70}
+.art svg[data-model="edge"] .ln{fill:#c6cad8}
+.art svg[data-model="edge"] .ln-dk{fill:#b3b8c8}
+.art svg[data-model="edge"] .ol{fill:none;stroke:#c6cad8;stroke-width:1.1}
+.art svg[data-model="edge"] .adapter path{fill:none;stroke:#aab0c0;stroke-width:1.1}
+.art svg[data-model="edge"] .fill-off{fill:#20242f}
+.art svg[data-model="edge"] .fill-on{fill:#3d4356}
+/* 暗色主题下再提亮一档：纯黑（#2e3444 以下）在 #10141C 背景上等于看不见 */
+body:not(.light) .art svg[data-model="edge"] .dk{fill:#3a4152}
+body:not(.light) .art svg[data-model="edge"] .cap{fill:#5b6176}
+body:not(.light) .art svg[data-model="edge"] .stk{fill:#6a7086}
+body:not(.light) .art svg[data-model="edge"] .ln{fill:#d2d6e2}
+body:not(.light) .art svg[data-model="edge"] .ln-dk{fill:#c0c5d4}
+body:not(.light) .art svg[data-model="edge"] .adapter path{stroke:#c0c5d4}
+body:not(.light) .art svg[data-model="edge"] [data-part="touchpad"]{fill:#343b4d;fill-opacity:1}
+body:not(.light) .art svg[data-model="edge"] .tp{fill:#343b4d}
+body:not(.light) .art svg[data-model="edge"] .tp-tex{fill:#3d4558}
