@@ -179,7 +179,7 @@ function ui({version=6,corrupt=false,production=false,auto=false,noHid=false,sto
  const ctx={__DS5_LANG:'zh-CN',atob,Blob,URL,isSecureContext:true,Date:class extends Date{static now(){return now}},document:window.document,navigator,localStorage:{getItem(k){return k==='ds5.lang'?'zh-CN':storage.get(k)??null},setItem(k,v){storage.set(k,v)}},setTimeout(fn,ms){const t={fn,ms};timers.push(t);return t},clearTimeout(t){if(t)t.cancelled=true},clearInterval(){},setInterval(fn,ms){timers.push({fn,ms})},confirm:()=>true,TextDecoder,Uint8Array,DataView,TextEncoder,Event:window.Event,console};vm.runInNewContext(html.match(/<script type="module">([\s\S]*?)<\/script>/)[1],ctx);
  ctx.crypto=webcrypto;ctx.location={protocol:'file:'};
  const el=id=>window.document.getElementById(id);return {el,window,device,sent,outputs,pending(ms){return timers.some(t=>t.ms===ms&&!t.cancelled&&!t.fired)},expire(ms=5000){const t=timers.find(t=>t.ms===ms&&!t.cancelled&&!t.fired);if(!t)throw Error("No pending timeout");t.fired=true;t.fn()},
- input(axes,buttons=0,extraButtons=0){now+=50;const b=new Uint8Array(63);b.set(axes);b[7]=8;b[8]=buttons;b[9]=extraButtons;listeners.inputreport({device,reportId:1,data:new DataView(b.buffer)})},
+ input(axes,buttons=0,extraButtons=0,extra={}){now+=50;const b=new Uint8Array(63);b.set(axes);b[7]=(extra.faces??0)|8;b[8]=buttons;b[9]=extraButtons;if(extra.triggers){b[4]=extra.triggers[0];b[5]=extra.triggers[1]}listeners.inputreport({device,reportId:1,data:new DataView(b.buffer)})},
  setPads(pads){gamepads=pads},async tick(ms=50){now+=ms;await timers.find(t=>t.ms===50).fn()},setBattery(pct,state){telemetry[11]=pct;telemetry[12]=state},setLink(state,bonds=1){const b=new Uint8Array(17);b.set(telemetry.slice(0,13));b[13]=0xd3;b[14]=state;b[15]=bonds;telemetry=b},failTelemetry(){telemetryFails=true},setLatency(age=1000,count=50){const b=new Uint8Array(51);b.set(telemetry.slice(0,13));b[13]=0xd3;b[14]=7;b[17]=0x4c;b[18]=1;const v=new DataView(b.buffer);[count,1200,1100,500,2000,age,400,800].forEach((n,i)=>v.setUint32(19+i*4,n,true));telemetry=b},async poll(){await timers.find(t=>t.ms===2000).fn()},disconnect:()=>listeners.disconnect({device}),cfg:()=>cfg};
 }
 test('UI: connect, stage only, rebase config, verify then save, disconnect cleanup',async()=>{const u=ui();await u.el('connect').onclick();assert.equal(u.el('connection').textContent,'接收器已连接');u.window.document.querySelector('[data-page="touch"]').onclick();const c=u.window.document.querySelector('#controls input[type="checkbox"]');c.checked=true;c.onchange();assert.equal(u.sent.filter(([id])=>id===246).length,0);u.cfg()[6]=42;await u.el('save').onclick();const writes=u.sent.filter(([id])=>id===246);assert.deepEqual(writes.map(([,p])=>p[0]),[1,2]);assert.equal(u.cfg()[6],42);assert.equal(u.cfg()[31],1);assert.equal(u.el('save').disabled,true);u.disconnect();assert.equal(u.el('connection').textContent,'尚未连接接收器');assert.equal(u.el('save').disabled,true)});
@@ -226,7 +226,7 @@ test('mapping selection highlights the source, survives live input and redraw, c
 });
 test('mapping source highlight also follows Edge artwork and diagram clicks',async()=>{
  const u=ui();u.device.productId=0x0df2;await u.el('connect').onclick();const triangle=u.el('art').querySelector('[data-part="triangle"]');u.el('art').onclick({target:triangle});assert.equal(u.el('mapping-source').value,'3');assert.equal(triangle.classList.contains('mapping-source'),true);assert.match(u.el('mapping-selection').textContent,/三角/);
- u.window.document.querySelector('[data-page="feel"]').onclick();assert.equal(triangle.classList.contains('mapping-source'),false);
+ u.window.document.querySelector('.nav [data-page="feel"]').onclick();assert.equal(triangle.classList.contains('mapping-source'),false);
 });
 
 test('trigger diagram explains its action, selects the matching side, and never starts a test',async()=>{
@@ -823,4 +823,50 @@ test('remap 0xFB accepts all eight profiles and rejects nine',()=>{
  }
  assert.throws(()=>remapRead(view(251,[8,8,...table]),8),/映射组回读不匹配/);
  assert.throws(()=>remapWrite(8,table),/映射格式错误/);
+});
+
+/* ---- Edge 页面反馈：扳机行程推测、按下高亮、样式契约 ---- */
+
+test('trigger stop card estimates the level from the trigger maximum',async()=>{
+ const u=ui();
+ await u.el('connect').onclick();
+ await u.poll();
+ u.window.document.querySelector('.nav [data-page="feel"]').onclick();
+ const row=side=>u.window.document.querySelector(`#trigger-stop [data-side="${side}"]`);
+ assert.match(row('L2').textContent,/未测/);
+ u.input([128,128,128,128],0,0,{triggers:[255,0]});
+ u.input([128,128,128,128]);
+ assert.match(row('L2').textContent,/长行程/);
+ assert.match(row('L2').textContent,/255/);
+ u.input([128,128,128,128],0,0,{triggers:[210,0]});
+ u.input([128,128,128,128]);
+ assert.match(row('L2').textContent,/中档/);
+ u.input([128,128,128,128],0,0,{triggers:[160,0]});
+ u.input([128,128,128,128]);
+ assert.match(row('L2').textContent,/短行程/);
+ const reset=u.window.document.querySelector('#trigger-stop-card button');
+ reset.onclick();
+ assert.match(row('L2').textContent,/未测/);
+});
+
+test('Edge artwork highlights pressed trigger and face button like the standard pad',async()=>{
+ const u=ui();
+ u.device.productId=0x0df2;
+ await u.el('connect').onclick();
+ await u.poll();
+ const art=u.el('art');
+ const part=p=>art.querySelector(`[data-part="${p}"]`);
+ u.input([128,128,128,128],0x04,0,{faces:0x20,triggers:[200,0]});
+ assert.ok(part('l2').classList.contains('pressed'),'L2 should be pressed');
+ assert.ok(part('cross').classList.contains('pressed'),'cross should be pressed');
+ assert.equal(part('r2').classList.contains('pressed'),false);
+ u.input([128,128,128,128]);
+ assert.equal(part('l2').classList.contains('pressed'),false);
+});
+
+test('Edge trigger outline uses the same pressed styling as the standard pad',async()=>{
+ const html=readFileSync(new URL('../index.html',import.meta.url),'utf8');
+ assert.match(html,/svg\[data-model="edge"\] \.ol\{[^}]*stroke/i,'Edge .ol base style missing');
+ assert.match(html,/svg\[data-model="edge"\] \[data-part\]\.pressed \.ol\{[^}]*stroke:#f5f9ff/i,'Edge .ol pressed style missing');
+ assert.match(html,/\.art \[data-part\]\.pressed \.ln\{fill:#fff/i,'standard pressed style missing');
 });

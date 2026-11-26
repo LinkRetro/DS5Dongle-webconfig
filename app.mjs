@@ -637,7 +637,7 @@ function renderPanel(){ if(flashSession?.isBusy()&&page!=='flash'){page='flash';
   for(const side of ['L2','R2']){const row=document.createElement('div');row.className='trigger-stop-row';row.dataset.side=side;box2.append(row)}
   card.append(box2);
   const reset=document.createElement('button');reset.type='button';reset.className='ghost';paintLocalized(reset,msg('trigger_stop_reset'));
-  reset.onclick=()=>{trigMax=[0,0];paintTriggerStop()};card.append(reset);
+  reset.onclick=()=>{trigMax=[0,0];trigPeak=[0,0];paintTriggerStop()};card.append(reset);
   box.append(card);paintTriggerStop();
  }
  if(['vision','feel','audio','motion'].includes(page))renderTests(box,inlineSettings);
@@ -1147,7 +1147,8 @@ $('art').onclick=e=>selectPart(e.target);$('art').onkeydown=e=>{if(e.key==='Ente
 /* 扳机行程限位推测：Edge 的 L2/R2 限位是纯机械滑块，手柄不上报档位。
  * 滑块会缩短行程，因此按到底时的最大模拟量会变小，用它推测档位，
  * 只作提示，不作为设置项。 */
-let trigMax=[0,0];
+let trigMax=[0,0];   /* 最近一次「按到底」测得的最大值 */
+let trigPeak=[0,0];  /* 本次按下过程中的峰值 */
 function triggerStopLevel(v){
  if(!v)return 'unknown';
  if(v>=240)return 'long';
@@ -1162,10 +1163,15 @@ function paintTriggerStop(){
   const v=trigMax[i],level=triggerStopLevel(v);
   el.dataset.level=level;
   const LEVEL_KEY={long:'trigger_stop_long',medium:'trigger_stop_medium',short:'trigger_stop_short',unknown:'trigger_stop_unknown'};
- el.textContent=`${side} · ${msg(LEVEL_KEY[level])} · ${v?('max '+v):'—'}`;
+ el.textContent=`${side} · ${t(LEVEL_KEY[level])} · ${v?('max '+v):'—'}`;
  }
 }
-function paintInput(i,source){lastInput=Date.now();if(lastInput-lastPaint<33)return;lastPaint=lastInput;visualInputActive=true;trigMax[0]=Math.max(trigMax[0],i.triggers[0]);trigMax[1]=Math.max(trigMax[1],i.triggers[1]);paintTriggerStop();moveSticks(i.axes);for(const [n,v]of [['l2',i.triggers[0]],['r2',i.triggers[1]]])for(const stop of $('art').querySelectorAll(`#ctl-${n}-fill [data-edge]`))stop.setAttribute('offset',String(v/255));paintLocalized($('input-state'),source==='接收器 HID'?msg('live_input_hid'):msg('live_input_browser'));$('left-axis').textContent=`${i.axes[0]} / ${i.axes[1]}`;$('right-axis').textContent=`${i.axes[2]} / ${i.axes[3]}`;$('triggers').textContent=i.triggers.map(v=>Math.round(v/255*100)+'%').join(' / ');$('art').querySelectorAll('[data-part]').forEach(p=>p.classList.toggle('pressed',i.parts.has(p.dataset.part)))}
+function paintInput(i,source){lastInput=Date.now();if(lastInput-lastPaint<33)return;lastPaint=lastInput;visualInputActive=true;for(const k of [0,1]){
+  const v=i.triggers[k];
+  if(v>5)trigPeak[k]=Math.max(trigPeak[k],v);
+  else if(trigPeak[k]>0){trigMax[k]=trigPeak[k];trigPeak[k]=0}   /* 松手后锁定本次结果，下次按下重新测量 */
+ }
+ paintTriggerStop();moveSticks(i.axes);for(const [n,v]of [['l2',i.triggers[0]],['r2',i.triggers[1]]])for(const stop of $('art').querySelectorAll(`#ctl-${n}-fill [data-edge]`))stop.setAttribute('offset',String(v/255));paintLocalized($('input-state'),source==='接收器 HID'?msg('live_input_hid'):msg('live_input_browser'));$('left-axis').textContent=`${i.axes[0]} / ${i.axes[1]}`;$('right-axis').textContent=`${i.axes[2]} / ${i.axes[3]}`;$('triggers').textContent=i.triggers.map(v=>Math.round(v/255*100)+'%').join(' / ');$('art').querySelectorAll('[data-part]').forEach(p=>p.classList.toggle('pressed',i.parts.has(p.dataset.part)))}
 /* ---- 陀螺仪 / 加速度（六轴）----
  * 偏移按 DualSense USB 输入报告布局，相对 p[0]=LX：
  * 陀螺仪 16..21 -> p[15..20]，加速度 22..27 -> p[21..26]，int16 小端。
