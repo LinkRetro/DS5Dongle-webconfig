@@ -1,7 +1,17 @@
 {
   "board": "v1",
-  "latest": "LCT616-DS5 3.18H-oc101-v1",
+  "latest": "LCT616-DS5 3.18H-oc102-v1",
   "versions": [
+    {
+      "version": "LCT616-DS5 3.18H-oc102-v1",
+      "tag": "3.18H-oc102",
+      "file": "ds5dongle-v1-3.18H-oc102-hs.bin",
+      "size": 816704,
+      "sha256": "22c3eb446aa649068947031a8a594872b9b022a3fee8f169b22667a5da369307",
+      "date": "2026-11-26",
+      "notes": "静音键默认行为改为「仅静音麦克风」，与手柄按键图标及原厂语义一致（可在网页改回麦克风+音频）",
+      "stable": false
+    },
     {
       "version": "LCT616-DS5 3.18H-oc101-v1",
       "tag": "3.18H-oc101",
