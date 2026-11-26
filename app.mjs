@@ -1100,11 +1100,9 @@ function renderRemap(box){const state=document.createElement('p');state.id='mapp
  source.onchange=edit;edit()
 }
 function paintLight(){const rgb=['led_r','led_g','led_b'].map(k=>val(k)??210);$('art').style.setProperty('--ctl-led',`rgb(${rgb.join(',')})`)}
-let showingRear=false;
-function showArt(edge){showingEdge=edge;$('art').innerHTML=edge?(showingRear?EDGE_REAR_ART:EDGE_ART):STANDARD_ART;$('view-toggle').hidden=!edge;for(const b of document.querySelectorAll('#view-toggle button'))b.classList.toggle('on',(b.dataset.view==='rear')===!!showingRear);stickParts=['stick-l','stick-r'].map(id=>$('art').querySelector(`[data-part="${id}"]`)).filter(Boolean).map(node=>({node,base:node.getAttribute('transform')??''}));visualInputActive=false;for(const p of $('art').querySelectorAll('[data-part]')){if(p.dataset.part.startsWith('fn-'))continue;p.setAttribute('tabindex','0');p.setAttribute('role','button');const paddle=edgeSources.find(({part})=>part===p.dataset.part);if(paddle)paintLocalized(p,paddle.label,'aria-label');else p.setAttribute('aria-label',p.dataset.part)}paintLight();paintMappingSource()}
+function showArt(edge){showingEdge=edge;$('art').innerHTML=edge?EDGE_ART:STANDARD_ART;stickParts=['stick-l','stick-r'].map(id=>$('art').querySelector(`[data-part="${id}"]`)).filter(Boolean).map(node=>({node,base:node.getAttribute('transform')??''}));visualInputActive=false;for(const p of $('art').querySelectorAll('[data-part]')){if(p.dataset.part.startsWith('fn-'))continue;p.setAttribute('tabindex','0');p.setAttribute('role','button');const paddle=edgeSources.find(({part})=>part===p.dataset.part);if(paddle)paintLocalized(p,paddle.label,'aria-label');else p.setAttribute('aria-label',p.dataset.part)}paintLight();paintMappingSource()}
 function setControllerArt(edge){
  $('device-title').textContent=edge?'DualSense Edge':'DualSense';
- if(!edge)showingRear=false;
  if(showingEdge!==edge)showArt(edge);
 }
 function paintTriggerSelection(){
@@ -1346,9 +1344,6 @@ paintLocalized($('input-state'),msg('phrase.after_connecting_click_a_part_of_the
 paintLocalized($('version'),msg('console_name'));
 mountLangSelect();applyI18n();
 document.querySelectorAll('[data-page]').forEach(b=>b.onclick=()=>{void stopTests();page=b.dataset.page;render()});
-document.querySelectorAll('#view-toggle button').forEach(b=>b.onclick=()=>{
- showingRear=b.dataset.view==='rear';showArt(showingEdge);
-});
 globalThis.addEventListener?.('blur',()=>{void stopTests()});globalThis.addEventListener?.('pagehide',()=>{void stopTests()});document.addEventListener('visibilitychange',()=>{if(document.hidden)void stopTests()});
 $('firmware-notice').onclick=()=>{void stopTests();page='flash';render()};
 showArt(false);render();

@@ -415,7 +415,6 @@ test('Edge paddle click opens its target on the mapping page and saves it to con
   return result;
  };
  await u.el('connect').onclick();
- u.el('view-toggle').querySelector('[data-view="rear"]').onclick();
  const art=u.el('art'),left=art.querySelector('[data-part="paddle-l"]');
  art.onclick({target:left});
  assert.equal(u.el('mapping-source').value,'31');

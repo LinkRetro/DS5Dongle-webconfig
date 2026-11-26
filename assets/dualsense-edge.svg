@@ -1,17 +1,8 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 544.70661 302.91098">
 <g class="edge-extras">
-  <!-- DualSense Edge 正面专属控件
-       依 Sony 官方零件图：正面看不到背键；只有摇杆下方、机身折线处的 Fn 垫块
-       （左右各一，带横向防滑纹）。背键在背面，见 dualsense-edge-rear.svg。 -->
-  <g data-part="fn-l" transform="translate(158,252) rotate(-8)">
-    <rect class="cap edge-control" x="-16" y="-7.5" width="32" height="15" rx="6"/>
-    <path d="M -12,-4 L 12,-4 M -12,0 L 12,0 M -12,4 L 12,4" stroke="#0d2233" stroke-width="1.4" opacity="0.5"/>
-    <text x="0" y="2.6" style="font-size:8px">Fn</text>
-  </g>
-  <g data-part="fn-r" transform="translate(386,252) rotate(8)">
-    <rect class="cap edge-control" x="-16" y="-7.5" width="32" height="15" rx="6"/>
-    <path d="M -12,-4 L 12,-4 M -12,0 L 12,0 M -12,4 L 12,4" stroke="#0d2233" stroke-width="1.4" opacity="0.5"/>
-    <text x="0" y="2.6" style="font-size:8px">Fn</text>
-  </g>
+  <g data-part="fn-l"><rect class="cap edge-control" x="199" y="251" width="30" height="13" rx="5"/><text x="214" y="260">Fn</text></g>
+  <g data-part="fn-r"><rect class="cap edge-control" x="316" y="251" width="30" height="13" rx="5"/><text x="331" y="260">Fn</text></g>
+  <g data-part="paddle-l"><rect class="cap edge-control" x="52" y="203" width="44" height="25" rx="9"/><text x="74" y="219">L4</text></g>
+  <g data-part="paddle-r"><rect class="cap edge-control" x="449" y="203" width="44" height="25" rx="9"/><text x="471" y="219">R4</text></g>
 </g>
 </svg>
