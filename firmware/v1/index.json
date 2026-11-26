@@ -1,7 +1,17 @@
 {
   "board": "v1",
-  "latest": "LCT616-DS5 3.18H-oc103-v1",
+  "latest": "LCT616-DS5 3.18H-oc105-v1",
   "versions": [
+    {
+      "version": "LCT616-DS5 3.18H-oc105-v1",
+      "tag": "3.18H-oc105",
+      "file": "ds5dongle-v1-3.18H-oc105-hs.bin",
+      "size": 817016,
+      "sha256": "da6848ad7c8c3d9cce663ea9f34bb7e9b947f52c9496b71511b86f93ee63e383",
+      "date": "2026-11-26",
+      "notes": "修复 Edge 识别：先 SET 0x65 进入 DSE 模式再查 0x70（此前顺序反过来，Edge 一律被判为普通手柄）；含背键原始报文诊断",
+      "stable": false
+    },
     {
       "version": "LCT616-DS5 3.18H-oc103-v1",
       "tag": "3.18H-oc103",
