@@ -907,3 +907,11 @@ test('shoulder buttons set pressed class on both artwork models',async()=>{
  }
 });
 
+/* FN_VISIBLE_FILL：Fn 的可见面是 .ln 横纹，必须被强制成紫色，
+   否则会被全局「按下 .ln 变白」规则覆盖（真实页面里顺序在后） */
+test('Fn pressed fill overrides the global white outline rule',async()=>{
+ const html=readFileSync(new URL('../index.html',import.meta.url),'utf8');
+ const block=(html.match(/FN_PURPLE_FORCE[\s\S]{0,900}/)||[''])[0];
+ assert.match(block,/fn-l"\]\.pressed \.ln/,'Fn .ln 规则缺失');
+ assert.match(block,/fill:var\(--violet-feedback\) !important/,'Fn 缺少 !important 覆盖（会被白色规则压掉）');
+});
