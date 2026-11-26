@@ -44,3 +44,18 @@ test('audio: stopping while permission is pending releases the newly granted str
 test('audio: permission denied and unsupported selected sink do not leak audio contexts',async()=>{
  const u=audioEnv();u.env.navigator.mediaDevices.getUserMedia=async()=>{throw Error('Permission denied')};const a=createAudioTester({env:u.env,notify(){}});await assert.rejects(a.microphone(),/Permission denied/);assert.equal(u.contexts.length,0);u.env.AudioContext.prototype.setSinkId=undefined;await assert.rejects(a.tone('dongle'),/无法选择/);assert(u.contexts[0].closed);
 });
+
+test('输出报告长度以描述符为准：PID 陈旧时也要补齐到 63 字节（Edge 场景）',async()=>{
+ const packets=[];
+ const device={opened:true,productId:0x0ce6,collections:[{outputReports:[{items:[{reportCount:63}]}]}],
+  async sendReport(id,b){packets.push([id,b])}};
+ const tester=createOutputTester({getDevice:()=>device,isConnected:()=>true,getColor:()=>[0,0,0],
+  notify:()=>{},onState:()=>{},timer:()=>0,cancel:()=>{}});
+ await tester.run('trigger',{side:'right',mode:'feedback',strength:5,start:0});
+ await flush();
+ const [id,payload]=packets.at(-1);
+ assert.equal(id,2);
+ assert.equal(payload.length,63,'应按描述符补齐到 63 字节');
+ assert.equal(payload[0],0x04,'右扳机标志位');
+ assert.equal(payload[10],0x21,'反馈模式');
+});

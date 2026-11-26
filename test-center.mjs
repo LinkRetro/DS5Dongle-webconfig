@@ -23,7 +23,20 @@ export function testOutput(kind,values={},edge=false){
 }
 export function createOutputTester({getDevice,isConnected,getColor,notify,onState=()=>{},timer=setTimeout,cancel=clearTimeout}){
  let generation=0,active=null,timeout=null,queue=Promise.resolve();
- const send=(d,b)=>{const task=queue.catch(()=>{}).then(()=>{if(!d.opened)throw Error('设备接口已关闭');return d.sendReport(2,b)});queue=task;return task};
+ /* 输出报告长度以设备描述符为准：接收器检测到 Edge 后会切换 PID 并重新枚举，
+  * 页面缓存的 productId 可能是旧值；按旧值发送会因长度不符被 Windows HID 拒绝，
+  * 表现为扳机测试完全没有反应。 */
+ function outputPayloadLength(d){
+  try{
+   let n=0;
+   for(const c of d.collections||[])for(const r of c.outputReports||[])for(const it of r.items||[])n+=it.reportCount||0;
+   return n>0?n:null;
+  }catch{return null}
+ }
+ const send=(d,b)=>{const task=queue.catch(()=>{}).then(()=>{if(!d.opened)throw Error('设备接口已关闭');
+  const need=outputPayloadLength(d);let data=b;
+  if(need&&need!==b.length){data=new Uint8Array(need);data.set(b.subarray(0,Math.min(b.length,need)))}
+  return d.sendReport(2,data)});queue=task;return task};
  async function stop(){generation++;cancel(timeout);timeout=null;const previous=active;active=null;onState();if(!previous)return true;
   const {d,kind,values,color}=previous;
  if(!d?.opened)return true;   /* device gone: nothing to reset, stay quiet */
