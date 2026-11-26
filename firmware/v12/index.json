@@ -1,7 +1,16 @@
 {
   "board": "v12",
-  "latest": "LCT616-DS5 3.18H-oc70-v12",
+  "latest": "LCT616-DS5 3.18H-oc71-v12",
   "versions": [
+    {
+      "version": "LCT616-DS5 3.18H-oc71-v12",
+      "tag": "3.18H-oc71",
+      "file": "ds5dongle-v12-3.18H-oc71-hs.bin",
+      "size": 812856,
+      "sha256": "f4945c842b714a39b072c02af58fb0e17cb0fa5df7ed523e930a31973ec1db05",
+      "date": "2026-11-26",
+      "notes": "手柄静音键现在有作用：按下同时静音麦克风与手柄/耳机音频，再按恢复（PC 上原本无人响应这个键）"
+    },
     {
       "version": "LCT616-DS5 3.18H-oc70-v12",
       "tag": "3.18H-oc70",
