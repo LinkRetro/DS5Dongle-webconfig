@@ -560,6 +560,7 @@ function renderPanel(){ if(flashSession?.isBusy()&&page!=='flash'){page='flash';
  if(page==='about'){
   const card=document.createElement('section');card.className='test-card';
   const intro=document.createElement('p');paintLocalized(intro,msg('about_description'));card.append(intro);
+  const buildLine=document.createElement('p');buildLine.className='hint';buildLine.id='page-build';buildLine.textContent='page build: '+((typeof PAGE_BUILD==='string')?PAGE_BUILD:'?');card.append(buildLine);
   const hw=document.createElement('p');hw.className='hint';paintLocalized(hw,msg('about_hardware'));card.append(hw);
   const sup=document.createElement('p');sup.className='hint';paintLocalized(sup,msg('about_support'));card.append(sup);
   const dc=document.createElement('a');dc.href='https://discord.com/invite/s3xcU2PgqZ';dc.target='_blank';dc.rel='noreferrer';paintLocalized(dc,msg('about_discord'));card.append(dc);

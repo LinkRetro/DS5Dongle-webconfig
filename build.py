@@ -23,10 +23,14 @@ def module_body(name):
 
 catalog = json.loads((r/'i18n-catalog.json').read_text(encoding='utf-8-sig'))
 catalog_source = json.dumps(catalog).replace('<', '\\u003c')
-js='const catalog='+catalog_source+';\n'+'\n'.join(module_body(name) for name in (
+import hashlib
+_pb = hashlib.sha1((standard + edge + catalog_source).encode('utf-8')).hexdigest()[:8]
+js='const PAGE_BUILD="'+_pb+'";const catalog='+catalog_source+';\n'+'\n'.join(module_body(name) for name in (
     'protocol.mjs','test-center.mjs','i18n.mjs','i18n_phrases.mjs'
 ))+'\nconst STANDARD_ART='+json.dumps(standard)+';\nconst EDGE_ART='+json.dumps(edge)+';\n'+module_body('app.mjs')
 # Embed serial resources and UI so file:// does not fetch binary support files.
+import hashlib
+_pb=hashlib.sha1((str(standard)+str(edge)+str(js)).encode('utf-8')).hexdigest()[:8]
 import base64
 
 
