@@ -8641,19 +8641,19 @@
       "tr": "Xbox 360 (XInput, eski oyunlar)"
     },
     "output_mode_hint": {
-      "zh-CN": "XInput 模式没有音频、触觉、自适应扳机和灯条，仅用于只认 Xbox 手柄的老游戏/模拟器；切换后需重启接收器",
-      "en": "XInput has no audio, haptics, adaptive triggers or light bar — only for games that require an Xbox pad. Restart the receiver after switching",
-      "zh-TW": "XInput 模式沒有音訊、觸覺、自適應扳機與燈條，僅供只認 Xbox 手把的遊戲；切換後需重啟接收器",
-      "ja": "XInput では音声・触覚・アダプティブトリガー・ライトバーは使えません。切替後は再起動が必要です",
-      "ko": "XInput 모드에서는 오디오/햅틱/적응형 트리거/라이트바를 쓸 수 없습니다. 전환 후 재시작 필요",
-      "de": "XInput bietet kein Audio, keine Haptik, keine adaptiven Trigger und keine Lightbar; nach dem Wechsel neu starten",
-      "fr": "XInput n'offre ni audio, ni haptique, ni gâchettes adaptatives, ni barre lumineuse ; redémarrer après le changement",
-      "es": "XInput no tiene audio, háptica, gatillos adaptativos ni barra de luz; reinicia tras cambiarlo",
-      "it": "XInput non ha audio, haptica, trigger adattivi né barra luminosa; riavvia dopo il cambio",
-      "pt-BR": "XInput não tem áudio, háptica, gatilhos adaptativos nem barra de luz; reinicie após trocar",
-      "ru": "В XInput нет звука, тактильной отдачи, адаптивных курков и подсветки; после смены перезапустите",
-      "pl": "XInput nie ma audio, haptyki, adaptacyjnych spustów ani podświetlenia; zrestartuj po zmianie",
-      "tr": "XInput'te ses, dokunsal geri bildirim, uyarlanabilir tetik ve ışık yok; değiştirdikten sonra yeniden başlat"
+      "zh-CN": "XInput 模式下没有音频、触觉、自适应扳机和灯条，仅用于只认 Xbox 手柄的老游戏/模拟器。切换后需重启接收器；此时网页连不上，按住 PS+Options 3 秒即可切回 DualSense。",
+      "zh-TW": "XInput 模式下沒有音訊、觸覺、自適應扳機與燈條，僅供只認 Xbox 手把的老遊戲/模擬器。切換後需重啟接收器；此時網頁連不上，按住 PS+Options 3 秒即可切回 DualSense。",
+      "en": "XInput has no audio, haptics, adaptive triggers or light bar - it exists for old games and emulators that only understand an Xbox pad. The receiver restarts after switching, and the page cannot connect in this mode: hold PS+Options for 3 s to return to DualSense.",
+      "ja": "XInput では音声・触覚・アダプティブトリガー・ライトバーは使えません。Xbox パッドしか認識しない旧作・エミュレーター向けです。切替後は再起動が必要で、このモードではページに接続できません。PS+Options を 3 秒長押しで DualSense に戻せます。",
+      "ko": "XInput 모드에서는 오디오·햅틱·적응형 트리거·라이트바를 쓸 수 없습니다. Xbox 패드만 인식하는 구형 게임/에뮬레이터용입니다. 전환 후 재시작이 필요하며 이 모드에서는 페이지 연결이 안 됩니다. PS+Options를 3초 누르면 DualSense로 돌아갑니다.",
+      "de": "XInput bietet kein Audio, keine Haptik, keine adaptiven Trigger und keine Lightbar - gedacht für alte Spiele und Emulatoren, die nur ein Xbox-Pad kennen. Nach dem Wechsel startet der Empfänger neu, und die Seite kann sich in diesem Modus nicht verbinden: PS+Options 3 s halten, um zu DualSense zurückzukehren.",
+      "fr": "XInput n'offre ni audio, ni haptique, ni gâchettes adaptatives, ni barre lumineuse : réservé aux jeux anciens et émulateurs qui ne reconnaissent qu'une manette Xbox. Le récepteur redémarre après le changement et la page ne peut pas s'y connecter : maintenez PS+Options 3 s pour revenir à DualSense.",
+      "es": "XInput no tiene audio, háptica, gatillos adaptativos ni barra de luz: es para juegos antiguos y emuladores que solo reconocen un mando Xbox. El receptor se reinicia tras cambiarlo y la página no puede conectarse en este modo: mantén PS+Options 3 s para volver a DualSense.",
+      "it": "XInput non ha audio, haptica, trigger adattivi né barra luminosa: serve per giochi vecchi ed emulatori che riconoscono solo un pad Xbox. Il ricevitore si riavvia dopo il cambio e la pagina non può connettersi in questa modalità: tieni premuto PS+Options per 3 s per tornare a DualSense.",
+      "pt-BR": "XInput não tem áudio, háptica, gatilhos adaptativos nem barra de luz: serve para jogos antigos e emuladores que só reconhecem um controle Xbox. O receptor reinicia após trocar e a página não conecta nesse modo: segure PS+Options por 3 s para voltar ao DualSense.",
+      "ru": "В XInput нет звука, тактильной отдачи, адаптивных курков и подсветки — режим для старых игр и эмуляторов, которые понимают только геймпад Xbox. После переключения приёмник перезапускается, и страница в этом режиме недоступна: удерживайте PS+Options 3 с, чтобы вернуться в DualSense.",
+      "pl": "XInput nie ma audio, haptyki, adaptacyjnych spustów ani podświetlenia — to tryb dla starych gier i emulatorów rozpoznających tylko pada Xbox. Po przełączeniu odbiornik restartuje się, a strona nie może się połączyć: przytrzymaj PS+Options 3 s, aby wrócić do DualSense.",
+      "tr": "XInput'te ses, dokunsal geri bildirim, uyarlanabilir tetik ve ışık yok; yalnızca Xbox kolu tanıyan eski oyunlar ve emülatörler içindir. Geçişten sonra alıcı yeniden başlar ve bu modda sayfa bağlanamaz: DualSense'e dönmek için PS+Options tuşlarını 3 sn basılı tutun."
     },
     "fw_boot_hint": {
       "zh-CN": "没有连上接收器也能刷机：按住 BOOT 插上进入下载模式 → 选好板型与版本 → 点「更新到此版本」→ 在弹窗里选择串口",
