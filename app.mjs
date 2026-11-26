@@ -180,6 +180,10 @@ function renderFirmware(box){
  const sel=document.createElement('select');sel.id='fw-version';
  picker.append(sel);
  const hint=document.createElement('p');hint.className='firmware-hint';
+ if(!device){
+  const boot=document.createElement('p');boot.className='firmware-hint';boot.id='fw-boot-hint';
+  paintLocalized(boot,msg('fw_boot_hint'));summary.append(boot);
+ }
  const go=document.createElement('button');go.className='fw-open';paintLocalized(go,msg('fw_install_version'));
  let list=[],chosen=null;
  const loadImage=async (entry,boardId)=>{
@@ -204,7 +208,11 @@ function renderFirmware(box){
  };
  sel.onchange=applyChoice;
   const selectBoard=()=>{list=catalogFor('-'+board.value)??[];sel.replaceChildren();for(const [i,v] of list.entries())option(sel,i,v.stable?v.version+' · '+messageText(msg('fw_stable_badge')):v.version,false);sel.value='0';applyChoice()};
-  board.onchange=selectBoard;selectBoard();
+  const lastBoard=(()=>{try{return localStorage.getItem('ds5.board')}catch{return null}})();
+  /* 记住上次选过的板型：下载模式（无 HID）下也能直接选固件；首次使用仍需显式选择 */
+  if(!detectedBoard&&(lastBoard==='v1'||lastBoard==='v12'))board.value=lastBoard;
+  board.onchange=()=>{try{localStorage.setItem('ds5.board',board.value)}catch{}selectBoard()};
+  selectBoard();
  // 点击即弹窗；弹窗挂在 body 上、不依赖设备连接，拔掉接收器后仍可操作
   go.onclick=()=>{if(!chosen||flashSession?.isBusy())return;const boardId=board.value;fwDialogOpen(chosen.version,chosen,entry=>loadImage(entry,boardId))};
  summary.append(picker);summary.append(hint);summary.append(document.createElement('br'),go);box.append(summary);
@@ -496,7 +504,7 @@ function refresh(){
  }
   if(page==='flash'){
    const board=$('fw-board'),versions=$('fw-version'),go=document.querySelector('.fw-open');
-   const locked=busy||flashSession?.isBusy();
+   const locked=flashSession?.isBusy();   /* flashing only: BOOT 模式没有 HID 也必须能选 */
    board.disabled=!!board.dataset.detected||!!locked;
    versions.disabled=!!locked||!versions.options.length;
    go.disabled=versions.disabled;

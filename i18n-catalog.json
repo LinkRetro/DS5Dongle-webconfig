@@ -8654,6 +8654,21 @@
       "ru": "В XInput нет звука, тактильной отдачи, адаптивных курков и подсветки; после смены перезапустите",
       "pl": "XInput nie ma audio, haptyki, adaptacyjnych spustów ani podświetlenia; zrestartuj po zmianie",
       "tr": "XInput'te ses, dokunsal geri bildirim, uyarlanabilir tetik ve ışık yok; değiştirdikten sonra yeniden başlat"
+    },
+    "fw_boot_hint": {
+      "zh-CN": "没有连上接收器也能刷机：按住 BOOT 插上进入下载模式 → 选好板型与版本 → 点「更新到此版本」→ 在弹窗里选择串口",
+      "en": "You can flash without a connected receiver: hold BOOT while plugging in (download mode) → pick board and version → Update to this version → choose the serial port",
+      "zh-TW": "沒連上接收器也能刷機：按住 BOOT 插上進入下載模式 → 選好板型與版本 → 點「更新到此版本」→ 在彈窗選序列埠",
+      "ja": "未接続でも書き込み可能：BOOT を押したまま接続（ダウンロードモード）→ 板と版を選択 → この版に更新 → シリアルポートを選択",
+      "ko": "연결 없이도 플래시 가능: BOOT 누른 채 연결(다운로드 모드) → 보드/버전 선택 → 이 버전으로 업데이트 → 시리얼 포트 선택",
+      "de": "Flashen ohne verbundenen Empfänger: BOOT beim Einstecken halten (Download-Modus) → Board und Version wählen → Aktualisieren → seriellen Port wählen",
+      "fr": "Flash possible sans récepteur : maintenir BOOT en branchant (mode téléchargement) → choisir carte et version → Mettre à jour → choisir le port série",
+      "es": "Se puede flashear sin receptor: mantén BOOT al conectar (modo descarga) → elige placa y versión → Actualizar → elige el puerto serie",
+      "it": "Puoi flashare senza ricevitore: tieni premuto BOOT collegando (modalità download) → scegli scheda e versione → Aggiorna → scegli la porta seriale",
+      "pt-BR": "Dá para gravar sem receptor: segure BOOT ao conectar (modo download) → escolha placa e versão → Atualizar → escolha a porta serial",
+      "ru": "Прошивка без приёмника: удерживайте BOOT при подключении (режим загрузки) → выберите плату и версию → Обновить → порт",
+      "pl": "Można wgrywać bez odbiornika: przytrzymaj BOOT przy podłączaniu (tryb download) → wybierz płytkę i wersję → Aktualizuj → port szeregowy",
+      "tr": "Alıcı olmadan da yazılabilir: takarken BOOT basılı tutun (indirme modu) → kart ve sürüm seçin → Güncelle → seri portu seçin"
     }
   }
 }
