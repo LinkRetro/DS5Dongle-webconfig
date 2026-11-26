@@ -712,25 +712,29 @@ const dhex=n=>n.toString(16).toUpperCase().padStart(2,'0');
 const dt=(id,params)=>messageText(msg(id,params));
 let lastLinkQuality=0;
 function paintDiag(b,fw){
- lastLinkQuality=b[62]||0;
+ /* 0xFA layout: firmware fills buf[0]=report id, buf[1]=flags ... buf[62]=quality.
+  * payload() already strips the report id, so every index here is one less than
+  * the firmware offset.  (Getting this wrong by one silently broke the board,
+  * RSSI and link-quality fields - the signal bars never lit.) */
+ lastLinkQuality=b[61]||0;
  const u16=i=>b[i]|(b[i+1]<<8);
- const addr=[...b.slice(6,12)].map(dhex).join(':');
- const name=new TextDecoder().decode(b.slice(26,58)).replace(/\0+$/,'').trim();
- const flags=b[1],edge=!!(flags&1),linked=!!(flags&4),haveScan=!!b[61];
+ const addr=[...b.slice(5,11)].map(dhex).join(':');
+ const name=new TextDecoder().decode(b.slice(25,57)).replace(/\0+$/,'').trim();
+ const flags=b[0],edge=!!(flags&1),linked=!!(flags&4),haveScan=!!b[60];
  /* Without a live link the model is unknown - showing "DualSense" there was
   * misleading when a customer simply cannot pair. */
  const model=linked?(edge?dt('diag_model_edge'):dt('diag_model_std')):dt('ctrl_unknown');
- const rssi=(b[60]&&b[60]!==1)?((b[60]>127?b[60]-256:b[60])+' dBm'):'';
- const q=b[62]||0;
+ const rssi=(b[59]&&b[59]!==1)?((b[59]>127?b[59]-256:b[59])+' dBm'):'';
+ const q=b[61]||0;
  const qText=q===1?dt('link_good'):q===2?dt('link_fair'):q===3?dt('link_poor'):dt('link_unknown');
- const board=b[58]===1?'v1':b[58]===2?'v1.2':'-';
- const usb=b[59]===1?'High-Speed':b[59]===0?'Full-Speed':b[59]===2?'-':'n/a';
+ const board=b[57]===1?'v1':b[57]===2?'v1.2':'-';
+ const usb=b[58]===1?'High-Speed':b[58]===0?'Full-Speed':b[58]===2?'-':'n/a';
  diagText=[
   dt('diag_controller',{model,address:addr||'-'})+(rssi?' · '+rssi:''),
   dt('diag_eir_name',{name:name||'-'}),
-  dt('diag_handshake',{code:dhex(b[3]),bonded:b[4],blacklist:b[5]}),
-  dt('diag_scan',{rounds:u16(12),connect:u16(14),handshake:u16(16)}),
-  dt('diag_audio',{avg:(u16(18)/10).toFixed(1),max:(u16(20)/10).toFixed(1),overruns:u16(22),fill:u16(24)}),
+  dt('diag_handshake',{code:dhex(b[2]),bonded:b[3],blacklist:b[4]}),
+  dt('diag_scan',{rounds:u16(11),connect:u16(13),handshake:u16(15)}),
+  dt('diag_audio',{avg:(u16(17)/10).toFixed(1),max:(u16(19)/10).toFixed(1),overruns:u16(21),fill:u16(23)}),
   dt('diag_link',{quality:qText}),
   dt('diag_hw',{board,usb}),
   dt('diag_firmware',{firmware:fw||'-',captured:new Date().toISOString().slice(0,19).replace('T',' ')+' UTC'})
@@ -767,10 +771,10 @@ async function refreshDiag(){
  if(!device||busy)return;
  try{
   const r=await hidWait(device.receiveFeatureReport(0xfa),'read diagnostics',1000);
-  const b=payload(r,0xfa,26);
+  const b=payload(r,0xfa,62);
   /* The signal bars sit in the hero strip, so the quality byte must be read on
    * every tab - not only while the dongle page is mounted. */
-  lastLinkQuality=b[62]||0;
+  lastLinkQuality=b[61]||0;
   paintLinkStatus(telemetry);
   if(!document.getElementById('latency-detail')&&!document.getElementById('latency-state'))return;
   paintDiag(b,firmwareVersion);
