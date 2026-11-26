@@ -11,10 +11,12 @@ up=r.parent/'DS5Dongle-OLED-Config-Web'
 _a=r/'assets'
 _std=_a/'dualsense.svg'
 _edge=_a/'dualsense-edge.svg'
+_edge_rear=_a/'dualsense-edge-rear.svg'
 # 优先用本仓库自带的 SVG（开源仓库不包含上游参考项目时也能构建）
 standard=(_std if _std.exists() else up/'src/assets/dualsense.svg').read_text(encoding='utf-8-sig')
 # The Edge overlay shares the standard projection, button shapes and hit areas.
 edge_overlay=_edge.read_text(encoding='utf-8-sig')
+edge_rear=_edge_rear.read_text(encoding='utf-8-sig')
 edge_extras=edge_overlay[edge_overlay.index('>')+1:edge_overlay.rindex('</svg>')]
 edge=standard.replace('<svg ', '<svg data-model="edge" ', 1).replace('</svg>', edge_extras+'</svg>')
 import json
@@ -26,7 +28,7 @@ catalog = json.loads((r/'i18n-catalog.json').read_text(encoding='utf-8-sig'))
 catalog_source = json.dumps(catalog).replace('<', '\\u003c')
 js='const catalog='+catalog_source+';\n'+'\n'.join(module_body(name) for name in (
     'protocol.mjs','test-center.mjs','i18n.mjs','i18n_phrases.mjs'
-))+'\nconst STANDARD_ART='+json.dumps(standard)+';\nconst EDGE_ART='+json.dumps(edge)+';\n'+module_body('app.mjs')
+))+'\nconst STANDARD_ART='+json.dumps(standard)+';\nconst EDGE_ART='+json.dumps(edge)+';\nconst EDGE_REAR_ART='+json.dumps(edge_rear)+';\n'+module_body('app.mjs')
 # Embed serial resources and UI so file:// does not fetch binary support files.
 import base64
 

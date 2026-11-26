@@ -8774,6 +8774,36 @@
       "ru": "Без назначения (исходный сигнал)",
       "pl": "Bez przypisania (surowy sygnał)",
       "tr": "Atama yok (ham sinyal)"
+    },
+    "view_front": {
+      "zh-CN": "正面",
+      "zh-TW": "正面",
+      "en": "Front",
+      "ja": "前面",
+      "ko": "앞면",
+      "de": "Vorne",
+      "fr": "Avant",
+      "es": "Frente",
+      "it": "Fronte",
+      "pt-BR": "Frente",
+      "ru": "Спереди",
+      "pl": "Przód",
+      "tr": "Ön"
+    },
+    "view_rear": {
+      "zh-CN": "背面",
+      "zh-TW": "背面",
+      "en": "Back",
+      "ja": "背面",
+      "ko": "뒷면",
+      "de": "Hinten",
+      "fr": "Arrière",
+      "es": "Reverso",
+      "it": "Retro",
+      "pt-BR": "Verso",
+      "ru": "Сзади",
+      "pl": "Tył",
+      "tr": "Arka"
     }
   }
 }

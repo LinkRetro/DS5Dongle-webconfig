@@ -302,3 +302,9 @@ input[type=range]{height:22px;cursor:pointer}
 .art svg[data-model="edge"] [data-part="touchpad"].pressed { fill: var(--violet-feedback); }
 .art .edge-control { stroke: #a8aab7; stroke-width: 1; }
 .art .edge-extras text { fill: #f4f2ff; font: 600 9px system-ui,sans-serif; text-anchor: middle; pointer-events: none; }
+
+/* 正/背面切换：只在 Edge 上出现，用来展示真实位于背面的背键 */
+.view-toggle{display:flex;gap:4px;margin:10px 0 0;padding:3px;border:1px solid var(--line);border-radius:999px;background:var(--panel);width:max-content}
+.view-toggle[hidden]{display:none}
+.view-toggle button{border:0;background:transparent;color:var(--muted);font:600 .82rem system-ui;padding:5px 14px;border-radius:999px;cursor:pointer}
+.view-toggle button.on{background:var(--accent);color:#0b2233}
