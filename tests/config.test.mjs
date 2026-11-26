@@ -827,27 +827,6 @@ test('remap 0xFB accepts all eight profiles and rejects nine',()=>{
 
 /* ---- Edge 页面反馈：扳机行程推测、按下高亮、样式契约 ---- */
 
-test('trigger stop card estimates the level from the trigger maximum',async()=>{
- const u=ui();
- await u.el('connect').onclick();
- await u.poll();
- u.window.document.querySelector('.nav [data-page="feel"]').onclick();
- const row=side=>u.window.document.querySelector(`#trigger-stop [data-side="${side}"]`);
- assert.match(row('L2').textContent,/未测/);
- u.input([128,128,128,128],0,0,{triggers:[255,0]});
- u.input([128,128,128,128]);
- assert.match(row('L2').textContent,/长行程/);
- assert.match(row('L2').textContent,/255/);
- u.input([128,128,128,128],0,0,{triggers:[210,0]});
- u.input([128,128,128,128]);
- assert.match(row('L2').textContent,/中档/);
- u.input([128,128,128,128],0,0,{triggers:[160,0]});
- u.input([128,128,128,128]);
- assert.match(row('L2').textContent,/短行程/);
- const reset=u.window.document.querySelector('#trigger-stop-card button');
- reset.onclick();
- assert.match(row('L2').textContent,/未测/);
-});
 
 test('Edge artwork highlights pressed trigger and face button like the standard pad',async()=>{
  const u=ui();

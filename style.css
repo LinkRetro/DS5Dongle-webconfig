@@ -309,12 +309,6 @@ input[type=range]{height:22px;cursor:pointer}
 .view-toggle button{border:0;background:transparent;color:var(--muted);font:600 .82rem system-ui;padding:5px 14px;border-radius:999px;cursor:pointer}
 .view-toggle button.on{background:var(--accent);color:#0b2233}
 
-/* 行程限位推测：只是提示，样式上刻意弱化 */
-.trigger-stop-grid{display:flex;flex-direction:column;gap:6px;margin:8px 0}
-.trigger-stop-row{padding:8px 10px;border:1px solid var(--line);border-radius:10px;background:var(--panel);font:600 .86rem system-ui;color:var(--muted)}
-.trigger-stop-row[data-level="short"]{border-color:var(--warning);color:var(--ink)}
-.trigger-stop-row[data-level="medium"]{border-color:var(--accent);color:var(--ink)}
-.trigger-stop-row[data-level="long"]{border-color:var(--success);color:var(--ink)}
 
 /* Edge 手绘图自带一套更深的配色，暗色主题下扳机/摇杆/触摸板会糊成一片。
    这里给 Edge 单独调亮，并为 adapter（行程滑块的独立画法）补上描边。 */
