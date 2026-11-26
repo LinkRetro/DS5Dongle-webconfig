@@ -62,6 +62,7 @@ if (-not $SkipChangelog) {
     Step '版本日志检查'
     $pyExe = (Get-Command python -ErrorAction SilentlyContinue).Source
     if (-not $pyExe) { $pyExe = 'python' }
+    & $pyExe (Join-Path $root 'tools\sync-changelog.py')
     & $pyExe (Join-Path $root 'tools\check-changelog.py')
     if ($LASTEXITCODE -ne 0) { throw '版本日志缺失：请在 docs/CHANGELOG.md 与 sync-firmware.ps1 补上当前版本' }
 }

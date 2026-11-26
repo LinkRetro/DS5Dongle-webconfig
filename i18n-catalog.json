@@ -8414,6 +8414,21 @@
       "ru": "Моно (чище)",
       "pl": "Mono (czyściej)",
       "tr": "Mono (daha temiz)"
+    },
+    "link_rest": {
+      "zh-CN": "已配对 {count} · {speed}",
+      "en": "Paired {count} · {speed}",
+      "zh-TW": "已配對 {count} · {speed}",
+      "ja": "ペアリング {count} · {speed}",
+      "ko": "페어링 {count} · {speed}",
+      "de": "Gekoppelt {count} · {speed}",
+      "fr": "Appairés {count} · {speed}",
+      "es": "Emparejados {count} · {speed}",
+      "it": "Accoppiati {count} · {speed}",
+      "pt-BR": "Pareados {count} · {speed}",
+      "ru": "Сопряжено {count} · {speed}",
+      "pl": "Sparowane {count} · {speed}",
+      "tr": "Eşleşmiş {count} · {speed}"
     }
   }
 }

@@ -32,7 +32,7 @@ test('all locales update the same Feel and Stick controls and follow incoming te
   assert.equal(u.el('controller-connection').textContent,check('phrase.querying_controller_services',locale));
   u.setLink(7,2);u.setBattery(40,0);await u.poll();u.input([128,128,128,128]);
   assert.equal(u.el('controller-connection').textContent,check('phrase.controller_connected',locale));
-  assert.equal(u.el('link-status').textContent,check('link_summary',locale).replace('{signal}',check('link_signal_rssi',locale).replace('{value}',0)).replace('{count}',2).replace('{speed}',check('link_speed_unknown',locale)));
+  assert.equal(u.el('link-status').textContent,check('link_rest',locale).replace('{count}',2).replace('{speed}',check('link_speed_unknown',locale)));
   assert.equal(u.el('input-state').textContent,check('live_input_hid',locale));
   assert.equal(u.el('save').textContent,check('phrase.save_this_page',locale));
   assert.equal(u.el('dirty').textContent,check('save_page_dirty',locale).replace('{count}',1));
@@ -85,7 +85,7 @@ test('Japanese Feel and live connection labels do not revert on polling',async()
  assert.equal(u.el('connection').textContent,'ドングル接続済み');
  assert.equal(u.el('controller-connection').textContent,'コントローラー接続済み');
  assert.match(u.el('power-status').textContent,/バッテリー駆動/);
- assert.match(u.el('link-status').textContent,/ペアリング済み 1 台/);
+ assert.match(u.el('link-status').textContent,/ペアリング 1/);
  assert.match(u.el('controls').textContent,/振動と触覚.*アダプティブトリガー/s);
  assert.match(u.el('art-trigger-hint').textContent,/図の L2／R2/);
  assert.equal(u.el('save').textContent,'このページの設定を保存');
@@ -126,7 +126,7 @@ test('Korean screenshot controls, telemetry and save status stay localized',asyn
  assert.equal(u.el('connection').textContent,'동글 연결됨');
  assert.equal(u.el('controller-connection').textContent,'컨트롤러 연결됨');
  assert.match(u.el('power-status').textContent,/배터리 사용 중/);
- assert.match(u.el('link-status').textContent,/페어링 1대/);
+ assert.match(u.el('link-status').textContent,/페어링 1/);
  assert.match(u.el('input-state').textContent,/실시간 입력/);
  assert.match(u.el('controls').textContent,/진동 및 햅틱.*적응형 트리거/s);
  assert.match(u.el('art-trigger-hint').textContent,/그림에서 L2 또는 R2/);
@@ -594,7 +594,7 @@ test('diagnostics show latency and do not report legacy USB rate as measured',as
  u.window.document.querySelector('[data-page="device"]').onclick();
  u.setLatency();await u.poll();
  assert.equal(u.el('latency-last').textContent,'1.200 ms');
- assert.match(u.el('link-status').textContent,/USB 未知/);
+ assert.match(u.el('link-status').textContent,/未知/);
  assert.doesNotMatch(u.el('link-status').textContent,/dBm/);
 });
 

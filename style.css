@@ -269,3 +269,15 @@ input[type=range]{height:22px;cursor:pointer}
 .qa-color[hidden]{display:none}
 .qa-color input[type=color]{width:38px;height:30px;padding:0;border-radius:8px;border:1px solid var(--line);background:transparent;cursor:pointer}
 .qa-color input[type=color]:disabled{opacity:.45;cursor:not-allowed}
+
+/* Bluetooth signal shown as phone-style bars (0–4).  Source of truth: link
+ * quality from the 0xFA diagnostics (audio drop rate), or RSSI when the
+ * controller actually reports one. */
+.sig-bars{display:inline-flex;align-items:flex-end;gap:2px;height:13px;margin-right:5px;vertical-align:-2px}
+.sig-bars i{display:block;width:3px;border-radius:1px;background:currentColor;opacity:.22}
+.sig-bars i.on{opacity:1}
+.sig-bars i:nth-child(1){height:4px}
+.sig-bars i:nth-child(2){height:7px}
+.sig-bars i:nth-child(3){height:10px}
+.sig-bars i:nth-child(4){height:13px}
+.sig-bars.unknown i{opacity:.18}

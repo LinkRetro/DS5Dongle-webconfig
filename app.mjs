@@ -386,6 +386,39 @@ function stageColor(input){
  colorFields.forEach((key,i)=>set(key,parseInt(hex.slice(1+i*2,3+i*2),16)));
  if(!$('qa-lights').disabled){cancelTriggerSequence();nextPreview={device,rgb:connectionColor()};scheduleColorPreview()}
 }
+/* Phone-style signal bars.  We cannot rely on RSSI (many BR/EDR controllers
+ * answer 0), so the bars come from the link-quality byte of the diagnostics
+ * report: good = 4, fair = 3, poor = 1, unknown = 0.  A real RSSI wins if the
+ * controller ever reports one. */
+function signalBars(rssi,quality){
+ if(rssi!==undefined&&rssi!==null&&rssi!==1&&rssi!==127){
+  if(rssi>=-60)return 4;
+  if(rssi>=-70)return 3;
+  if(rssi>=-80)return 2;
+  return 1;
+ }
+ return quality===1?4:quality===2?3:quality===3?1:0;
+}
+function paintLinkStatus(b){
+ const ls=$('link-status');
+ if(!ls)return;
+ const links=!!b&&b.length>=17&&b[13]===0xd3;
+ const rawRssi=b?(b[0]>127?b[0]-256:b[0]):1;
+ const rssi=(links&&b[14]===7)?rawRssi:undefined;
+ const q=lastLinkQuality||0;
+ const bars=signalBars(rssi,q);
+ const label=bars===4?msg('link_good'):bars===3?msg('link_fair'):bars>=1?msg('link_poor'):msg('link_unknown');
+ const sig=document.createElement('span');
+ sig.className='sig-bars'+(bars?'':' unknown');
+ sig.setAttribute('role','img');
+ paintLocalized(sig,label,'aria-label');
+ for(let i=0;i<4;i++){const bar=document.createElement('i');if(i<bars)bar.className='on';sig.append(bar);}
+ const speed=links&&(b[16]&2)?((b[1]&0x40)?'HS':'FS'):messageText(msg('link_speed_unknown'));
+ const rest=document.createElement('span');
+ rest.textContent=messageText(msg('link_rest',{count:links?b[15]:'—',speed}));
+ ls.replaceChildren(sig,rest);
+}
+
 function paintVerdict(){
  const box=$('verdict');if(!box)return;
  const state=telemetry?.length>=17&&telemetry[13]===0xD3?telemetry[14]:null;
@@ -1176,20 +1209,7 @@ function paintBattery(b){
  $('battery-alert').hidden=!low&&!charging;
  $('battery-alert').dataset.kind=charging?'charging':'low';
  paintLocalized($('battery-warning'),low?msg('battery_low',{pct}):charging?msg('battery_low_charging',{pct}):'');
- /* 信号 / 配对数量 / USB 速率（遥测已包含，见 usb_gamepad.c 遥测布局） */
- const ls=$('link-status');
- if(ls){
-  if(!b){paintLocalized(ls,msg('link_summary',{signal:msg('link_signal_missing'),count:'—',speed:'—'}))}
-  else{
-   const rssi=b[0]>127?b[0]-256:b[0];
-    const links=b.length>=17&&b[13]===0xd3;
-    const ql=lastLinkQuality;
-    const signal=ql===1?msg('link_good'):ql===2?msg('link_fair'):ql===3?msg('link_poor'):
-      (links&&b[14]===7&&rssi!==1&&rssi!==127?msg('link_signal_rssi',{value:rssi}):msg('link_signal_missing'));
-    const speed=links&&(b[16]&2)?((b[1]&0x40)?'HS':'FS'):msg('link_speed_unknown');
-    paintLocalized(ls,msg('link_summary',{signal,count:links?b[15]:'—',speed}));
-  }
- }
+ paintLinkStatus(b);
  paintLocalized($('battery-explanation'),low?msg('phrase.fast_blue_flashing_means_low_battery_not'):charging?msg('phrase.controller_is_charging_the_low_battery_flash'):'');
 }
 function paintLatency(b){if(!$('latency-average'))return;   /* 面板已移除时静默跳过 */
