@@ -1,7 +1,17 @@
 {
   "board": "v1",
-  "latest": "LCT616-DS5 3.18H-oc80-v1",
+  "latest": "LCT616-DS5 3.18H-oc81-v1",
   "versions": [
+    {
+      "version": "LCT616-DS5 3.18H-oc81-v1",
+      "tag": "3.18H-oc81",
+      "file": "ds5dongle-v1-3.18H-oc81-hs.bin",
+      "size": 813216,
+      "sha256": "096e86123b25c29ef03afe36ef16b9f043bb9ed0f051d217f994da89a357c1c8",
+      "date": "2026-11-26",
+      "notes": "修复 XInput 模式网页看不到设备：复合设备的设备级类改为 0x00，Windows 才会加载 usbccgp 并枚举 HID 接口",
+      "stable": false
+    },
     {
       "version": "LCT616-DS5 3.18H-oc80-v1",
       "tag": "3.18H-oc80",
