@@ -8504,6 +8504,36 @@
       "ru": "Только звук",
       "pl": "Tylko dźwięk",
       "tr": "Yalnız ses"
+    },
+    "auto_stealth": {
+      "zh-CN": "无手柄时隐藏接收器",
+      "en": "Hide receiver when no controller",
+      "zh-TW": "無手把時隱藏接收器",
+      "ja": "未接続時はレシーバーを隠す",
+      "ko": "컨트롤러 없을 때 수신기 숨김",
+      "de": "Empfänger ohne Controller ausblenden",
+      "fr": "Masquer le récepteur sans manette",
+      "es": "Ocultar el receptor sin mando",
+      "it": "Nascondi il ricevitore senza controller",
+      "pt-BR": "Ocultar receptor sem controle",
+      "ru": "Скрывать приёмник без геймпада",
+      "pl": "Ukryj odbiornik bez pada",
+      "tr": "Kumanda yokken alıcıyı gizle"
+    },
+    "auto_stealth_hint": {
+      "zh-CN": "配对过手柄后，手柄断开 5 秒自动从电脑移除；电脑声音自动回到音箱，不必拔接收器",
+      "en": "Once paired, the receiver disappears 5 s after the controller disconnects, so Windows audio returns to your speakers",
+      "zh-TW": "配對過手把後，斷開 5 秒自動從電腦移除，聲音回到喇叭",
+      "ja": "ペアリング後、切断から5秒でレシーバーを外し、音声がスピーカーに戻ります",
+      "ko": "페어링 후 5초 뒤 수신기가 사라져 소리가 스피커로 돌아갑니다",
+      "de": "Nach dem Pairing verschwindet der Empfänger 5 s nach dem Trennen; Windows nutzt wieder die Lautsprecher",
+      "fr": "Après appairage, le récepteur disparaît 5 s après la déconnexion et l'audio revient aux haut-parleurs",
+      "es": "Tras emparejar, el receptor desaparece 5 s después de desconectar y el audio vuelve a los altavoces",
+      "it": "Dopo l'accoppiamento il ricevitore sparisce 5 s dopo la disconnessione e l'audio torna alle casse",
+      "pt-BR": "Após parear, o receptor some 5 s depois de desconectar e o áudio volta às caixas",
+      "ru": "После сопряжения приёмник исчезает через 5 с после отключения, звук возвращается на колонки",
+      "pl": "Po sparowaniu odbiornik znika 5 s po rozłączeniu, dźwięk wraca do głośników",
+      "tr": "Eşleşmeden sonra kumanda ayrılınca alıcı 5 sn içinde kaybolur, ses hoparlöre döner"
     }
   }
 }

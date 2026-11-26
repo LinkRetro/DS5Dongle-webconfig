@@ -1,7 +1,16 @@
 {
   "board": "v12",
-  "latest": "LCT616-DS5 3.18H-oc72-v12",
+  "latest": "LCT616-DS5 3.18H-oc73-v12",
   "versions": [
+    {
+      "version": "LCT616-DS5 3.18H-oc73-v12",
+      "tag": "3.18H-oc73",
+      "file": "ds5dongle-v12-3.18H-oc73-hs.bin",
+      "size": 813136,
+      "sha256": "64a9b2eb710f7a2ae4877d2a1cacb6d9b2a08d5949d2ec14eaa5bd75df7cc03b",
+      "date": "2026-11-26",
+      "notes": "无手柄时自动隐藏接收器：配对过后断开 5 秒即从电脑移除，Windows 声音自动回到音箱，不必拔接收器（配置版本 13）"
+    },
     {
       "version": "LCT616-DS5 3.18H-oc72-v12",
       "tag": "3.18H-oc72",
