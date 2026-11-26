@@ -532,6 +532,13 @@ function set(k,v){const same=k==='haptics_gain'?Math.fround(v)===Math.fround(bas
 function option(select,value,label,translateLegacy=true){const o=document.createElement('option');o.value=value;if(!translateLegacy)o.setAttribute('translate','no');paintLocalized(o,translateLegacy?bindCopy(label):label);select.append(o)}
 function row(label,hint,group=false){const r=document.createElement(group?'div':'label');if(group){r.setAttribute('role','group');paintLocalized(r,bindCopy(label),'aria-label')}r.className='row';const s=document.createElement('span');const caption=document.createElement('span');paintLocalized(caption,bindCopy(label));s.append(caption);if(hint){const h=document.createElement('small');paintLocalized(h,bindCopy(hint));s.append(h)}r.append(s);return r}
 function render(){renderPanel();applyPhrases(document.body)}
+function paintOutputModeNotice(){
+ const el=document.getElementById('output-mode-notice');
+ if(!el)return;
+ const xinput=Number(val('output_mode')??0)===1;
+ el.hidden=!xinput;
+}
+
 function renderPanel(){ if(flashSession?.isBusy()&&page!=='flash'){page='flash';say('正在烧录，请等待完成后切换分类');return}document.body.dataset.page=page;paintMappingSource();paintLocalized($('panel-title'),msg(NAV_KEYS[page]));paintLocalized($('panel-sub'),page==='flash'?msg('phrase.device_version_latest_local_firmware_browser_update'):page==='vision'?msg('phrase.preview_a_color_then_save_it_as'):page==='motion'?msg('phrase.diagnostic_settings_are_stored_in_this_browser'):scopedSavePages.has(page)?msg('phrase.tests_are_temporary_save_submits_only_this'):page==='about'?msg('phrase.oled_visual_language_bl616_protocol'):msg('phrase.changes_are_only_sent_when_you_click'));const box=$('controls');box.replaceChildren();document.querySelectorAll('[data-page]').forEach(b=>b.classList.toggle('active',b.dataset.page===page));
  if(page==='flash'){renderFirmware(box);refresh();return}
  if(page==='about'){
@@ -565,7 +572,7 @@ function renderPanel(){ if(flashSession?.isBusy()&&page!=='flash'){page='flash';
   if(k==='mask'){const g=document.createElement('fieldset');g.className='row';const title=document.createElement('span');const caption=document.createElement('span');paintLocalized(caption,label);title.append(caption);const help=document.createElement('small');paintLocalized(help,hint);title.append(help);g.append(title);const choices=document.createElement('div');[msg('control_off'),msg('touch_dpad'),msg('touch_left_mouse'),msg('touch_right_mouse'),msg('touch_zones')].forEach((choice,i)=>{const l=document.createElement('label');l.style.display='block';const c=document.createElement('input');c.type='checkbox';c.checked=!!(val('tp_mode_enabled_mask')&(1<<i));c.onchange=()=>{let mask=val('tp_mode_enabled_mask')??1;mask=c.checked?mask|(1<<i):mask&~(1<<i);if(!mask){c.checked=true;say(msg('touch_keep_mode'));return}set('tp_mode_enabled_mask',mask)};const caption=document.createElement('span');paintLocalized(caption,choice);l.append(c,caption);choices.append(l)});g.append(choices);box.append(g);continue}
   const r=row(label,hint,min!==undefined&&!Array.isArray(min));let c;
   if(k==='color'){c=document.createElement('input');c.type='color';c.value='#'+['led_r','led_g','led_b'].map(n=>(val(n)??255).toString(16).padStart(2,'0')).join('');c.oninput=()=>['led_r','led_g','led_b'].forEach((n,i)=>set(n,parseInt(c.value.slice(1+i*2,3+i*2),16)))}
-  else if(Array.isArray(min)){c=document.createElement('select');min.forEach((t,i)=>option(c,i,t));c.value=val(k)??0;c.onchange=()=>set(k,Number(c.value))}
+  else if(Array.isArray(min)){c=document.createElement('select');min.forEach((t,i)=>option(c,i,t));c.value=val(k)??0;c.onchange=()=>{set(k,Number(c.value));if(k==='output_mode')paintOutputModeNotice()}}
   else if(min!==undefined){
    r.classList.add('range-row');c=document.createElement('div');c.className='range-control';
    const slider=document.createElement('input'),number=document.createElement('input');
@@ -594,6 +601,14 @@ function renderPanel(){ if(flashSession?.isBusy()&&page!=='flash'){page='flash';
    box.append(group);
   }
  if(page==='device'){
+  /* 当前为 XInput 兼容模式时，必须在页面顶部明确告知代价与切回方法。
+   * 这是减少“切过去回不来/以为设备坏了”类投诉的第一道防线。 */
+  const notice=document.createElement('div');notice.id='output-mode-notice';notice.className='mode-notice';
+  paintLocalized(notice,msg('output_mode_notice'));box.prepend(notice);
+  const modes=document.createElement('details');modes.className='latency-panel';modes.id='output-mode-help';
+  modes.innerHTML='<summary data-i18n="output_mode_details_title"></summary><p data-i18n="output_mode_details_body"></p>';
+  box.append(modes);
+  paintOutputModeNotice();
   const diagnostics=document.createElement('details');diagnostics.className='latency-panel';
   diagnostics.innerHTML='<summary data-i18n="device_latency">诊断 · 板内蓝牙输入至 USB 提交完成</summary><p id="latency-state"></p><div class="latency-grid"><div><span data-i18n="device_latency_last">最新</span><strong id="latency-last">—</strong></div><div><span data-i18n="device_latency_average">平均</span><strong id="latency-average">—</strong></div><div><span data-i18n="device_latency_max">最大</span><strong id="latency-max">—</strong></div></div><p class="hint" id="latency-detail"></p>';
   box.append(diagnostics);paintLatency(telemetry);

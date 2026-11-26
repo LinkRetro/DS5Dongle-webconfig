@@ -8669,6 +8669,51 @@
       "ru": "Прошивка без приёмника: удерживайте BOOT при подключении (режим загрузки) → выберите плату и версию → Обновить → порт",
       "pl": "Można wgrywać bez odbiornika: przytrzymaj BOOT przy podłączaniu (tryb download) → wybierz płytkę i wersję → Aktualizuj → port szeregowy",
       "tr": "Alıcı olmadan da yazılabilir: takarken BOOT basılı tutun (indirme modu) → kart ve sürüm seçin → Güncelle → seri portu seçin"
+    },
+    "output_mode_notice": {
+      "zh-CN": "当前为 Xbox 360（XInput）兼容模式：没有音频、HD 触觉、自适应扳机和灯条。切回 DualSense：按住 PS + Options 3 秒。",
+      "zh-TW": "目前為 Xbox 360（XInput）相容模式：沒有音訊、HD 觸覺、自適應扳機與燈條。切回 DualSense：按住 PS + Options 3 秒。",
+      "en": "Xbox 360 (XInput) compatibility mode: no audio, HD haptics, adaptive triggers or light bar. Back to DualSense: hold PS + Options for 3 s.",
+      "ja": "Xbox 360（XInput）互換モードです：音声・HD 触覚・アダプティブトリガー・ライトバーは使えません。DualSense に戻すには PS + Options を 3 秒長押し。",
+      "ko": "Xbox 360(XInput) 호환 모드입니다: 오디오·HD 햅틱·적응형 트리거·라이트바가 없습니다. DualSense로 돌아가려면 PS + Options를 3초 누르세요.",
+      "de": "Xbox 360 (XInput)-Kompatibilitätsmodus: kein Audio, keine HD-Haptik, keine adaptiven Trigger, keine Lightbar. Zurück zu DualSense: PS + Options 3 s halten.",
+      "fr": "Mode compatibilité Xbox 360 (XInput) : pas d'audio, ni haptique HD, ni gâchettes adaptatives, ni barre lumineuse. Retour à DualSense : maintenir PS + Options 3 s.",
+      "es": "Modo compatibilidad Xbox 360 (XInput): sin audio, háptica HD, gatillos adaptativos ni barra de luz. Volver a DualSense: mantén PS + Options 3 s.",
+      "it": "Modalità compatibilità Xbox 360 (XInput): niente audio, haptica HD, trigger adattivi o barra luminosa. Per tornare a DualSense: tieni premuto PS + Options per 3 s.",
+      "pt-BR": "Modo compatibilidade Xbox 360 (XInput): sem áudio, háptica HD, gatilhos adaptativos ou barra de luz. Para voltar ao DualSense: segure PS + Options por 3 s.",
+      "ru": "Режим совместимости Xbox 360 (XInput): нет звука, HD-отдачи, адаптивных курков и подсветки. Вернуться в DualSense: удерживайте PS + Options 3 с.",
+      "pl": "Tryb zgodności Xbox 360 (XInput): brak audio, haptyki HD, adaptacyjnych spustów i podświetlenia. Powrót do DualSense: przytrzymaj PS + Options 3 s.",
+      "tr": "Xbox 360 (XInput) uyumluluk modu: ses, HD dokunsal geri bildirim, uyarlanabilir tetik ve ışık yok. DualSense'e dönmek için PS + Options tuşlarını 3 sn basılı tutun."
+    },
+    "output_mode_details_title": {
+      "zh-CN": "输出模式说明",
+      "zh-TW": "輸出模式說明",
+      "en": "What the output modes mean",
+      "ja": "出力モードの説明",
+      "ko": "출력 모드 설명",
+      "de": "Was die Ausgabemodi bedeuten",
+      "fr": "Signification des modes de sortie",
+      "es": "Qué significan los modos de salida",
+      "it": "Cosa significano le modalità di uscita",
+      "pt-BR": "O que significam os modos de saída",
+      "ru": "Что означают режимы вывода",
+      "pl": "Co oznaczają tryby wyjścia",
+      "tr": "Çıkış modları ne anlama gelir"
+    },
+    "output_mode_details_body": {
+      "zh-CN": "DualSense：全功能，音频、HD 触觉、自适应扳机、灯条全部可用。XInput：只适合只认 Xbox 手柄的老游戏与模拟器；没有音频/触觉/自适应扳机/灯条，键盘鼠标类映射也无效；此模式下网页无法连接，必须按住 PS + Options 3 秒切回。两种模式切换后都需要重启接收器。",
+      "zh-TW": "DualSense：全功能，音訊、HD 觸覺、自適應扳機與燈條皆可用。XInput：僅適合只認 Xbox 手把的老遊戲與模擬器；沒有音訊/觸覺/自適應扳機/燈條，鍵盤滑鼠類映射也無效；此模式下網頁無法連線，必須按住 PS + Options 3 秒切回。兩種模式切換後都需重啟接收器。",
+      "en": "DualSense: everything works - audio, HD haptics, adaptive triggers, light bar. XInput: only for old games and emulators that understand an Xbox pad; no audio, no haptics, no adaptive triggers, no light bar, and keyboard/mouse remaps are not delivered. In XInput mode the web page cannot connect - hold PS + Options for 3 s to get back. Both directions need a receiver restart.",
+      "ja": "DualSense：全機能（音声・HD 触覚・アダプティブトリガー・ライトバー）。XInput：Xbox パッドしか認識しない旧作・エミュレーター向けで、音声・触覚・アダプティブトリガー・ライトバーは使えず、キーボード/マウスへの割り当ても無効です。このモードではページに接続できないため、PS + Options を 3 秒長押しで戻してください。どちらの切替も再起動が必要です。",
+      "ko": "DualSense: 오디오·HD 햅틱·적응형 트리거·라이트바 모두 사용. XInput: Xbox 패드만 인식하는 구형 게임·에뮬레이터용이며 오디오·햅틱·적응형 트리거·라이트바가 없고 키보드/마우스 매핑도 전달되지 않습니다. 이 모드에서는 페이지 연결이 불가하니 PS + Options를 3초 눌러 되돌리세요. 전환 시 재시작이 필요합니다.",
+      "de": "DualSense: alles funktioniert - Audio, HD-Haptik, adaptive Trigger, Lightbar. XInput: nur für alte Spiele und Emulatoren, die ein Xbox-Pad verstehen; kein Audio, keine Haptik, keine adaptiven Trigger, keine Lightbar, und Tastatur-/Maus-Zuordnungen werden nicht gesendet. In XInput kann sich die Seite nicht verbinden - PS + Options 3 s halten. Beide Richtungen brauchen einen Neustart.",
+      "fr": "DualSense : tout fonctionne (audio, haptique HD, gâchettes adaptatives, barre lumineuse). XInput : uniquement pour les jeux anciens et émulateurs qui reconnaissent une manette Xbox ; pas d'audio, ni haptique, ni gâchettes adaptatives, ni barre lumineuse, et les affectations clavier/souris ne passent pas. En XInput la page ne peut pas se connecter : maintenez PS + Options 3 s. Les deux sens exigent un redémarrage.",
+      "es": "DualSense: todo funciona (audio, háptica HD, gatillos adaptativos, barra de luz). XInput: solo para juegos antiguos y emuladores que reconocen un mando Xbox; sin audio, háptica, gatillos adaptativos ni barra de luz, y las asignaciones de teclado/ratón no se envían. En XInput la página no puede conectarse: mantén PS + Options 3 s. Ambos sentidos requieren reiniciar.",
+      "it": "DualSense: funziona tutto (audio, haptica HD, trigger adattivi, barra luminosa). XInput: solo per giochi vecchi ed emulatori che riconoscono un pad Xbox; niente audio, haptica, trigger adattivi o barra luminosa, e le assegnazioni tastiera/mouse non vengono inviate. In XInput la pagina non può connettersi: tieni premuto PS + Options 3 s. Entrambe le direzioni richiedono un riavvio.",
+      "pt-BR": "DualSense: tudo funciona (áudio, háptica HD, gatilhos adaptativos, barra de luz). XInput: apenas para jogos antigos e emuladores que reconhecem um controle Xbox; sem áudio, háptica, gatilhos adaptativos ou barra de luz, e mapeamentos de teclado/mouse não são enviados. No XInput a página não conecta: segure PS + Options por 3 s. As duas direções exigem reiniciar.",
+      "ru": "DualSense: работает всё — звук, HD-отдача, адаптивные курки, подсветка. XInput: только для старых игр и эмуляторов, понимающих геймпад Xbox; нет звука, отдачи, адаптивных курков и подсветки, а назначения на клавиатуру/мышь не передаются. В XInput страница не подключается — удерживайте PS + Options 3 с. В обе стороны нужен перезапуск.",
+      "pl": "DualSense: działa wszystko — audio, haptyka HD, adaptacyjne spusty, podświetlenie. XInput: tylko dla starych gier i emulatorów rozpoznających pada Xbox; brak audio, haptyki, adaptacyjnych spustów i podświetlenia, a przypisania klawiatury/myszy nie są wysyłane. W XInput strona nie może się połączyć — przytrzymaj PS + Options 3 s. Obie zmiany wymagają restartu.",
+      "tr": "DualSense: her şey çalışır (ses, HD dokunsal geri bildirim, uyarlanabilir tetik, ışık). XInput: yalnızca Xbox kolu tanıyan eski oyunlar ve emülatörler için; ses, dokunsal geri bildirim, uyarlanabilir tetik ve ışık yok, klavye/fare atamaları iletilmez. XInput'ta sayfa bağlanamaz: PS + Options tuşlarını 3 sn basılı tutun. Her iki yönde de yeniden başlatma gerekir."
     }
   }
 }
