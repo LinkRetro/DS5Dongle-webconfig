@@ -126,7 +126,9 @@ function applyI18n(){
  paintMappingSource();
 }
 let device=null,baseline=null,draft={},page='feel',busy=false,epoch=0,profile=0,activeProfile=null,table=null,mapDirty=false,lastInput=0,lastPaint=0,tableBaseline=null,telemetry=null,restartNeeded=false;
-let stickParts=[],visualInputActive=false,showingEdge=false,edgePreviewSupported=false;
+let stickParts=[],visualInputActive=false,showingEdge=false,edgePreviewSupported=false,edgeTagStreak=0;
+/* 连续多少帧命中 preview tag 才认定 Edge（500Hz 下 10 帧≈20ms，用户无感，误判概率可忽略） */
+const EDGE_TAG_STREAK=10;
 const edgeSources=[
  {part:'paddle-l',key:'edge_l4_target',label:msg('edge_l4')},
  {part:'paddle-r',key:'edge_r4_target',label:msg('edge_r4')},
@@ -829,7 +831,8 @@ async function refreshDiag(){
   const r=await hidWait(d.receiveFeatureReport(0xfa),'read diagnostics',1000);
   if(d!==device)return;
   const b=payload(r,0xfa,62);
-  if(b[0]&4)setControllerArt(!!(b[0]&1));
+  /* 机型只升级不降级：0xFA flags bit0=Edge。降级只发生在断开/换设备时。 */
+ if((b[0]&4)&&(b[0]&1))setControllerArt(true);
   /* The signal bars sit in the hero strip, so the quality byte must be read on
    * every tab - not only while the dongle page is mounted. */
   lastLinkQuality=b[61]||0;
@@ -1285,7 +1288,12 @@ function paintTouch(p){
 function onInput(e){
  if(e.device!==device||e.reportId!==1||$('gamepad').value!=='')return;
  const bytes=new Uint8Array(e.data.buffer,e.data.byteOffset,e.data.byteLength);
- if(!showingEdge&&edgePreviewSupported&&edgePreview(bytes))setControllerArt(true);
+ /* 标准 DualSense 的陀螺仪/触摸数据偶尔会出现 0xE8，单帧命中不能算 Edge。
+    必须连续 EDGE_TAG_STREAK 帧一致才切换，彻底消除机型闪跳。 */
+ if(!showingEdge&&edgePreviewSupported){
+  if(edgePreview(bytes)){if(++edgeTagStreak>=EDGE_TAG_STREAK)setControllerArt(true);}
+  else edgeTagStreak=0;
+ }
  const i=inputParts(bytes,showingEdge,edgePreviewSupported);
  if(i)paintInput(i,'接收器 HID');
  paintTouch(bytes);
@@ -1360,7 +1368,7 @@ mountLangSelect();applyI18n();
 document.querySelectorAll('[data-page]').forEach(b=>b.onclick=()=>{void stopTests();page=b.dataset.page;render()});
 globalThis.addEventListener?.('blur',()=>{void stopTests()});globalThis.addEventListener?.('pagehide',()=>{void stopTests()});document.addEventListener('visibilitychange',()=>{if(document.hidden)void stopTests()});
 $('firmware-notice').onclick=()=>{void stopTests();page='flash';render()};
-showArt(false);render();
+edgeTagStreak=0;showArt(false);render();
 void autoReconnect();
 
 /* Restored: was accidentally removed while rewriting the diagnostics block. */

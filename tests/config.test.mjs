@@ -166,20 +166,20 @@ test('locale changes preserve mapping and firmware choices and update an already
 test('config: packed offsets, LE float, preserve runtime fields and reject corruption before write',()=>{const b=bytes();const v=view(247,b);const p=patch(v,{haptics_gain:1.7,tp_block_raw:1,combo_window:50});assert.equal(p[20],1);assert.equal(p[31],1);assert.equal(p[30],50);assert.equal(decode(view(247,p)).haptics_gain,Math.fround(1.7));for(let i=5;i<30;i++)assert.equal(p[i],b[i]);assert.throws(()=>patch(v,{speaker_volume:128}));assert.throws(()=>patch(v,{combo_window:NaN}));assert.throws(()=>patch(v,{controller_mode:1.2}));assert.throws(()=>decode(view(247,[7,...b.slice(1)])));assert.throws(()=>decode(view(247,b.slice(0,31))));assert.throws(()=>decode(view(246,b)));assert.throws(()=>patch(v,{dse_detected:0}));assert.equal(command(1,p).length,63)});
 test('remap: complete two-group format and invalid reply checks',()=>{const table=Uint8Array.from({length:124},(_,i)=>i%4===1?Math.floor(i/4):0);const r=remapRead(view(251,[1,0,...table]),0);assert.equal(r.active,1);assert.deepEqual(r.table,table);assert.deepEqual(remapWrite(1,table).slice(0,6),Uint8Array.of(1,1,0,0,0,0));assert.throws(()=>remapRead(view(251,[1,1,...table]),0));table[0]=3;assert.throws(()=>remapWrite(0,table))});
 test('input: diagonals, digital buttons and trigger channels follow firmware payload',()=>{const b=new Uint8Array(63);b.set([0,255,127,128,64,255]);b[7]=0x21;b[8]=0x21;const i=inputParts(b);for(const k of ['dpad-up','dpad-right','cross','l1','options'])assert(i.parts.has(k));assert.deepEqual(i.axes,[0,255,127,128]);assert.deepEqual(i.triggers,[64,255]);assert.equal(inputParts(new Uint8Array(9)),null)});
-function ui({version=6,corrupt=false,production=false,auto=false,noHid=false,storage=new Map()}={}){
+function ui({version=6,corrupt=false,production=false,auto=false,noHid=false,fw='LCT616-DS5 3.18-oc2',storage=new Map()}={}){
  let telemetry=new Uint8Array(13);telemetry[11]=255;const timers=[];let telemetryFails=false,now=1000,gamepads=[];
  const html=readFileSync(new URL(production?'../auth-preview.html':'../index.html',import.meta.url),'utf8');const {window}=parseHTML(html);
  // linkedom omits native browser form value/validity setters.
  Object.defineProperty(window.HTMLSelectElement.prototype,'value',{configurable:true,get(){return [...this.options].find(o=>o.hasAttribute('selected'))?.value??this.options[0]?.value??''},set(v){for(const o of this.options)o.toggleAttribute('selected',String(o.value)===String(v))}});
  window.HTMLInputElement.prototype.setCustomValidity=function(s){this.validationMessage=s};window.HTMLInputElement.prototype.checkValidity=function(){return !this.validationMessage};
  let cfg=bytes();cfg[0]=version;let selected=0;const tables=[0,1].map(()=>Uint8Array.from({length:124},(_,i)=>i%4===1?Math.floor(i/4):0));const sent=[],listeners={};
- const device={vendorId:1356,productId:3302,opened:false,collections:[{featureReports:[{reportId:247}]}],async open(){this.opened=true},async close(){this.opened=false},addEventListener(n,f){listeners[n]=f},removeEventListener(n){delete listeners[n]},async receiveFeatureReport(id){if(id===248)return view(id,new TextEncoder().encode('LCT616-DS5 3.18-oc2'));if(id===247)return view(id,cfg);if(id===251)return view(id,[0,selected,...tables[selected]]);if(id===249){if(telemetryFails)throw Error('telemetry failed');return view(id,telemetry)}throw Error('unexpected read')},async sendFeatureReport(id,p){sent.push([id,p.slice()]);if(id===246&&p[0]===1){cfg=p.slice(1,33);if(corrupt)cfg[31]=0}if(id===251&&p[0]===3)selected=p[1];if(id===251&&p[0]===1)tables[p[1]]=p.slice(2,126)}};
+ const device={vendorId:1356,productId:3302,opened:false,collections:[{featureReports:[{reportId:247}]}],async open(){this.opened=true},async close(){this.opened=false},addEventListener(n,f){listeners[n]=f},removeEventListener(n){delete listeners[n]},async receiveFeatureReport(id){if(id===248)return view(id,new TextEncoder().encode(fw));if(id===247)return view(id,cfg);if(id===251)return view(id,[0,selected,...tables[selected]]);if(id===249){if(telemetryFails)throw Error('telemetry failed');return view(id,telemetry)}throw Error('unexpected read')},async sendFeatureReport(id,p){sent.push([id,p.slice()]);if(id===246&&p[0]===1){cfg=p.slice(1,33);if(corrupt)cfg[31]=0}if(id===251&&p[0]===3)selected=p[1];if(id===251&&p[0]===1)tables[p[1]]=p.slice(2,126)}};
  const outputs=[];device.sendReport=async(id,p)=>{outputs.push([id,p.slice()])};
  const navigator=noHid?{getGamepads(){return gamepads}}:{hid:{async requestDevice(){return [device]},async getDevices(){return auto?[device]:[]},addEventListener(n,f){listeners[n]=f}},getGamepads(){return gamepads}};
  const ctx={__DS5_LANG:'zh-CN',atob,Blob,URL,isSecureContext:true,Date:class extends Date{static now(){return now}},document:window.document,navigator,localStorage:{getItem(k){return k==='ds5.lang'?'zh-CN':storage.get(k)??null},setItem(k,v){storage.set(k,v)}},setTimeout(fn,ms){const t={fn,ms};timers.push(t);return t},clearTimeout(t){if(t)t.cancelled=true},clearInterval(){},setInterval(fn,ms){timers.push({fn,ms})},confirm:()=>true,TextDecoder,Uint8Array,DataView,TextEncoder,Event:window.Event,console};vm.runInNewContext(html.match(/<script type="module">([\s\S]*?)<\/script>/)[1],ctx);
  ctx.crypto=webcrypto;ctx.location={protocol:'file:'};
  const el=id=>window.document.getElementById(id);return {el,window,device,sent,outputs,pending(ms){return timers.some(t=>t.ms===ms&&!t.cancelled&&!t.fired)},expire(ms=5000){const t=timers.find(t=>t.ms===ms&&!t.cancelled&&!t.fired);if(!t)throw Error("No pending timeout");t.fired=true;t.fn()},
- input(axes,buttons=0,extraButtons=0,extra={}){now+=50;const b=new Uint8Array(63);b.set(axes);b[7]=(extra.faces??0)|8;b[8]=buttons;b[9]=extraButtons;if(extra.triggers){b[4]=extra.triggers[0];b[5]=extra.triggers[1]}listeners.inputreport({device,reportId:1,data:new DataView(b.buffer)})},
+ input(axes,buttons=0,extraButtons=0,extra={}){now+=50;const b=new Uint8Array(63);b.set(axes);b[7]=(extra.faces??0)|8;b[8]=buttons;b[9]=extraButtons;if(extra.triggers){b[4]=extra.triggers[0];b[5]=extra.triggers[1]}if(extra.raw)for(const [i,v]of Object.entries(extra.raw))b[+i]=v;listeners.inputreport({device,reportId:1,data:new DataView(b.buffer)})},
  setPads(pads){gamepads=pads},async tick(ms=50){now+=ms;await timers.find(t=>t.ms===50).fn()},setBattery(pct,state){telemetry[11]=pct;telemetry[12]=state},setLink(state,bonds=1){const b=new Uint8Array(17);b.set(telemetry.slice(0,13));b[13]=0xd3;b[14]=state;b[15]=bonds;telemetry=b},failTelemetry(){telemetryFails=true},setLatency(age=1000,count=50){const b=new Uint8Array(51);b.set(telemetry.slice(0,13));b[13]=0xd3;b[14]=7;b[17]=0x4c;b[18]=1;const v=new DataView(b.buffer);[count,1200,1100,500,2000,age,400,800].forEach((n,i)=>v.setUint32(19+i*4,n,true));telemetry=b},async poll(){await timers.find(t=>t.ms===2000).fn()},disconnect:()=>listeners.disconnect({device}),cfg:()=>cfg};
 }
 test('UI: connect, stage only, rebase config, verify then save, disconnect cleanup',async()=>{const u=ui();await u.el('connect').onclick();assert.equal(u.el('connection').textContent,'接收器已连接');u.window.document.querySelector('[data-page="touch"]').onclick();const c=u.window.document.querySelector('#controls input[type="checkbox"]');c.checked=true;c.onchange();assert.equal(u.sent.filter(([id])=>id===246).length,0);u.cfg()[6]=42;await u.el('save').onclick();const writes=u.sent.filter(([id])=>id===246);assert.deepEqual(writes.map(([,p])=>p[0]),[1,2]);assert.equal(u.cfg()[6],42);assert.equal(u.cfg()[31],1);assert.equal(u.el('save').disabled,true);u.disconnect();assert.equal(u.el('connection').textContent,'尚未连接接收器');assert.equal(u.el('save').disabled,true)});
@@ -914,4 +914,25 @@ test('Fn pressed fill overrides the global white outline rule',async()=>{
  const block=(html.match(/FN_PURPLE_FORCE[\s\S]{0,900}/)||[''])[0];
  assert.match(block,/fn-l"\]\.pressed \.ln/,'Fn .ln 规则缺失');
  assert.match(block,/fill:var\(--violet-feedback\) !important/,'Fn 缺少 !important 覆盖（会被白色规则压掉）');
+});
+
+test('机型不闪跳：标准手柄数据偶然命中 0xE8 不会切成 Edge，Edge 需连续命中才切换',async()=>{
+ const u=ui({fw:'LCT616-DS5 3.18H-oc109-v1'});await u.el('connect').onclick();
+ const model=()=>u.el('art').querySelector('svg')?.getAttribute('data-model');
+ assert.equal(u.el('device-title').textContent,'DualSense');
+ assert.equal(model(),'ds5');
+ // 标准手柄：每 3 帧有一次字节 11=0xE8、12=0（模拟陀螺仪数据偶然命中）
+ for(let i=0;i<30;i++){
+  const raw=(i%3===0)?{[11]:0xe8,[12]:0}:undefined;
+  u.input([127,128,128,127],0,0,{raw});
+ }
+ assert.equal(u.el('device-title').textContent,'DualSense','偶发命中不应切换机型');
+ assert.equal(model(),'ds5');
+ // Edge：连续 12 帧一致命中 → 切换
+ for(let i=0;i<12;i++)u.input([127,128,128,127],0,0,{raw:{[11]:0xe8,[12]:3}});
+ assert.equal(u.el('device-title').textContent,'DualSense Edge');
+ assert.equal(model(),'edge');
+ // 之后即使 tag 消失也不回退（只在断开时重置）
+ for(let i=0;i<6;i++)u.input([127,128,128,127],0,0,{});
+ assert.equal(model(),'edge','已确认的 Edge 不应回退为普通版');
 });
