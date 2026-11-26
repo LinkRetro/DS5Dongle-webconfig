@@ -203,7 +203,7 @@ function renderFirmware(box){
   paintLocalized(go,firmwareVersion===chosen.version?msg('fw_reinstall_version'):msg('fw_install_version'));
  };
  sel.onchange=applyChoice;
-  const selectBoard=()=>{list=catalogFor('-'+board.value)??[];sel.replaceChildren();for(const [i,v] of list.entries())option(sel,i,v.version,false);sel.value='0';applyChoice()};
+  const selectBoard=()=>{list=catalogFor('-'+board.value)??[];sel.replaceChildren();for(const [i,v] of list.entries())option(sel,i,v.stable?v.version+' · '+messageText(msg('fw_stable_badge')):v.version,false);sel.value='0';applyChoice()};
   board.onchange=selectBoard;selectBoard();
  // 点击即弹窗；弹窗挂在 body 上、不依赖设备连接，拔掉接收器后仍可操作
   go.onclick=()=>{if(!chosen||flashSession?.isBusy())return;const boardId=board.value;fwDialogOpen(chosen.version,chosen,entry=>loadImage(entry,boardId))};

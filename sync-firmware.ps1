@@ -26,6 +26,8 @@ $web = $PSScriptRoot
 $root = Split-Path (Split-Path $web -Parent) -Parent
 if (-not $FirmwareRoot) { $FirmwareRoot = Join-Path $root 'firmware' }
 
+$StableTag = '3.18H-oc74'   # 正式版（网页固件列表打星标）
+
 $notes = @{
     9  = '早期版本，存在“已配对后不再主动扫描”问题'
     10 = '早期版本，存在板型宏与重连问题'
@@ -127,6 +129,7 @@ foreach ($board in 'v1', 'v12') {
             sha256  = (Get-FileHash $_.FullName -Algorithm SHA256).Hash.ToLowerInvariant()
             date    = $_.LastWriteTime.ToString('yyyy-MM-dd')
             notes   = $notes[$oc]
+            stable  = ($m.Groups[1].Value -eq $StableTag)
         }
     }
     if ($items.Count -eq 0) { Write-Warning "跳过 $board：没有匹配的固件文件"; continue }
@@ -135,7 +138,7 @@ foreach ($board in 'v1', 'v12') {
         board    = $board
         latest   = $items[0].version
         # 注意：只有一个版本时 PowerShell 会把它解包成单个对象，必须强制成数组
-        versions = @($items | Select-Object version, tag, file, size, sha256, date, notes)
+        versions = @($items | Select-Object version, tag, file, size, sha256, date, notes, stable)
     } | ConvertTo-Json -Depth 5 | Set-Content (Join-Path $dst 'index.json') -Encoding utf8
 
     $summary += [pscustomobject]@{

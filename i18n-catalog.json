@@ -8579,6 +8579,21 @@
       "ru": "Скрыть весь приёмник",
       "pl": "Ukryj cały odbiornik",
       "tr": "Tüm alıcıyı gizle"
+    },
+    "fw_stable_badge": {
+      "zh-CN": "正式版",
+      "en": "stable",
+      "zh-TW": "正式版",
+      "ja": "正式版",
+      "ko": "정식판",
+      "de": "stabil",
+      "fr": "stable",
+      "es": "estable",
+      "it": "stabile",
+      "pt-BR": "estável",
+      "ru": "стабильная",
+      "pl": "stabilna",
+      "tr": "kararlı"
     }
   }
 }
