@@ -1,7 +1,17 @@
 {
   "board": "v12",
-  "latest": "LCT616-DS5 3.18H-oc108-v12",
+  "latest": "LCT616-DS5 3.18H-oc109-v12",
   "versions": [
+    {
+      "version": "LCT616-DS5 3.18H-oc109-v12",
+      "tag": "3.18H-oc109",
+      "file": "ds5dongle-v12-3.18H-oc109-hs.bin",
+      "size": 817520,
+      "sha256": "15cd5fa5ccf7f3ba6d56a9c7b95b92978b62710f9b201af6057429dc691519e4",
+      "date": "2026-11-26",
+      "notes": "遥测新增静音灯状态（0xF9 字节 59），网页可同步显示手柄静音指示灯",
+      "stable": false
+    },
     {
       "version": "LCT616-DS5 3.18H-oc108-v12",
       "tag": "3.18H-oc108",

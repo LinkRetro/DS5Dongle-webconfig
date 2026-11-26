@@ -8849,6 +8849,21 @@
       "ru": "Включено: нажмите Fn, L4, R4, крест и откройте консоль (F12)",
       "pl": "Włączone: naciśnij Fn, L4, R4, krzyżyk i sprawdź konsolę (F12)",
       "tr": "Etkin: Fn, L4, R4 ve çarpıya basıp konsolu (F12) kontrol edin"
+    },
+    "mic_muted_badge": {
+      "zh-CN": "麦克风已静音",
+      "zh-TW": "麥克風已靜音",
+      "en": "Mic muted",
+      "ja": "マイクミュート中",
+      "ko": "마이크 음소거됨",
+      "de": "Mikrofon stumm",
+      "fr": "Micro coupé",
+      "es": "Micrófono silenciado",
+      "it": "Microfono muto",
+      "pt-BR": "Microfone mudo",
+      "ru": "Микрофон выключен",
+      "pl": "Mikrofon wyciszony",
+      "tr": "Mikrofon kapalı"
     }
   }
 }

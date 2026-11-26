@@ -358,6 +358,10 @@ function dirty(){return changedCount()>0}
 function needsRestart(){return Object.keys(draft).some(k=>restartFields.has(k))||!!(mappingChanges()&&table.some((v,i)=>i%4===0&&v!==0))}
 function paintQuickActions(){
  const state=telemetry?.length>=17&&telemetry[13]===0xD3?telemetry[14]:null;
+ /* 静音指示灯同步：0xF9 字节 59（页面索引 58） = 0 关 / 1 常亮 / 2 呼吸 */
+ const muteLed=telemetry&&telemetry.length>58?telemetry[58]:0;
+ {const badge=$('mute-status');if(badge){badge.hidden=!muteLed;if(muteLed)paintLocalized(badge,msg('mic_muted_badge'));badge.dataset.on=muteLed?'1':'0'}
+  const mutePart=$('art')?.querySelector('[data-part="mute"]');if(mutePart)mutePart.classList.toggle('muted',!!muteLed);}
   const ready=!!device&&!busy&&state===7;
  const labels={rumble:'qa_rumble',trigger:'phrase.test_both_triggers',lights:'qa_lights'};
   document.querySelectorAll('#controls button[data-hid="true"]').forEach(b=>b.disabled=!ready);
