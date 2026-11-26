@@ -425,17 +425,10 @@ body:not(.light) .art svg[data-model="ds5"] .tp-tex,
 .art svg[data-model="ds5"] #tp-light{fill:#E7E6ED;stroke:#CFCCD8;stroke-width:.8}
 .art svg[data-model="ds5"]:has([data-part="touchpad"].pressed) #tp-light{fill:var(--violet-feedback);stroke:var(--violet-feedback)}
 
-/* FN_STUB_HIDE */
-/* 标准版没有 Fn：保留几何（避免切断壳体接缝），只隐掉垫块纹理与轮廓，
-   垫块本体填成壳体黑，看起来就是平滑外壳。 */
-.art svg[data-model="ds5"] .fn-stub .ln,
-.art svg[data-model="ds5"] .fn-stub .ln-dk,
-.art svg[data-model="ds5"] .fn-stub .ol{display:none}
-.art svg[data-model="ds5"] .fn-stub .dk{display:none}
+.art .shell{fill:#212530}
+.art .edge-key-label{fill:var(--ink);font-size:10px;font-weight:650;text-anchor:middle;pointer-events:none}
 
 /* 手柄静音时指示灯为橙色，网页同步显示：按钮描边+外发光，状态条徽标 */
 .art [data-part="mute"].muted{filter:drop-shadow(0 0 3px #F3BD68) drop-shadow(0 0 6px #F3BD6880)}
 .art [data-part="mute"].muted .ln,.art [data-part="mute"].muted .ol{fill:#F3BD68}
 #mute-status{border-color:#F3BD68;color:#F3BD68}
-
-.art svg[data-model="ds5"] .bg-blank{fill:var(--bg)}
