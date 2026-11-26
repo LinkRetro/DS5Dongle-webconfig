@@ -1,7 +1,17 @@
 {
   "board": "v12",
-  "latest": "LCT616-DS5 3.18H-oc90-v12",
+  "latest": "LCT616-DS5 3.18H-oc91-v12",
   "versions": [
+    {
+      "version": "LCT616-DS5 3.18H-oc91-v12",
+      "tag": "3.18H-oc91",
+      "file": "ds5dongle-v12-3.18H-oc91-hs.bin",
+      "size": 813908,
+      "sha256": "60b8c534acc178c22535853edbae48be78a469f93b2eb0686ba784096e5a166e",
+      "date": "2026-11-26",
+      "notes": "XInput 无手柄也持续上报中性帧（周期 kick），自检不再依赖蓝牙输入；修正 oc90 自检未运行的问题",
+      "stable": false
+    },
     {
       "version": "LCT616-DS5 3.18H-oc90-v12",
       "tag": "3.18H-oc90",
