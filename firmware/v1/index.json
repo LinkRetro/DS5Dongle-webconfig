@@ -1,13 +1,23 @@
 {
   "board": "v1",
-  "latest": "LCT616-DS5 3.18H-oc96-v1",
+  "latest": "LCT616-DS5 3.18H-oc97-v1",
   "versions": [
+    {
+      "version": "LCT616-DS5 3.18H-oc97-v1",
+      "tag": "3.18H-oc97",
+      "file": "ds5dongle-v1-3.18H-oc97-hs.bin",
+      "size": 816220,
+      "sha256": "6f513615fea36b5d1e337d49a6d721b8f6218e4842911faf33ff372945cc6d78",
+      "date": "2026-11-26",
+      "notes": "开机日志打印固件版本字符串，避免刷没刷上、刷了哪一版无法确认；无功能改动",
+      "stable": false
+    },
     {
       "version": "LCT616-DS5 3.18H-oc96-v1",
       "tag": "3.18H-oc96",
       "file": "ds5dongle-v1-3.18H-oc96-hs.bin",
       "size": 815944,
-      "sha256": "6ea210d0c37c12d11b0633504d6c17272f7b8f32ce3e61b91895622287f5632a",
+      "sha256": "1d579227e48f31e7e5ad49f1a47dcd9e151fb4df59ccfc3a1379024fecee4044",
       "date": "2026-11-26",
       "notes": "XInput 重构为独立类驱动 src/xinput.c（CherryUSB 规范 + GP2040-CE 发送策略）：端点生命周期归类管理，应用层只提交最新报文",
       "stable": false

@@ -1,5 +1,5 @@
 export const latestFirmware={version:'LCT616-DS5 3.18H-oc8',board:'LCTech BL616',date:'2026-11-14',size:794988};
-export const boardFirmwares={v1:{"id":"v1","version":"LCT616-DS5 3.18H-oc96-v1","board":"DS5Dongle V1 · 单灯","date":"2026-11-26","size":815944},v12:{"id":"v12","version":"LCT616-DS5 3.18H-oc96-v12","board":"DS5Dongle V1.2 · RGB","date":"2026-11-26","size":816440}};
+export const boardFirmwares={v1:{"id":"v1","version":"LCT616-DS5 3.18H-oc97-v1","board":"DS5Dongle V1 · 单灯","date":"2026-11-26","size":816220},v12:{"id":"v12","version":"LCT616-DS5 3.18H-oc97-v12","board":"DS5Dongle V1.2 · RGB","date":"2026-11-26","size":816464}};
 export function catalogFor(version){
  const board=version?.match(/-(v1|v12)$/)?.[1];
  const cat=typeof BOARD_FIRMWARE_CATALOG!=='undefined'?BOARD_FIRMWARE_CATALOG:null;

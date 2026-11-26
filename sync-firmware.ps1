@@ -117,6 +117,7 @@ $notes = @{
     94 = '修复 XInput 卡死：busy 守卫挡在自愈分支之前导致 clear_stall 永不执行；并处理 USB 挂起/恢复'
     95 = '按 GP2040-CE 模型重写发送：完成回调驱动、忙则跳过、不再手动 clear_stall（oc94 上电卡死的根因）'
     96 = 'XInput 重构为独立类驱动 src/xinput.c（CherryUSB 规范 + GP2040-CE 发送策略）：端点生命周期归类管理，应用层只提交最新报文'
+    97 = '开机日志打印固件版本字符串，避免刷没刷上、刷了哪一版无法确认；无功能改动'
 }
 
 $labels = @{ v1 = 'DS5Dongle V1 · 单灯'; v12 = 'DS5Dongle V1.2 · RGB' }
