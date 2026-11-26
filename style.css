@@ -298,8 +298,8 @@ input[type=range]{height:22px;cursor:pointer}
 .mode-notice[hidden]{display:none}
 
 /* Same controller projection and interaction styles for both Sony models. */
-.art svg[data-model="edge"] [data-part="touchpad"] { fill: #262832; fill-opacity: .9; }
-.art svg[data-model="edge"] [data-part="touchpad"].pressed { fill: var(--violet-feedback); }
+.art svg:is([data-model="edge"],[data-model="ds5"]) [data-part="touchpad"] { fill: #262832; fill-opacity: .9; }
+.art svg:is([data-model="edge"],[data-model="ds5"]) [data-part="touchpad"].pressed { fill: var(--violet-feedback); }
 .art .edge-control { stroke: #a8aab7; stroke-width: 1; }
 .art .edge-extras text { fill: #f4f2ff; font: 600 9px system-ui,sans-serif; text-anchor: middle; pointer-events: none; }
 
@@ -312,102 +312,102 @@ input[type=range]{height:22px;cursor:pointer}
 
 /* Edge 手绘图自带一套更深的配色，暗色主题下扳机/摇杆/触摸板会糊成一片。
    这里给 Edge 单独调亮，并为 adapter（行程滑块的独立画法）补上描边。 */
-.art svg[data-model="edge"] .dk{fill:#2e3444}
-.art svg[data-model="edge"] .cap{fill:#4b5062}
-.art svg[data-model="edge"] .stk{fill:#585d70}
-.art svg[data-model="edge"] .ln{fill:#c6cad8}
-.art svg[data-model="edge"] .ln-dk{fill:#b3b8c8}
-.art svg[data-model="edge"] .ol{fill:none;stroke:#c6cad8;stroke-width:1.1}
-.art svg[data-model="edge"] .adapter path{fill:none;stroke:#aab0c0;stroke-width:1.1}
-.art svg[data-model="edge"] .fill-off{fill:#20242f}
-.art svg[data-model="edge"] .fill-on{fill:#3d4356}
+.art svg:is([data-model="edge"],[data-model="ds5"]) .dk{fill:#2e3444}
+.art svg:is([data-model="edge"],[data-model="ds5"]) .cap{fill:#4b5062}
+.art svg:is([data-model="edge"],[data-model="ds5"]) .stk{fill:#585d70}
+.art svg:is([data-model="edge"],[data-model="ds5"]) .ln{fill:#c6cad8}
+.art svg:is([data-model="edge"],[data-model="ds5"]) .ln-dk{fill:#b3b8c8}
+.art svg:is([data-model="edge"],[data-model="ds5"]) .ol{fill:none;stroke:#c6cad8;stroke-width:1.1}
+.art svg:is([data-model="edge"],[data-model="ds5"]) .adapter path{fill:none;stroke:#aab0c0;stroke-width:1.1}
+.art svg:is([data-model="edge"],[data-model="ds5"]) .fill-off{fill:#20242f}
+.art svg:is([data-model="edge"],[data-model="ds5"]) .fill-on{fill:#3d4356}
 /* 暗色主题下再提亮一档：纯黑（#2e3444 以下）在 #10141C 背景上等于看不见 */
-body:not(.light) .art svg[data-model="edge"] .dk{fill:#3a4152}
-body:not(.light) .art svg[data-model="edge"] .cap{fill:#5b6176}
-body:not(.light) .art svg[data-model="edge"] .stk{fill:#6a7086}
-body:not(.light) .art svg[data-model="edge"] .ln{fill:#d2d6e2}
-body:not(.light) .art svg[data-model="edge"] .ln-dk{fill:#c0c5d4}
-body:not(.light) .art svg[data-model="edge"] .adapter path{stroke:#c0c5d4}
-body:not(.light) .art svg[data-model="edge"] [data-part="touchpad"]{fill:#343b4d;fill-opacity:1}
-body:not(.light) .art svg[data-model="edge"] .tp{fill:#343b4d}
-body:not(.light) .art svg[data-model="edge"] .tp-tex{fill:#3d4558}
+body:not(.light) .art svg:is([data-model="edge"],[data-model="ds5"]) .dk{fill:#3a4152}
+body:not(.light) .art svg:is([data-model="edge"],[data-model="ds5"]) .cap{fill:#5b6176}
+body:not(.light) .art svg:is([data-model="edge"],[data-model="ds5"]) .stk{fill:#6a7086}
+body:not(.light) .art svg:is([data-model="edge"],[data-model="ds5"]) .ln{fill:#d2d6e2}
+body:not(.light) .art svg:is([data-model="edge"],[data-model="ds5"]) .ln-dk{fill:#c0c5d4}
+body:not(.light) .art svg:is([data-model="edge"],[data-model="ds5"]) .adapter path{stroke:#c0c5d4}
+body:not(.light) .art svg:is([data-model="edge"],[data-model="ds5"]) [data-part="touchpad"]{fill:#343b4d;fill-opacity:1}
+body:not(.light) .art svg:is([data-model="edge"],[data-model="ds5"]) .tp{fill:#343b4d}
+body:not(.light) .art svg:is([data-model="edge"],[data-model="ds5"]) .tp-tex{fill:#3d4558}
 
 /* Edge 扳机的按下反馈要和普通图一致：轮廓变白，本体泛紫 */
-.art svg[data-model="edge"] [data-part].pressed .ol{stroke:#F5F9FF;stroke-width:1.3}
+.art svg:is([data-model="edge"],[data-model="ds5"]) [data-part].pressed .ol{stroke:#F5F9FF;stroke-width:1.3}
 
 /* EDGE_PRESS_PARITY */
-.art svg[data-model="edge"] [data-part].pressed .cap,
-.art svg[data-model="edge"] [data-part].pressed.cap,
-.art svg[data-model="edge"] [data-part].pressed .stk{fill:var(--violet-feedback)}
-.art svg[data-model="edge"] [data-part="l2"] .dk{fill:url(#ctl-l2-fill)}
-.art svg[data-model="edge"] [data-part="r2"] .dk{fill:url(#ctl-r2-fill)}
+.art svg:is([data-model="edge"],[data-model="ds5"]) [data-part].pressed .cap,
+.art svg:is([data-model="edge"],[data-model="ds5"]) [data-part].pressed.cap,
+.art svg:is([data-model="edge"],[data-model="ds5"]) [data-part].pressed .stk{fill:var(--violet-feedback)}
+.art svg:is([data-model="edge"],[data-model="ds5"]) [data-part="l2"] .dk{fill:url(#ctl-l2-fill)}
+.art svg:is([data-model="edge"],[data-model="ds5"]) [data-part="r2"] .dk{fill:url(#ctl-r2-fill)}
 
 /* EDGE_ONLY_PARTS */
 /* Edge 独有部件（背键 L4/R4、Fn）在普通手柄上没有对应物，
    它们的主表面是 .dk，所以单独给一条和 cap/stk 等价的紫色填充。 */
-.art svg[data-model="edge"] [data-part="paddle-l"].pressed .dk,
-.art svg[data-model="edge"] [data-part="paddle-r"].pressed .dk,
-.art svg[data-model="edge"] [data-part="fn-l"].pressed .dk,
-.art svg[data-model="edge"] [data-part="fn-r"].pressed .dk{fill:var(--violet-feedback)}
+.art svg:is([data-model="edge"],[data-model="ds5"]) [data-part="paddle-l"].pressed .dk,
+.art svg:is([data-model="edge"],[data-model="ds5"]) [data-part="paddle-r"].pressed .dk,
+.art svg:is([data-model="edge"],[data-model="ds5"]) [data-part="fn-l"].pressed .dk,
+.art svg:is([data-model="edge"],[data-model="ds5"]) [data-part="fn-r"].pressed .dk{fill:var(--violet-feedback)}
 /* 背键/Fn 的内部描边同样按普通图规则变白 */
-body:not(.light) .art svg[data-model="edge"] [data-part="paddle-l"].pressed .ln,
-body:not(.light) .art svg[data-model="edge"] [data-part="paddle-r"].pressed .ln,
-body:not(.light) .art svg[data-model="edge"] [data-part="fn-l"].pressed .ln,
-body:not(.light) .art svg[data-model="edge"] [data-part="fn-r"].pressed .ln,
-body:not(.light) .art svg[data-model="edge"] [data-part="paddle-l"].pressed .ol,
-body:not(.light) .art svg[data-model="edge"] [data-part="paddle-r"].pressed .ol,
-body:not(.light) .art svg[data-model="edge"] [data-part="fn-l"].pressed .ol,
-body:not(.light) .art svg[data-model="edge"] [data-part="fn-r"].pressed .ol{fill:#F5F9FF;stroke:#F5F9FF}
+body:not(.light) .art svg:is([data-model="edge"],[data-model="ds5"]) [data-part="paddle-l"].pressed .ln,
+body:not(.light) .art svg:is([data-model="edge"],[data-model="ds5"]) [data-part="paddle-r"].pressed .ln,
+body:not(.light) .art svg:is([data-model="edge"],[data-model="ds5"]) [data-part="fn-l"].pressed .ln,
+body:not(.light) .art svg:is([data-model="edge"],[data-model="ds5"]) [data-part="fn-r"].pressed .ln,
+body:not(.light) .art svg:is([data-model="edge"],[data-model="ds5"]) [data-part="paddle-l"].pressed .ol,
+body:not(.light) .art svg:is([data-model="edge"],[data-model="ds5"]) [data-part="paddle-r"].pressed .ol,
+body:not(.light) .art svg:is([data-model="edge"],[data-model="ds5"]) [data-part="fn-l"].pressed .ol,
+body:not(.light) .art svg:is([data-model="edge"],[data-model="ds5"]) [data-part="fn-r"].pressed .ol{fill:#F5F9FF;stroke:#F5F9FF}
 
 /* EDGE_PRESS_SPECIFICITY */
 /* 暗色主题的 Edge 配色带 body+svg 两个元素选择器，会压过普通按下规则。
    这里用同等前缀 + 更多类，确保按下时优先级更高：
    - L1/R1：实色紫（与普通图 .pressed .dk 一致）
    - L2/R2：保留渐变（按压力度） */
-body:not(.light) .art svg[data-model="edge"] [data-part="l1"].pressed .dk,
-body:not(.light) .art svg[data-model="edge"] [data-part="r1"].pressed .dk{fill:var(--violet-feedback)}
-body:not(.light) .art svg[data-model="edge"] [data-part="l2"] .dk{fill:url(#ctl-l2-fill)}
-body:not(.light) .art svg[data-model="edge"] [data-part="r2"] .dk{fill:url(#ctl-r2-fill)}
-body:not(.light) .art svg[data-model="edge"] [data-part="l2"].pressed .ol,
-body:not(.light) .art svg[data-model="edge"] [data-part="r2"].pressed .ol,
-body:not(.light) .art svg[data-model="edge"] [data-part="l1"].pressed .ol,
-body:not(.light) .art svg[data-model="edge"] [data-part="r1"].pressed .ol{stroke:#F5F9FF;stroke-width:1.3}
+body:not(.light) .art svg:is([data-model="edge"],[data-model="ds5"]) [data-part="l1"].pressed .dk,
+body:not(.light) .art svg:is([data-model="edge"],[data-model="ds5"]) [data-part="r1"].pressed .dk{fill:var(--violet-feedback)}
+body:not(.light) .art svg:is([data-model="edge"],[data-model="ds5"]) [data-part="l2"] .dk{fill:url(#ctl-l2-fill)}
+body:not(.light) .art svg:is([data-model="edge"],[data-model="ds5"]) [data-part="r2"] .dk{fill:url(#ctl-r2-fill)}
+body:not(.light) .art svg:is([data-model="edge"],[data-model="ds5"]) [data-part="l2"].pressed .ol,
+body:not(.light) .art svg:is([data-model="edge"],[data-model="ds5"]) [data-part="r2"].pressed .ol,
+body:not(.light) .art svg:is([data-model="edge"],[data-model="ds5"]) [data-part="l1"].pressed .ol,
+body:not(.light) .art svg:is([data-model="edge"],[data-model="ds5"]) [data-part="r1"].pressed .ol{stroke:#F5F9FF;stroke-width:1.3}
 
 /* EDGE_STICK_TINT */
 /* 摇杆移动时的混色基色要用 Edge 自己的提亮色，否则半程会掉回 #444553 显脏 */
-.art svg[data-model="edge"] [data-part].moving:not(.pressed) .stk{
+.art svg:is([data-model="edge"],[data-model="ds5"]) [data-part].moving:not(.pressed) .stk{
  fill:color-mix(in srgb,var(--violet-feedback) var(--stick-tint),#6a7086);
 }
-.art svg[data-model="edge"] [data-part].moving:not(.pressed) .ol{
+.art svg:is([data-model="edge"],[data-model="ds5"]) [data-part].moving:not(.pressed) .ol{
  stroke:color-mix(in srgb,#E9DCFF var(--stick-tint),#c6cad8);
 }
 
 /* FN_SOLID_PURPLE */
 /* Fn 的可见面是那几条横纹（.ln/.ln-dk），按下时如果只把底下的 .dk 变紫，
    纹路仍是白的，看起来就像"没有紫色背景"。这里让纹路本身也变紫。 */
-.art svg[data-model="edge"] [data-part="fn-l"].pressed .ln,
-.art svg[data-model="edge"] [data-part="fn-r"].pressed .ln,
-.art svg[data-model="edge"] [data-part="fn-l"].pressed .ln-dk,
-.art svg[data-model="edge"] [data-part="fn-r"].pressed .ln-dk{
+.art svg:is([data-model="edge"],[data-model="ds5"]) [data-part="fn-l"].pressed .ln,
+.art svg:is([data-model="edge"],[data-model="ds5"]) [data-part="fn-r"].pressed .ln,
+.art svg:is([data-model="edge"],[data-model="ds5"]) [data-part="fn-l"].pressed .ln-dk,
+.art svg:is([data-model="edge"],[data-model="ds5"]) [data-part="fn-r"].pressed .ln-dk{
  fill:var(--violet-feedback);
  stroke:none;
 }
-.art svg[data-model="edge"] [data-part="fn-l"].pressed .dk,
-.art svg[data-model="edge"] [data-part="fn-r"].pressed .dk{fill:var(--violet-feedback)}
+.art svg:is([data-model="edge"],[data-model="ds5"]) [data-part="fn-l"].pressed .dk,
+.art svg:is([data-model="edge"],[data-model="ds5"]) [data-part="fn-r"].pressed .dk{fill:var(--violet-feedback)}
 
 /* FN_PURPLE_FORCE */
 /* 全局「按下 .ln 变白」规则在构建后的顺序里排在本文件之后会赢，
    Fn 的可见面又是 .ln，导致按下显示白色。这里用 !important 明确覆盖。 */
-body:not(.light) .art svg[data-model="edge"] [data-part="fn-l"].pressed .ln,
-body:not(.light) .art svg[data-model="edge"] [data-part="fn-r"].pressed .ln,
-body:not(.light) .art svg[data-model="edge"] [data-part="fn-l"].pressed .ln-dk,
-body:not(.light) .art svg[data-model="edge"] [data-part="fn-r"].pressed .ln-dk,
-body:not(.light) .art svg[data-model="edge"] [data-part="fn-l"].pressed .ol,
-body:not(.light) .art svg[data-model="edge"] [data-part="fn-r"].pressed .ol{
+body:not(.light) .art svg:is([data-model="edge"],[data-model="ds5"]) [data-part="fn-l"].pressed .ln,
+body:not(.light) .art svg:is([data-model="edge"],[data-model="ds5"]) [data-part="fn-r"].pressed .ln,
+body:not(.light) .art svg:is([data-model="edge"],[data-model="ds5"]) [data-part="fn-l"].pressed .ln-dk,
+body:not(.light) .art svg:is([data-model="edge"],[data-model="ds5"]) [data-part="fn-r"].pressed .ln-dk,
+body:not(.light) .art svg:is([data-model="edge"],[data-model="ds5"]) [data-part="fn-l"].pressed .ol,
+body:not(.light) .art svg:is([data-model="edge"],[data-model="ds5"]) [data-part="fn-r"].pressed .ol{
  fill:var(--violet-feedback) !important;
  stroke:var(--violet-feedback) !important;
 }
-body:not(.light) .art svg[data-model="edge"] [data-part="fn-l"].pressed .dk,
-body:not(.light) .art svg[data-model="edge"] [data-part="fn-r"].pressed .dk{
+body:not(.light) .art svg:is([data-model="edge"],[data-model="ds5"]) [data-part="fn-l"].pressed .dk,
+body:not(.light) .art svg:is([data-model="edge"],[data-model="ds5"]) [data-part="fn-r"].pressed .dk{
  fill:var(--violet-feedback) !important;
 }

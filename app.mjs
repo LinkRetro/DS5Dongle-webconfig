@@ -856,7 +856,7 @@ function paintDiagNotice(){
 function moveSticks(axes){
  const offset=v=>{v=Number.isFinite(v)?Math.max(0,Math.min(255,v)):128;return v>=127&&v<=128?0:(v<127?(v-127)/127:(v-128)/127)*9};
  for(let i=0;i<stickParts.length;i++){
-  const {node,base}=stickParts[i],dx=offset(axes[i*2]),dy=offset(axes[i*2+1]);
+  const {node}=stickParts[i];const base=stickParts[i].base||'',dx=offset(axes[i*2]),dy=offset(axes[i*2+1]);
   node.setAttribute('transform',`translate(${dx.toFixed(2)} ${dy.toFixed(2)}) ${base}`.trim());
   const amount=Math.min(1,Math.hypot(dx,dy)/9);
   node.classList.toggle('moving',amount>0);
@@ -1108,7 +1108,7 @@ function renderRemap(box){const state=document.createElement('p');state.id='mapp
  source.onchange=edit;edit()
 }
 function paintLight(){const rgb=['led_r','led_g','led_b'].map(k=>val(k)??210);$('art').style.setProperty('--ctl-led',`rgb(${rgb.join(',')})`)}
-function showArt(edge){showingEdge=edge;$('art').innerHTML=edge?EDGE_ART:STANDARD_ART;stickParts=['stick-l','stick-r'].map(id=>$('art').querySelector(`[data-part="${id}"]`)).filter(Boolean).map(node=>({node,base:node.getAttribute('transform')??''}));visualInputActive=false;for(const p of $('art').querySelectorAll('[data-part]')){if(p.dataset.part.startsWith('fn-'))continue;p.setAttribute('tabindex','0');p.setAttribute('role','button');const paddle=edgeSources.find(({part})=>part===p.dataset.part);if(paddle)paintLocalized(p,paddle.label,'aria-label');else p.setAttribute('aria-label',p.dataset.part)}paintLight();paintMappingSource()}
+function showArt(edge){showingEdge=edge;$('art').innerHTML=edge?EDGE_ART:STANDARD_ART;stickParts=['stick-l','stick-r'].map(id=>$('art').querySelector(`[data-part="${id}"]`)).filter(Boolean).map(node=>({node,base:(node.getAttribute('transform')??'')}));visualInputActive=false;for(const p of $('art').querySelectorAll('[data-part]')){if(p.dataset.part.startsWith('fn-'))continue;p.setAttribute('tabindex','0');p.setAttribute('role','button');const paddle=edgeSources.find(({part})=>part===p.dataset.part);if(paddle)paintLocalized(p,paddle.label,'aria-label');else p.setAttribute('aria-label',p.dataset.part)}paintLight();paintMappingSource()}
 function setControllerArt(edge){
  $('device-title').textContent=edge?'DualSense Edge':'DualSense';
  if(showingEdge!==edge)showArt(edge);
