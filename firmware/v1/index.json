@@ -1,7 +1,17 @@
 {
   "board": "v1",
-  "latest": "LCT616-DS5 3.18H-oc97-v1",
+  "latest": "LCT616-DS5 3.18H-oc98-v1",
   "versions": [
+    {
+      "version": "LCT616-DS5 3.18H-oc98-v1",
+      "tag": "3.18H-oc98",
+      "file": "ds5dongle-v1-3.18H-oc98-hs.bin",
+      "size": 816380,
+      "sha256": "8b2e1f9e00d19aacdc17262413b0c35a2a4743cef6bb1240d2e7a47d738624a5",
+      "date": "2026-11-26",
+      "notes": "XInput 报文诊断：打印前 3 帧完整 20 字节与按键变化（含扳机/摇杆），用于确认 PC 收到的按键值",
+      "stable": false
+    },
     {
       "version": "LCT616-DS5 3.18H-oc97-v1",
       "tag": "3.18H-oc97",
