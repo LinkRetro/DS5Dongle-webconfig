@@ -411,3 +411,16 @@ body:not(.light) .art svg:is([data-model="edge"],[data-model="ds5"]) [data-part=
 body:not(.light) .art svg:is([data-model="edge"],[data-model="ds5"]) [data-part="fn-r"].pressed .dk{
  fill:var(--violet-feedback) !important;
 }
+
+/* DS5_TOUCHPAD_LIGHT */
+/* 普通 DualSense 的触摸板是浅色（与机身同色系），Edge 才是黑色触摸板。
+   两图共用派生底图后，这里按机型区分触摸板颜色。 */
+body:not(.light) .art svg[data-model="ds5"] .tp,
+.art svg[data-model="ds5"] .tp{fill:var(--ctl-body)!important}
+body:not(.light) .art svg[data-model="ds5"] .tp-tex,
+.art svg[data-model="ds5"] .tp-tex{fill:color-mix(in srgb,var(--ctl-body) 94%,#ffffff)!important}
+
+/* DS5_TOUCHPAD_RECT */
+/* 标准版触摸板用浅色块绘制（派生图原来继承 Edge 的黑色触摸板） */
+.art svg[data-model="ds5"] #tp-light{fill:#E7E6ED;stroke:#CFCCD8;stroke-width:.8}
+.art svg[data-model="ds5"]:has([data-part="touchpad"].pressed) #tp-light{fill:var(--violet-feedback);stroke:var(--violet-feedback)}
