@@ -437,3 +437,5 @@ body:not(.light) .art svg[data-model="ds5"] .tp-tex,
 .art [data-part="mute"].muted{filter:drop-shadow(0 0 3px #F3BD68) drop-shadow(0 0 6px #F3BD6880)}
 .art [data-part="mute"].muted .ln,.art [data-part="mute"].muted .ol{fill:#F3BD68}
 #mute-status{border-color:#F3BD68;color:#F3BD68}
+
+.art svg[data-model="ds5"] .bg-blank{fill:var(--bg)}
