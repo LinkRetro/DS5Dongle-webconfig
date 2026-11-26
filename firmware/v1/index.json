@@ -1,7 +1,17 @@
 {
   "board": "v1",
-  "latest": "LCT616-DS5 3.18H-oc81-v1",
+  "latest": "LCT616-DS5 3.18H-oc82-v1",
   "versions": [
+    {
+      "version": "LCT616-DS5 3.18H-oc82-v1",
+      "tag": "3.18H-oc82",
+      "file": "ds5dongle-v1-3.18H-oc82-hs.bin",
+      "size": 813216,
+      "sha256": "afd58e71941c987a75c29111b766d3cda106841e4b740a2b0661604b97e28cc1",
+      "date": "2026-11-26",
+      "notes": "XInput 改用 045E:02FD：避开 xusb22 对 028E 的设备级独占，保证复合枚举与网页连接；Xbox 驱动走接口类匹配",
+      "stable": false
+    },
     {
       "version": "LCT616-DS5 3.18H-oc81-v1",
       "tag": "3.18H-oc81",
