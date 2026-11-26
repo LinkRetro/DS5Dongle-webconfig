@@ -1,7 +1,17 @@
 {
   "board": "v12",
-  "latest": "LCT616-DS5 3.18H-oc106-v12",
+  "latest": "LCT616-DS5 3.18H-oc107-v12",
   "versions": [
+    {
+      "version": "LCT616-DS5 3.18H-oc107-v12",
+      "tag": "3.18H-oc107",
+      "file": "ds5dongle-v12-3.18H-oc107-hs.bin",
+      "size": 818588,
+      "sha256": "27f97db8832adb6ced58ecbd0ed2a4bc03fce18359ad7c77860cfb25da44782c",
+      "date": "2026-11-26",
+      "notes": "修复 Edge 背键映射不生效：网页字段偏移与配置体长度改为结构体真实布局（58/59，60 字节）；Edge 切换重启提示更明确",
+      "stable": false
+    },
     {
       "version": "LCT616-DS5 3.18H-oc106-v12",
       "tag": "3.18H-oc106",
