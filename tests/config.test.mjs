@@ -698,3 +698,79 @@ test('plan A: lightbar colour lives on the home row, receiver LED toggle lives i
  const devLabels=[...u.window.document.querySelectorAll('#controls .row')].map(l=>l.textContent).join('|');
  assert.match(devLabels,/接收器一分钟后熄灯/);
 });
+
+test('diagnostics decode 0xFA one byte before the firmware offset (off-by-one regression)',async()=>{
+ const u=ui();await u.el('connect').onclick();
+ u.window.document.querySelector('[data-page="device"]').onclick();
+ const read=u.device.receiveFeatureReport.bind(u.device);
+ u.device.receiveFeatureReport=async id=>{
+  if(id!==0xfa)return read(id);
+  /* 62 payload bytes: payload() already dropped the report ID, so index = firmware offset - 1 */
+  const b=new Uint8Array(62);
+  b[0]=0x05;                                  /* flags: edge + linked          */
+  b[1]=7;                                      /* state                        */
+  b[2]=0x22;                                   /* handshake id                 */
+  b[3]=2;b[4]=0;                               /* bonded / blacklist           */
+  b.set([0xd0,0xbc,0xc1,0x9c,0x74,0x5a],5);    /* address                      */
+  b[11]=3;b[12]=0;                             /* scan rounds                  */
+  b[13]=1;b[14]=0;                             /* connect failures             */
+  b[15]=0;b[16]=0;                             /* handshake failures           */
+  b[17]=445&0xff;b[18]=445>>8;                 /* avg  44.5 ms                 */
+  b[19]=520&0xff;b[20]=520>>8;                 /* max  52.0 ms                 */
+  b[21]=0;b[22]=0;                             /* overruns                     */
+  b[23]=460&0xff;b[24]=460>>8;                 /* fill                         */
+  b.set(new TextEncoder().encode('DualSense'),25);
+  b[57]=2;                                     /* board v1.2                   */
+  b[58]=1;                                     /* USB High-Speed               */
+  b[59]=1;                                     /* RSSI unknown                 */
+  b[60]=1;                                     /* have_scan                    */
+  b[61]=1;                                     /* link quality: good           */
+  return view(0xfa,b);
+ };
+ u.setLink(7,2);
+ await u.poll();await u.poll();
+ await new Promise(r=>setImmediate(r));
+
+ const text=u.el('diag-text')?.textContent||'';
+ assert.match(text,/v1\.2/,'board must read v1.2, not the USB byte');
+ assert.match(text,/High-Speed/,'usb speed must read High-Speed');
+ assert.match(text,/D0:BC:C1:9C:74:5A/i,'address keeps the right bytes');
+ assert.match(text,/44\.5/,'average encode time');
+ assert.match(text,/52\.0/,'max encode time');
+ assert.match(text,/链路良好/,'link quality comes from byte 61');
+ const bars=u.el('link-status').querySelectorAll('.sig-bars i.on').length;
+ assert.equal(bars,4,'four bars for good link quality');
+});
+
+test('telemetry 0xF9 drives link status, bonds and USB speed',async()=>{
+ const u=ui();await u.el('connect').onclick();
+ const read=u.device.receiveFeatureReport.bind(u.device);
+ u.device.receiveFeatureReport=async id=>{
+  if(id!==0xf9)return read(id);
+  const b=new Uint8Array(63);
+  b[0]=0xc4;                                  /* rssi -60 */
+  b[1]=0x40;                                  /* USB High-Speed flag */
+  b[13]=0xd3;b[14]=7;                         /* connected marker */
+  b[15]=2;                                    /* two bonded controllers */
+  b[16]=0x02;                                 /* link info valid */
+  return view(0xf9,b);
+ };
+ await u.poll();
+ const text=u.el('link-status').textContent;
+ assert.match(text,/2/,'bonded count comes from byte 15');
+ assert.match(text,/HS/,'USB speed flag comes from byte 1 bit 6');
+});
+
+test('remap 0xFB accepts all eight profiles and rejects nine',()=>{
+ const table=Uint8Array.from({length:124},(_,i)=>i%4===1?Math.floor(i/4)%31:0);
+ for(let p=0;p<8;p++){
+  const r=remapRead(view(251,[p,p,...table]),p);
+  assert.equal(r.active,p);
+  assert.equal(r.table.length,124);
+  const cmd=remapWrite(p,table);
+  assert.equal(cmd[0],1,'write command id');
+  assert.equal(cmd[1],p,'profile byte');
+ }
+ assert.throws(()=>remapRead(view(251,[8,8,...table]),8),/映射组回读不匹配/);
+ assert.throws(()=>remapWrite(8,table),/映射格式错误/);
+});
