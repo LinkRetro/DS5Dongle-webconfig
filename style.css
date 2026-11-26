@@ -364,3 +364,17 @@ body:not(.light) .art svg[data-model="edge"] [data-part="paddle-l"].pressed .ol,
 body:not(.light) .art svg[data-model="edge"] [data-part="paddle-r"].pressed .ol,
 body:not(.light) .art svg[data-model="edge"] [data-part="fn-l"].pressed .ol,
 body:not(.light) .art svg[data-model="edge"] [data-part="fn-r"].pressed .ol{fill:#F5F9FF;stroke:#F5F9FF}
+
+/* EDGE_PRESS_SPECIFICITY */
+/* 暗色主题的 Edge 配色带 body+svg 两个元素选择器，会压过普通按下规则。
+   这里用同等前缀 + 更多类，确保按下时优先级更高：
+   - L1/R1：实色紫（与普通图 .pressed .dk 一致）
+   - L2/R2：保留渐变（按压力度） */
+body:not(.light) .art svg[data-model="edge"] [data-part="l1"].pressed .dk,
+body:not(.light) .art svg[data-model="edge"] [data-part="r1"].pressed .dk{fill:var(--violet-feedback)}
+body:not(.light) .art svg[data-model="edge"] [data-part="l2"] .dk{fill:url(#ctl-l2-fill)}
+body:not(.light) .art svg[data-model="edge"] [data-part="r2"] .dk{fill:url(#ctl-r2-fill)}
+body:not(.light) .art svg[data-model="edge"] [data-part="l2"].pressed .ol,
+body:not(.light) .art svg[data-model="edge"] [data-part="r2"].pressed .ol,
+body:not(.light) .art svg[data-model="edge"] [data-part="l1"].pressed .ol,
+body:not(.light) .art svg[data-model="edge"] [data-part="r1"].pressed .ol{stroke:#F5F9FF;stroke-width:1.3}
