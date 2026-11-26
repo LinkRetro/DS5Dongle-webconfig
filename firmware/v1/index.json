@@ -1,7 +1,17 @@
 {
   "board": "v1",
-  "latest": "LCT616-DS5 3.18H-oc85-v1",
+  "latest": "LCT616-DS5 3.18H-oc86-v1",
   "versions": [
+    {
+      "version": "LCT616-DS5 3.18H-oc86-v1",
+      "tag": "3.18H-oc86",
+      "file": "ds5dongle-v1-3.18H-oc86-hs.bin",
+      "size": 813396,
+      "sha256": "9fdfcb69beffc57755be20654ee319e4fbf6c95cfcd64bb29289f65bc1cc7885",
+      "date": "2026-11-26",
+      "notes": "XInput 诊断二：转发心跳与 busy 卡死计数，区分蓝牙输入中断还是端点发送完成回调丢失",
+      "stable": false
+    },
     {
       "version": "LCT616-DS5 3.18H-oc85-v1",
       "tag": "3.18H-oc85",

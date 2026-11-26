@@ -106,6 +106,7 @@ $notes = @{
     83 = 'XInput 恢复单接口 045E:028E（与原装 360 手柄一致），产品名也显示为 Xbox 360 Controller；切回 DualSense 请用 PS+Options 长按 3 秒'
     84 = 'XInput 补上 17 字节 XID 描述符（xusb22 识别 XInput 的关键），端点改为原装的 0x81/0x01，震动报文偏移修正'
     85 = 'XInput 输入诊断版：打印前 5 帧与每千帧发送结果（返回值、按钮、摇杆），用于定位 joy.cpl 无输入'
+    86 = 'XInput 诊断二：转发心跳与 busy 卡死计数，区分蓝牙输入中断还是端点发送完成回调丢失'
 }
 
 $labels = @{ v1 = 'DS5Dongle V1 · 单灯'; v12 = 'DS5Dongle V1.2 · RGB' }
