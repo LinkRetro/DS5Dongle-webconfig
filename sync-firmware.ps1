@@ -114,6 +114,7 @@ $notes = @{
     91 = 'XInput 无手柄也持续上报中性帧（周期 kick），自检不再依赖蓝牙输入；修正 oc90 自检未运行的问题'
     92 = '移除 A 键自检图案（测试已完成，留着会导致 A 键永久按下）；保留真实按键映射与边沿日志'
     93 = 'XInput 发送改为双缓冲乒乓 + STALL 自愈：发送中的报文不再被改写，管道卡住 20ms 自动 clear_stall 重试'
+    94 = '修复 XInput 卡死：busy 守卫挡在自愈分支之前导致 clear_stall 永不执行；并处理 USB 挂起/恢复'
 }
 
 $labels = @{ v1 = 'DS5Dongle V1 · 单灯'; v12 = 'DS5Dongle V1.2 · RGB' }

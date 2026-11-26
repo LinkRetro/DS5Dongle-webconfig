@@ -1,13 +1,23 @@
 {
   "board": "v12",
-  "latest": "LCT616-DS5 3.18H-oc93-v12",
+  "latest": "LCT616-DS5 3.18H-oc94-v12",
   "versions": [
+    {
+      "version": "LCT616-DS5 3.18H-oc94-v12",
+      "tag": "3.18H-oc94",
+      "file": "ds5dongle-v12-3.18H-oc94-hs.bin",
+      "size": 814156,
+      "sha256": "188cceaea4ab93bf681671f6c55061fb8ba49abb0c87a95a49abd5c4a1533383",
+      "date": "2026-11-26",
+      "notes": "修复 XInput 卡死：busy 守卫挡在自愈分支之前导致 clear_stall 永不执行；并处理 USB 挂起/恢复",
+      "stable": false
+    },
     {
       "version": "LCT616-DS5 3.18H-oc93-v12",
       "tag": "3.18H-oc93",
       "file": "ds5dongle-v12-3.18H-oc93-hs.bin",
-      "size": 813904,
-      "sha256": "1c495c7e2a1d332e220279ae47e9acf656752fee39a38966fe427871571ce978",
+      "size": 814156,
+      "sha256": "813190d4b6f53bd0f6853f083cfc747dfbf3d11477dc077f31b67f081f01d878",
       "date": "2026-11-26",
       "notes": "XInput 发送改为双缓冲乒乓 + STALL 自愈：发送中的报文不再被改写，管道卡住 20ms 自动 clear_stall 重试",
       "stable": false
