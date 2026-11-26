@@ -1,7 +1,17 @@
 {
   "board": "v12",
-  "latest": "LCT616-DS5 3.18H-oc102-v12",
+  "latest": "LCT616-DS5 3.18H-oc103-v12",
   "versions": [
+    {
+      "version": "LCT616-DS5 3.18H-oc103-v12",
+      "tag": "3.18H-oc103",
+      "file": "ds5dongle-v12-3.18H-oc103-hs.bin",
+      "size": 817324,
+      "sha256": "0fbcfc15d033fa67465b2eb830f928c60b5adaf2e714dc1a348e4c5fc16f6f22",
+      "date": "2026-11-26",
+      "notes": "配置版本 15：固件版本变化时自动把输出模式重置为 DualSense，避免升级后停在 XInput 导致“没声音/没触觉”（其它设置保持不变）",
+      "stable": false
+    },
     {
       "version": "LCT616-DS5 3.18H-oc102-v12",
       "tag": "3.18H-oc102",
