@@ -98,6 +98,7 @@ $notes = @{
     75 = '实验：新增 Xbox 360 (XInput) 输出模式，兼容只认 XInput 的老游戏与模拟器（无音频/触觉/自适应扳机）'
     76 = '修复 XInput 模式枚举失败：全速（other-speed）描述符也要切到 Xbox 布局；启动日志打印当前输出模式'
     77 = 'XInput 模式逃生开关：开机 3 秒内按住 BOOT 1.5 秒，或手柄 PS+Options 长按 3 秒，即可切回 DualSense 并重启'
+    78 = '修复 oc77 启动崩溃：调度器启动前误用 vTaskDelay 导致 Store/AMO access fault（BOOT 逃生窗口）'
 }
 
 $labels = @{ v1 = 'DS5Dongle V1 · 单灯'; v12 = 'DS5Dongle V1.2 · RGB' }

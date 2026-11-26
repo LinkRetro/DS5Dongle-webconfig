@@ -1,7 +1,17 @@
 {
   "board": "v1",
-  "latest": "LCT616-DS5 3.18H-oc77-v1",
+  "latest": "LCT616-DS5 3.18H-oc78-v1",
   "versions": [
+    {
+      "version": "LCT616-DS5 3.18H-oc78-v1",
+      "tag": "3.18H-oc78",
+      "file": "ds5dongle-v1-3.18H-oc78-hs.bin",
+      "size": 813160,
+      "sha256": "31114c6a5a3efd40ef2bf3a6453cb4fffda7edec6bc263f1e57954f93808223a",
+      "date": "2026-11-26",
+      "notes": "修复 oc77 启动崩溃：调度器启动前误用 vTaskDelay 导致 Store/AMO access fault（BOOT 逃生窗口）",
+      "stable": false
+    },
     {
       "version": "LCT616-DS5 3.18H-oc77-v1",
       "tag": "3.18H-oc77",
