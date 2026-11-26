@@ -629,6 +629,17 @@ function renderPanel(){ if(flashSession?.isBusy()&&page!=='flash'){page='flash';
   diagnostics.innerHTML='<summary data-i18n="device_latency">诊断 · 板内蓝牙输入至 USB 提交完成</summary><p id="latency-state"></p><div class="latency-grid"><div><span data-i18n="device_latency_last">最新</span><strong id="latency-last">—</strong></div><div><span data-i18n="device_latency_average">平均</span><strong id="latency-average">—</strong></div><div><span data-i18n="device_latency_max">最大</span><strong id="latency-max">—</strong></div></div><p class="hint" id="latency-detail"></p>';
   box.append(diagnostics);paintLatency(telemetry);
  }
+ if(page==='feel'){
+  const card=document.createElement('section');card.className='test-card';card.id='trigger-stop-card';
+  const h=document.createElement('h3');paintLocalized(h,msg('trigger_stop_title'));card.append(h);
+  const hint=document.createElement('p');hint.className='hint';paintLocalized(hint,msg('trigger_stop_hint'));card.append(hint);
+  const box2=document.createElement('div');box2.id='trigger-stop';box2.className='trigger-stop-grid';
+  for(const side of ['L2','R2']){const row=document.createElement('div');row.className='trigger-stop-row';row.dataset.side=side;box2.append(row)}
+  card.append(box2);
+  const reset=document.createElement('button');reset.type='button';reset.className='ghost';paintLocalized(reset,msg('trigger_stop_reset'));
+  reset.onclick=()=>{trigMax=[0,0];paintTriggerStop()};card.append(reset);
+  box.append(card);paintTriggerStop();
+ }
  if(['vision','feel','audio','motion'].includes(page))renderTests(box,inlineSettings);
  refresh();paintLight()
 }
@@ -1133,7 +1144,28 @@ function selectPart(target){
  if(page==='remap'&&idx>=0&&source){source.value=idx;source.onchange()}
 }
 $('art').onclick=e=>selectPart(e.target);$('art').onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();selectPart(e.target)}};
-function paintInput(i,source){lastInput=Date.now();if(lastInput-lastPaint<33)return;lastPaint=lastInput;visualInputActive=true;moveSticks(i.axes);for(const [n,v]of [['l2',i.triggers[0]],['r2',i.triggers[1]]])for(const stop of $('art').querySelectorAll(`#ctl-${n}-fill [data-edge]`))stop.setAttribute('offset',String(v/255));paintLocalized($('input-state'),source==='接收器 HID'?msg('live_input_hid'):msg('live_input_browser'));$('left-axis').textContent=`${i.axes[0]} / ${i.axes[1]}`;$('right-axis').textContent=`${i.axes[2]} / ${i.axes[3]}`;$('triggers').textContent=i.triggers.map(v=>Math.round(v/255*100)+'%').join(' / ');$('art').querySelectorAll('[data-part]').forEach(p=>p.classList.toggle('pressed',i.parts.has(p.dataset.part)))}
+/* 扳机行程限位推测：Edge 的 L2/R2 限位是纯机械滑块，手柄不上报档位。
+ * 滑块会缩短行程，因此按到底时的最大模拟量会变小，用它推测档位，
+ * 只作提示，不作为设置项。 */
+let trigMax=[0,0];
+function triggerStopLevel(v){
+ if(!v)return 'unknown';
+ if(v>=240)return 'long';
+ if(v>=200)return 'medium';
+ if(v>=140)return 'short';
+ return 'unknown';
+}
+function paintTriggerStop(){
+ const box=$('trigger-stop');if(!box)return;
+ for(const [i,side] of [[0,'L2'],[1,'R2']]){
+  const el=box.querySelector(`[data-side="${side}"]`);if(!el)return;
+  const v=trigMax[i],level=triggerStopLevel(v);
+  el.dataset.level=level;
+  const LEVEL_KEY={long:'trigger_stop_long',medium:'trigger_stop_medium',short:'trigger_stop_short',unknown:'trigger_stop_unknown'};
+ el.textContent=`${side} · ${msg(LEVEL_KEY[level])} · ${v?('max '+v):'—'}`;
+ }
+}
+function paintInput(i,source){lastInput=Date.now();if(lastInput-lastPaint<33)return;lastPaint=lastInput;visualInputActive=true;trigMax[0]=Math.max(trigMax[0],i.triggers[0]);trigMax[1]=Math.max(trigMax[1],i.triggers[1]);paintTriggerStop();moveSticks(i.axes);for(const [n,v]of [['l2',i.triggers[0]],['r2',i.triggers[1]]])for(const stop of $('art').querySelectorAll(`#ctl-${n}-fill [data-edge]`))stop.setAttribute('offset',String(v/255));paintLocalized($('input-state'),source==='接收器 HID'?msg('live_input_hid'):msg('live_input_browser'));$('left-axis').textContent=`${i.axes[0]} / ${i.axes[1]}`;$('right-axis').textContent=`${i.axes[2]} / ${i.axes[3]}`;$('triggers').textContent=i.triggers.map(v=>Math.round(v/255*100)+'%').join(' / ');$('art').querySelectorAll('[data-part]').forEach(p=>p.classList.toggle('pressed',i.parts.has(p.dataset.part)))}
 /* ---- 陀螺仪 / 加速度（六轴）----
  * 偏移按 DualSense USB 输入报告布局，相对 p[0]=LX：
  * 陀螺仪 16..21 -> p[15..20]，加速度 22..27 -> p[21..26]，int16 小端。
