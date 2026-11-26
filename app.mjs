@@ -617,6 +617,13 @@ function renderPanel(){ if(flashSession?.isBusy()&&page!=='flash'){page='flash';
    box.append(group);
   }
  if(page==='device'){
+  /* 自检：按一次按钮后，接下来 20 帧原始位打到控制台，便于确认某个键到底有没有上报 */
+  const self=document.createElement('button');self.type='button';self.className='ghost';self.id='selfcheck';
+  paintLocalized(self,msg('device_selfcheck'));
+  const selfHint=document.createElement('p');selfHint.className='hint';
+  paintLocalized(selfHint,msg('device_selfcheck_hint'));
+  self.onclick=()=>{keyDebugFrames=20;say(msg('device_selfcheck_on'))};
+  box.append(self,selfHint);
   /* 当前为 XInput 兼容模式时，必须在页面顶部明确告知代价与切回方法。
    * 这是减少“切过去回不来/以为设备坏了”类投诉的第一道防线。 */
   const notice=document.createElement('div');notice.id='output-mode-notice';notice.className='mode-notice';
@@ -1166,12 +1173,13 @@ function paintTriggerStop(){
  el.textContent=`${side} · ${t(LEVEL_KEY[level])} · ${v?('max '+v):'—'}`;
  }
 }
+let keyDebugFrames=0;
 function paintInput(i,source){lastInput=Date.now();if(lastInput-lastPaint<33)return;lastPaint=lastInput;visualInputActive=true;for(const k of [0,1]){
   const v=i.triggers[k];
   if(v>5)trigPeak[k]=Math.max(trigPeak[k],v);
   else if(trigPeak[k]>0){trigMax[k]=trigPeak[k];trigPeak[k]=0}   /* 松手后锁定本次结果，下次按下重新测量 */
  }
- paintTriggerStop();moveSticks(i.axes);for(const [n,v]of [['l2',i.triggers[0]],['r2',i.triggers[1]]])for(const stop of $('art').querySelectorAll(`#ctl-${n}-fill [data-edge]`))stop.setAttribute('offset',String(v/255));paintLocalized($('input-state'),source==='接收器 HID'?msg('live_input_hid'):msg('live_input_browser'));$('left-axis').textContent=`${i.axes[0]} / ${i.axes[1]}`;$('right-axis').textContent=`${i.axes[2]} / ${i.axes[3]}`;$('triggers').textContent=i.triggers.map(v=>Math.round(v/255*100)+'%').join(' / ');$('art').querySelectorAll('[data-part]').forEach(p=>p.classList.toggle('pressed',i.parts.has(p.dataset.part)))}
+ paintTriggerStop();if(keyDebugFrames>0){keyDebugFrames--;try{console.log('[DS5 selfcheck]',JSON.stringify({parts:[...i.parts],axes:i.axes,triggers:i.triggers}))}catch(e){}}moveSticks(i.axes);for(const [n,v]of [['l2',i.triggers[0]],['r2',i.triggers[1]]])for(const stop of $('art').querySelectorAll(`#ctl-${n}-fill [data-edge]`))stop.setAttribute('offset',String(v/255));paintLocalized($('input-state'),source==='接收器 HID'?msg('live_input_hid'):msg('live_input_browser'));$('left-axis').textContent=`${i.axes[0]} / ${i.axes[1]}`;$('right-axis').textContent=`${i.axes[2]} / ${i.axes[3]}`;$('triggers').textContent=i.triggers.map(v=>Math.round(v/255*100)+'%').join(' / ');$('art').querySelectorAll('[data-part]').forEach(p=>p.classList.toggle('pressed',i.parts.has(p.dataset.part)))}
 /* ---- 陀螺仪 / 加速度（六轴）----
  * 偏移按 DualSense USB 输入报告布局，相对 p[0]=LX：
  * 陀螺仪 16..21 -> p[15..20]，加速度 22..27 -> p[21..26]，int16 小端。

@@ -8909,6 +8909,51 @@
       "ru": "Измерить снова",
       "pl": "Zmierz ponownie",
       "tr": "Yeniden ölç"
+    },
+    "device_selfcheck": {
+      "zh-CN": "按键自检",
+      "zh-TW": "按鍵自檢",
+      "en": "Key self-check",
+      "ja": "キー自己診断",
+      "ko": "키 자체 점검",
+      "de": "Tasten-Selbsttest",
+      "fr": "Auto-test des touches",
+      "es": "Autodiagnóstico de botones",
+      "it": "Autotest tasti",
+      "pt-BR": "Autoteste de botões",
+      "ru": "Самопроверка кнопок",
+      "pl": "Autotest przycisków",
+      "tr": "Tuş öz-testi"
+    },
+    "device_selfcheck_hint": {
+      "zh-CN": "点击后在控制台打印接下来 20 帧的按键位；依次按 Fn、L4、R4、× 即可看出它们有没有上报",
+      "zh-TW": "點擊後在主控台印出接下來 20 幀的按鍵位；依序按 Fn、L4、R4、× 即可看出有沒有上報",
+      "en": "Prints the next 20 frames of button bits to the console; press Fn, L4, R4 and cross in turn to see which of them are reported",
+      "ja": "クリックすると次の 20 フレームのボタンビットをコンソールに出力します。Fn、L4、R4、× の順に押して報告の有無を確認できます",
+      "ko": "클릭하면 다음 20프레임의 버튼 비트를 콘솔에 출력합니다. Fn, L4, R4, ×를 차례로 눌러 보고 여부를 확인하세요",
+      "de": "Gibt die nächsten 20 Frames der Tastenbits in der Konsole aus; drücke nacheinander Fn, L4, R4 und Kreuz, um zu sehen, was gemeldet wird",
+      "fr": "Affiche les 20 prochaines trames de bits de boutons dans la console ; appuyez successivement sur Fn, L4, R4 et croix pour voir ce qui est rapporté",
+      "es": "Muestra las próximas 20 tramas de bits de botones en la consola; pulsa Fn, L4, R4 y cruz para ver cuáles se informan",
+      "it": "Stampa le prossime 20 frame dei bit dei pulsanti nella console; premi Fn, L4, R4 e croce per vedere quali vengono riportati",
+      "pt-BR": "Mostra as próximas 20 quadros de bits de botões no console; pressione Fn, L4, R4 e cruz para ver quais são reportados",
+      "ru": "Выводит в консоль следующие 20 кадров битов кнопок; нажмите Fn, L4, R4 и крест, чтобы увидеть, что передаётся",
+      "pl": "Wypisuje w konsoli kolejne 20 ramek bitów przycisków; naciśnij Fn, L4, R4 i krzyżyk, aby sprawdzić, co jest raportowane",
+      "tr": "Konsola sonraki 20 karedeki tuş bitlerini yazar; Fn, L4, R4 ve çarpıya sırayla basarak hangilerinin bildirildiğini görün"
+    },
+    "device_selfcheck_on": {
+      "zh-CN": "已开启：请按 Fn、L4、R4、×，然后看控制台（F12）",
+      "zh-TW": "已開啟：請按 Fn、L4、R4、×，然後看主控台（F12）",
+      "en": "Enabled: press Fn, L4, R4, cross, then check the console (F12)",
+      "ja": "有効化：Fn、L4、R4、× を押してからコンソール（F12）を確認してください",
+      "ko": "활성화됨: Fn, L4, R4, ×를 누른 뒤 콘솔(F12)을 확인하세요",
+      "de": "Aktiviert: Fn, L4, R4, Kreuz drücken und dann die Konsole (F12) prüfen",
+      "fr": "Activé : appuyez sur Fn, L4, R4, croix puis ouvrez la console (F12)",
+      "es": "Activado: pulsa Fn, L4, R4, cruz y revisa la consola (F12)",
+      "it": "Attivato: premi Fn, L4, R4, croce e controlla la console (F12)",
+      "pt-BR": "Ativado: pressione Fn, L4, R4, cruz e veja o console (F12)",
+      "ru": "Включено: нажмите Fn, L4, R4, крест и откройте консоль (F12)",
+      "pl": "Włączone: naciśnij Fn, L4, R4, krzyżyk i sprawdź konsolę (F12)",
+      "tr": "Etkin: Fn, L4, R4 ve çarpıya basıp konsolu (F12) kontrol edin"
     }
   }
 }

@@ -378,3 +378,12 @@ body:not(.light) .art svg[data-model="edge"] [data-part="l2"].pressed .ol,
 body:not(.light) .art svg[data-model="edge"] [data-part="r2"].pressed .ol,
 body:not(.light) .art svg[data-model="edge"] [data-part="l1"].pressed .ol,
 body:not(.light) .art svg[data-model="edge"] [data-part="r1"].pressed .ol{stroke:#F5F9FF;stroke-width:1.3}
+
+/* EDGE_STICK_TINT */
+/* 摇杆移动时的混色基色要用 Edge 自己的提亮色，否则半程会掉回 #444553 显脏 */
+.art svg[data-model="edge"] [data-part].moving:not(.pressed) .stk{
+ fill:color-mix(in srgb,var(--violet-feedback) var(--stick-tint),#6a7086);
+}
+.art svg[data-model="edge"] [data-part].moving:not(.pressed) .ol{
+ stroke:color-mix(in srgb,#E9DCFF var(--stick-tint),#c6cad8);
+}
