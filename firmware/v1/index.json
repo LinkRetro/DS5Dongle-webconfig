@@ -1,7 +1,17 @@
 {
   "board": "v1",
-  "latest": "LCT616-DS5 3.18H-oc98-v1",
+  "latest": "LCT616-DS5 3.18H-oc99-v1",
   "versions": [
+    {
+      "version": "LCT616-DS5 3.18H-oc99-v1",
+      "tag": "3.18H-oc99",
+      "file": "ds5dongle-v1-3.18H-oc99-hs.bin",
+      "size": 816380,
+      "sha256": "e16170e71eef838426280b558365e96950b627eb85dc7d47c5e441b546cd5c88",
+      "date": "2026-11-26",
+      "notes": "修复 oc98 诊断日志导致 xin_sent 不自增、每帧打印拖死 USB 的问题；raw 只打印一次",
+      "stable": false
+    },
     {
       "version": "LCT616-DS5 3.18H-oc98-v1",
       "tag": "3.18H-oc98",
