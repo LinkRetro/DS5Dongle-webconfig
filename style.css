@@ -431,7 +431,7 @@ body:not(.light) .art svg[data-model="ds5"] .tp-tex,
 .art svg[data-model="ds5"] .fn-stub .ln,
 .art svg[data-model="ds5"] .fn-stub .ln-dk,
 .art svg[data-model="ds5"] .fn-stub .ol{display:none}
-.art svg[data-model="ds5"] .fn-stub .dk{fill:#000}
+.art svg[data-model="ds5"] .fn-stub .dk{display:none}
 
 /* 手柄静音时指示灯为橙色，网页同步显示：按钮描边+外发光，状态条徽标 */
 .art [data-part="mute"].muted{filter:drop-shadow(0 0 3px #F3BD68) drop-shadow(0 0 6px #F3BD6880)}
