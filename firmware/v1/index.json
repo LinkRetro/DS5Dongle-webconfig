@@ -1,13 +1,23 @@
 {
   "board": "v1",
-  "latest": "LCT616-DS5 3.18H-oc95-v1",
+  "latest": "LCT616-DS5 3.18H-oc96-v1",
   "versions": [
+    {
+      "version": "LCT616-DS5 3.18H-oc96-v1",
+      "tag": "3.18H-oc96",
+      "file": "ds5dongle-v1-3.18H-oc96-hs.bin",
+      "size": 815944,
+      "sha256": "6ea210d0c37c12d11b0633504d6c17272f7b8f32ce3e61b91895622287f5632a",
+      "date": "2026-11-26",
+      "notes": "XInput 重构为独立类驱动 src/xinput.c（CherryUSB 规范 + GP2040-CE 发送策略）：端点生命周期归类管理，应用层只提交最新报文",
+      "stable": false
+    },
     {
       "version": "LCT616-DS5 3.18H-oc95-v1",
       "tag": "3.18H-oc95",
       "file": "ds5dongle-v1-3.18H-oc95-hs.bin",
-      "size": 813372,
-      "sha256": "b298e10802714b241ce39eeebb33441c12abf2a6d0a5d4aa2a4915e55d9a1eb5",
+      "size": 815944,
+      "sha256": "743506686f7ab75f8d688db1467f0ada8e65e9096daf57078ac064ecee4988d9",
       "date": "2026-11-26",
       "notes": "按 GP2040-CE 模型重写发送：完成回调驱动、忙则跳过、不再手动 clear_stall（oc94 上电卡死的根因）",
       "stable": false
