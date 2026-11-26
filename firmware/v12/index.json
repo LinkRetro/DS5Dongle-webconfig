@@ -1,7 +1,17 @@
 {
   "board": "v12",
-  "latest": "LCT616-DS5 3.18H-oc83-v12",
+  "latest": "LCT616-DS5 3.18H-oc84-v12",
   "versions": [
+    {
+      "version": "LCT616-DS5 3.18H-oc84-v12",
+      "tag": "3.18H-oc84",
+      "file": "ds5dongle-v12-3.18H-oc84-hs.bin",
+      "size": 813748,
+      "sha256": "8a99be78a4e8f3982eff97962430e662d151b8db5defce6b639307d308fa0198",
+      "date": "2026-11-26",
+      "notes": "XInput 补上 17 字节 XID 描述符（xusb22 识别 XInput 的关键），端点改为原装的 0x81/0x01，震动报文偏移修正",
+      "stable": false
+    },
     {
       "version": "LCT616-DS5 3.18H-oc83-v12",
       "tag": "3.18H-oc83",
