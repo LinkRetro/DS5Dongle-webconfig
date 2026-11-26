@@ -1,7 +1,17 @@
 {
   "board": "v1",
-  "latest": "LCT616-DS5 3.18H-oc86-v1",
+  "latest": "LCT616-DS5 3.18H-oc87-v1",
   "versions": [
+    {
+      "version": "LCT616-DS5 3.18H-oc87-v1",
+      "tag": "3.18H-oc87",
+      "file": "ds5dongle-v1-3.18H-oc87-hs.bin",
+      "size": 813392,
+      "sha256": "27fd4e00711cffedeb38bb481c1543e8d67857d477355f5a2da47127722ad974",
+      "date": "2026-11-26",
+      "notes": "XInput 发送超时自愈：IN 端点 20ms 未完成就重发，修复第 2 帧后输入全被丢弃（joy.cpl 无输入）",
+      "stable": false
+    },
     {
       "version": "LCT616-DS5 3.18H-oc86-v1",
       "tag": "3.18H-oc86",
