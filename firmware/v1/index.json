@@ -1,13 +1,23 @@
 {
   "board": "v1",
-  "latest": "LCT616-DS5 3.18H-oc88-v1",
+  "latest": "LCT616-DS5 3.18H-oc89-v1",
   "versions": [
+    {
+      "version": "LCT616-DS5 3.18H-oc89-v1",
+      "tag": "3.18H-oc89",
+      "file": "ds5dongle-v1-3.18H-oc89-hs.bin",
+      "size": 813124,
+      "sha256": "c0732b93a27cb3bf74c904a756732153809940b0ac23dd69f20ca41873fb2c04",
+      "date": "2026-11-26",
+      "notes": "XInput 端点拆分 0x81/0x02（BL616 共用端点号 1 时 IN 传输无法完成），并增加发送完成计数",
+      "stable": false
+    },
     {
       "version": "LCT616-DS5 3.18H-oc88-v1",
       "tag": "3.18H-oc88",
       "file": "ds5dongle-v1-3.18H-oc88-hs.bin",
-      "size": 813104,
-      "sha256": "6ca8093dc54af8a3a25c05d48aaba0079764ab073387294befae29ecd2a84f62",
+      "size": 813124,
+      "sha256": "c7dc53a915440c3ea2c4190d1f8c1c047e2afab8fb53a96cd70125b331e31943",
       "date": "2026-11-26",
       "notes": "XInput 改为标准常驻发送模型：端点始终挂着一帧、完成即重挂，形成连续 1ms 流，避免主机 STALL 后停轮询",
       "stable": false
