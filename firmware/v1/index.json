@@ -1,7 +1,17 @@
 {
   "board": "v1",
-  "latest": "LCT616-DS5 3.18H-oc94-v1",
+  "latest": "LCT616-DS5 3.18H-oc95-v1",
   "versions": [
+    {
+      "version": "LCT616-DS5 3.18H-oc95-v1",
+      "tag": "3.18H-oc95",
+      "file": "ds5dongle-v1-3.18H-oc95-hs.bin",
+      "size": 813372,
+      "sha256": "b298e10802714b241ce39eeebb33441c12abf2a6d0a5d4aa2a4915e55d9a1eb5",
+      "date": "2026-11-26",
+      "notes": "按 GP2040-CE 模型重写发送：完成回调驱动、忙则跳过、不再手动 clear_stall（oc94 上电卡死的根因）",
+      "stable": false
+    },
     {
       "version": "LCT616-DS5 3.18H-oc94-v1",
       "tag": "3.18H-oc94",
