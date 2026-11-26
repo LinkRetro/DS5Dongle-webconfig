@@ -1,7 +1,17 @@
 {
   "board": "v1",
-  "latest": "LCT616-DS5 3.18H-oc99-v1",
+  "latest": "LCT616-DS5 3.18H-oc100-v1",
   "versions": [
+    {
+      "version": "LCT616-DS5 3.18H-oc100-v1",
+      "tag": "3.18H-oc100",
+      "file": "ds5dongle-v1-3.18H-oc100-hs.bin",
+      "size": 816380,
+      "sha256": "2d499351e53cbdcc76c09b6d0260ab5470af1ce0d26120da3c511a2860d752ce",
+      "date": "2026-11-26",
+      "notes": "修复 XInput 发送空缓冲：无新数据时重发上次真实帧（此前发的是未构建的全 0 缓冲，导致摇杆为 0、按键卡住）",
+      "stable": false
+    },
     {
       "version": "LCT616-DS5 3.18H-oc99-v1",
       "tag": "3.18H-oc99",
