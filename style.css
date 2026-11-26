@@ -347,3 +347,20 @@ body:not(.light) .art svg[data-model="edge"] .tp-tex{fill:#3d4558}
 .art svg[data-model="edge"] [data-part].pressed .stk{fill:var(--violet-feedback)}
 .art svg[data-model="edge"] [data-part="l2"] .dk{fill:url(#ctl-l2-fill)}
 .art svg[data-model="edge"] [data-part="r2"] .dk{fill:url(#ctl-r2-fill)}
+
+/* EDGE_ONLY_PARTS */
+/* Edge 独有部件（背键 L4/R4、Fn）在普通手柄上没有对应物，
+   它们的主表面是 .dk，所以单独给一条和 cap/stk 等价的紫色填充。 */
+.art svg[data-model="edge"] [data-part="paddle-l"].pressed .dk,
+.art svg[data-model="edge"] [data-part="paddle-r"].pressed .dk,
+.art svg[data-model="edge"] [data-part="fn-l"].pressed .dk,
+.art svg[data-model="edge"] [data-part="fn-r"].pressed .dk{fill:var(--violet-feedback)}
+/* 背键/Fn 的内部描边同样按普通图规则变白 */
+body:not(.light) .art svg[data-model="edge"] [data-part="paddle-l"].pressed .ln,
+body:not(.light) .art svg[data-model="edge"] [data-part="paddle-r"].pressed .ln,
+body:not(.light) .art svg[data-model="edge"] [data-part="fn-l"].pressed .ln,
+body:not(.light) .art svg[data-model="edge"] [data-part="fn-r"].pressed .ln,
+body:not(.light) .art svg[data-model="edge"] [data-part="paddle-l"].pressed .ol,
+body:not(.light) .art svg[data-model="edge"] [data-part="paddle-r"].pressed .ol,
+body:not(.light) .art svg[data-model="edge"] [data-part="fn-l"].pressed .ol,
+body:not(.light) .art svg[data-model="edge"] [data-part="fn-r"].pressed .ol{fill:#F5F9FF;stroke:#F5F9FF}

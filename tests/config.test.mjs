@@ -879,3 +879,32 @@ test('Edge press styling matches the standard pad rule for rule',async()=>{
  assert.match(html,/svg\[data-model="edge"\] \[data-part="r2"\] \.dk\{fill:url\(#ctl-r2-fill\)\}/i,'Edge R2 gradient not wired');
  assert.match(html,/id=\\?"ctl-l2-fill\\?"[^>]*>[\s\S]{0,600}?data-edge/i,'Edge L2 gradient stops missing');
 });
+
+/* PART_STYLE_MATRIX：部件清单与按下样式必须逐个覆盖（见 docs/PART_STYLE_MATRIX.md） */
+test('every interactive part on both models has pressed-state styling',async()=>{
+ const html=readFileSync(new URL('../index.html',import.meta.url),'utf8');
+ const readArt=f=>readFileSync(new URL('../assets/'+f,import.meta.url),'utf8');
+ const partsOf=svg=>new Set([...svg.matchAll(/data-part="([^"]+)"/g)].map(m=>m[1]));
+ const std=partsOf(readArt('dualsense.svg'));
+ const edge=partsOf(readArt('dualsense-edge.svg'));
+
+ // 1) Edge 必须包含普通手柄的全部交互部件
+ for(const p of std) assert.ok(edge.has(p),'Edge 缺少普通手柄的部件：'+p);
+
+ // 2) Edge 独有部件必须登记，且每个都要有"变紫"的规则
+ const EDGE_ONLY=[...edge].filter(p=>!std.has(p)).sort();
+ assert.deepEqual(EDGE_ONLY,['fn-l','fn-r','paddle-l','paddle-r'],'Edge 独有部件清单变化，请同步样式与文档');
+ // 四个部件共用一条规则块：块内必须出现各自的选择器，且整块含紫色填充
+ const block=(html.match(/EDGE_ONLY_PARTS[\s\S]{0,1200}/)||[''])[0];
+ assert.match(block,/--violet-feedback/,'Edge 独有部件规则块缺少紫色填充');
+ for(const p of EDGE_ONLY){
+  assert.match(block,new RegExp(`data-part="${p}"\\]\\.pressed \\.dk`,'i'),`${p} 未登记按下规则`);
+ }
+
+ // 3) 共有部件按填充类覆盖：cap/stk 有通用规则；dk 类只在扳机（渐变）与 Edge 独有件上
+ assert.match(html,/\[data-part\]\.pressed \.cap[^{]*\{[^}]*--violet-feedback/i,'cap 紫色填充规则缺失');
+ assert.match(html,/\[data-part\]\.pressed \.stk[^{]*\{[^}]*--violet-feedback/i,'stk 紫色填充规则缺失');
+ for(const t of ['l2','r2']){
+  assert.match(html,new RegExp(`data-part="${t}"\\] \\.dk\\{fill:url\\(#ctl-${t}-fill\\)\}`,'i'),`${t} 渐变未接线`);
+ }
+});
