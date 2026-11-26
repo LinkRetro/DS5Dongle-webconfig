@@ -1,13 +1,23 @@
 {
   "board": "v1",
-  "latest": "LCT616-DS5 3.18H-oc89-v1",
+  "latest": "LCT616-DS5 3.18H-oc90-v1",
   "versions": [
+    {
+      "version": "LCT616-DS5 3.18H-oc90-v1",
+      "tag": "3.18H-oc90",
+      "file": "ds5dongle-v1-3.18H-oc90-hs.bin",
+      "size": 813408,
+      "sha256": "ef9e284ede90ed71fa894bb49bd51ae03cbe8185b1809ae7878f0ef64f7259f1",
+      "date": "2026-11-26",
+      "notes": "XInput 传输自检：A 键 2Hz 自动闪烁，用于区分“主机没收到”与“映射不对”",
+      "stable": false
+    },
     {
       "version": "LCT616-DS5 3.18H-oc89-v1",
       "tag": "3.18H-oc89",
       "file": "ds5dongle-v1-3.18H-oc89-hs.bin",
-      "size": 813124,
-      "sha256": "c0732b93a27cb3bf74c904a756732153809940b0ac23dd69f20ca41873fb2c04",
+      "size": 813408,
+      "sha256": "e02bf07aa2db9fb187b61c85b85a80d72f810893d1cf4341d2226f9215cde605",
       "date": "2026-11-26",
       "notes": "XInput 端点拆分 0x81/0x02（BL616 共用端点号 1 时 IN 传输无法完成），并增加发送完成计数",
       "stable": false
