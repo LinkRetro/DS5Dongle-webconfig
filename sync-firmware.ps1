@@ -128,6 +128,7 @@ $notes = @{
     105 = '修复 Edge 识别：先 SET 0x65 进入 DSE 模式再查 0x70（此前顺序反过来，Edge 一律被判为普通手柄）；含背键原始报文诊断'
     106 = 'DualSense Edge 背键映射：L4/R4 可映射为 L3/R3/×○□△/L1/R1/L2/R2/Create/Options（配置版本 16）'
     107 = '修复 Edge 背键映射不生效：网页字段偏移与配置体长度改为结构体真实布局（58/59，60 字节）；Edge 切换重启提示更明确'
+    108 = 'DualSense Edge 背键可在映射页配置，并独立显示实际按下状态。'
 }
 
 $labels = @{ v1 = 'DS5Dongle V1 · 单灯'; v12 = 'DS5Dongle V1.2 · RGB' }

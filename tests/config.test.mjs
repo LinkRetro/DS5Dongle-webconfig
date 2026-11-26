@@ -179,7 +179,7 @@ function ui({version=6,corrupt=false,production=false,auto=false,noHid=false,sto
  const ctx={__DS5_LANG:'zh-CN',atob,Blob,URL,isSecureContext:true,Date:class extends Date{static now(){return now}},document:window.document,navigator,localStorage:{getItem(k){return k==='ds5.lang'?'zh-CN':storage.get(k)??null},setItem(k,v){storage.set(k,v)}},setTimeout(fn,ms){const t={fn,ms};timers.push(t);return t},clearTimeout(t){if(t)t.cancelled=true},clearInterval(){},setInterval(fn,ms){timers.push({fn,ms})},confirm:()=>true,TextDecoder,Uint8Array,DataView,TextEncoder,Event:window.Event,console};vm.runInNewContext(html.match(/<script type="module">([\s\S]*?)<\/script>/)[1],ctx);
  ctx.crypto=webcrypto;ctx.location={protocol:'file:'};
  const el=id=>window.document.getElementById(id);return {el,window,device,sent,outputs,pending(ms){return timers.some(t=>t.ms===ms&&!t.cancelled&&!t.fired)},expire(ms=5000){const t=timers.find(t=>t.ms===ms&&!t.cancelled&&!t.fired);if(!t)throw Error("No pending timeout");t.fired=true;t.fn()},
- input(axes,buttons=0){now+=50;const b=new Uint8Array(63);b.set(axes);b[7]=8;b[8]=buttons;listeners.inputreport({device,reportId:1,data:new DataView(b.buffer)})},
+ input(axes,buttons=0,extraButtons=0){now+=50;const b=new Uint8Array(63);b.set(axes);b[7]=8;b[8]=buttons;b[9]=extraButtons;listeners.inputreport({device,reportId:1,data:new DataView(b.buffer)})},
  setPads(pads){gamepads=pads},async tick(ms=50){now+=ms;await timers.find(t=>t.ms===50).fn()},setBattery(pct,state){telemetry[11]=pct;telemetry[12]=state},setLink(state,bonds=1){const b=new Uint8Array(17);b.set(telemetry.slice(0,13));b[13]=0xd3;b[14]=state;b[15]=bonds;telemetry=b},failTelemetry(){telemetryFails=true},setLatency(age=1000,count=50){const b=new Uint8Array(51);b.set(telemetry.slice(0,13));b[13]=0xd3;b[14]=7;b[17]=0x4c;b[18]=1;const v=new DataView(b.buffer);[count,1200,1100,500,2000,age,400,800].forEach((n,i)=>v.setUint32(19+i*4,n,true));telemetry=b},async poll(){await timers.find(t=>t.ms===2000).fn()},disconnect:()=>listeners.disconnect({device}),cfg:()=>cfg};
 }
 test('UI: connect, stage only, rebase config, verify then save, disconnect cleanup',async()=>{const u=ui();await u.el('connect').onclick();assert.equal(u.el('connection').textContent,'接收器已连接');u.window.document.querySelector('[data-page="touch"]').onclick();const c=u.window.document.querySelector('#controls input[type="checkbox"]');c.checked=true;c.onchange();assert.equal(u.sent.filter(([id])=>id===246).length,0);u.cfg()[6]=42;await u.el('save').onclick();const writes=u.sent.filter(([id])=>id===246);assert.deepEqual(writes.map(([,p])=>p[0]),[1,2]);assert.equal(u.cfg()[6],42);assert.equal(u.cfg()[31],1);assert.equal(u.el('save').disabled,true);u.disconnect();assert.equal(u.el('connection').textContent,'尚未连接接收器');assert.equal(u.el('save').disabled,true)});
@@ -366,12 +366,65 @@ test('live sticks: explicit browser gamepad source also drives movement and sour
  u.el('gamepad').value='';u.el('gamepad').onchange();assert.equal(left.getAttribute('transform'),base);
 });
 
-test('Edge artwork: preserves its own neutral transform and resets after timeout',async()=>{
- const u=ui();u.device.productId=0x0df2;await u.el('connect').onclick();
- const left=u.el('art').querySelector('[data-part="stick-l"]'),right=u.el('art').querySelector('[data-part="stick-r"]');
- assert.equal(left.getAttribute('transform'),null);
- u.input([0,0,255,255]);assert.equal(left.getAttribute('transform'),'translate(-9.00 -9.00)');assert.equal(right.getAttribute('transform'),'translate(9.00 9.00)');
- await u.tick(3100);assert.equal(left.getAttribute('transform'),null);assert.equal(right.getAttribute('transform'),null);
+test('Edge artwork uses the same front view and stick travel as DualSense',async()=>{
+ const u=ui(),art=u.el('art');
+ const originalView=art.querySelector('svg').getAttribute('viewBox');
+ const stick=part=>art.querySelector('[data-part="'+part+'"]');
+ const leftBase=stick('stick-l').getAttribute('transform'),rightBase=stick('stick-r').getAttribute('transform');
+ u.device.productId=0x0df2;await u.el('connect').onclick();
+ assert.equal(art.querySelector('svg').getAttribute('viewBox'),originalView);
+ const left=stick('stick-l'),right=stick('stick-r');
+ assert.equal(left.getAttribute('transform'),leftBase);
+ u.input([0,0,255,255],0xc0,1);
+ assert.ok(left.classList.contains('pressed')&&right.classList.contains('pressed'));
+ assert.ok(stick('ps').classList.contains('pressed'));
+ assert.equal(left.getAttribute('transform'),'translate(-9.00 -9.00) '+leftBase);
+ assert.equal(right.getAttribute('transform'),'translate(9.00 9.00) '+rightBase);
+ u.input([128,128,128,128]);
+ assert.equal(stick('ps').classList.contains('pressed'),false);
+ assert.equal(left.classList.contains('pressed'),false);
+ await u.tick(3100);assert.equal(left.getAttribute('transform'),leftBase);assert.equal(right.getAttribute('transform'),rightBase);
+});
+
+test('Edge physical extras remain visible when their game output is remapped',()=>{
+ const p=new Uint8Array(63);p[7]=0x28;p[8]=0x40;p[9]=1;p[11]=0xe8;p[12]=5;
+ assert.deepEqual([...inputParts(p,true,true).parts],['cross','stick-l','ps','fn-l','paddle-l']);
+ p[7]=8;p[8]=0;p[9]=0;p[12]=0;
+ assert.deepEqual([...inputParts(p,true,true).parts],[]);
+ p[9]=0x80;
+ assert.deepEqual([...inputParts(p,true).parts],['paddle-r']);
+ assert.deepEqual([...inputParts(p).parts],[]);
+});
+
+test('Edge paddle click opens its target on the mapping page and saves it to config v16',async()=>{
+ const u=ui({version:16});
+ u.device.productId=0x0df2;
+ const read=u.device.receiveFeatureReport.bind(u.device);
+ u.device.receiveFeatureReport=id=>{
+  if(id!==0xf7)return read(id);
+  const body=new Uint8Array(60);body.set(u.cfg());
+  return Promise.resolve(view(id,body));
+ };
+ const send=u.device.sendFeatureReport.bind(u.device);
+ let paddleTarget=0;
+ u.device.sendFeatureReport=async(id,p)=>{await send(id,p);if(id===0xf6&&p[0]===1)paddleTarget=p[59]};
+ const readConfig=u.device.receiveFeatureReport;
+ u.device.receiveFeatureReport=async id=>{
+  const result=await readConfig(id);
+  if(id===0xf7)result.setUint8(59,paddleTarget);
+  return result;
+ };
+ await u.el('connect').onclick();
+ const art=u.el('art'),left=art.querySelector('[data-part="paddle-l"]');
+ art.onclick({target:left});
+ assert.equal(u.el('mapping-source').value,'31');
+ assert.ok(left.classList.contains('mapping-source'));
+ const target=u.el('edge-map-target');
+ target.value='3';target.onchange();
+ assert.equal(u.el('save').disabled,false);
+ await u.el('save').onclick();
+ assert.equal(paddleTarget,3);
+ assert.ok(!u.sent.some(([id,p])=>id===0xfb&&p[0]===1));
 });
 
 test('latency telemetry: version, byte offsets, coherent stage sum and incomplete/old reports',()=>{

@@ -296,3 +296,9 @@ input[type=range]{height:22px;cursor:pointer}
   line-height:1.5;
 }
 .mode-notice[hidden]{display:none}
+
+/* Same controller projection and interaction styles for both Sony models. */
+.art svg[data-model="edge"] [data-part="touchpad"] { fill: #262832; fill-opacity: .9; }
+.art svg[data-model="edge"] [data-part="touchpad"].pressed { fill: var(--violet-feedback); }
+.art .edge-control { stroke: #a8aab7; stroke-width: 1; }
+.art .edge-extras text { fill: #f4f2ff; font: 600 9px system-ui,sans-serif; text-anchor: middle; pointer-events: none; }

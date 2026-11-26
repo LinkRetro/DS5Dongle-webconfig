@@ -1,7 +1,17 @@
 {
   "board": "v1",
-  "latest": "LCT616-DS5 3.18H-oc107-v1",
+  "latest": "LCT616-DS5 3.18H-oc108-v1",
   "versions": [
+    {
+      "version": "LCT616-DS5 3.18H-oc108-v1",
+      "tag": "3.18H-oc108",
+      "file": "ds5dongle-v1-3.18H-oc108-hs.bin",
+      "size": 817020,
+      "sha256": "624b8f1705413c0c11d0e2f831ecdb267770b76e8345ad2ababf0b9878513460",
+      "date": "2026-11-26",
+      "notes": "DualSense Edge 背键可在映射页配置，并独立显示实际按下状态。",
+      "stable": false
+    },
     {
       "version": "LCT616-DS5 3.18H-oc107-v1",
       "tag": "3.18H-oc107",

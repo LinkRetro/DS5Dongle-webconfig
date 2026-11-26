@@ -1,4 +1,4 @@
-import {fields,decode,patch,command,payload,remapRead,remapWrite,inputParts,decodeLatency} from './protocol.mjs';
+import {fields,decode,patch,command,payload,remapRead,remapWrite,edgePreview,inputParts,decodeLatency} from './protocol.mjs';
 import {createOutputTester,createAudioTester,testOutput} from './test-center.mjs';
 import {LANGS,S,detectLang,makeT} from './i18n.mjs';
 import {PATTERNS,JAPANESE_PATTERNS,KOREAN_PATTERNS} from './i18n_phrases.mjs';
@@ -126,7 +126,15 @@ function applyI18n(){
  paintMappingSource();
 }
 let device=null,baseline=null,draft={},page='feel',busy=false,epoch=0,profile=0,activeProfile=null,table=null,mapDirty=false,lastInput=0,lastPaint=0,tableBaseline=null,telemetry=null,restartNeeded=false;
-let stickParts=[],visualInputActive=false;
+let stickParts=[],visualInputActive=false,showingEdge=false,edgePreviewSupported=false;
+const edgeSources=[
+ {part:'paddle-l',key:'edge_l4_target',label:msg('edge_l4')},
+ {part:'paddle-r',key:'edge_r4_target',label:msg('edge_r4')},
+];
+const edgeTargets=[msg('edge_target_none'),'L3','R3',msg('map_cross'),msg('map_circle'),msg('map_square'),msg('map_triangle'),'L1','R1','L2','R2','Create','Options'];
+function edgeSource(index){return edgeSources[index-sourceParts.length]}
+function edgeMappingAvailable(){return edgeSources.every(({key})=>baseline?.[key]!==undefined)}
+
 let remapSource=0;
 let triggerSide='left',triggerHighlight=null;
 const triggerPresetKey='ds5.trigger-test';
@@ -151,9 +159,11 @@ function paintTriggerHint(){
 }
 function paintMappingSource(){
  paintTriggerHint();
- const selected=page==='remap'?sourceParts[remapSource]:null;
- $('art').querySelectorAll('[data-part]').forEach(p=>{const on=p.dataset.part===selected;p.classList.toggle('mapping-source',on);if(on)p.setAttribute('data-mapping-label',messageText(names[remapSource]));else p.removeAttribute('data-mapping-label')});
- const label=$('mapping-selection');if(label){label.hidden=!selected;paintLocalized(label,selected?msg('map_selection',{source:names[remapSource]}):'')}
+ const paddle=edgeSource(remapSource);
+ const selected=page==='remap'?(paddle?.part??sourceParts[remapSource]):null;
+ const selectedLabel=paddle?.label??names[remapSource];
+ $('art').querySelectorAll('[data-part]').forEach(p=>{const on=p.dataset.part===selected;p.classList.toggle('mapping-source',on);if(on)p.setAttribute('data-mapping-label',messageText(selectedLabel));else p.removeAttribute('data-mapping-label')});
+ const label=$('mapping-selection');if(label){label.hidden=!selected;paintLocalized(label,selected?msg('map_selection',{source:selectedLabel}):'')}
 }
 let firmwareVersion=null,flashHost=null,flashSession=null,firmwareURL=null;
 function paintFirmware(){
@@ -333,7 +343,7 @@ const specs={
 feel:[['haptics_gain',msg('phrase.haptic_strength'),'',1,2,.1],['trigger_reduce',msg('phrase.trigger_resistance'),msg('phrase.0_keeps_the_game_s_original_strength'),0,10,1]],
 audio:[['speaker_volume','扬声器音量','',0,100,1],['headset_volume','耳机音量','',0,100,1],['headset_mono',msg('audio_headset_output'),msg('audio_headset_output_hint'),[msg('audio_stereo'),msg('audio_mono')]],['mute_button_mode',msg('audio_mute_btn'),msg('audio_mute_btn_hint'),[msg('audio_mute_both'),msg('audio_mute_mic'),msg('audio_mute_out')]],['speaker_gain','扬声器增益','',0,7,1],['audio_buffer_length','音频缓冲','',16,128,1],['audio_haptic','音频转触觉','',['关闭','自动（游戏优先）','强制']],['disable_speaker','关闭扬声器编码'],['disable_mic','关闭麦克风透传'],['lock_volume','锁定音量','忽略电脑和游戏的音量调整。']],
 touch:[['tp_mode',msg('touch_mode'),'',[msg('control_off'),msg('touch_dpad'),msg('touch_left_mouse_right_dpad'),msg('touch_left_dpad_right_mouse'),msg('touch_zone_mapping')]],['tp_mouse_sensitivity',msg('touch_mouse_sensitivity'),'',1,32,1],['tp_block_raw',msg('touch_block_raw'),msg('touch_mapping_only')],['combo_window',msg('touch_combo_window'),msg('touch_combo_help'),0,50,1],['mask',msg('touch_cycle_modes'),msg('touch_cycle_help')],['gyro_aim_mode',msg('gyro_aim'),'',[msg('gyro_aim_off'),msg('gyro_aim_always'),msg('gyro_aim_hold')]],['gyro_sensitivity',msg('gyro_sens'),'',1,100,1],['gyro_sens_y',msg('gyro_sens_y'),'',1,100,1],['gyro_deadzone',msg('gyro_dead'),'',0,50,1]],
-device:[['controller_mode',msg('device_usb_mode'),msg('device_restart_required'),['DualSense','DualSense Edge',msg('device_auto_detect')]],['polling_rate_mode',msg('device_polling'),msg('device_polling_help'),['500 Hz','1 kHz',msg('device_polling_realtime')]],['inactive_time',msg('device_idle_disconnect'),msg('device_idle_help'),0,60,1],['idle_save',msg('device_radio_saving'),msg('device_radio_help')],['enable_wake',msg('device_ps_wake')],['ps_shortcut_enabled',msg('device_ps_shortcuts'),msg('device_ps_shortcuts_help')],['enable_usb_sn',msg('device_usb_serial'),msg('device_restart_required')],['usb_stealth',msg('device_hide_usb'),msg('device_hide_usb_help')],['auto_stealth',msg('auto_stealth'),msg('auto_stealth_hint'),[msg('auto_stealth_off'),msg('auto_stealth_audio'),msg('auto_stealth_usb')]],['output_mode',msg('output_mode'),msg('output_mode_hint'),[msg('output_mode_ds5'),msg('output_mode_xinput')]],['edge_l4_target',msg('edge_l4'),msg('edge_hint'),[msg('edge_target_none'),'L3','R3',msg('map_cross'),msg('map_circle'),msg('map_square'),msg('map_triangle'),'L1','R1','L2','R2','Create','Options']],['edge_r4_target',msg('edge_r4'),'',[msg('edge_target_none'),'L3','R3',msg('map_cross'),msg('map_circle'),msg('map_square'),msg('map_triangle'),'L1','R1','L2','R2','Create','Options']],['disable_led',msg('device_led_timeout'),msg('device_led_help')]]};
+device:[['controller_mode',msg('device_usb_mode'),msg('device_restart_required'),['DualSense','DualSense Edge',msg('device_auto_detect')]],['polling_rate_mode',msg('device_polling'),msg('device_polling_help'),['500 Hz','1 kHz',msg('device_polling_realtime')]],['inactive_time',msg('device_idle_disconnect'),msg('device_idle_help'),0,60,1],['idle_save',msg('device_radio_saving'),msg('device_radio_help')],['enable_wake',msg('device_ps_wake')],['ps_shortcut_enabled',msg('device_ps_shortcuts'),msg('device_ps_shortcuts_help')],['enable_usb_sn',msg('device_usb_serial'),msg('device_restart_required')],['usb_stealth',msg('device_hide_usb'),msg('device_hide_usb_help')],['auto_stealth',msg('auto_stealth'),msg('auto_stealth_hint'),[msg('auto_stealth_off'),msg('auto_stealth_audio'),msg('auto_stealth_usb')]],['output_mode',msg('output_mode'),msg('output_mode_hint'),[msg('output_mode_ds5'),msg('output_mode_xinput')]],['disable_led',msg('device_led_timeout'),msg('device_led_help')]]};
 function val(k){return k in draft?draft[k]:baseline?.[k]}
 const restartDevices=new WeakSet();
 const restartFields=new Set(['polling_rate_mode','controller_mode','enable_usb_sn','ps_shortcut_enabled','usb_stealth','tp_mode','enable_wake']);
@@ -500,7 +510,13 @@ function refresh(){
  paintConnection();
  if(page==='remap'){
   paintRemapStatus();
-  if(!table)document.querySelectorAll('#controls input,#controls select,#controls button').forEach(e=>e.disabled=true);
+  if(!table){
+   document.querySelectorAll('#controls input,#controls select,#controls button').forEach(e=>e.disabled=true);
+   if(enabled&&edgeMappingAvailable()){
+    $('mapping-source').disabled=false;
+    const target=$('edge-map-target');if(target)target.disabled=false;
+   }
+  }
  }
   if(page==='flash'){
    const board=$('fw-board'),versions=$('fw-version'),go=document.querySelector('.fw-open');
@@ -797,8 +813,11 @@ function paintDiag(b,fw){
 async function refreshDiag(){
  if(!device||busy)return;
  try{
-  const r=await hidWait(device.receiveFeatureReport(0xfa),'read diagnostics',1000);
+  const d=device;
+  const r=await hidWait(d.receiveFeatureReport(0xfa),'read diagnostics',1000);
+  if(d!==device)return;
   const b=payload(r,0xfa,62);
+  if(b[0]&4)setControllerArt(!!(b[0]&1));
   /* The signal bars sit in the hero strip, so the quality byte must be read on
    * every tab - not only while the dongle page is mounted. */
   lastLinkQuality=b[61]||0;
@@ -850,7 +869,7 @@ const savedDrafts=new WeakMap();
 function disconnected(){
  /* Drop the cached link quality: bars must not stay green with no controller. */
  lastLinkQuality=0;paintLinkStatus(null);
- gyroBase=null;gyroRaw=null;gyroSmooth=null;gyroBias=null;gyroBiasFrames=0;accSmooth=null;void stopTests();epoch++;if(device){if(dirty())savedDrafts.set(device,{draft,profile,table:mapDirty?table.slice():null});device.removeEventListener('inputreport',onInput)}device=null;firmwareVersion=null;paintLocalized($('version'),msg('console_name'));paintFirmware();baseline=null;draft={};table=null;tableBaseline=null;telemetry=null;mapDirty=false;restartNeeded=false;clearInput();render()}
+ gyroBase=null;gyroRaw=null;gyroSmooth=null;gyroBias=null;gyroBiasFrames=0;accSmooth=null;void stopTests();epoch++;if(device){if(dirty())savedDrafts.set(device,{draft,profile,table:mapDirty?table.slice():null});device.removeEventListener('inputreport',onInput)}device=null;firmwareVersion=null;setControllerArt(false);paintLocalized($('version'),msg('console_name'));paintFirmware();baseline=null;draft={};table=null;tableBaseline=null;telemetry=null;mapDirty=false;restartNeeded=false;clearInput();render()}
 async function load(){const cfg=decode(await readCfg());const m=await readTable(profile);baseline=cfg;draft={};table=m.table;tableBaseline=m.table.slice();mapDirty=false;render()}
 const HID_FILTERS=[{vendorId:0x054c,productId:0x0ce6},{vendorId:0x054c,productId:0x0df2},{vendorId:0x045e,productId:0x02fd},{vendorId:0x045e,productId:0x028e}];   /* XInput 模式（配置 HID 接口） */
 const pickConfigDevice=list=>list?.find(d=>d.collections.some(c=>c.featureReports.some(r=>r.reportId===0xf7)));
@@ -870,7 +889,7 @@ async function attachDevice(d){
     m=remapRead(await step('读取按键映射',()=>d.receiveFeatureReport(0xfb)),profile);activeProfile=m.active;
    }catch(e){if(epoch!==connectionEpoch||!d.opened)throw e;mapError=e}
    const pending=savedDrafts.get(d);
-   device=d;firmwareVersion=fw;paintFirmware();baseline=cfg;draft=pending?.draft??{};table=m?.table??null;tableBaseline=table?.slice()??null;if(m){if(pending?.table&&pending.profile===profile)table=pending.table;savedDrafts.delete(d)}mapDirty=false;restartNeeded=restartDevices.has(d);epoch++;render();d.addEventListener('inputreport',onInput);paintLocalized($('version'),fw);$('device-title').textContent=d.productId===0x0df2?'DualSense Edge':'DualSense';showArt(d.productId===0x0df2);say(mapError?'已连接，但映射读取失败：'+mapError.message:pending?'已恢复此接收器的未保存草稿。':'已读取当前设置。修改后点击应用并保存。',mapError?'error':'info');return true;
+   device=d;firmwareVersion=fw;edgePreviewSupported=Number(fw.match(/-oc(\d+)/)?.[1])>=108;paintFirmware();baseline=cfg;draft=pending?.draft??{};table=m?.table??null;tableBaseline=table?.slice()??null;if(m){if(pending?.table&&pending.profile===profile)table=pending.table;savedDrafts.delete(d)}mapDirty=false;restartNeeded=restartDevices.has(d);epoch++;render();d.addEventListener('inputreport',onInput);paintLocalized($('version'),fw);setControllerArt(d.productId===0x0df2);say(mapError?'已连接，但映射读取失败：'+mapError.message:pending?'已恢复此接收器的未保存草稿。':'已读取当前设置。修改后点击应用并保存。',mapError?'error':'info');return true;
  }catch(e){expired=true;disconnected();if(d.opened)await hidWait(d.close(),'关闭设备接口',500).catch(()=>{});throw e}
 }
 /* 浏览器已经记住授权时，无需点击即可静默重连（老用户零操作） */
@@ -1030,8 +1049,27 @@ function hidKeyFromEvent(ev){
 }
 function renderRemap(box){const state=document.createElement('p');state.id='mapping-state';state.className='hint';state.setAttribute('role','status');box.append(state);const r=row(msg('map_group'),msg('map_group_help'));const p=document.createElement('select');[1,2,3,4,5,6,7,8].forEach(group=>option(p,group-1,msg('map_group_number',{group})));p.value=profile;p.onchange=()=>{const next=Number(p.value);if(mapDirty){p.value=profile;say('请先保存或重新读取，再切换映射组');return}exclusive(async()=>{try{const m=await readTable(next);profile=next;table=m.table;tableBaseline=m.table.slice();render()}catch(e){p.value=profile;throw e}})};r.append(p);box.append(r);
  const activate=document.createElement('button');paintLocalized(activate,msg('map_use_group'));activate.onclick=()=>exclusive(async()=>{if(mapDirty)throw Error('请先保存本组更改再切换');await hidWait(device.sendFeatureReport(0xfb,command(5,[profile],127)),'切换映射组');const m=await readTable(profile);if(m.active!==profile)throw Error('切换映射组失败');say(`已切换到映射组 ${profile+1}`)});box.append(activate);
- const source=document.createElement('select');source.id='mapping-source';names.forEach((n,i)=>option(source,i,n));source.value=remapSource;const sr=row(msg('map_source'),msg('map_source_help'));sr.append(source);box.append(sr);const area=document.createElement('div');box.append(area);
- function edit(){const id=Number(source.value),o=id*4,t=table?.[o]??0;remapSource=id;paintMappingSource();area.replaceChildren();const tr=row(msg('map_to'));const type=document.createElement('select');[msg('map_controller'),msg('map_keyboard'),msg('map_mouse')].forEach((n,i)=>option(type,i,n));type.value=t;type.onchange=()=>{if(!table)return;table[o]=Number(type.value);table[o+1]=table[o]===0?id:0;table[o+2]=0;table[o+3]=0;mapDirty=true;edit();refresh()};tr.append(type);area.append(tr);
+ const source=document.createElement('select');source.id='mapping-source';
+ names.forEach((name,index)=>option(source,index,name));
+ if(edgeMappingAvailable())edgeSources.forEach(({label},index)=>option(source,sourceParts.length+index,label));
+ else if(edgeSource(remapSource))remapSource=0;
+ source.value=remapSource;
+ const sourceRow=row(msg('map_source'),msg('map_source_help'));
+ sourceRow.append(source);box.append(sourceRow);
+ const area=document.createElement('div');box.append(area);
+ function edit(){
+  const id=Number(source.value),paddle=edgeSource(id);
+  remapSource=id;paintMappingSource();area.replaceChildren();
+  if(paddle){
+   const targetRow=row(msg('map_target'),msg('edge_hint'));
+   const target=document.createElement('select');target.id='edge-map-target';
+   edgeTargets.forEach((label,index)=>option(target,index,label));
+   target.value=val(paddle.key)??0;
+   target.onchange=()=>set(paddle.key,Number(target.value));
+   targetRow.append(target);area.append(targetRow);refresh();return;
+  }
+  const o=id*4,t=table?.[o]??0;
+  const tr=row(msg('map_to'));const type=document.createElement('select');[msg('map_controller'),msg('map_keyboard'),msg('map_mouse')].forEach((n,i)=>option(type,i,n));type.value=t;type.onchange=()=>{if(!table)return;table[o]=Number(type.value);table[o+1]=table[o]===0?id:0;table[o+2]=0;table[o+3]=0;mapDirty=true;edit();refresh()};tr.append(type);area.append(tr);
  const vr=row(t===1?msg('map_keycode'):msg('map_target'));let target;if(t===1){target=document.createElement('select');
   for(const [name,code] of HID_KEYS)option(target,code,name+' · '+code);
   const cur=table?.[o+1]??4;
@@ -1062,14 +1100,18 @@ function renderRemap(box){const state=document.createElement('p');state.id='mapp
  source.onchange=edit;edit()
 }
 function paintLight(){const rgb=['led_r','led_g','led_b'].map(k=>val(k)??210);$('art').style.setProperty('--ctl-led',`rgb(${rgb.join(',')})`)}
-function showArt(edge){$('art').innerHTML=edge?EDGE_ART:STANDARD_ART;stickParts=['stick-l','stick-r'].map(id=>$('art').querySelector(`[data-part="${id}"]`)).map(node=>({node,base:node.getAttribute('transform')??''}));visualInputActive=false;for(const p of $('art').querySelectorAll('[data-part]')){p.setAttribute('tabindex','0');p.setAttribute('role','button');p.setAttribute('aria-label',p.dataset.part)}paintLight();paintMappingSource()}
+function showArt(edge){showingEdge=edge;$('art').innerHTML=edge?EDGE_ART:STANDARD_ART;stickParts=['stick-l','stick-r'].map(id=>$('art').querySelector(`[data-part="${id}"]`)).map(node=>({node,base:node.getAttribute('transform')??''}));visualInputActive=false;for(const p of $('art').querySelectorAll('[data-part]')){if(p.dataset.part.startsWith('fn-'))continue;p.setAttribute('tabindex','0');p.setAttribute('role','button');const paddle=edgeSources.find(({part})=>part===p.dataset.part);if(paddle)paintLocalized(p,paddle.label,'aria-label');else p.setAttribute('aria-label',p.dataset.part)}paintLight();paintMappingSource()}
+function setControllerArt(edge){
+ $('device-title').textContent=edge?'DualSense Edge':'DualSense';
+ if(showingEdge!==edge)showArt(edge);
+}
 function paintTriggerSelection(){
  const status=$('trigger-selection');
  if(status)paintLocalized(status,triggerSide==='left'?msg('phrase.l2_selected_press_the_test_button_to'):msg('phrase.r2_selected_press_the_test_button_to'));
 }
 function selectPart(target){
  const id=target.closest('[data-part]')?.dataset.part;
- if(!id||flashSession?.isBusy())return;
+ if(!id||id.startsWith('fn-')||flashSession?.isBusy())return;
  const isTrigger=id==='l2'||id==='r2';
  if(isTrigger&&page!=='remap'){
   void stopTests();
@@ -1085,8 +1127,10 @@ function selectPart(target){
  if(!(isTrigger&&page==='remap')){
   void stopTests();page=id==='touchpad'?'touch':['speaker','mute'].includes(id)?'audio':id==='lightbar'?'vision':id==='body'?'feel':'remap';render();
  }
- const idx=sourceParts.indexOf(id),source=$('mapping-source');
- if(page==='remap'&&idx>=0&&source){source.value=idx;source.dispatchEvent(new Event('change'))}
+ const paddleIndex=edgeSources.findIndex(entry=>entry.part===id);
+ const idx=paddleIndex<0?sourceParts.indexOf(id):edgeMappingAvailable()?sourceParts.length+paddleIndex:-1;
+ const source=$('mapping-source');
+ if(page==='remap'&&idx>=0&&source){source.value=idx;source.onchange()}
 }
 $('art').onclick=e=>selectPart(e.target);$('art').onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();selectPart(e.target)}};
 function paintInput(i,source){lastInput=Date.now();if(lastInput-lastPaint<33)return;lastPaint=lastInput;visualInputActive=true;moveSticks(i.axes);for(const [n,v]of [['l2',i.triggers[0]],['r2',i.triggers[1]]])for(const stop of $('art').querySelectorAll(`#ctl-${n}-fill [data-edge]`))stop.setAttribute('offset',String(v/255));paintLocalized($('input-state'),source==='接收器 HID'?msg('live_input_hid'):msg('live_input_browser'));$('left-axis').textContent=`${i.axes[0]} / ${i.axes[1]}`;$('right-axis').textContent=`${i.axes[2]} / ${i.axes[3]}`;$('triggers').textContent=i.triggers.map(v=>Math.round(v/255*100)+'%').join(' / ');$('art').querySelectorAll('[data-part]').forEach(p=>p.classList.toggle('pressed',i.parts.has(p.dataset.part)))}
@@ -1227,7 +1271,8 @@ function paintTouch(p){
 function onInput(e){
  if(e.device!==device||e.reportId!==1||$('gamepad').value!=='')return;
  const bytes=new Uint8Array(e.data.buffer,e.data.byteOffset,e.data.byteLength);
- const i=inputParts(bytes);
+ if(!showingEdge&&edgePreviewSupported&&edgePreview(bytes))setControllerArt(true);
+ const i=inputParts(bytes,showingEdge,edgePreviewSupported);
  if(i)paintInput(i,'接收器 HID');
  paintTouch(bytes);
  onGyro(bytes);

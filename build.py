@@ -13,7 +13,10 @@ _std=_a/'dualsense.svg'
 _edge=_a/'dualsense-edge.svg'
 # 优先用本仓库自带的 SVG（开源仓库不包含上游参考项目时也能构建）
 standard=(_std if _std.exists() else up/'src/assets/dualsense.svg').read_text(encoding='utf-8-sig')
-edge=(_edge if _edge.exists() else up/'src/assets/dualsense-edge.svg').read_text(encoding='utf-8-sig')
+# The Edge overlay shares the standard projection, button shapes and hit areas.
+edge_overlay=_edge.read_text(encoding='utf-8-sig')
+edge_extras=edge_overlay[edge_overlay.index('>')+1:edge_overlay.rindex('</svg>')]
+edge=standard.replace('<svg ', '<svg data-model="edge" ', 1).replace('</svg>', edge_extras+'</svg>')
 import json
 def module_body(name):
     source = (r/name).read_text(encoding='utf-8-sig')

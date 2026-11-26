@@ -18,7 +18,13 @@ export function patch(view,changes){const supported=decode(view),raw=payload(vie
 export function command(cmd,data=[],size=63){if(data.length+1>size)throw Error('报告数据过长');const p=new Uint8Array(size);p[0]=cmd;p.set(data,1);return p}
 export function remapRead(view,profile){const b=payload(view,0xfb,126);if(b[0]>7||b[1]!==profile)throw Error('映射组回读不匹配');const table=b.slice(2,126);for(let i=0;i<31;i++){const[t,v,m,f]=table.slice(i*4,i*4+4);if(t>2||(t===0&&v>30)||(t===2&&v>2)||(f&~3))throw Error('映射表包含不支持的字段')}return {active:b[0],table}}
 export function remapWrite(profile,table){if(!(profile>=0&&profile<8)||table.length!==124)throw Error('映射格式错误');remapRead(new DataView(Uint8Array.of(251,0,profile,...table).buffer),profile);return command(1,[profile,...table],127)}
-export function inputParts(p){if(p.length<10)return null;const parts=new Set();const hat=p[7]&15;const hats=[['dpad-up'],['dpad-up','dpad-right'],['dpad-right'],['dpad-down','dpad-right'],['dpad-down'],['dpad-down','dpad-left'],['dpad-left'],['dpad-up','dpad-left']];for(const k of hats[hat]??[])parts.add(k);for(const [byte,names]of [[7,['square','cross','circle','triangle']],[8,['l1','r1','l2','r2','create','options','stick-l','stick-r']],[9,['ps','touchpad','mute']]])names.forEach((n,i)=>{if(p[byte]&(1<<(i+(byte===7?4:0))))parts.add(n)});return {parts,axes:[...p.slice(0,4)],triggers:[p[4],p[5]]}}
+/* oc108 mirrors physical extras before mapping. Older firmware exposes
+ * only the extras kept in the USB output. */
+export function edgePreview(p){return p.length===63&&p[11]===0xe8&&p[12]<=15}
+export function inputParts(p,edge=false,preview=false){if(p.length<10)return null;const parts=new Set();const hat=p[7]&15;const hats=[['dpad-up'],['dpad-up','dpad-right'],['dpad-right'],['dpad-down','dpad-right'],['dpad-down'],['dpad-down','dpad-left'],['dpad-left'],['dpad-up','dpad-left']];for(const k of hats[hat]??[])parts.add(k);for(const [byte,names]of [[7,['square','cross','circle','triangle']],[8,['l1','r1','l2','r2','create','options','stick-l','stick-r']],[9,['ps','touchpad','mute']]])names.forEach((n,i)=>{if(p[byte]&(1<<(i+(byte===7?4:0))))parts.add(n)});if(edge){
+ const bits=preview&&edgePreview(p)?p[12]:p[9]>>4;
+ ['fn-l','fn-r','paddle-l','paddle-r'].forEach((name,i)=>{if(bits&(1<<i))parts.add(name)});
+ }return {parts,axes:[...p.slice(0,4)],triggers:[p[4],p[5]]}}
 
 export function decodeLatency(b){
  if(b.length<51||b[17]!==0x4c||![1,2,3].includes(b[18]))return null;
