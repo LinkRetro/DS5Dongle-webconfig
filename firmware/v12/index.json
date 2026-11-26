@@ -1,7 +1,17 @@
 {
   "board": "v12",
-  "latest": "LCT616-DS5 3.18H-oc82-v12",
+  "latest": "LCT616-DS5 3.18H-oc83-v12",
   "versions": [
+    {
+      "version": "LCT616-DS5 3.18H-oc83-v12",
+      "tag": "3.18H-oc83",
+      "file": "ds5dongle-v12-3.18H-oc83-hs.bin",
+      "size": 813732,
+      "sha256": "0685983b45931d19620ff6938d81cea948784f104c91693c94041a9d06358865",
+      "date": "2026-11-26",
+      "notes": "XInput 恢复单接口 045E:028E（与原装 360 手柄一致），产品名也显示为 Xbox 360 Controller；切回 DualSense 请用 PS+Options 长按 3 秒",
+      "stable": false
+    },
     {
       "version": "LCT616-DS5 3.18H-oc82-v12",
       "tag": "3.18H-oc82",

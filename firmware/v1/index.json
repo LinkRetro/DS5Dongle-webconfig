@@ -1,13 +1,23 @@
 {
   "board": "v1",
-  "latest": "LCT616-DS5 3.18H-oc82-v1",
+  "latest": "LCT616-DS5 3.18H-oc83-v1",
   "versions": [
+    {
+      "version": "LCT616-DS5 3.18H-oc83-v1",
+      "tag": "3.18H-oc83",
+      "file": "ds5dongle-v1-3.18H-oc83-hs.bin",
+      "size": 812976,
+      "sha256": "8da96d8f6252e0ac3e9cd874fe5ca07a18e614d11c141010ba4a3fbe0f1bdd97",
+      "date": "2026-11-26",
+      "notes": "XInput 恢复单接口 045E:028E（与原装 360 手柄一致），产品名也显示为 Xbox 360 Controller；切回 DualSense 请用 PS+Options 长按 3 秒",
+      "stable": false
+    },
     {
       "version": "LCT616-DS5 3.18H-oc82-v1",
       "tag": "3.18H-oc82",
       "file": "ds5dongle-v1-3.18H-oc82-hs.bin",
-      "size": 813216,
-      "sha256": "afd58e71941c987a75c29111b766d3cda106841e4b740a2b0661604b97e28cc1",
+      "size": 813208,
+      "sha256": "40e7e64f8653ec90890b2ecf06e4bee5c1fbc21ffa8f6bfd18d9d6b9a968a99b",
       "date": "2026-11-26",
       "notes": "XInput 改用 045E:02FD：避开 xusb22 对 028E 的设备级独占，保证复合枚举与网页连接；Xbox 驱动走接口类匹配",
       "stable": false
