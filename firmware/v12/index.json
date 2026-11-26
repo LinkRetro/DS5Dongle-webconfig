@@ -1,7 +1,17 @@
 {
   "board": "v12",
-  "latest": "LCT616-DS5 3.18H-oc111-v12",
+  "latest": "LCT616-DS5 3.18H-oc112-v12",
   "versions": [
+    {
+      "version": "LCT616-DS5 3.18H-oc112-v12",
+      "tag": "3.18H-oc112",
+      "file": "ds5dongle-v12-3.18H-oc112-hs.bin",
+      "size": 817768,
+      "sha256": "1fc405b6b37017fb7930affcbfa5fcc958db41e7c31defe8e18035b3a3823bf5",
+      "date": "2026-11-26",
+      "notes": "切换手柄不再整机重启：运行期切换 PID/报告描述符 + 软拔插重新枚举，蓝牙链路保持",
+      "stable": false
+    },
     {
       "version": "LCT616-DS5 3.18H-oc111-v12",
       "tag": "3.18H-oc111",
