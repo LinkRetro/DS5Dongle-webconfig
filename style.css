@@ -378,3 +378,11 @@ body:not(.light) .art svg[data-model="edge"] [data-part="l2"].pressed .ol,
 body:not(.light) .art svg[data-model="edge"] [data-part="r2"].pressed .ol,
 body:not(.light) .art svg[data-model="edge"] [data-part="l1"].pressed .ol,
 body:not(.light) .art svg[data-model="edge"] [data-part="r1"].pressed .ol{stroke:#F5F9FF;stroke-width:1.3}
+
+/* FN_STATIC：Fn 是手柄内部按键，永远不会有按下事件，不要做成可点击的样子 */
+.art svg[data-model="edge"] [data-part="fn-l"],
+.art svg[data-model="edge"] [data-part="fn-r"]{cursor:default}
+.art svg[data-model="edge"] [data-part="fn-l"]:hover,
+.art svg[data-model="edge"] [data-part="fn-r"]:hover,
+.art svg[data-model="edge"] [data-part="fn-l"]:focus-visible,
+.art svg[data-model="edge"] [data-part="fn-r"]:focus-visible{filter:none}
