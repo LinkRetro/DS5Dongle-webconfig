@@ -1,7 +1,17 @@
 {
   "board": "v12",
-  "latest": "LCT616-DS5 3.18H-oc76-v12",
+  "latest": "LCT616-DS5 3.18H-oc77-v12",
   "versions": [
+    {
+      "version": "LCT616-DS5 3.18H-oc77-v12",
+      "tag": "3.18H-oc77",
+      "file": "ds5dongle-v12-3.18H-oc77-hs.bin",
+      "size": 813404,
+      "sha256": "1f6130d51272c07656b112753c841f1714e574cb96d9bbbc462031f085324f47",
+      "date": "2026-11-26",
+      "notes": "XInput 模式逃生开关：开机 3 秒内按住 BOOT 1.5 秒，或手柄 PS+Options 长按 3 秒，即可切回 DualSense 并重启",
+      "stable": false
+    },
     {
       "version": "LCT616-DS5 3.18H-oc76-v12",
       "tag": "3.18H-oc76",
