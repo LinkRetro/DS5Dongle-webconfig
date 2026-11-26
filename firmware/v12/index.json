@@ -1,7 +1,17 @@
 {
   "board": "v12",
-  "latest": "LCT616-DS5 3.18H-oc100-v12",
+  "latest": "LCT616-DS5 3.18H-oc101-v12",
   "versions": [
+    {
+      "version": "LCT616-DS5 3.18H-oc101-v12",
+      "tag": "3.18H-oc101",
+      "file": "ds5dongle-v12-3.18H-oc101-hs.bin",
+      "size": 817196,
+      "sha256": "a5c2ef3d7504665680c3657c70fc5d06f52d1694f0b8523483a8b5218fef7402",
+      "date": "2026-11-26",
+      "notes": "XInput: 只提交最新报告，避免重复占用 FIFO，并在 USB 重新配置后恢复端点状态。",
+      "stable": false
+    },
     {
       "version": "LCT616-DS5 3.18H-oc100-v12",
       "tag": "3.18H-oc100",
