@@ -1,7 +1,17 @@
 {
   "board": "v12",
-  "latest": "LCT616-DS5 3.18H-oc87-v12",
+  "latest": "LCT616-DS5 3.18H-oc88-v12",
   "versions": [
+    {
+      "version": "LCT616-DS5 3.18H-oc88-v12",
+      "tag": "3.18H-oc88",
+      "file": "ds5dongle-v12-3.18H-oc88-hs.bin",
+      "size": 813860,
+      "sha256": "e593aea6eed23e27359b8efd438e56f0699f7aee288ae5b61d68c0b83fde0449",
+      "date": "2026-11-26",
+      "notes": "XInput 改为标准常驻发送模型：端点始终挂着一帧、完成即重挂，形成连续 1ms 流，避免主机 STALL 后停轮询",
+      "stable": false
+    },
     {
       "version": "LCT616-DS5 3.18H-oc87-v12",
       "tag": "3.18H-oc87",
