@@ -1,8 +1,24 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 544.70661 302.91098">
 <g class="edge-extras">
-  <g data-part="fn-l"><rect class="cap edge-control" x="199" y="251" width="30" height="13" rx="5"/><text x="214" y="260">Fn</text></g>
-  <g data-part="fn-r"><rect class="cap edge-control" x="316" y="251" width="30" height="13" rx="5"/><text x="331" y="260">Fn</text></g>
-  <g data-part="paddle-l"><rect class="cap edge-control" x="52" y="203" width="44" height="25" rx="9"/><text x="74" y="219">L4</text></g>
-  <g data-part="paddle-r"><rect class="cap edge-control" x="449" y="203" width="44" height="25" rx="9"/><text x="471" y="219">R4</text></g>
+  <!-- DualSense Edge 专属控件：位置取自真机（背键在握把外侧下方，Fn 在摇杆正下方）。
+       所有元素均保持在 viewBox 内，避免被 SVG 视口裁剪。 -->
+  <g data-part="fn-l">
+    <rect class="cap edge-control" x="172" y="276" width="26" height="12" rx="6"/>
+    <text x="185" y="284.4">Fn</text>
+  </g>
+  <g data-part="fn-r">
+    <rect class="cap edge-control" x="348" y="276" width="26" height="12" rx="6"/>
+    <text x="361" y="284.4">Fn</text>
+  </g>
+  <g data-part="paddle-l" transform="translate(112,270) rotate(-22)">
+    <path class="cap edge-control" d="M -9,-26 C -9,-30 -5,-32 0,-32 C 5,-32 9,-30 9,-26 L 11,16 C 11,23 6,26 0,26 C -6,26 -11,23 -11,16 Z"/>
+    <path d="M -5,-18 L 5,-18 L 6,8 L -6,8 Z" fill="#0d2233" opacity="0.55"/>
+    <text x="0" y="-1">L4</text>
+  </g>
+  <g data-part="paddle-r" transform="translate(433,270) rotate(22)">
+    <path class="cap edge-control" d="M -9,-26 C -9,-30 -5,-32 0,-32 C 5,-32 9,-30 9,-26 L 11,16 C 11,23 6,26 0,26 C -6,26 -11,23 -11,16 Z"/>
+    <path d="M -5,-18 L 5,-18 L 6,8 L -6,8 Z" fill="#0d2233" opacity="0.55"/>
+    <text x="0" y="-1">R4</text>
+  </g>
 </g>
 </svg>
