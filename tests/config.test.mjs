@@ -908,3 +908,22 @@ test('every interactive part on both models has pressed-state styling',async()=>
   assert.match(html,new RegExp(`data-part="${t}"\\] \\.dk\\{fill:url\\(#ctl-${t}-fill\\)\}`,'i'),`${t} 渐变未接线`);
  }
 });
+
+/* SHOULDER_BUTTONS_LIVE：L1/R1/L2/R2 的按下类必须真的被加上（含 Edge 图） */
+test('shoulder buttons set pressed class on both artwork models',async()=>{
+ for(const pid of [0x0ce6,0x0df2]){
+  const u=ui();
+  u.device.productId=pid;
+  await u.el('connect').onclick();
+  await u.poll();
+  const art=u.el('art');
+  const part=n=>art.querySelector(`[data-part="${n}"]`);
+  const cases=[['l1',0x01],['r1',0x02],['l2',0x04],['r2',0x08]];
+  for(const [name,bit] of cases){
+   u.input([128,128,128,128],bit);
+   assert.ok(part(name)?.classList.contains('pressed'),`PID ${pid.toString(16)}: ${name} 未收到 pressed`);
+   u.input([128,128,128,128]);
+   assert.equal(part(name)?.classList.contains('pressed'),false,`PID ${pid.toString(16)}: ${name} 松开后未清除`);
+  }
+ }
+});
