@@ -1,7 +1,17 @@
 {
   "board": "v12",
-  "latest": "LCT616-DS5 3.18H-oc112-v12",
+  "latest": "LCT616-DS5 3.18H-oc113-v12",
   "versions": [
+    {
+      "version": "LCT616-DS5 3.18H-oc113-v12",
+      "tag": "3.18H-oc113",
+      "file": "ds5dongle-v12-3.18H-oc113-hs.bin",
+      "size": 817512,
+      "sha256": "3aaeb3b656630f2038579210ebd884d9e91864980d0101c237faba5440290d24",
+      "date": "2026-11-26",
+      "notes": "USB 序列号带型号后缀，切换手柄不再复用 Windows 旧实例（修复 Code 10 / 网页连不上）",
+      "stable": false
+    },
     {
       "version": "LCT616-DS5 3.18H-oc112-v12",
       "tag": "3.18H-oc112",
