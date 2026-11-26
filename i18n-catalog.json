@@ -8714,6 +8714,66 @@
       "ru": "DualSense: работает всё — звук, HD-отдача, адаптивные курки, подсветка. XInput: только для старых игр и эмуляторов, понимающих геймпад Xbox; нет звука, отдачи, адаптивных курков и подсветки, а назначения на клавиатуру/мышь не передаются. В XInput страница не подключается — удерживайте PS + Options 3 с. В обе стороны нужен перезапуск.",
       "pl": "DualSense: działa wszystko — audio, haptyka HD, adaptacyjne spusty, podświetlenie. XInput: tylko dla starych gier i emulatorów rozpoznających pada Xbox; brak audio, haptyki, adaptacyjnych spustów i podświetlenia, a przypisania klawiatury/myszy nie są wysyłane. W XInput strona nie może się połączyć — przytrzymaj PS + Options 3 s. Obie zmiany wymagają restartu.",
       "tr": "DualSense: her şey çalışır (ses, HD dokunsal geri bildirim, uyarlanabilir tetik, ışık). XInput: yalnızca Xbox kolu tanıyan eski oyunlar ve emülatörler için; ses, dokunsal geri bildirim, uyarlanabilir tetik ve ışık yok, klavye/fare atamaları iletilmez. XInput'ta sayfa bağlanamaz: PS + Options tuşlarını 3 sn basılı tutun. Her iki yönde de yeniden başlatma gerekir."
+    },
+    "edge_l4": {
+      "zh-CN": "Edge 左背键（L4）",
+      "zh-TW": "Edge 左背鍵（L4）",
+      "en": "Edge left paddle (L4)",
+      "ja": "Edge 左パドル（L4）",
+      "ko": "Edge 왼쪽 패들(L4)",
+      "de": "Edge linke Paddel (L4)",
+      "fr": "Palette gauche Edge (L4)",
+      "es": "Paleta izquierda Edge (L4)",
+      "it": "Paddle sinistro Edge (L4)",
+      "pt-BR": "Paddle esquerdo Edge (L4)",
+      "ru": "Левый лепесток Edge (L4)",
+      "pl": "Lewy łopatka Edge (L4)",
+      "tr": "Edge sol pedal (L4)"
+    },
+    "edge_r4": {
+      "zh-CN": "Edge 右背键（R4）",
+      "zh-TW": "Edge 右背鍵（R4）",
+      "en": "Edge right paddle (R4)",
+      "ja": "Edge 右パドル（R4）",
+      "ko": "Edge 오른쪽 패들(R4)",
+      "de": "Edge rechte Paddel (R4)",
+      "fr": "Palette droite Edge (R4)",
+      "es": "Paleta derecha Edge (R4)",
+      "it": "Paddle destro Edge (R4)",
+      "pt-BR": "Paddle direito Edge (R4)",
+      "ru": "Правый лепесток Edge (R4)",
+      "pl": "Prawa łopatka Edge (R4)",
+      "tr": "Edge sağ pedal (R4)"
+    },
+    "edge_hint": {
+      "zh-CN": "把背键映射成普通按键（多数游戏不能直接绑定背键）；选「不映射」则保留原始背键信号",
+      "zh-TW": "把背鍵對應成一般按鍵（多數遊戲無法直接綁定背鍵）；選「不對應」則保留原始背鍵訊號",
+      "en": "Map the paddle to a normal button (most games cannot bind paddles directly); choose none to keep the raw signal",
+      "ja": "パドルを通常ボタンに割り当てます（多くのゲームはパドルを直接割り当てできません）。「なし」で生の信号を維持します",
+      "ko": "패들을 일반 버튼으로 매핑합니다(대부분의 게임은 패들을 직접 바인딩할 수 없음). '없음'은 원래 신호를 유지합니다",
+      "de": "Paddel auf eine normale Taste legen (die meisten Spiele können Paddel nicht direkt belegen); „keine“ behält das Rohsignal",
+      "fr": "Mapper la palette sur un bouton normal (la plupart des jeux ne peuvent pas lier les palettes) ; « aucun » garde le signal brut",
+      "es": "Asigna la paleta a un botón normal (casi ningún juego permite asignarlas); «ninguno» mantiene la señal original",
+      "it": "Mappa il paddle su un pulsante normale (quasi nessun gioco li supporta); «nessuno» mantiene il segnale grezzo",
+      "pt-BR": "Mapeie o paddle para um botão normal (quase nenhum jogo aceita paddles); “nenhum” mantém o sinal original",
+      "ru": "Назначьте лепесток на обычную кнопку (игры обычно не поддерживают лепестки); «нет» сохраняет исходный сигнал",
+      "pl": "Przypisz łopatkę do zwykłego przycisku (mało gier je obsługuje); „brak” zachowuje surowy sygnał",
+      "tr": "Pedalı normal bir tuşa atayın (çoğu oyun pedalı desteklemez); “yok” ham sinyali korur"
+    },
+    "edge_target_none": {
+      "zh-CN": "不映射（保留原始背键）",
+      "zh-TW": "不對應（保留原始背鍵）",
+      "en": "No mapping (keep raw paddle)",
+      "ja": "割り当てなし（生のパドル）",
+      "ko": "매핑 없음(원래 패들)",
+      "de": "Keine Zuordnung (Rohsignal)",
+      "fr": "Aucun mappage (signal brut)",
+      "es": "Sin asignar (señal original)",
+      "it": "Nessuna mappatura (segnale grezzo)",
+      "pt-BR": "Sem mapeamento (sinal original)",
+      "ru": "Без назначения (исходный сигнал)",
+      "pl": "Bez przypisania (surowy sygnał)",
+      "tr": "Atama yok (ham sinyal)"
     }
   }
 }

@@ -1,7 +1,17 @@
 {
   "board": "v12",
-  "latest": "LCT616-DS5 3.18H-oc105-v12",
+  "latest": "LCT616-DS5 3.18H-oc106-v12",
   "versions": [
+    {
+      "version": "LCT616-DS5 3.18H-oc106-v12",
+      "tag": "3.18H-oc106",
+      "file": "ds5dongle-v12-3.18H-oc106-hs.bin",
+      "size": 818540,
+      "sha256": "246b197727d060e1d2437f6a30e28084618811f183acbf7048db066668fa2706",
+      "date": "2026-11-26",
+      "notes": "DualSense Edge 背键映射：L4/R4 可映射为 L3/R3/×○□△/L1/R1/L2/R2/Create/Options（配置版本 16）",
+      "stable": false
+    },
     {
       "version": "LCT616-DS5 3.18H-oc105-v12",
       "tag": "3.18H-oc105",
