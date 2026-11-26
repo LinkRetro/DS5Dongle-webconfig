@@ -381,3 +381,16 @@ body:not(.light) .art svg[data-model="edge"] [data-part="r1"].pressed .ol{stroke
 .art svg[data-model="edge"] [data-part].moving:not(.pressed) .ol{
  stroke:color-mix(in srgb,#E9DCFF var(--stick-tint),#c6cad8);
 }
+
+/* FN_SOLID_PURPLE */
+/* Fn 的可见面是那几条横纹（.ln/.ln-dk），按下时如果只把底下的 .dk 变紫，
+   纹路仍是白的，看起来就像"没有紫色背景"。这里让纹路本身也变紫。 */
+.art svg[data-model="edge"] [data-part="fn-l"].pressed .ln,
+.art svg[data-model="edge"] [data-part="fn-r"].pressed .ln,
+.art svg[data-model="edge"] [data-part="fn-l"].pressed .ln-dk,
+.art svg[data-model="edge"] [data-part="fn-r"].pressed .ln-dk{
+ fill:var(--violet-feedback);
+ stroke:none;
+}
+.art svg[data-model="edge"] [data-part="fn-l"].pressed .dk,
+.art svg[data-model="edge"] [data-part="fn-r"].pressed .dk{fill:var(--violet-feedback)}
