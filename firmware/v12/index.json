@@ -1,7 +1,17 @@
 {
   "board": "v12",
-  "latest": "LCT616-DS5 3.18H-oc74-v12",
+  "latest": "LCT616-DS5 3.18H-oc75-v12",
   "versions": [
+    {
+      "version": "LCT616-DS5 3.18H-oc75-v12",
+      "tag": "3.18H-oc75",
+      "file": "ds5dongle-v12-3.18H-oc75-hs.bin",
+      "size": 813180,
+      "sha256": "db2c4dd30bca02b44f2724075bb2878a57aab57e40d4c7f01792b25210d3488e",
+      "date": "2026-11-26",
+      "notes": "实验：新增 Xbox 360 (XInput) 输出模式，兼容只认 XInput 的老游戏与模拟器（无音频/触觉/自适应扳机）",
+      "stable": false
+    },
     {
       "version": "LCT616-DS5 3.18H-oc74-v12",
       "tag": "3.18H-oc74",

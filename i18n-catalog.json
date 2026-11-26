@@ -8594,6 +8594,66 @@
       "ru": "стабильная",
       "pl": "stabilna",
       "tr": "kararlı"
+    },
+    "output_mode": {
+      "zh-CN": "USB 输出模式",
+      "en": "USB output mode",
+      "zh-TW": "USB 輸出模式",
+      "ja": "USB 出力モード",
+      "ko": "USB 출력 모드",
+      "de": "USB-Ausgabemodus",
+      "fr": "Mode de sortie USB",
+      "es": "Modo de salida USB",
+      "it": "Modalità di uscita USB",
+      "pt-BR": "Modo de saída USB",
+      "ru": "Режим USB-вывода",
+      "pl": "Tryb wyjścia USB",
+      "tr": "USB çıkış modu"
+    },
+    "output_mode_ds5": {
+      "zh-CN": "DualSense（默认，全功能）",
+      "en": "DualSense (default, full features)",
+      "zh-TW": "DualSense（預設，全功能）",
+      "ja": "DualSense（既定・全機能）",
+      "ko": "DualSense(기본, 전체 기능)",
+      "de": "DualSense (Standard, alle Funktionen)",
+      "fr": "DualSense (par défaut, toutes fonctions)",
+      "es": "DualSense (por defecto, todas las funciones)",
+      "it": "DualSense (predefinito, tutte le funzioni)",
+      "pt-BR": "DualSense (padrão, todos os recursos)",
+      "ru": "DualSense (по умолчанию, все функции)",
+      "pl": "DualSense (domyślnie, pełna funkcja)",
+      "tr": "DualSense (varsayılan, tüm özellikler)"
+    },
+    "output_mode_xinput": {
+      "zh-CN": "Xbox 360（XInput，兼容老游戏）",
+      "en": "Xbox 360 (XInput, for old games)",
+      "zh-TW": "Xbox 360（XInput，相容老遊戲）",
+      "ja": "Xbox 360（XInput・旧作向け）",
+      "ko": "Xbox 360(XInput, 구형 게임용)",
+      "de": "Xbox 360 (XInput, für alte Spiele)",
+      "fr": "Xbox 360 (XInput, jeux anciens)",
+      "es": "Xbox 360 (XInput, juegos antiguos)",
+      "it": "Xbox 360 (XInput, giochi vecchi)",
+      "pt-BR": "Xbox 360 (XInput, jogos antigos)",
+      "ru": "Xbox 360 (XInput, старые игры)",
+      "pl": "Xbox 360 (XInput, starsze gry)",
+      "tr": "Xbox 360 (XInput, eski oyunlar)"
+    },
+    "output_mode_hint": {
+      "zh-CN": "XInput 模式没有音频、触觉、自适应扳机和灯条，仅用于只认 Xbox 手柄的老游戏/模拟器；切换后需重启接收器",
+      "en": "XInput has no audio, haptics, adaptive triggers or light bar — only for games that require an Xbox pad. Restart the receiver after switching",
+      "zh-TW": "XInput 模式沒有音訊、觸覺、自適應扳機與燈條，僅供只認 Xbox 手把的遊戲；切換後需重啟接收器",
+      "ja": "XInput では音声・触覚・アダプティブトリガー・ライトバーは使えません。切替後は再起動が必要です",
+      "ko": "XInput 모드에서는 오디오/햅틱/적응형 트리거/라이트바를 쓸 수 없습니다. 전환 후 재시작 필요",
+      "de": "XInput bietet kein Audio, keine Haptik, keine adaptiven Trigger und keine Lightbar; nach dem Wechsel neu starten",
+      "fr": "XInput n'offre ni audio, ni haptique, ni gâchettes adaptatives, ni barre lumineuse ; redémarrer après le changement",
+      "es": "XInput no tiene audio, háptica, gatillos adaptativos ni barra de luz; reinicia tras cambiarlo",
+      "it": "XInput non ha audio, haptica, trigger adattivi né barra luminosa; riavvia dopo il cambio",
+      "pt-BR": "XInput não tem áudio, háptica, gatilhos adaptativos nem barra de luz; reinicie após trocar",
+      "ru": "В XInput нет звука, тактильной отдачи, адаптивных курков и подсветки; после смены перезапустите",
+      "pl": "XInput nie ma audio, haptyki, adaptacyjnych spustów ani podświetlenia; zrestartuj po zmianie",
+      "tr": "XInput'te ses, dokunsal geri bildirim, uyarlanabilir tetik ve ışık yok; değiştirdikten sonra yeniden başlat"
     }
   }
 }
