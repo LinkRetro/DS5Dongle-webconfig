@@ -792,6 +792,31 @@ test('diagnostics decode 0xFA one byte before the firmware offset (off-by-one re
  assert.equal(bars,4,'four bars for good link quality');
 });
 
+test('信号格：RSSI 不可用时按质量字节点亮，质量 0 才显示未知',async()=>{
+ const mk=async(quality)=>{
+  const u=ui();await u.el('connect').onclick();
+  const read=u.device.receiveFeatureReport.bind(u.device);
+  u.device.receiveFeatureReport=async id=>{
+   if(id===0xf9){const t=new Uint8Array(63);t[0]=1;t[13]=0xd3;t[14]=7;t[15]=1;t[16]=0x02;return view(0xf9,t);}
+   if(id!==0xfa)return read(id);
+   const b=new Uint8Array(64);
+   b[1]=0x04;            /* flags: connected（非 Edge） */
+   b[2]=7;               /* state: connected */
+   b[60]=1;              /* have_scan */
+   b[61]=quality;        /* 链路质量（固件字节 62 -> 页面索引 61） */
+   return view(0xfa,b);
+  };
+  u.setLink(7);
+  await u.poll();await u.poll();
+  await new Promise(r=>setImmediate(r));
+  return u.el('link-status').querySelectorAll('.sig-bars i.on').length;
+ };
+ assert.equal(await mk(1),4,'质量 1=good 应亮 4 格');
+ assert.equal(await mk(2),3,'质量 2=fair 应亮 3 格');
+ assert.equal(await mk(3),1,'质量 3=poor 应亮 1 格');
+ assert.equal(await mk(0),0,'质量 0 应显示未知');
+});
+
 test('telemetry 0xF9 drives link status, bonds and USB speed',async()=>{
  const u=ui();await u.el('connect').onclick();
  const read=u.device.receiveFeatureReport.bind(u.device);

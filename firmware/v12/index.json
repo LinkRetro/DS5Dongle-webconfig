@@ -1,7 +1,17 @@
 {
   "board": "v12",
-  "latest": "LCT616-DS5 3.18H-oc110-v12",
+  "latest": "LCT616-DS5 3.18H-oc111-v12",
   "versions": [
+    {
+      "version": "LCT616-DS5 3.18H-oc111-v12",
+      "tag": "3.18H-oc111",
+      "file": "ds5dongle-v12-3.18H-oc111-hs.bin",
+      "size": 817776,
+      "sha256": "869e0ab8f4ae2876ad91bddf15ab716c24ad18bf944396c2aa5faebca3fb4c13",
+      "date": "2026-11-26",
+      "notes": "修正信号质量语义：1=good/2=fair/3=poor，与页面信号格一致",
+      "stable": false
+    },
     {
       "version": "LCT616-DS5 3.18H-oc110-v12",
       "tag": "3.18H-oc110",
