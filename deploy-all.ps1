@@ -14,7 +14,8 @@ param(
     [switch]$NoStage,
     [string]$SiteTarget = 'H:\网站源码\linkretro\tools\DS5Dongle',
     [string]$ServerCommand,
-    [switch]$SkipI18n
+    [switch]$SkipI18n,
+    [switch]$SkipChangelog
 )
 
 $ErrorActionPreference = 'Stop'
@@ -54,6 +55,15 @@ if (-not $SkipI18n) {
         & $pyExe i18n-gate.py
         if ($LASTEXITCODE -ne 0) { throw 'i18n 回归：翻译缺口变大' }
     } finally { Pop-Location }
+}
+
+# ---------- 1.8) 版本日志闸门 ----------
+if (-not $SkipChangelog) {
+    Step '版本日志检查'
+    $pyExe = (Get-Command python -ErrorAction SilentlyContinue).Source
+    if (-not $pyExe) { $pyExe = 'python' }
+    & $pyExe (Join-Path $root 'tools\check-changelog.py')
+    if ($LASTEXITCODE -ne 0) { throw '版本日志缺失：请在 docs/CHANGELOG.md 与 sync-firmware.ps1 补上当前版本' }
 }
 
 # ---------- 2) 部署到站点目录 ----------

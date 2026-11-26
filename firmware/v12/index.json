@@ -1,7 +1,16 @@
 {
   "board": "v12",
-  "latest": "LCT616-DS5 3.18H-oc68-v12",
+  "latest": "LCT616-DS5 3.18H-oc69-v12",
   "versions": [
+    {
+      "version": "LCT616-DS5 3.18H-oc69-v12",
+      "tag": "3.18H-oc69",
+      "file": "ds5dongle-v12-3.18H-oc69-hs.bin",
+      "size": 812816,
+      "sha256": "9dae3975ae8a23f41f64c26a5198b69cfaeae69581f2a777fe5bd3da8cf07ecd",
+      "date": "2026-11-26",
+      "notes": "音频优先级队列改为 2 深；音频排队时跳过一次手柄上报，修复持续破音/断续（drop 归零）"
+    },
     {
       "version": "LCT616-DS5 3.18H-oc68-v12",
       "tag": "3.18H-oc68",
