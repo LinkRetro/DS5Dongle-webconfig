@@ -555,9 +555,12 @@ function renderPanel(){ if(flashSession?.isBusy()&&page!=='flash'){page='flash';
  }
  const inlineSettings=new Map();
  /* 未连接时不显示摇杆字段；连接后按固件实际具备的字段过滤 */
+ /* Hide fields the connected firmware does not report: a page showing a setting
+  * that the device silently drops is worse than not showing it at all. */
+ const supported=([k])=>!(k in fields)||!baseline||(k in baseline);
  const pageSpecs=page==='sticks'
   ? (baseline?specs.sticks.filter(([k])=>k==='stick_flags'?('stick_left_curve' in baseline):(k in baseline)):[])
-  : specs[page];
+  : specs[page].filter(supported);
  for(const [k,label,hint,min,max,step]of pageSpecs){
   if(k==='mask'){const g=document.createElement('fieldset');g.className='row';const title=document.createElement('span');const caption=document.createElement('span');paintLocalized(caption,label);title.append(caption);const help=document.createElement('small');paintLocalized(help,hint);title.append(help);g.append(title);const choices=document.createElement('div');[msg('control_off'),msg('touch_dpad'),msg('touch_left_mouse'),msg('touch_right_mouse'),msg('touch_zones')].forEach((choice,i)=>{const l=document.createElement('label');l.style.display='block';const c=document.createElement('input');c.type='checkbox';c.checked=!!(val('tp_mode_enabled_mask')&(1<<i));c.onchange=()=>{let mask=val('tp_mode_enabled_mask')??1;mask=c.checked?mask|(1<<i):mask&~(1<<i);if(!mask){c.checked=true;say(msg('touch_keep_mode'));return}set('tp_mode_enabled_mask',mask)};const caption=document.createElement('span');paintLocalized(caption,choice);l.append(c,caption);choices.append(l)});g.append(choices);box.append(g);continue}
   const r=row(label,hint,min!==undefined&&!Array.isArray(min));let c;
