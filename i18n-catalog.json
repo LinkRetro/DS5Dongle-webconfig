@@ -8864,6 +8864,21 @@
       "ru": "Микрофон выключен",
       "pl": "Mikrofon wyciszony",
       "tr": "Mikrofon kapalı"
+    },
+    "dongle_not_found_hint": {
+      "zh-CN": "没有找到接收器：请确认接收器已重新枚举（约 1 秒）后，再点一次「连接接收器」",
+      "zh-TW": "沒有找到接收器：請確認接收器已重新列舉（約 1 秒）後，再點一次「連接接收器」",
+      "en": "No receiver found: wait ~1 s for it to re-enumerate, then click Connect again",
+      "ja": "レシーバーが見つかりません：再列挙（約1秒）を待ってから、もう一度「接続」を押してください",
+      "ko": "리시버를 찾을 수 없습니다. 재열거(약 1초) 후 다시 연결을 눌러 주세요",
+      "de": "Kein Empfänger gefunden: ca. 1 s auf Neu-Enumeration warten und erneut verbinden",
+      "fr": "Récepteur introuvable : attendez ~1 s la réénumération puis recliquez sur Connecter",
+      "es": "No se encontró el receptor: espera ~1 s a que se reenumere y vuelve a conectar",
+      "it": "Ricevitore non trovato: attendi ~1 s la rienumerazione e riprova a connettere",
+      "pt-BR": "Receptor não encontrado: aguarde ~1 s para reenumerar e clique em conectar de novo",
+      "ru": "Приёмник не найден: подождите ~1 с переподключения и нажмите «Подключить» ещё раз",
+      "pl": "Nie znaleziono odbiornika: poczekaj ~1 s na ponowną enumerację i kliknij połącz ponownie",
+      "tr": "Alıcı bulunamadı: ~1 sn yeniden numaralandırmayı bekleyip tekrar bağlanın"
     }
   }
 }

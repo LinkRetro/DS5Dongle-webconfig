@@ -919,8 +919,17 @@ async function autoReconnect(){
 $('connect').onclick=()=>exclusive(async()=>{
  if(device){const d=device;await hidWait(stopTests(),'停止测试',3000).catch(()=>{});disconnected();if(d.opened)await hidWait(d.close(),'关闭设备接口',1000).catch(()=>{});say(msg('phrase.disconnected'));return}
  if(!navigator.hid)throw Error('请使用支持 WebHID 的 Chrome / Edge');
- const list=await navigator.hid.requestDevice({filters:HID_FILTERS});
- await attachDevice(pickConfigDevice(list));
+ /* 先看浏览器是否已授权（同一 PID 重新枚举后可直接连上，无需再弹窗）；
+    没有再弹选择器；两者都没有时给出明确提示，而不是静默无反应。 */
+ let known=[];
+ try{known=await navigator.hid.getDevices()}catch{}
+ let target=pickConfigDevice(known);
+ if(!target){
+  const picked=await navigator.hid.requestDevice({filters:HID_FILTERS});
+  target=pickConfigDevice(picked);
+ }
+ if(!target)throw Error(msg('dongle_not_found_hint'));
+ await attachDevice(target);
 });
  navigator.hid?.addEventListener('disconnect',e=>{if(e.device===device){restartDevices.delete(e.device);disconnected();say(msg('phrase.dongle_disconnected_keep_this_page_open_and'))}});
 $('revert').onclick=()=>{if($('revert').disabled)return;const scoped=scopedSavePages.has(page);if(scoped){for(const key of Object.keys(settingsToSave()))delete draft[key];if(page==='feel')triggerPresetDraft=null}else{draft={};table=tableBaseline?.slice()??null;savedDrafts.delete(device);mapDirty=false}render();say(scoped?'已丢弃本页草稿，其他页面的改动保留。':'已丢弃未提交的草稿。此操作不会撤回已发送到设备的配置。')};
