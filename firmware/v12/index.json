@@ -1,7 +1,17 @@
 {
   "board": "v12",
-  "latest": "LCT616-DS5 3.18H-oc84-v12",
+  "latest": "LCT616-DS5 3.18H-oc85-v12",
   "versions": [
+    {
+      "version": "LCT616-DS5 3.18H-oc85-v12",
+      "tag": "3.18H-oc85",
+      "file": "ds5dongle-v12-3.18H-oc85-hs.bin",
+      "size": 813572,
+      "sha256": "5d9bee8bcd139ca892dade6966c9f33b8f7c7763d2f871f07c23388fffd4a7fd",
+      "date": "2026-11-26",
+      "notes": "XInput 输入诊断版：打印前 5 帧与每千帧发送结果（返回值、按钮、摇杆），用于定位 joy.cpl 无输入",
+      "stable": false
+    },
     {
       "version": "LCT616-DS5 3.18H-oc84-v12",
       "tag": "3.18H-oc84",
