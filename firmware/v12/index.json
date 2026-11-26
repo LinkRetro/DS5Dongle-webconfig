@@ -1,13 +1,22 @@
 {
   "board": "v12",
-  "latest": "LCT616-DS5 3.18H-oc73-v12",
+  "latest": "LCT616-DS5 3.18H-oc74-v12",
   "versions": [
+    {
+      "version": "LCT616-DS5 3.18H-oc74-v12",
+      "tag": "3.18H-oc74",
+      "file": "ds5dongle-v12-3.18H-oc74-hs.bin",
+      "size": 815128,
+      "sha256": "f6bb67d561e5c9ab6a288147ad21363bf55d5800972bdc3ee3075b23630341df",
+      "date": "2026-11-26",
+      "notes": "更聪明的释放方式：默认只隐藏音频接口（HID 保留，网页仍可连），3 秒未枚举会自动回滚；可选隐藏整个接收器"
+    },
     {
       "version": "LCT616-DS5 3.18H-oc73-v12",
       "tag": "3.18H-oc73",
       "file": "ds5dongle-v12-3.18H-oc73-hs.bin",
-      "size": 813136,
-      "sha256": "64a9b2eb710f7a2ae4877d2a1cacb6d9b2a08d5949d2ec14eaa5bd75df7cc03b",
+      "size": 815128,
+      "sha256": "c81ed991ccf4ef23a78a2540f14aaf783b539e54926badb2ef50afc6e1eaf6bb",
       "date": "2026-11-26",
       "notes": "无手柄时自动隐藏接收器：配对过后断开 5 秒即从电脑移除，Windows 声音自动回到音箱，不必拔接收器（配置版本 13）"
     },
