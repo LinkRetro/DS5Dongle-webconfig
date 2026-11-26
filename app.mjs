@@ -765,14 +765,17 @@ function paintDiag(b,fw){
 }
 async function refreshDiag(){
  if(!device||busy)return;
- /* Only touch the DOM once the dongle page (the mount anchor) exists; keeps the
- * poller quiet on other tabs and in DOM-less test harnesses. */
- if(!document.getElementById('latency-detail')&&!document.getElementById('latency-state'))return;
  try{
   const r=await hidWait(device.receiveFeatureReport(0xfa),'read diagnostics',1000);
   const b=payload(r,0xfa,26);
+  /* The signal bars sit in the hero strip, so the quality byte must be read on
+   * every tab - not only while the dongle page is mounted. */
+  lastLinkQuality=b[62]||0;
+  paintLinkStatus(telemetry);
+  if(!document.getElementById('latency-detail')&&!document.getElementById('latency-state'))return;
   paintDiag(b,firmwareVersion);
  }catch{
+  if(!document.getElementById('latency-detail')&&!document.getElementById('latency-state'))return;
   paintDiagNotice();
  }
 }
@@ -1225,7 +1228,7 @@ function paintLatency(b){if(!$('latency-average'))return;   /* 面板已移除�
 let polling=false;setInterval(async()=>{
  if(document.hidden||!device||busy||polling)return;
  polling=true;const d=device;
-  try{const b=payload(await hidWait(d.receiveFeatureReport(0xf9),'读取设备状态'),0xf9,13);if(device===d){telemetry=b;if(b[13]!==0xd3||b[14]!==7)void stopTests();paintBattery(b);paintLatency(b);paintConnection();if((++diagTick%5)===0)void refreshDiag()}}
+  try{const b=payload(await hidWait(d.receiveFeatureReport(0xf9),'读取设备状态'),0xf9,13);if(device===d){telemetry=b;if(b[13]!==0xd3||b[14]!==7)void stopTests();paintBattery(b);paintLatency(b);paintConnection();if((++diagTick%2)===0)void refreshDiag()}}
   catch{if(device===d){void stopTests();telemetry=null;paintBattery(null);paintLatency(null);paintConnection()}}
  finally{polling=false}
 },2000);

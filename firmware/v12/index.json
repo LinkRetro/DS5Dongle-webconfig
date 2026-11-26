@@ -1,13 +1,22 @@
 {
   "board": "v12",
-  "latest": "LCT616-DS5 3.18H-oc69-v12",
+  "latest": "LCT616-DS5 3.18H-oc70-v12",
   "versions": [
+    {
+      "version": "LCT616-DS5 3.18H-oc70-v12",
+      "tag": "3.18H-oc70",
+      "file": "ds5dongle-v12-3.18H-oc70-hs.bin",
+      "size": 812816,
+      "sha256": "7ee109e92542e05f942d91304277000f8077c250a2771c709349483f049be6d8",
+      "date": "2026-11-26",
+      "notes": "信号条修复：没有播放音频时也显示链路状态；网页诊断轮询不再依赖当前标签页，刷新更快"
+    },
     {
       "version": "LCT616-DS5 3.18H-oc69-v12",
       "tag": "3.18H-oc69",
       "file": "ds5dongle-v12-3.18H-oc69-hs.bin",
       "size": 812816,
-      "sha256": "9dae3975ae8a23f41f64c26a5198b69cfaeae69581f2a777fe5bd3da8cf07ecd",
+      "sha256": "8c26344bf60dec9215f7c227edff5badb8925e01ca68dfb027c2f87531d5a9f3",
       "date": "2026-11-26",
       "notes": "音频优先级队列改为 2 深；音频排队时跳过一次手柄上报，修复持续破音/断续（drop 归零）"
     },
