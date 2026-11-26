@@ -1,7 +1,17 @@
 {
   "board": "v12",
-  "latest": "LCT616-DS5 3.18H-oc92-v12",
+  "latest": "LCT616-DS5 3.18H-oc93-v12",
   "versions": [
+    {
+      "version": "LCT616-DS5 3.18H-oc93-v12",
+      "tag": "3.18H-oc93",
+      "file": "ds5dongle-v12-3.18H-oc93-hs.bin",
+      "size": 813904,
+      "sha256": "1c495c7e2a1d332e220279ae47e9acf656752fee39a38966fe427871571ce978",
+      "date": "2026-11-26",
+      "notes": "XInput 发送改为双缓冲乒乓 + STALL 自愈：发送中的报文不再被改写，管道卡住 20ms 自动 clear_stall 重试",
+      "stable": false
+    },
     {
       "version": "LCT616-DS5 3.18H-oc92-v12",
       "tag": "3.18H-oc92",

@@ -1,13 +1,23 @@
 {
   "board": "v1",
-  "latest": "LCT616-DS5 3.18H-oc92-v1",
+  "latest": "LCT616-DS5 3.18H-oc93-v1",
   "versions": [
+    {
+      "version": "LCT616-DS5 3.18H-oc93-v1",
+      "tag": "3.18H-oc93",
+      "file": "ds5dongle-v1-3.18H-oc93-hs.bin",
+      "size": 813660,
+      "sha256": "06010b0d46758136817a5b4cb76c78756365b0a9dc0be3876ac55b13585f24ba",
+      "date": "2026-11-26",
+      "notes": "XInput 发送改为双缓冲乒乓 + STALL 自愈：发送中的报文不再被改写，管道卡住 20ms 自动 clear_stall 重试",
+      "stable": false
+    },
     {
       "version": "LCT616-DS5 3.18H-oc92-v1",
       "tag": "3.18H-oc92",
       "file": "ds5dongle-v1-3.18H-oc92-hs.bin",
-      "size": 813408,
-      "sha256": "f5d5e2c24649b6fc1794cb65f062535f3222b96a6c5f208d53a51d91759c8ca9",
+      "size": 813660,
+      "sha256": "a69f70500dec3181ebf1fbea163b8ebe303027af5881317f1733867c2e969ab1",
       "date": "2026-11-26",
       "notes": "移除 A 键自检图案（测试已完成，留着会导致 A 键永久按下）；保留真实按键映射与边沿日志",
       "stable": false
