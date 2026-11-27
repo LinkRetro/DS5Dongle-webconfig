@@ -961,3 +961,17 @@ test('机型不闪跳：标准手柄数据偶然命中 0xE8 不会切成 Edge，
  for(let i=0;i<6;i++)u.input([127,128,128,127],0,0,{});
  assert.equal(model(),'edge','已确认的 Edge 不应回退为普通版');
 });
+
+test('映射组下拉：8 个选项文案互不相同且带组号',async()=>{
+ const u=ui();await u.el('connect').onclick();
+ const navBtn=u.window.document.querySelector('.nav [data-page="remap"]');
+ assert.ok(navBtn,'映射页导航存在');
+ navBtn.onclick();
+ await new Promise(r=>setImmediate(r));
+ const sel=u.el('mapping-group');
+ assert.ok(sel,'映射组下拉存在');
+ const labels=[...sel.options].map(o=>o.textContent.trim());
+ assert.equal(labels.length,8,'应有 8 个组');
+ assert.equal(new Set(labels).size,8,'8 个组文案不能重复: '+labels.join(' | '));
+ labels.forEach((t,i)=>assert.match(t,new RegExp(String(i+1)),'缺少组号: '+t));
+});

@@ -6721,19 +6721,19 @@
       "tr": "Düzenlenen grubu etkin gruptan ayrı seçin."
     },
     "map_group_number": {
-      "en": "Group",
-      "zh-CN": "分组",
-      "zh-TW": "分組",
-      "ja": "グループ",
-      "ko": "그룹",
-      "de": "Gruppe",
-      "fr": "Groupe",
-      "es": "Grupo",
-      "it": "Gruppo",
-      "pt-BR": "Grupo",
-      "ru": "Группа",
-      "pl": "Grupa",
-      "tr": "Grup"
+      "zh-CN": "分组 {group}",
+      "zh-TW": "分組 {group}",
+      "en": "Group {group}",
+      "ja": "グループ {group}",
+      "ko": "그룹 {group}",
+      "de": "Gruppe {group}",
+      "fr": "Groupe {group}",
+      "es": "Grupo {group}",
+      "it": "Gruppo {group}",
+      "pt-BR": "Grupo {group}",
+      "ru": "Группа {group}",
+      "pl": "Grupa {group}",
+      "tr": "Grup {group}"
     },
     "map_use_group": {
       "en": "Use the group being edited",
