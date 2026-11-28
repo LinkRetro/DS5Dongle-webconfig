@@ -1,7 +1,17 @@
 {
   "board": "v12",
-  "latest": "LCT616-DS5 3.18H-oc115-v12",
+  "latest": "LCT616-DS5 3.18H-oc116-v12",
   "versions": [
+    {
+      "version": "LCT616-DS5 3.18H-oc116-v12",
+      "tag": "3.18H-oc116",
+      "file": "ds5dongle-v12-3.18H-oc116-hs.bin",
+      "size": 817232,
+      "sha256": "869c15777587147db1e8bca546c93a9677f715933456d3d1c1b6af3caf43ef83",
+      "date": "2026-11-28",
+      "notes": "音频通带固定为 8 kHz（Opus wideband）：此前扬声器路径在插拔耳机前跑在 AUTO 全频段、之后变 8 kHz，声音不一致；现在两条路径统一，日志标签改为真实值",
+      "stable": false
+    },
     {
       "version": "LCT616-DS5 3.18H-oc115-v12",
       "tag": "3.18H-oc115",
