@@ -139,6 +139,17 @@ $notes = @{
     116 = '音频通带固定为 8 kHz（Opus wideband）：此前扬声器路径在插拔耳机前跑在 AUTO 全频段、之后变 8 kHz，声音不一致；现在两条路径统一，日志标签改为真实值'
 }
 
+# English notes for the web firmware list. Versions without an entry fall back to
+# a short generated line, so an English UI never shows Chinese release notes.
+$notesEn = @{
+    112 = 'Switch controllers without a full reboot: runtime PID/report-descriptor switch plus a soft re-enumeration, Bluetooth link kept'
+    113 = 'USB serial number now carries the model suffix so Windows stops reusing stale instances (fixes Code 10 / page not connecting)'
+    114 = 'USB serial number always enabled (with model suffix); fixes Code 10 / page not connecting after switching controllers'
+    115 = 'Auto mode always enumerates as a standard DualSense; no descriptor switch, so Code 10 / page not connecting cannot happen'
+    116 = 'Audio passband pinned to 8 kHz (Opus wideband): previously the speaker path ran at full band until a headset was plugged, then dropped; both paths now match and the log reports the real value'
+}
+
+
 $labels = @{ v1 = 'DS5Dongle V1 · 单灯'; v12 = 'DS5Dongle V1.2 · RGB' }
 $summary = @()
 
@@ -170,7 +181,8 @@ foreach ($board in 'v1', 'v12') {
             size    = $_.Length
             sha256  = (Get-FileHash $_.FullName -Algorithm SHA256).Hash.ToLowerInvariant()
             date    = $_.LastWriteTime.ToString('yyyy-MM-dd')
-            notes   = $notes[$oc]
+            notes    = $notes[$oc]
+    notes_en = if ($notesEn.ContainsKey($oc)) { $notesEn[$oc] } else { "Firmware build oc$oc" }
             stable  = ($m.Groups[1].Value -eq $StableTag)
         }
     }
@@ -180,7 +192,7 @@ foreach ($board in 'v1', 'v12') {
         board    = $board
         latest   = $items[0].version
         # 注意：只有一个版本时 PowerShell 会把它解包成单个对象，必须强制成数组
-        versions = @($items | Select-Object version, tag, file, size, sha256, date, notes, stable)
+        versions = @($items | Select-Object version, tag, file, size, sha256, date, notes, notes_en, stable)
     } | ConvertTo-Json -Depth 5 | Set-Content (Join-Path $dst 'index.json') -Encoding utf8
 
     $summary += [pscustomobject]@{

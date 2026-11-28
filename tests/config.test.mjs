@@ -157,8 +157,9 @@ test('locale changes preserve mapping and firmware choices and update an already
  assert.equal(u.el('fw-dialog-title').textContent,'更新接收器固件');
  assert.equal(u.el('fw-board').value,'v12');
  switchTo('en');
- const catNotes=JSON.parse(readFileSync(new URL('../firmware/v1/index.json',import.meta.url),'utf8')).versions[0].notes;
- if(catNotes)assert.ok(u.el('controls').textContent.includes(catNotes),'发布说明应显示在固件页');
+ const catEntry=JSON.parse(readFileSync(new URL('../firmware/v1/index.json',import.meta.url),'utf8')).versions[0];
+ if(catEntry.notes_en)assert.ok(u.el('controls').textContent.includes(catEntry.notes_en),'英文界面应显示英文发布说明');
+ if(catEntry.notes)assert.ok(!u.el('controls').textContent.includes(catEntry.notes),'英文界面不得显示中文发布说明');
  assert.equal(u.el('fw-board').value,'v12');
  doc.querySelector('.fw-close').onclick();
  assert.equal(u.sent.some(([id])=>id===246),false);

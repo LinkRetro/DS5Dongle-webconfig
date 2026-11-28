@@ -57,6 +57,15 @@ if (-not $SkipI18n) {
     } finally { Pop-Location }
 }
 
+# ---------- 1.7) UI 语言闸门：非中文界面不得出现中文 ----------
+if (-not $SkipI18n) {
+    Step 'UI 语言检查（中文泄漏 / 固件英文说明）'
+    $pyExe = (Get-Command python -ErrorAction SilentlyContinue).Source
+    if (-not $pyExe) { $pyExe = 'python' }
+    & $pyExe (Join-Path $root 'tools\check-ui-i18n.py')
+    if ($LASTEXITCODE -ne 0) { throw 'UI 语言检查失败：固件说明缺英文，或动态文案未接入翻译' }
+}
+
 # ---------- 1.8) 版本日志闸门 ----------
 if (-not $SkipChangelog) {
     Step '版本日志检查'

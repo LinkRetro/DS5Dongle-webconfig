@@ -223,16 +223,21 @@ globalThis.mountDongleFlash = function (document) {
     elements.log.scrollTop = elements.log.scrollHeight;
   }
 
+  const LT = (text) => {
+    const fn = globalThis.dshLT;
+    return typeof fn === "function" ? fn(text) : text;
+  };
+
   function setStatus(kind, text) {
     elements.statusDot.dataset.status = kind;
-    elements.statusText.textContent = text;
+    elements.statusText.textContent = LT(text);
   }
 
   function setProgress(value, stage) {
     const normalized = Math.max(0, Math.min(100, value));
     elements.progressBar.value = Math.round(normalized * 10) / 10;
     elements.progressValue.textContent = `${Math.round(normalized)}%`;
-    if (stage) elements.stageText.textContent = stage;
+    if (stage) elements.stageText.textContent = LT(stage);
   }
 
   function updateControls() {

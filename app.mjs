@@ -58,6 +58,7 @@ function trText(raw){
   return raw;
 }
 /* 动态文案的翻译入口：中文环境原样返回 */
+globalThis.dshLT=null; /* assigned below so the flasher can localise its status text */
 const phraseSources=new Map();
 function LT(text){
  const result=lang==='zh-CN'?text:trText(text);
@@ -67,6 +68,8 @@ function LT(text){
  }
  return result;
 }
+globalThis.dshLT=LT;
+
 const originalPhrases=new WeakMap();
 const originalAttributes=new WeakMap();
 function walkPhrases(root){
@@ -211,7 +214,7 @@ function renderFirmware(box){
    if(!chosen){paintLocalized(hint,msg('fw_confirm_board'));go.disabled=true;return}
    go.disabled=flashSession?.isBusy()??false;
    paintLocalized(hint,'');
-   for(const part of [msg('fw_selected',{version:chosen.version}),firmwareVersion===chosen.version?msg('fw_selected_current'):null,chosen.notes?legacy(chosen.notes):null]){
+   for(const part of [msg('fw_selected',{version:chosen.version}),firmwareVersion===chosen.version?msg('fw_selected_current'):null,((lang==='zh-CN'||lang==='zh-TW')?chosen.notes:null)||chosen.notes_en?legacy(((lang==='zh-CN'||lang==='zh-TW')?chosen.notes:chosen.notes_en)):null]){
     if(!part)continue;
     if(hint.childNodes.length)hint.append(' · ');
     const label=document.createElement('span');paintLocalized(label,part);hint.append(label);

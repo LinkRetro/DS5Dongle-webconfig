@@ -10,6 +10,7 @@
       "sha256": "869c15777587147db1e8bca546c93a9677f715933456d3d1c1b6af3caf43ef83",
       "date": "2026-11-28",
       "notes": "音频通带固定为 8 kHz（Opus wideband）：此前扬声器路径在插拔耳机前跑在 AUTO 全频段、之后变 8 kHz，声音不一致；现在两条路径统一，日志标签改为真实值",
+      "notes_en": "Audio passband pinned to 8 kHz (Opus wideband): previously the speaker path ran at full band until a headset was plugged, then dropped; both paths now match and the log reports the real value",
       "stable": false
     },
     {
@@ -20,6 +21,7 @@
       "sha256": "1c483672dadcd465dc783d1b966c18f47a6cd44fe7fcdacbb19335f3cdca061d",
       "date": "2026-11-27",
       "notes": "自动模式固定普通 DualSense USB 身份，不再随型号切换描述符；彻底避免切换后配置接口 Code 10 / 网页连不上",
+      "notes_en": "Auto mode always enumerates as a standard DualSense; no descriptor switch, so Code 10 / page not connecting cannot happen",
       "stable": false
     },
     {
@@ -30,6 +32,7 @@
       "sha256": "73409951716402152cbd2b9f9d3453fc51c95904f62bfdf6dfff6d0bb3dfbe12",
       "date": "2026-11-26",
       "notes": "始终启用 USB 序列号（含型号后缀），修复切换手柄后配置接口 Code 10 / 网页连不上",
+      "notes_en": "USB serial number always enabled (with model suffix); fixes Code 10 / page not connecting after switching controllers",
       "stable": false
     },
     {
@@ -40,6 +43,7 @@
       "sha256": "3aaeb3b656630f2038579210ebd884d9e91864980d0101c237faba5440290d24",
       "date": "2026-11-26",
       "notes": "USB 序列号带型号后缀，切换手柄不再复用 Windows 旧实例（修复 Code 10 / 网页连不上）",
+      "notes_en": "USB serial number now carries the model suffix so Windows stops reusing stale instances (fixes Code 10 / page not connecting)",
       "stable": false
     },
     {
@@ -50,6 +54,7 @@
       "sha256": "1fc405b6b37017fb7930affcbfa5fcc958db41e7c31defe8e18035b3a3823bf5",
       "date": "2026-11-26",
       "notes": "切换手柄不再整机重启：运行期切换 PID/报告描述符 + 软拔插重新枚举，蓝牙链路保持",
+      "notes_en": "Switch controllers without a full reboot: runtime PID/report-descriptor switch plus a soft re-enumeration, Bluetooth link kept",
       "stable": false
     },
     {
@@ -60,6 +65,7 @@
       "sha256": "869e0ab8f4ae2876ad91bddf15ab716c24ad18bf944396c2aa5faebca3fb4c13",
       "date": "2026-11-26",
       "notes": "修正信号质量语义：1=good/2=fair/3=poor，与页面信号格一致",
+      "notes_en": "Firmware build oc111",
       "stable": false
     },
     {
@@ -70,6 +76,7 @@
       "sha256": "13d82564258d06a7fc85e4891f8af14e8829009ccc40edf15fbcd455f81427db",
       "date": "2026-11-26",
       "notes": "信号强度兜底：控制器不支持 HCI Read RSSI 时，用输入报告抖动换算链路质量，页面信号格恢复显示",
+      "notes_en": "Firmware build oc110",
       "stable": false
     },
     {
@@ -80,6 +87,7 @@
       "sha256": "15cd5fa5ccf7f3ba6d56a9c7b95b92978b62710f9b201af6057429dc691519e4",
       "date": "2026-11-26",
       "notes": "遥测新增静音灯状态（0xF9 字节 59），网页可同步显示手柄静音指示灯",
+      "notes_en": "Firmware build oc109",
       "stable": false
     },
     {
@@ -90,6 +98,7 @@
       "sha256": "c38135e2b7c37e63957f7b860fe0d7a8b1b3bc25f0cf54cc794e03a969209866",
       "date": "2026-11-26",
       "notes": "DualSense Edge 背键可在映射页配置，并独立显示实际按下状态。",
+      "notes_en": "Firmware build oc108",
       "stable": false
     },
     {
@@ -100,6 +109,7 @@
       "sha256": "27f97db8832adb6ced58ecbd0ed2a4bc03fce18359ad7c77860cfb25da44782c",
       "date": "2026-11-26",
       "notes": "修复 Edge 背键映射不生效：网页字段偏移与配置体长度改为结构体真实布局（58/59，60 字节）；Edge 切换重启提示更明确",
+      "notes_en": "Firmware build oc107",
       "stable": false
     },
     {
@@ -110,6 +120,7 @@
       "sha256": "246b197727d060e1d2437f6a30e28084618811f183acbf7048db066668fa2706",
       "date": "2026-11-26",
       "notes": "DualSense Edge 背键映射：L4/R4 可映射为 L3/R3/×○□△/L1/R1/L2/R2/Create/Options（配置版本 16）",
+      "notes_en": "Firmware build oc106",
       "stable": false
     },
     {
@@ -120,6 +131,7 @@
       "sha256": "43e6f73aa5b2c79bd502c1727f3004996b4040af19f873861eb9707ca3e2076a",
       "date": "2026-11-26",
       "notes": "修复 Edge 识别：先 SET 0x65 进入 DSE 模式再查 0x70（此前顺序反过来，Edge 一律被判为普通手柄）；含背键原始报文诊断",
+      "notes_en": "Firmware build oc105",
       "stable": false
     },
     {
@@ -130,6 +142,7 @@
       "sha256": "0fbcfc15d033fa67465b2eb830f928c60b5adaf2e714dc1a348e4c5fc16f6f22",
       "date": "2026-11-26",
       "notes": "配置版本 15：固件版本变化时自动把输出模式重置为 DualSense，避免升级后停在 XInput 导致“没声音/没触觉”（其它设置保持不变）",
+      "notes_en": "Firmware build oc103",
       "stable": false
     },
     {
@@ -140,6 +153,7 @@
       "sha256": "9c28e6c627db91b3281b2a904ab7407282770d0402377e774601785047450950",
       "date": "2026-11-26",
       "notes": "静音键默认行为改为「仅静音麦克风」，与手柄按键图标及原厂语义一致（可在网页改回麦克风+音频）",
+      "notes_en": "Firmware build oc102",
       "stable": false
     },
     {
@@ -150,6 +164,7 @@
       "sha256": "a5c2ef3d7504665680c3657c70fc5d06f52d1694f0b8523483a8b5218fef7402",
       "date": "2026-11-26",
       "notes": "XInput: 只提交最新报告，避免重复占用 FIFO，并在 USB 重新配置后恢复端点状态。",
+      "notes_en": "Firmware build oc101",
       "stable": false
     },
     {
@@ -160,6 +175,7 @@
       "sha256": "bb9b6ef6adc80900850d813959a2927b6e795801c5a3d33260520b9277716775",
       "date": "2026-11-26",
       "notes": "修复 XInput 发送空缓冲：无新数据时重发上次真实帧（此前发的是未构建的全 0 缓冲，导致摇杆为 0、按键卡住）",
+      "notes_en": "Firmware build oc100",
       "stable": false
     },
     {
@@ -170,6 +186,7 @@
       "sha256": "4492267c44764c0c18b77457b1986eba138ffbb793e0335f0752c24524acdd12",
       "date": "2026-11-26",
       "notes": "修复 oc98 诊断日志导致 xin_sent 不自增、每帧打印拖死 USB 的问题；raw 只打印一次",
+      "notes_en": "Firmware build oc99",
       "stable": false
     },
     {
@@ -180,6 +197,7 @@
       "sha256": "4eef2742bf620e12d270c6d3898164352d1a0d846cffeeb1f58eac0cbaa2d4bc",
       "date": "2026-11-26",
       "notes": "XInput 报文诊断：打印前 3 帧完整 20 字节与按键变化（含扳机/摇杆），用于确认 PC 收到的按键值",
+      "notes_en": "Firmware build oc98",
       "stable": false
     },
     {
@@ -190,6 +208,7 @@
       "sha256": "01667d8977c74270237d14d9d694802200d613828db55938dd5c34cece6a1dc1",
       "date": "2026-11-26",
       "notes": "开机日志打印固件版本字符串，避免刷没刷上、刷了哪一版无法确认；无功能改动",
+      "notes_en": "Firmware build oc97",
       "stable": false
     },
     {
@@ -200,6 +219,7 @@
       "sha256": "025a4ea3ba3fa89354ade59907eca85e3295ad1093289706fd43d68144377690",
       "date": "2026-11-26",
       "notes": "XInput 重构为独立类驱动 src/xinput.c（CherryUSB 规范 + GP2040-CE 发送策略）：端点生命周期归类管理，应用层只提交最新报文",
+      "notes_en": "Firmware build oc96",
       "stable": false
     },
     {
@@ -210,6 +230,7 @@
       "sha256": "e018ee4369f5213954198d9541adf0f127066e05393563ac33a3ddbe37a1098e",
       "date": "2026-11-26",
       "notes": "按 GP2040-CE 模型重写发送：完成回调驱动、忙则跳过、不再手动 clear_stall（oc94 上电卡死的根因）",
+      "notes_en": "Firmware build oc95",
       "stable": false
     },
     {
@@ -220,6 +241,7 @@
       "sha256": "188cceaea4ab93bf681671f6c55061fb8ba49abb0c87a95a49abd5c4a1533383",
       "date": "2026-11-26",
       "notes": "修复 XInput 卡死：busy 守卫挡在自愈分支之前导致 clear_stall 永不执行；并处理 USB 挂起/恢复",
+      "notes_en": "Firmware build oc94",
       "stable": false
     },
     {
@@ -230,6 +252,7 @@
       "sha256": "813190d4b6f53bd0f6853f083cfc747dfbf3d11477dc077f31b67f081f01d878",
       "date": "2026-11-26",
       "notes": "XInput 发送改为双缓冲乒乓 + STALL 自愈：发送中的报文不再被改写，管道卡住 20ms 自动 clear_stall 重试",
+      "notes_en": "Firmware build oc93",
       "stable": false
     },
     {
@@ -240,6 +263,7 @@
       "sha256": "a56de2ccc1ef0bfa734ba9e556cf4f6b0d50f7619dda21885edb6d4f6a35a02b",
       "date": "2026-11-26",
       "notes": "移除 A 键自检图案（测试已完成，留着会导致 A 键永久按下）；保留真实按键映射与边沿日志",
+      "notes_en": "Firmware build oc92",
       "stable": false
     },
     {
@@ -250,6 +274,7 @@
       "sha256": "b346a7a1dc27651ed74f1e43559ba49b6457210adf3fe19197d54a542be3ace3",
       "date": "2026-11-26",
       "notes": "XInput 无手柄也持续上报中性帧（周期 kick），自检不再依赖蓝牙输入；修正 oc90 自检未运行的问题",
+      "notes_en": "Firmware build oc91",
       "stable": false
     },
     {
@@ -260,6 +285,7 @@
       "sha256": "c65653be8828e8881d5d51bf0ca7a99548f173a70c317a73063ebf2e825c59df",
       "date": "2026-11-26",
       "notes": "XInput 传输自检：A 键 2Hz 自动闪烁，用于区分“主机没收到”与“映射不对”",
+      "notes_en": "Firmware build oc90",
       "stable": false
     },
     {
@@ -270,6 +296,7 @@
       "sha256": "9ae2e37842992f7fae4dccfbb9b7a0374a4b178404c29755835dddc21d641503",
       "date": "2026-11-26",
       "notes": "XInput 端点拆分 0x81/0x02（BL616 共用端点号 1 时 IN 传输无法完成），并增加发送完成计数",
+      "notes_en": "Firmware build oc89",
       "stable": false
     },
     {
@@ -280,6 +307,7 @@
       "sha256": "3194ed68bd2a103335f742e3d8a3c14192fda65976fb45201ce37504b9953e42",
       "date": "2026-11-26",
       "notes": "XInput 改为标准常驻发送模型：端点始终挂着一帧、完成即重挂，形成连续 1ms 流，避免主机 STALL 后停轮询",
+      "notes_en": "Firmware build oc88",
       "stable": false
     },
     {
@@ -290,6 +318,7 @@
       "sha256": "139ebd5f6c1d5d1ce4886157ba03daf90f1608696287824c3bb914636d37a399",
       "date": "2026-11-26",
       "notes": "XInput 发送超时自愈：IN 端点 20ms 未完成就重发，修复第 2 帧后输入全被丢弃（joy.cpl 无输入）",
+      "notes_en": "Firmware build oc87",
       "stable": false
     },
     {
@@ -300,6 +329,7 @@
       "sha256": "ab26c6e8e15675be8f6e09e83636be5fa1661ff2f8af1c130db3d96f6103745e",
       "date": "2026-11-26",
       "notes": "XInput 诊断二：转发心跳与 busy 卡死计数，区分蓝牙输入中断还是端点发送完成回调丢失",
+      "notes_en": "Firmware build oc86",
       "stable": false
     },
     {
@@ -310,6 +340,7 @@
       "sha256": "5d9bee8bcd139ca892dade6966c9f33b8f7c7763d2f871f07c23388fffd4a7fd",
       "date": "2026-11-26",
       "notes": "XInput 输入诊断版：打印前 5 帧与每千帧发送结果（返回值、按钮、摇杆），用于定位 joy.cpl 无输入",
+      "notes_en": "Firmware build oc85",
       "stable": false
     },
     {
@@ -320,6 +351,7 @@
       "sha256": "8a99be78a4e8f3982eff97962430e662d151b8db5defce6b639307d308fa0198",
       "date": "2026-11-26",
       "notes": "XInput 补上 17 字节 XID 描述符（xusb22 识别 XInput 的关键），端点改为原装的 0x81/0x01，震动报文偏移修正",
+      "notes_en": "Firmware build oc84",
       "stable": false
     },
     {
@@ -330,6 +362,7 @@
       "sha256": "0685983b45931d19620ff6938d81cea948784f104c91693c94041a9d06358865",
       "date": "2026-11-26",
       "notes": "XInput 恢复单接口 045E:028E（与原装 360 手柄一致），产品名也显示为 Xbox 360 Controller；切回 DualSense 请用 PS+Options 长按 3 秒",
+      "notes_en": "Firmware build oc83",
       "stable": false
     },
     {
@@ -340,6 +373,7 @@
       "sha256": "43bfccf3bb00cbd1df3af0b6bd3b4c2e3d17ed5ae8bc1651d63036e3830c5c13",
       "date": "2026-11-26",
       "notes": "XInput 改用 045E:02FD：避开 xusb22 对 028E 的设备级独占，保证复合枚举与网页连接；Xbox 驱动走接口类匹配",
+      "notes_en": "Firmware build oc82",
       "stable": false
     },
     {
@@ -350,6 +384,7 @@
       "sha256": "394e6922fa92f0dd19e6926274da6f755be19a429bb11c687747d0fad6fc772a",
       "date": "2026-11-26",
       "notes": "修复 XInput 模式网页看不到设备：复合设备的设备级类改为 0x00，Windows 才会加载 usbccgp 并枚举 HID 接口",
+      "notes_en": "Firmware build oc81",
       "stable": false
     },
     {
@@ -360,6 +395,7 @@
       "sha256": "e9b6ca2aa01a6a2c7e27b93b8db316fa9e267aea9dc59b550a52641fcd3281e2",
       "date": "2026-11-26",
       "notes": "XInput 模式再加一个完整 DualSense HID 手柄接口，确保 Chrome/网页一定能看到设备并切回",
+      "notes_en": "Firmware build oc80",
       "stable": false
     },
     {
@@ -370,6 +406,7 @@
       "sha256": "ffc241cdc5ca9431a7c82299b80ce681294d8b7f45a5d5a8eba988ff162c43a7",
       "date": "2026-11-26",
       "notes": "XInput 模式保留最小 HID 配置接口：切到 Xbox 模式后网页仍能连接并切回；构建新增启动路径静态检查",
+      "notes_en": "Firmware build oc79",
       "stable": false
     },
     {
@@ -380,6 +417,7 @@
       "sha256": "7075da20c4142808b97c31ebf8bfe45e0644d06140565e564b749f6816c7221f",
       "date": "2026-11-26",
       "notes": "修复 oc77 启动崩溃：调度器启动前误用 vTaskDelay 导致 Store/AMO access fault（BOOT 逃生窗口）",
+      "notes_en": "Firmware build oc78",
       "stable": false
     },
     {
@@ -390,6 +428,7 @@
       "sha256": "1f6130d51272c07656b112753c841f1714e574cb96d9bbbc462031f085324f47",
       "date": "2026-11-26",
       "notes": "XInput 模式逃生开关：开机 3 秒内按住 BOOT 1.5 秒，或手柄 PS+Options 长按 3 秒，即可切回 DualSense 并重启",
+      "notes_en": "Firmware build oc77",
       "stable": false
     },
     {
@@ -400,6 +439,7 @@
       "sha256": "9c967771eaad692ab1428bd9736ae6d23d27c752761d9356e6458c0cfe3cf2a5",
       "date": "2026-11-26",
       "notes": "修复 XInput 模式枚举失败：全速（other-speed）描述符也要切到 Xbox 布局；启动日志打印当前输出模式",
+      "notes_en": "Firmware build oc76",
       "stable": false
     },
     {
@@ -410,6 +450,7 @@
       "sha256": "db2c4dd30bca02b44f2724075bb2878a57aab57e40d4c7f01792b25210d3488e",
       "date": "2026-11-26",
       "notes": "实验：新增 Xbox 360 (XInput) 输出模式，兼容只认 XInput 的老游戏与模拟器（无音频/触觉/自适应扳机）",
+      "notes_en": "Firmware build oc75",
       "stable": false
     },
     {
@@ -420,6 +461,7 @@
       "sha256": "f6bb67d561e5c9ab6a288147ad21363bf55d5800972bdc3ee3075b23630341df",
       "date": "2026-11-26",
       "notes": "更聪明的释放方式：默认只隐藏音频接口（HID 保留，网页仍可连），3 秒未枚举会自动回滚；可选隐藏整个接收器",
+      "notes_en": "Firmware build oc74",
       "stable": true
     },
     {
@@ -430,6 +472,7 @@
       "sha256": "c81ed991ccf4ef23a78a2540f14aaf783b539e54926badb2ef50afc6e1eaf6bb",
       "date": "2026-11-26",
       "notes": "无手柄时自动隐藏接收器：配对过后断开 5 秒即从电脑移除，Windows 声音自动回到音箱，不必拔接收器（配置版本 13）",
+      "notes_en": "Firmware build oc73",
       "stable": false
     },
     {
@@ -440,6 +483,7 @@
       "sha256": "12a03a30b14e2a4bd324339bf5c17dae608b57abd4600c8942989b1ca83a4f06",
       "date": "2026-11-26",
       "notes": "静音键行为可选（麦克风+音频 / 仅麦克风 / 仅音频），按下时点亮手柄橙色静音灯（配置版本 12）",
+      "notes_en": "Firmware build oc72",
       "stable": false
     },
     {
@@ -450,6 +494,7 @@
       "sha256": "f4945c842b714a39b072c02af58fb0e17cb0fa5df7ed523e930a31973ec1db05",
       "date": "2026-11-26",
       "notes": "手柄静音键现在有作用：按下同时静音麦克风与手柄/耳机音频，再按恢复（PC 上原本无人响应这个键）",
+      "notes_en": "Firmware build oc71",
       "stable": false
     },
     {
@@ -460,6 +505,7 @@
       "sha256": "7ee109e92542e05f942d91304277000f8077c250a2771c709349483f049be6d8",
       "date": "2026-11-26",
       "notes": "信号条修复：没有播放音频时也显示链路状态；网页诊断轮询不再依赖当前标签页，刷新更快",
+      "notes_en": "Firmware build oc70",
       "stable": false
     },
     {
@@ -470,6 +516,7 @@
       "sha256": "8c26344bf60dec9215f7c227edff5badb8925e01ca68dfb027c2f87531d5a9f3",
       "date": "2026-11-26",
       "notes": "音频优先级队列改为 2 深；音频排队时跳过一次手柄上报，修复持续破音/断续（drop 归零）",
+      "notes_en": "Firmware build oc69",
       "stable": false
     },
     {
@@ -480,6 +527,7 @@
       "sha256": "5e6e29fb6d333e7b7f98578bbb16d2a5b93c3f36c1264fdb07923c111cfd0e4c",
       "date": "2026-11-25",
       "notes": "新增耳机输出立体声/单声道切换：单声道 160 kbps，中高频更干净（配置版本 11）",
+      "notes_en": "Firmware build oc68",
       "stable": false
     },
     {
@@ -490,6 +538,7 @@
       "sha256": "43bdb970c8adc64bb27e6a3e2eae9ee95c20906861b6639fe71cd17641442c34",
       "date": "2026-11-25",
       "notes": "耳机孔中高频呲呲声修复：限幅器改为逐样本软包络 + 2.5 dB 余量，消除槽率调制与削波",
+      "notes_en": "Firmware build oc67",
       "stable": false
     },
     {
@@ -500,6 +549,7 @@
       "sha256": "f6d091a7ee1a2b547dc515272490bb36f16d6b426f8f9e8310286592ca33f3bf",
       "date": "2026-11-25",
       "notes": "音质修复：限幅器释放加快（消除音乐抽吸感）；扬声器改为 12 kHz 宽带编码",
+      "notes_en": "Firmware build oc66",
       "stable": false
     },
     {
@@ -510,6 +560,7 @@
       "sha256": "4f773c1f7d48959de462c5fca7a6d61872d6f3a5426f0423de34d5c6093df3b3",
       "date": "2026-11-25",
       "notes": "网页显示链路质量（按音频丢帧率计算）；RSSI 为 0 时如实显示为未知",
+      "notes_en": "Firmware build oc65",
       "stable": false
     },
     {
@@ -520,6 +571,7 @@
       "sha256": "911ae487a289851b21650e1c1fba0b9d7c7a702bfea17047bfc03dccdf69b0bb",
       "date": "2026-11-25",
       "notes": "弱链路自适应：远距离时降低手柄上报频率、暂停音频转触觉；音频发送失败不再阻塞；遥测增加 drop/rssi",
+      "notes_en": "Firmware build oc64",
       "stable": false
     },
     {
@@ -530,6 +582,7 @@
       "sha256": "a5cb80e136386d413601fe28ca08a47f9646c9c565661e27cec6894b106762d0",
       "date": "2026-11-25",
       "notes": "Edge 探测加强：按 Fn/背键时打印 0x20-0x3F 原始字节（用于定位按键位，正式映射下一版）",
+      "notes_en": "Firmware build oc63",
       "stable": false
     },
     {
@@ -540,6 +593,7 @@
       "sha256": "6c58006a8e87601c6c1f45ffa28ba8eafdfac43cd6f06cb31565fbeaf1c1d71b",
       "date": "2026-11-23",
       "notes": "音频遥测增加发包耗时 tx（诊断偶发卡顿是编码慢还是发包慢）",
+      "notes_en": "Firmware build oc62",
       "stable": false
     },
     {
@@ -550,6 +604,7 @@
       "sha256": "b398fecc25f457b0e6479c6e5c082fa53931dc5e0c79ec8524db183f4781d44e",
       "date": "2026-11-23",
       "notes": "连不上时自愈：连续 3 次 L2CAP 握手失败自动清除失效配对，提示用 PS+Create 重新配对",
+      "notes_en": "Firmware build oc61",
       "stable": false
     },
     {
@@ -560,6 +615,7 @@
       "sha256": "144400744083c19ab0cdb3a4c3630720e98d9b203710d4bc309ee00d66d4138a",
       "date": "2026-11-23",
       "notes": "音频任务优先级提到与 USB 同级；陀螺仪采样降到 200Hz，进一步让出 CPU 给音频编码",
+      "notes_en": "Firmware build oc60",
       "stable": false
     },
     {
@@ -570,6 +626,7 @@
       "sha256": "54c54cbc5c968b85fb5d7e7e41899d2d6c133e6b79d85cff82eea84dd7bd1927",
       "date": "2026-11-23",
       "notes": "修复开陀螺仪当鼠标后音频卡顿：鼠标上报限流到 200Hz（位移累加，不丢精度）",
+      "notes_en": "Firmware build oc59",
       "stable": false
     },
     {
@@ -580,6 +637,7 @@
       "sha256": "1e8a0471a4ff17ce406dfd722c281c5d686b46f9a8eaec41cf7601f6d96e5453",
       "date": "2026-11-23",
       "notes": "陀螺仪当鼠标移到触摸板与鼠标页；左右/上下灵敏度可分别调节（配置版本 10）",
+      "notes_en": "Firmware build oc58",
       "stable": false
     },
     {
@@ -590,6 +648,7 @@
       "sha256": "f11ef7b23fb0f4d26e977d04a740a45918cde1235710ee01ef20d82d4a1b2570",
       "date": "2026-11-23",
       "notes": "修复陀螺仪当鼠标左右几乎不动（水平改取 Y 轴偏航）；新增轴向反转/交换选项",
+      "notes_en": "Firmware build oc57",
       "stable": false
     },
     {
@@ -600,6 +659,7 @@
       "sha256": "c3a0073ea1c77cb3e2cbcf06eb6d363227ce7f0eb39385aaa38ec8a80841c8e8",
       "date": "2026-11-23",
       "notes": "DualSense Edge 探测版：连接 Edge 后按 Fn/背键，串口会打印尚未解析字节的位图（用于确认按键位后再正式映射）",
+      "notes_en": "Firmware build oc56",
       "stable": false
     },
     {
@@ -610,6 +670,7 @@
       "sha256": "27619cc81a585dff3bc2bc9de222b0fa972e160448278b0bb5e72d5a9e2d5ba0",
       "date": "2026-11-23",
       "notes": "陀螺仪当鼠标：可选常开或按住 L2 激活，支持灵敏度/死区/轴向反转（网页新增设置）",
+      "notes_en": "Firmware build oc55",
       "stable": false
     },
     {
@@ -620,6 +681,7 @@
       "sha256": "8325cd3888718dcb41d6ee8282716e5211ccb5891b72a03cef2e4aa2a62a1919",
       "date": "2026-11-23",
       "notes": "按键映射组由 2 套扩展到 8 套；Create+方向键上下 循环切换分组",
+      "notes_en": "Firmware build oc54",
       "stable": false
     },
     {
@@ -630,6 +692,7 @@
       "sha256": "2200e10a72407a0b74cb7976fee07b26ad785c31cba1bfd5987b8449e85dbd22",
       "date": "2026-11-23",
       "notes": "修复按键映射到鼠标键无效：不再要求先开触摸板鼠标模式",
+      "notes_en": "Firmware build oc53",
       "stable": false
     },
     {
@@ -640,6 +703,7 @@
       "sha256": "8b88ca1045b7bd8463c9166cda170037b5b519a12d49969530babcfcaf2cb22e",
       "date": "2026-11-23",
       "notes": "诊断补充最后一轮扫描 RSSI；未连接时不再显示虚假型号（便于排查连不上的情况）",
+      "notes_en": "Firmware build oc52",
       "stable": false
     },
     {
@@ -650,6 +714,7 @@
       "sha256": "c051a78e4f43e8414bf28b171eca2dee629688de734e37c78f3dbfea25439bfa",
       "date": "2026-11-23",
       "notes": "诊断面板改为可折叠；地址优先取当前连接（修正字节错位）；描述符长度加编译期断言",
+      "notes_en": "Firmware build oc51",
       "stable": false
     },
     {
@@ -660,6 +725,7 @@
       "sha256": "51aeb8bb14444a358f67b366176c67d16158438904abef68c63eef2a22fa13df",
       "date": "2026-11-23",
       "notes": "诊断面板移到接收器页；地址/名称在仅重连场景下也能显示（地址回落 + EIR 名称持久化）",
+      "notes_en": "Firmware build oc50",
       "stable": false
     },
     {
@@ -670,6 +736,7 @@
       "sha256": "8f451fd5e05206c021ffc512f8530e026c0694f2086dfe366c175d3bd8d83016",
       "date": "2026-11-23",
       "notes": "修复 0xFA 描述符截断（数组长度未同步 +8，导致 End Collection 被丢弃、HID 无法枚举）",
+      "notes_en": "Firmware build oc49",
       "stable": false
     },
     {
@@ -680,6 +747,7 @@
       "sha256": "368c360efa2357a63c383eb11a9961894ef4ea6b5c4a39a3a3bf2414b94dceaf",
       "date": "2026-11-23",
       "notes": "修复诊断卡片取不到数据：HID 描述符补声明 0xFA 报告，并按声明长度返回 63 字节",
+      "notes_en": "Firmware build oc48",
       "stable": false
     },
     {
@@ -690,6 +758,7 @@
       "sha256": "049d0b2b10997f772d34b723ac4aeb96744aea855aee08f6186c3f308e612fa3",
       "date": "2026-11-23",
       "notes": "诊断信息补充硬件上下文：板型（v1 / v1.2）与 USB 枚举速率；网页支持下载诊断文本",
+      "notes_en": "Firmware build oc47",
       "stable": false
     },
     {
@@ -700,6 +769,7 @@
       "sha256": "5b175287a83651a3946584a635938cebab45c9dcdcf062d32e117ed4f2cde6ee",
       "date": "2026-11-23",
       "notes": "新增兼容性诊断接口（0xFA）：手柄型号/地址/EIR 名称/握手结果/配对与扫描计数/音频健康度，供网页导出",
+      "notes_en": "Firmware build oc46",
       "stable": false
     },
     {
@@ -710,6 +780,7 @@
       "sha256": "b210e856702490db9407dbe6ec156280404d83b89039a7693c9dc9b503b3a25a",
       "date": "2026-11-23",
       "notes": "inquiry 选型统一（结束扫描路径也按名称识别）；无名称手柄不再自动选中；扫描日志打印设备名",
+      "notes_en": "Firmware build oc45",
       "stable": false
     },
     {
@@ -720,6 +791,7 @@
       "sha256": "a3a42e01743756051e10346ab11c68c62da7d628ac1629b9837eaa15e902c760",
       "date": "2026-11-23",
       "notes": "inquiry 名称过滤（只认 DualSense，防邻居手柄抢连）+ 握手失败跳过表；BOOT 连按 5 次清空黑名单",
+      "notes_en": "Firmware build oc44",
       "stable": false
     },
     {
@@ -730,6 +802,7 @@
       "sha256": "8ff9c949c280103a9cebad2f565b1c42232eb5ad5db7788d261ebff23f24147f",
       "date": "2026-11-23",
       "notes": "修复 PS+Create 无法重配：黑名单不再掐断连接/通道，只在配对成功时解封",
+      "notes_en": "Firmware build oc43",
       "stable": false
     },
     {
@@ -740,6 +813,7 @@
       "sha256": "5544bb38866f72283075f5fa785083de239200b7d1ae4db45a85eb31700182bf",
       "date": "2026-11-23",
       "notes": "修正 SDK 地址 API 误用：配对完成时用 BR 地址（此前 bt_conn_get_dst 返回 LE 联合体，导致地址错位一位）",
+      "notes_en": "Firmware build oc42",
       "stable": false
     },
     {
@@ -750,6 +824,7 @@
       "sha256": "0a9d316495c5bebf13873ebaa83ff3ecde6628f49bffb6da4e9d5a557250da3a",
       "date": "2026-11-23",
       "notes": "配对：长按 BOOT 清配对时把相关手柄加入持久黑名单，PS 键自动重连会被拒绝，必须 PS+Create 重配",
+      "notes_en": "Firmware build oc41",
       "stable": false
     },
     {
@@ -760,6 +835,7 @@
       "sha256": "6e3cdf2933a5addf67014620ab23a6b446265e729495fba3603a7ff4fbc34544",
       "date": "2026-11-23",
       "notes": "音频遥测增加 PCM 缓冲水位 fill（为弹性缓冲判断漂移方向，行为不变）",
+      "notes_en": "Firmware build oc40",
       "stable": false
     },
     {
@@ -770,6 +846,7 @@
       "sha256": "52b6953fe623b12ff8a1bf265907c257f6c74af672a602b1aae249a39f97b68d",
       "date": "2026-11-23",
       "notes": "报文回退 0x39 双帧（0x36 单帧在解码侧出现爆音）；保留 RX 优先级/看门狗改动",
+      "notes_en": "Firmware build oc39",
       "stable": false
     },
     {
@@ -780,6 +857,7 @@
       "sha256": "e5cb098ada0189c03b3c025bb8d56cd2f2a4e5b60fe4cc44a75be9080629b7cb",
       "date": "2026-11-23",
       "notes": "抑制编码尖峰：BT RX 优先级回 5（不再每包抢占编码）；编码看门狗 15→25 ms",
+      "notes_en": "Firmware build oc38",
       "stable": false
     },
     {
@@ -790,6 +868,7 @@
       "sha256": "ce3f1a52b71fe11c0556484579dcc8ef9012fa360f99855888477954774fb038",
       "date": "2026-11-23",
       "notes": "音频改 0x36 单帧报文（10 ms 一帧，延迟减半），512 样本累积",
+      "notes_en": "Firmware build oc37",
       "stable": false
     },
     {
@@ -800,6 +879,7 @@
       "sha256": "fb91a98cc606e65d7dc6ae58a403064e9bb8ad664eb5526722a4e835b80bb40c",
       "date": "2026-11-23",
       "notes": "音频包走发送优先级槽（不再排在 0x31 后面）；限幅器改为块内斜坡（消除块边界咔哒）；有声时手柄输出降到 16ms",
+      "notes_en": "Firmware build oc36",
       "stable": false
     },
     {
@@ -810,6 +890,7 @@
       "sha256": "af79dca195cf16f1ca8e8b130fd3532365ebea8dd0b96d39522273398ac792eb",
       "date": "2026-11-23",
       "notes": "回退 960/定点（实测定点慢 6%、精确 20ms 供给导致卡顿）：恢复 1024+重采样+浮点",
+      "notes_en": "Firmware build oc35",
       "stable": false
     },
     {
@@ -820,6 +901,7 @@
       "sha256": "46bdebd09dbda4e5662f73407c5b0864d58cdf052a1851e9d73c97ba901595fd",
       "date": "2026-11-23",
       "notes": "P0 优化：累积 960 样本（2×480）去掉重采样/音高偏差；定点编码 A/B",
+      "notes_en": "Firmware build oc34",
       "stable": false
     },
     {
@@ -830,6 +912,7 @@
       "sha256": "e3793c44dc334c8eb418f976a144d6277602ae97e3c78e584b0c54343b72ae7d",
       "date": "2026-11-23",
       "notes": "耳机音量改为 0–100 百分比并映射到可听区间（0x3D–0x7F），滑块线性化",
+      "notes_en": "Firmware build oc33",
       "stable": false
     },
     {
@@ -840,6 +923,7 @@
       "sha256": "63ff59547c76642ca3cd9505fcb77fd4397a10165b051a30f140708f20852c01",
       "date": "2026-11-23",
       "notes": "耳机立体声：插耳机时开立体声并把带宽限到 12 kHz 以控制编码耗时；无耳机仍单声道",
+      "notes_en": "Firmware build oc32",
       "stable": false
     },
     {
@@ -850,6 +934,7 @@
       "sha256": "3d967202df0d4548216d5572a60cc199e5c34b5800b458e46a844b7bb1815ded",
       "date": "2026-11-23",
       "notes": "浮点 CELT + 每 500 帧输出编码耗时统计（avg/max/overruns），用于判断能否开立体声",
+      "notes_en": "Firmware build oc31",
       "stable": false
     },
     {
@@ -860,6 +945,7 @@
       "sha256": "28ffaa6095fb2b43a5390de27a6b18d21c8e595b919129a86e0a81ca56dec881",
       "date": "2026-11-23",
       "notes": "实验版：Opus 改为浮点 CELT（利用 FPU），测量单帧编码耗时是否为立体声腾出预算",
+      "notes_en": "Firmware build oc30",
       "stable": false
     },
     {
@@ -870,6 +956,7 @@
       "sha256": "a8d01873a65b1e63f077ada282eac3d382b0f9413244d5a3f1453a456b4211e8",
       "date": "2026-11-23",
       "notes": "修复无音频：单核无法实时编码立体声（实测 11-12ms/帧），退回单声道并恢复 8-tap 重采样",
+      "notes_en": "Firmware build oc29",
       "stable": false
     },
     {
@@ -880,6 +967,7 @@
       "sha256": "c60f1c94a6eb11964a83a96444d5f70455150e9429285784e51dd1242d292036",
       "date": "2026-11-23",
       "notes": "对齐开源 DS5Dongle：始终立体声编码、队列 10×672B、complexity 0、重采样 8→16 taps",
+      "notes_en": "Firmware build oc28",
       "stable": false
     },
     {
@@ -890,6 +978,7 @@
       "sha256": "7af6ca1062ba41675446d96f6a18712a8906f9919d68b74351e84a388e51db7c",
       "date": "2026-11-23",
       "notes": "音频包改走带流控的发送队列，不再因 net_buf 池空整包丢弃（杂音/卡顿主因）",
+      "notes_en": "Firmware build oc27",
       "stable": false
     },
     {
@@ -900,6 +989,7 @@
       "sha256": "0498f14491fa92aaf642d097f2e3c6381af4cb34990687c49854b233c1a09824",
       "date": "2026-11-23",
       "notes": "耳机杂音定位：耳机流改为单声道编码（保留 0xD6 tag），并记录所用音频 tag",
+      "notes_en": "Firmware build oc26",
       "stable": false
     },
     {
@@ -910,6 +1000,7 @@
       "sha256": "a646ed22ea074ab2060eb8a5d56582b124ca1ded19bfcdc121bcf9f923c0d1b5",
       "date": "2026-11-23",
       "notes": "音频：新增峰值限幅器（消除削波杂音）、Opus 复杂度 0→1；新增 PCM 溢出计数日志",
+      "notes_en": "Firmware build oc25",
       "stable": false
     },
     {
@@ -920,6 +1011,7 @@
       "sha256": "0b4335846292509f554af97ea92714ca36f7bbbfe90c786837c19dea0aa7a93c",
       "date": "2026-11-23",
       "notes": "配对链路加固：分页超时 5.12→10.24 秒、连接看门狗放宽到 12 秒；固件升级不再清空配对记录",
+      "notes_en": "Firmware build oc24",
       "stable": false
     },
     {
@@ -930,6 +1022,7 @@
       "sha256": "22a136ace5c8955cd96187aaf8cc4da959f992c9b44d65e0193fa5dff4985856",
       "date": "2026-11-23",
       "notes": "修复断开后无法回连：保留射频扫描（PS 唤醒需要）；扫描中/已连接不再关射频；USB 不再自动软断开",
+      "notes_en": "Firmware build oc23",
       "stable": false
     },
     {
@@ -940,6 +1033,7 @@
       "sha256": "8d87c8d2239c9acaf717974abc9f40c973dfb8cd0cb601fe157345ce4cb230b2",
       "date": "2026-11-23",
       "notes": "扬声器音量曲线：1–100 铺满手柄可听区间 0x3D–0x64，滑块行程线性化",
+      "notes_en": "Firmware build oc22",
       "stable": false
     },
     {
@@ -950,6 +1044,7 @@
       "sha256": "14f0cdaf4e7e92431d7443c60c996695825543c7d837dd2974ef54ec7cf64e11",
       "date": "2026-11-23",
       "notes": "搜索状态改为呼吸灯（软件 PWM，2.4 秒一个呼吸）",
+      "notes_en": "Firmware build oc21",
       "stable": false
     },
     {
@@ -960,6 +1055,7 @@
       "sha256": "9f989464d34cd010aff42ede19ee924cf614409da163ead67bc9030e5e692f8d",
       "date": "2026-11-23",
       "notes": "配对双闪灯效（搜索中）；连接超时 8s→5s、L2CAP 3s→2s，失败更快重来",
+      "notes_en": "Firmware build oc20",
       "stable": false
     },
     {
@@ -970,6 +1066,7 @@
       "sha256": "5b1bdca7a6f8ad63383a823e843165e55e847b5bcc54b8f2ecd1952c811beda4",
       "date": "2026-11-23",
       "notes": "配对节奏对齐 BlueRetro：无配对时约 2 秒重扫一次；已配对未连接时 10 秒重试",
+      "notes_en": "Firmware build oc19",
       "stable": false
     },
     {
@@ -980,6 +1077,7 @@
       "sha256": "1a3cd712f4c4f4e9fda137b6d2d527189c455b9036f8884c9680d8152a274a90",
       "date": "2026-11-23",
       "notes": "网页音量/增益调整即时推送到手柄，音频测试实时反映；首次配对重试修复",
+      "notes_en": "Firmware build oc18",
       "stable": false
     },
     {
@@ -990,6 +1088,7 @@
       "sha256": "a016610aeec1cbc8d8273bd653f26723971ce91385f904281734995acc843b7d",
       "date": "2026-11-23",
       "notes": "修复首次配对：无配对记录时不再扫描两次就放弃；等待/搜索状态不自动熄灯；按键日志改为 INFO",
+      "notes_en": "Firmware build oc17",
       "stable": false
     },
     {
@@ -1000,6 +1099,7 @@
       "sha256": "674e0b6c1ddf84aa9521082447467ede7c5bb81529bb6c5af5eb2a5b7bcdad64",
       "date": "2026-11-23",
       "notes": "修复扬声器音量偏小；对角补偿默认关闭；BT RX 抢占音频编码；有声时输出 24ms→8ms",
+      "notes_en": "Firmware build oc16",
       "stable": false
     },
     {
@@ -1010,6 +1110,7 @@
       "sha256": "920c8377bd883a38ca9889275694705f820c2998adf3a5bb9c28f614fe15d4bc",
       "date": "2026-11-20",
       "notes": "新增摇杆曲线、对角补偿、轴向限制（oc15 基线）",
+      "notes_en": "Firmware build oc15",
       "stable": false
     },
     {
@@ -1020,6 +1121,7 @@
       "sha256": "1075e00ba2cd207ff8c953197744072f03fa767c01ffb420fae9d0ec07957012",
       "date": "2026-11-20",
       "notes": "测试版：新增左右摇杆内外死区",
+      "notes_en": "Firmware build oc14",
       "stable": false
     },
     {
@@ -1030,6 +1132,7 @@
       "sha256": "3b67001a37ef4dba0bb172e3512ccc3922c3e5e3a60df4770fa59cd4c1e60c34",
       "date": "2026-11-20",
       "notes": "测试版：保存结果确认、鼠标映射和实际 USB 速率",
+      "notes_en": "Firmware build oc13",
       "stable": false
     },
     {
@@ -1040,6 +1143,7 @@
       "sha256": "ef051c4797cf07c5b7b46061a2a7882dea2a1b4f6676d254878912978e2dbe62",
       "date": "2026-11-20",
       "notes": "当前推荐：修复板型识别、V1 回报率、更新后清配对",
+      "notes_en": "Firmware build oc12",
       "stable": false
     }
   ]
